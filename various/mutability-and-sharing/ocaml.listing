@@ -1,0 +1,54 @@
+(* -*- caml -*- *)
+
+let _ =
+  let i = 1 in
+  let i2 = i in
+    (* no way to mutate nor call weird ++ or += *)
+    
+  let s = "hello" in
+  let s2 = s in
+  s2.[0] <- 'H' ;
+  print_endline ("s2: " ^ s2) ;
+  print_endline ("s : " ^ s) ;
+
+  let l = [| "hello" ; "" |] in
+  let l2 = l in
+  l2.(1) <- "world";
+  print_endline ("l2: " ^ Array.fold_left (^) "" l2) ;
+  print_endline ("l : " ^ Array.fold_left (^) "" l) ;
+
+  ();;
+
+
+type struct_point = {
+    mutable x: int ;
+    mutable y: int ;
+  }
+let show_struct_point p = Printf.sprintf "{ x = %d ; y = %d }" p.x p.y
+
+let _ = 
+  let sp = { x = 0 ; y = 1 } in
+  let sp2 = sp in
+  sp2.x <- sp2.x + 1 ;
+  sp2.y <- sp2.y + 1 ;
+  print_endline ("sp2: " ^ show_struct_point sp2) ;
+  print_endline ("sp : " ^ show_struct_point sp) ;
+  ();;
+
+
+class point x y =
+  object
+    val mutable x = x
+    val mutable y = y
+
+    method translate x' y' = x <- x + x' ; y <- x + y'
+    method show = Printf.sprintf "Point(%d, %d)" x y
+  end
+
+let _ = 
+  let p = new point 0 1 in
+  let p2 = p in
+  p2#translate 1 1 ;
+  print_endline ("p2: " ^ p2#show) ;
+  print_endline ("p : " ^ p#show) ;
+  ();;

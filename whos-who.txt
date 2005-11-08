@@ -1,0 +1,2149 @@
+# -*- fill-column: 1000 -*-
+
+Jerome Vouillon
+  mel: vouillon@pps.jussieu.fr
+  url: http://pauillac.inria.fr/~vouillon/
+  OCaml (OO implementation)
+
+Larry Wall
+  mel: larry@wall.org
+  url: http://www.wall.org/~larry/
+  Perl
+
+Miguel de Icaza
+  mel: miguel@ximian.com
+  Gnome, mono
+
+Paul Prescod
+  mel: paul@prescod.net
+  url: http://www.prescod.net/
+  Python, XML
+
+Shriram Krishnamurthi
+  url: http://www.cs.brown.edu/~sk/
+  mel: sk+0@cs.brown.edu
+  DrScheme
+  Scheme
+
+Olin Shivers
+  url: http://www.ai.mit.edu/~shivers/
+  mel: shivers@cc.gatech.edu
+  scsh
+  Scheme, ML
+
+Dave MacQueen
+  url: http://www.cs.bell-labs.com/who/dbm/
+  mel: macqueen@bell-labs.com
+  loc: Bell Labs, New Jersey
+  SML/NJ main developper
+
+Andrew Appel
+  url: http://www.cs.princeton.edu/~appel/
+  mel: appel@princeton.edu
+  loc: Princeton
+  SML/NJ developper
+  book "Modern Compiler Implementation in ML", "Modern Compiler Implementation in Java", "Modern Compiler Implementation in C"
+  Compilation, optimization, and garbage collection of mostly functional programming languages.
+
+Jakub Travnik
+  url: http://cs.felk.cvut.cz/~travnij1/
+  mel: J.Travnik@sh.cvut.cz
+  Ruby mailing list
+  designing his own language (simple, for exprimenting with language structures, features continuation only calling style)
+
+Julia Lawall
+  url: http://www.diku.dk/users/julia/
+  Partial Evaluation
+
+Richard Stallman
+  mel: rms@gnu.org
+  GNU
+
+Andrew 'Andy' Hunt
+  url: http://www.pragmaticprogrammer.com/
+  co-author of "Programming Ruby: The Pragmatic Programmer's Guide"
+
+David 'Dave' Thomas
+  url: http://www.pragmaticprogrammer.com/
+  mel: Dave@PragmaticProgrammer.com
+  Ruby mailing list
+  co-author of "Programming Ruby: The Pragmatic Programmer's Guide"
+
+Paul Graham
+  url: http://www.paulgraham.com/
+  mel: pg@paulgraham.com
+  Arc (Lisp'ish, scripting oriented) http://www.paulgraham.com/arc.html
+
+Simon Marlow
+  url: http://research.microsoft.com/~simonmar/
+  mel: simonmar@microsoft.com
+  Haskell
+
+Frank Pfenning
+  url: www.cs.cmu.edu/~fp/ 
+  mel: fp@cs.cmu.edu
+  loc: Carnegie Mellon
+  Type theory and its application to language design, in particular
+  logic- and functional-programming languages. Logic, automated theorem
+  proving, formal program development, and programming environments.
+
+Luca Cardelli
+  url: http://www.luca.demon.co.uk/
+  mel: luca@microsoft.com
+  loc: Microsoft Research (MSR) Cambridge
+  Theory of programming languages: polymorphism, subtyping, objects,
+  recursion, modularization, typechecking, distribution. Modula-3,
+  Obliq, ML2000.
+
+Andrew Wright
+  url: http://www.intertrust.com/star/wright/
+  mel: wright@intertrust.com akwright@acm.org
+  Soft typing, type systems, compilation techniques, Scheme, ML.
+
+Matthias Felleisen
+  url: http://www.ccs.neu.edu/home/matthias/
+  mel: matthias@ccs.neu.edu
+  MrSpidey conceptor (?)
+  Scheme guru/advocate
+  DrScheme
+  Principles of programming languages
+
+Cormac Flanagan
+  url: http://www.cs.rice.edu/~cormac/
+  mel: cormac@cs.rice.edu
+  MrSpidey conceptor (?)
+
+Paul Steckler
+  url: http://www.cs.rice.edu/~steck/
+  mel: steck@cs.rice.edu
+  DrScheme developper
+  MrSpidey maintainer
+
+Chris Rathman
+  url: http://www.angelfire.com/tx4/cus/index.html
+  mel: ChrisRath@AOL.com
+  Lambda the Ultimate poster
+  multi language man (OO Shape examples http://www.angelfire.com/tx4/cus/shapes/)
+  
+Ehud Lamm
+  mel: mslamm@mscc.huji.ac.il
+  Lambda the Ultimate master
+
+Andrew Cooke
+  url: http://www.acooke.org/andrew/
+  mel: andrew@acooke.org
+  Lambda the Ultimate poster
+  An Introduction to Programming Languages http://www.acooke.org/andrew/writing/lang.html
+
+Marcin 'Qrczak' Kowalczyk
+  url: http://qrczak.ids.net.pl/
+  mel: qrczak@knm.org.pl
+  Haskell activist
+  develop its own test language (King)
+
+Fergus Henderson 
+  url: http://www.cs.mu.oz.au/~fjh/
+  mel: fjh@cs.mu.oz.au
+  Mercury
+
+Simon Peyton Jones
+  url: http://research.microsoft.com/users/simonpj/
+  mel: simonpj@microsoft.com
+  loc: Glasgow
+  GHC
+  C--
+  Design, implementation, and application of lazy functional languages.
+  In practical terms, that means I spend most of my time on our
+  implementation of Haskell, the Glasgow Haskell Compiler, and its
+  ramifications.
+
+Matthias Blume
+  url: http://cm.bell-labs.com/who/blume/ http://www.cs.princeton.edu/~blume/
+  loc: Bell Labs
+  SML/NJ
+  Implementation of mostly functional languages, in particular SML and
+  Scheme; efficient data representation, separate compilation,
+  compilation management, cross-module optimizations; language design
+
+David Simmons
+  url: http://www.smallscript.org/
+  mel: david.simmons@smallscript.net
+  SmallScript (enhanced SmallTalk)
+  QKS SmallTalk http://www.qks.com/
+
+Yukihiro Matsumoto
+  mel: matz@ruby-lang.org
+  Ruby main developper http://www.ruby-lang.org/
+
+Francois Pottier
+  url: http://pauillac.inria.fr/~fpottier/
+  mel: Francois.Pottier@inria.fr
+  loc: INRIA Rocquencourt
+  constraint-based type-inference with subtyping
+  Wallace: generic subtyping-constraint-handling library (http://pauillac.inria.fr/~fpottier/wallace/)
+
+Alain Frisch
+  url: http://www.eleves.ens.fr:8080/home/frisch/
+  mel: frisch@clipper.ens.fr
+  Types récursifs, combinaisons booléennes et fonctions surchargées: application au typage de XML
+
+Benjamin C. Pierce
+  url: http://www.cis.upenn.edu/~bcpierce/ http://www.cs.indiana.edu/hyplan/pierce.html
+  mel: bcpierce@saul.cis.upenn.edu
+  loc:  University of Pennsylvania
+  Static type systems, subtyping, bounded quantification, type
+  inference, lambda-calculus, intersection types, concurrency.
+
+
+# http://www-2.cs.cmu.edu/afs/cs.cmu.edu/user/mleone/web/language-people.html
+# perl -0p 's|<tt>([^<]*)</tt>|$1|gi; s| <a\s+href\s*=\s*"([^"]*)"> ([^<]*) </a> |$2 ($1)|xgsi'
+
+
+Martín Abadi
+  url: http://www.research.digital.com/SRC/personal/Martin_Abadi/home.html
+  loc: DEC SRC
+  Security in distributed systems, specification and verification
+  methods, principles of programming languages.
+
+Samson Abramsky
+  url: http://www.dcs.ed.ac.uk/home/samson
+  loc: University of Edinburgh
+  Semantics of programming languages, concurrency, game semantics,
+  program analysis.
+
+Gul Agha
+  url: http://www.cs.uiuc.edu/CS_INFO_SERVER/DEPT_INFO/CS_FACULTY/FAC_HTMLS/agha.html
+  loc: University of Illinois at Urbana-Champaign
+  Logic, object-oriented programming, formal semantics, actors.
+
+Alex Aiken
+  url: http://http.cs.berkeley.edu/~aiken/
+  loc: Berkeley
+  Program analysis, type theory, optimization, constraint theories,
+  functional programming, instruction scheduling.
+
+Hassan Aït-Kaci
+  url: http://www.isg.sfu.ca/~hak
+  loc: Simon Fraser University
+  Constraint-based programming, object-orientation, logical and
+  functional programming, and the design of compilation techniques.
+
+Maria Alpuente
+  url: http://www.dsic.upv.es/users/elp/alpuente.html
+  loc: Technical University of Valencia (Spain)
+  Logic Programming: semantics, extensions and applications integration
+  of functional and logic programming languages abstract
+  interpretation, program manipulation.
+
+Thorsten Altenkirch
+  url: http://www.cs.chalmers.se/~alti
+  loc: Chalmers
+  Type theory, categorical logic and program verification.
+
+Saman Amarasinghe
+  url: http://suif.stanford.edu/~saman/index.html
+  loc: Stanford
+  Compilers for parallel machines, SUIF
+  (http://suif.stanford.edu/index.html).
+
+Jennifer Anderson
+  url: http://suif.stanford.edu/~anderson/index.html
+  loc: Stanford
+  Compilers for scalable parallel machines, SUIF
+  (http://suif.stanford.edu/index.html).
+
+Peter Holst Andersen
+  url: ftp://ftp.diku.dk/diku/semantics/www/people/txix.html
+  loc: DIKU, University of Copenhagen
+  Partial evaluation, C-Mix.
+
+Zena Matilde Ariola
+  url: http://www.cs.uoregon.edu/~ariola
+  loc: University of Oregon
+  Principles of programming languages, formal semantics.
+
+Arvind
+  url: http://csg-www.lcs.mit.edu:8001/Users/arvind/
+  loc: MIT
+  All aspects of parallel computing and declarative programming
+  languages. Dynamic dataflow architectures, the implicitly parallel
+  programming language Id, and the compilation of languages such as Id
+  on parallel machines.
+
+Mike Ashley
+  url: http://www.eecs.ukans.edu/~jashley
+  loc: University of Kansas
+  Program analysis, program transformations, language design and
+  implementation.
+
+Mikhail Auguston
+  url: http://www.cs.nmsu.edu/~mikau/index.html
+  loc: New Mexico State University
+  Programming languages design and implementation, the design of the
+  compiler writing language RIGAL
+  (http://www.ida.liu.se/labs/pelab/members/vaden/rigal.html), software
+  engineering, testing and debugging automation, assertion languages.
+
+Lennart Augustsson
+  url: http://www.cs.chalmers.se/~augustss
+  loc: Chalmers
+  Functional programming and implementation.
+
+Henry Baker
+  url: ftp://ftp.netcom.com/pub/hb/hbaker/home.html
+  loc: Independent researcher/consultant
+  Garbage collection, GC, storage management, programming languages,
+  Lisp, Ada, APL, ML, functional programming, compilers, linear types,
+  reversible computation, parallel languages, quantum computation.
+
+Thomas Ball
+  url: http://www.bell-labs.com/~tball/
+  loc: Bell Laboratories, Lucent Technologies
+  Dynamic analysis of programs, domain-specific languages, software
+  visualization, software tools
+
+Carlos Baquero
+  url: http://shiva.di.uminho.pt/%7Ecbm/
+  loc: Minho University
+  Concurrent object oriented programming, inheritance of concurrency
+  control code, C++ extensions, transactions on distributed and mobile
+  computing.
+
+Gerald Baumgartner
+  url: http://www.cs.purdue.edu/people/gb
+  loc: Purdue
+  Functional and object-oriented languages, type systems, object types,
+  modules.
+
+Françoise Bellegarde
+  url: http://www.cse.ogi.edu/~bellegar/fb.html
+  loc: Oregon Graduate Institute
+  Program transformation by rewriting, functional programming,
+  automatic demonstration, and the use of formal methods for software
+  development.
+
+Edoardo Biagioni
+  url: /afs/cs.cmu.edu/user/esb/pub/html/home.html
+  loc: Carnegie Mellon
+  Functional languages, parallel computing and architectures,
+  compilers, networking, operating systems, and I/O.
+
+Lars Birkedal
+  url: /afs/cs.cmu.edu/user/birkedal/www/birkedal-home.html
+  loc: Carnegie Mellon
+  Type theory, modules, Standard ML, compilation of ML, the ML Kit,
+  partial evaluation, SML-Mix.
+
+Sandip K. Biswas
+  url: http://www.cis.upenn.edu/~sbiswas/home.html
+  loc: University of Pennsylvania
+  Compilers, type theory, module systems, separate compilation,
+  configuration management, program slicing.
+
+Michael R. Blair
+  url: http://www-swiss.ai.mit.edu/~ziggy/ziggy.html
+  loc: MIT
+  Dynamically adaptive profile-guided specialization, partial
+  evaluation, program analyisi, compilation, type theory, subtyping.
+
+Guy Blelloch
+  url: /afs/cs.cmu.edu/user/guyb/www/home.html
+  loc: Carnegie Mellon
+  Parallel languages and compilers. NESL
+  (/afs/cs.cmu.edu/project/scandal/public/www/nesl.html).
+
+Alan Borning
+  url: http://www.cs.washington.edu/homes/borning
+  loc: University of Washington
+  Constraint-based languages and systems
+  (http://www.cs.washington.edu/research/projects/weird/www/constraints.html).
+
+Lee Braine
+  url: http://www.cs.ucl.ac.uk/staff/L.Braine/
+  loc: University College London
+  Functional programming, object-oriented programming, visual
+  programming, and language implementations.
+
+Franck van Breugel
+  url: http://www.di.unipi.it/~fvb
+  loc: University of Pisa
+  Operational and denotational semantics of concurrent programming and
+  specification languages, metric spaces.
+
+Preston Briggs
+  url: ftp://cs.rice.edu/public/preston
+  loc: Rice
+
+Jean-Pierre Briot
+  url: http://web.yl.is.s.u-tokyo.ac.jp/members/briot/home.html
+  loc: University of Tokyo
+  Object-oriented programming, concurrency/parallelism,
+  meta-programming and reflection, artificial intelligence, artificial
+  life, computer music.
+
+Kim B. Bruce
+  url: http://www.cs.williams.edu/~kim/
+  loc: Williams College
+  Semantics and design of programming languages, type theory,
+  object-oriented languages, models of higher-order lambda calculus
+  including subtypes and bounded polymorphism.
+
+Barrett R. Bryant
+  url: http://www.cis.uab.edu/info/faculty/bryant/bryant.html
+  loc: The University of Alabama at Birmingham
+  Compiler design, formal semantics, object-oriented technology.
+
+Tim Budd
+  url: http://www.cs.orst.edu:80/~budd/
+  loc: Oregon State
+  Programming languages, Leda (http://www.cs.orst.edu/~budd/leda.html),
+  implementation techniques, OOP
+  (http://www.cs.orst.edu/~budd/oop.html).
+
+Peter Buhr
+  url: http://plg.uwaterloo.ca:80/~pabuhr/
+  loc: University of Waterloo
+  Polymorphism, persistence, concurrency, and concurrent monitoring,
+  visualization and debugging.
+
+Margaret M. Burnett
+  url: http://www.cs.orst.edu/~burnett
+  loc: Oregon State University.
+  Visual programming languages design, theory, and implementation.
+  (ftp-able papers (ftp://ftp.cs.orst.edu/pub/burnett)).
+
+Rod Burstall
+  url: http://www.dcs.ed.ac.uk/infopages/rb.html
+  loc: Edinburgh
+  Computer-aided proof and its relation to type theory; development of
+  correct programs with respect to a specification; applications of
+  category theory in computer science.
+
+Philippe Canalda
+  url: http://www-rocq.inria.fr/~canalda/
+  loc: INRIA Rocquencourt
+  PAGODE: a generator of optimizing code generators, compilation
+  techniques, CoSy : an optimizing compiler platform, software
+  engineering, automatic term rewriting system generation, term and DAG
+  normalization problem, non-deterministic finite state automata with
+  non-linear and unification pattern constraints, dynamic programming,
+  reentrant programming, pattern matching.
+
+Steve Carr
+  url: http://www.cs.mtu.edu/faculty/Carr.html
+  loc: Michigan Technological University
+  Compilers for instruction-level parallel architectures.
+
+Nicholas Carriero
+  url: http://www.cs.yale.edu/HTML/YALE/CS/Brochure/faculty/carriero.html
+  loc: Yale
+  Systems issues in the development and deployment of software tools
+  for parallelism
+
+Giuseppe Castagna
+  url: http://www.ens.fr/users/castagna/index.html
+  loc: LIENS (Laboratoire d'Informatique de l'Ecole Normale Supérieure)
+  Type theory, object-oriented programming.
+
+Manuel M.T. Chakravarty
+  url: http://www.cs.tu-berlin.de/~chak/
+  loc: Technical University of Berlin
+  Design and implementation of functional and logic programming
+  languages with emphasis on the integration of both paradigms and
+  parallel implementations.
+
+Craig Chambers
+  url: http://www.cs.washington.edu/people/faculty/chambers.html
+  loc: University of Washington
+  Design and implementation of advanced object-oriented languages.
+  Cecil
+  (http://www.cs.washington.edu/research/projects/cecil/cecil/www/cecil-home.html).
+
+Thomas Christopher
+  url: http://www.iit.edu/~tc
+  loc: Illinois Institute of Technology
+  Parallel programming languages, compilers, experimental programming
+  models, message-driven computing, and Icon.
+
+Mark Chu-Carroll
+  url: http://www.eecis.udel.edu/~carroll/homepage.html
+  loc: University of Delaware
+  Programming languages and environments, general purpose parallel
+  programming, compiler analysis and high-level optimization.
+
+Wayne Citrin
+  url: http://soglio.colorado.edu/
+  loc: University of Colorado
+  Visual programming languages and environments.
+
+Chris Clack
+  url: http://www.cs.ucl.ac.uk/staff/C.Clack/
+  loc: University College London
+  Language design, programming environments and techniques (especially
+  functional programming), high performance computing
+
+William D Clinger
+  url: http://www.ccs.neu.edu/home/will/
+  loc: Northeastern
+  Higher order and functional languages: design and specification,
+  optimizations and their correctness, generational garbage collection.
+
+Chris Colby
+  url: http://foxnet.cs.cmu.edu/people/acid
+  loc: Carnegie Mellon
+  Program analysis via abstract interpretation of the aliasing,
+  synchronization, and communication behavior of concurrent languages
+  such as Concurrent ML.
+
+Jean-Francois Collard
+  url: http://www.prism.uvsq.fr/public/jfcollar/index.html
+  loc: CNRS, Laboratory PRISM
+  Static analyses, dataflow analyses, automatic parallelization,
+  scheduling, data-parallel functional programming
+
+Charles Consel
+  url: http://www.irisa.fr/EXTERNE/projet/lande/consel/consel
+  loc: University of Rennes/IRISA
+  Static program analysis, compilation and compiler generation,
+  programming environment, prototyping and program transformation.
+
+Robert Constable
+  url: http://www.cs.cornell.edu/Info/Faculty/Robert_Constable.html
+  loc: Cornell
+  Systems for computer-assisted problem solving in programming and
+  mathematics, such as Nuprl
+  (http://www.cs.cornell.edu/Info/Projects/NuPrl/nuprl.html). Models
+  and program refinement for the Polya programming language.
+
+Daniel E. Cooke
+  url: http://cs.utep.edu/csdept/faculty/cooke.html
+  loc: University of Texas at El Paso
+  High-level language development. Recently developed language,
+  SequenceL.
+
+Gordon V. Cormack
+  url: http://plg.uwaterloo.ca/~gvcormac
+  loc: University of Waterloo
+  Parsing and text processing, attribute grammars, data types,
+  concurrency.
+
+Patrick Cousot
+  url: http://www.ens.fr/~cousot
+  loc: ENS, Paris
+  Static program analysis, abstract interpretation, program development
+  and verification, semantics.
+
+Dirk Craeynest
+  url: http://www.cs.kuleuven.ac.be/~dirk/
+  loc: K. U. Leuven
+  Semantics directed compiler construction, integrated environments,
+  programming language Ada, software engineering.
+
+Roger Crew
+  url: http://www.research.microsoft.com/research/analysts/rfc/
+  loc: Microsoft Research
+  Semantics, program analysis, verification and transformations.
+
+Ron Cytron
+  url: http://www.cs.wustl.edu/~cytron
+  loc: Washington University in St. Louis
+  Program optimization, program transformation, intermediate
+  representations.
+
+Mads Dam
+  url: http://www.sics.se/people/mads-dam.html
+  loc: Swedish Institute of Computer Science
+  First and higher order modal and temporal logics, compositional
+  verification techniques, process specification languages, and
+  applications to computer based systems for cooperative work.
+
+Laurent Dami
+  url: http://cuiwww.unige.ch/OSG/Dami/HomePage.html
+  loc: Université de Genève
+  The HOP Calculus (http://cuiwww.unige.ch/OSG/Hop/); integration of
+  functional and object-oriented languages.
+
+Olivier Danvy
+  url: http://www.daimi.aau.dk/~danvy
+  loc: Aarhus University
+  Programming languages, partial evaluation, continuations.
+
+Rowan Davies
+  url: http://foxnet.cs.cmu.edu/people/rowan/home.html
+  loc: Carnegie Mellon
+  Type systems, ML, refinement types, partial evaluation, computation
+  staging, program analysis.
+
+Jeffrey Dean
+  url: http://www.research.digital.com/people/jdean
+  loc: Digital Equipment Corporation, Western Research Laboratory (http://www.research.digital.com/wrl/home.html)
+  Efficient profiling techniques (DCPI
+  (http://www.research.digital.com/S RC/dcpi/)), optimization
+  techniques for object-oriented & high-level languages like Cecil
+  (http://www.cs.washington.edu/research/projects/cecil/ce
+  cil/www/cecil-home.html), low-level code scheduling, software tools
+  for performance understanding
+
+Mourad Debbabi
+  url: http://www.ift.ulaval.ca//recherche/profs/debbabi/research_en.html
+  loc: Laval University, Quebec
+  Programming languages, integration of paradigms, semantics and formal
+  methods.
+
+André DeHon
+  url: http://www.ai.mit.edu/people/andre/andre.html
+  loc: MIT
+  Quasistatic computing
+  (http://www.ai.mit.edu/projects/transit/tn103/tn103.html),
+  specialization, feedback, and adaptation
+
+Arie van Deursen
+  url: http://www.cwi.nl/~arie/
+  loc: CWI, Amsterdam
+  Language prototyping, algebraic specifications, language-specific
+  tools, program understanding, software reengineering.
+
+Stephan Diehl
+  url: http://www.cs.uni-sb.de/~diehl
+  loc: Universitaet des Saarlandes (University Saarbruecken)
+  Semantics of programming languages, semantics directed generation of
+  compilers and abstract machines, meta-programming, WWW programming
+  languages.
+
+T. B. Dinesh
+  url: http://www.cwi.nl/~dinesh/
+  loc: CWI (http://www.cwi.nl/)
+  Object oriented programming; algebraic specifications; theorem
+  proving; visual languages; partial evaluation; ASF+SDF; static
+  program analysis
+
+Pedro Diniz
+  url: http://www.cs.ucsb.edu/~pedro
+  loc: University of California, Santa Barbara
+  Parallelizing compilers, program analysis and optimization of
+  sequential and parallel programs, dynamic feedback techniques.
+
+Amer Diwan
+  url: http://www.cs.umass.edu/~diwan/home.html
+  loc: University of Massachusetts
+  Garbage collection, inlining, memory system performance, optimization
+  for memory hierarchies, partial evaluation, program analysis,
+  compilers for object-oriented languages.
+
+Simon Dobson
+  url: http://www.cis.rl.ac.uk/people/sd/contact.html
+  loc: Rutherford Appleton Laboratory
+  Programming abstractions for parallel and distributed systems,
+  compilation, program transformation, semantics.
+
+Scott Draves
+  url: /afs/cs.cmu.edu/user/spot/web/home.html
+  loc: Carnegie Mellon
+  Partial evaluation, abstraction vs. performance.
+
+Bruce F. Duba
+  url: http://www.research.microsoft.com/research/analysts/bduba/
+  loc: Microsoft Research (http://www.research.microsoft.com/)
+  Design and implementation of programming languages.
+
+Dominic Duggan
+  url: http://nuada.uwaterloo.ca/dduggan.html
+  loc: University of Waterloo
+  Type systems and type inference (ML3000), object types, dynamic
+  types, operational semantics, higher-order unification, explicit
+  substitutions, partial continuations, application frameworks.
+
+Dirk Dussart
+  url: http://www.cs.kuleuven.ac.be/~dirkd/
+  loc: Katholieke Universiteit Leuven, Belgium
+  Program specialization techniques.
+
+Susan Eggers
+  url: http://www.cs.washington.edu/homes/eggers/
+  loc: University of Washington
+  Dynamic compilation, code scheduling, parallel optimizations for
+  locality.
+
+Michael Ernst
+  url: http://www.cs.rice.edu/~mernst/
+  loc: Rice University
+  Static analysis, slicing, debugging (including optimized code),
+  serialization of parallel programs; game theory, intellectual
+  property.
+
+David Espinosa
+  url: http://www-swiss.ai.mit.edu/ftpdir/users/dae/home.html
+  loc: MIT and Columbia
+  Monads, compiler and operating system architecture.
+
+Leonidas Fegaras
+  url: ftp://cse.ogi.edu/pub/crml/fegaras.html
+  loc: Oregon Graduate Institute
+  Functional programming, database programming languages, query
+  optimization, program transformation and verification.
+
+Mary Fernandez
+  url: http://www.research.att.com/info/mff/
+  loc: AT&T Research
+  Improving software development through the design of very high-level
+  and special-purpose programming languages and the development of
+  tools for their efficient implementation, such as the New Jersey
+  Machine-Code toolkit (http://www.cs.princeton.edu/grad/mff/toolkit).
+
+Jeanne Ferrante
+  url: http://www-cse.ucsd.edu/users/ferrante
+  loc: University of California, San Diego
+  Intermediate representations for optimizing and parallelizing
+  compilers; optimization in parallel and memory hierarchy machines.
+
+Andrzej Filinski
+  url: http://www.dcs.ed.ac.uk/~aof/
+  loc: Edinburgh
+  Continuations, CPS, category theory.
+
+Sigbjorn Finne
+  url: http://www.dcs.gla.ac.uk:80/~sof/
+  loc: Glasgow
+  Lazy functional languages, specifically Haskell, and their use in the
+  implementation of graphical user interfaces.
+
+Cormac Flanagan
+  url: http://www.cs.rice.edu:80/~cormac/
+  loc: Rice
+  Advanced programming languages; their semantic foundations, analysis,
+  optimization and implementation; and partial program verification,
+  both through advanced type systems and interactive program analyses.
+
+Ian Foster
+  url: http://www.mcs.anl.gov/people/foster/
+  loc: Argonne National Laboratory
+  Parallel languages, compilers, runtime systems, applications.
+
+Christopher W. Fraser
+  url: ftp://netlib.att.com/netlib/att/cs/home/cwfraser.html
+  loc: Bell Laboratories
+  Retargetable code generation and optimization, including lcc
+  (http://www.cs.princeton.edu/software/lcc), a retargetable compiler
+  for ANSI C.
+
+Timothy Freeman
+  url: /afs/cs.cmu.edu/user/tsf/html/home.html
+  loc: Carnegie Mellon
+  Refinement types, ML
+
+Dan Friedman
+  url: http://www.cs.indiana.edu/hyplan/dfried.html
+  loc: Indiana University
+  Principles of programming languages
+
+Svend Frølund
+  url: http://www.hpl.hp.com/personal/Svend_Frolund
+  loc: HP Labs
+  Object-oriented languages; language support for coordination,
+  distribution, concurrency, persistence, and fault-tolerance.
+
+David Gelernter
+  url: http://www.cs.yale.edu/HTML/YALE/CS/Brochure/faculty/gelernter.html
+  loc: Yale
+  Linda (http://www.cs.yale.edu/HTML/YALE/CS/Linda/linda.html),
+  parallel programming, software ensembles, artificial intelligence,
+  adaptive parallelism, programming environments for parallelism,
+  realtime data fusion, and expert databases.
+
+Shai Geva
+  url: /afs/cs.cmu.edu/user/shai/WWW/home.html
+  loc: Carnegie Mellon
+  Semantics, intensional aspects of computation, domain theory,
+  concurrency, functional programming, reasoning about programs.
+
+Giorgio Ghelli
+  url: http://www.di.unipi.it/~ghelli/ghelli.html
+  loc: Pisa University
+  Database programming languages, type theory, object oriented
+  languages; the object-oriented database programming language
+  Fibonacci.
+
+Andy Gill
+  url: http://www.dcs.gla.ac.uk/~andy/
+  loc: Glasgow
+  Using equational reasoning to perform non-trivial proofs;
+  deforestation; purely functional finite maps; parsing combinators.
+
+Christopher Glaeser
+  url: http://www.nullstone.com
+  loc: Nullstone Corporation
+  Methodologies to evaluate compiler optimization and run-time
+  performance.
+
+Robert Glück
+  url: http://www.diku.dk/people/RG.html
+  loc: DIKU, University of Copenhagen
+  Programming languages and compiler construction, semantics-based
+  program manipulation and program analyses, program specialization,
+  program composition, metaprogramming, functional and logic
+  programming.
+
+Joseph A. Goguen
+  url: http://www.comlab.ox.ac.uk/oucl/people/joseph.goguen.html
+  loc: Oxford
+  Software engineering; formal methods; object oriented, relational and
+  functional programming and their combinations; concurrent computer
+  architecture based on rewriting; algebraic specification; theorem
+  proving; hardware verification; philosophy of computation.
+
+Benjamin Goldberg
+  url: http://cs.nyu.edu/cs/faculty/goldberg/index.html
+  loc: New York University
+  Functional programming, memory management, program optimization
+
+Andrew Gordon
+  url: http://www.cl.cam.ac.uk/users/adg/
+  loc: Cambridge
+  Operational semantics; I/O and concurrency; mechanised verification.
+
+John K. Gough
+  url: http://www.dstc.qut.edu.au/~gough
+  loc: Queensland University of Technology
+  Code generation, optimization. Implementation of programming
+  languages, strongly typed imperative languages.
+
+T.C. Nicholas Graham
+  url: http://www.cs.yorku.ca/People/graham/
+  loc: York University
+  Functional programming languages, languages for developing user
+  interfaces and multi-media groupware, visual programming
+  environments.
+
+John Greiner
+  url: /afs/cs.cmu.edu/user/jdg/www/home.html
+  loc: Carnegie Mellon
+  Language models of complexity, type theory, parallel algorithms.
+
+David Gries
+  url: http://www.cs.cornell.edu/home/gries
+  loc: Cornell
+  Logic as a tool, programming methodology, formal development of
+  programs, semantics of programming languages, compilers.
+
+Dave Grove
+  url: http://www.cs.washington.edu/homes/grove/index.html
+  loc: University of Washington
+  Design, implementation and optimization of advanced object-oriented
+  languages, such as Cecil
+  (http://www.cs.washington.edu/research/projects/cecil/cecil/www/cecil-home.html).
+
+Carl Gunter
+  url: http://www.cis.upenn.edu/~gunter/home.html
+  loc: University of Pennsylvania
+  Domain theory, semantics of polymorphism, computational aspects of
+  linear logic, structure and representation of partial information.
+
+Rajiv Gupta
+  url: http://www.cs.pitt.edu:80/~gupta/
+  loc: University of Pittsburgh
+  Parallelizing and optimizing compilers; parallel architectures;
+  distributed, real-time, and fault tolerant computing; software
+  testing and debugging
+
+Sandeep K. S. Gupta
+  url: http://www.cs.colostate.edu/~gupta
+  loc: Colorado State University
+  Parallelizing compilers, parallel program synthesis and parallel
+  computing.
+
+Mary Hall
+  url: http://suif.stanford.edu/~mhall/index.html
+  loc: Stanford
+  Interprocedural optimization for parallelizing compilers, SUIF
+  (http://suif.stanford.edu/index.html).
+
+Thomas Hallgren
+  url: http://www.cs.chalmers.se/~hallgren
+  loc: Chalmers
+  Type systems with subtypes, graphical user interfaces for functional
+  languages.
+
+Kevin Hammond
+  url: http://www.dcs.gla.ac.uk:80/~kh/
+  loc: Glasgow
+  Design and implementation of pure functional languages, such as
+  Haskell.
+
+John Hannan
+  url: http://www.cse.psu.edu/~hannan
+  loc: Penn State
+  Operational semantics and type theory; compiler verification;
+  mathematical logic; program transformation; abstract machines.
+
+David R. Hanson
+  url: http://www.cs.princeton.edu/faculty/drh
+  loc: Princeton
+  lcc (http://www.cs.princeton.edu/software/lcc), a retargetable
+  compiler for ANSI C. Programming languages, compilers, programming
+  environments.
+
+Michael Hanus
+  url: http://www-i2.informatik.rwth-aachen.de/hanus/
+  loc: RWTH Aachen
+  Type systems for and implementation of logic programming languages,
+  integration of functional and logic programming languages (ALF
+  system), abstract interpretation of logic, functional logic and
+  constraint logic programming languages.
+
+James Harland
+  url: http://www.cs.rmit.edu.au/~jah
+  loc: Royal Melbourne Institute of Technology
+  Foundations of logic programming, linear logic, proof theory,
+  deductive databases, computational logic.
+
+Robert Harper
+  url: /afs/cs.cmu.edu/user/rwh/public/www/home.html
+  loc: Carnegie Mellon
+  Logical frameworks, machine-assisted proofs, ML, ML2000, modules,
+  lambda calculus, type theory, category theory, semantics and logics
+  of programs, functional programming, applications of functional
+  languages to systems programming.
+
+John Hatcliff
+  url: http://www.diku.dk/research-groups/topps/personal/hatcliff.html
+  loc: DIKU, University of Copenhagen
+  Operational semantics, correctness of program transformations,
+  continuations, logics and type theory, logical frameworks, partial
+  evaluation, computational monads, static analysis of programs.
+
+Chris Haynes
+  url: http://www.cs.indiana.edu/hyplan/chaynes.html
+  loc: Indiana
+  Type systems, control abstraction, symbolic computation, Scheme.
+
+Fritz Henglein
+  url: ftp://ftp.diku.dk/pub/diku/users/henglein
+  loc: DIKU, University of Copenhagen
+  Type inference systems, program analysis, algorithmic and
+  computational complexity, global program optimization
+
+Jonathan M. D. Hill
+  url: http://www.comlab.ox.ac.uk/oucl/people/jonathan.hill.html
+  loc: Oxford
+  Bulk Synchronous Parallel model; Data-parallel non-strict functional
+  programming;
+  (http://www.comlab.ox.ac.uk/oucl/users/jonathan.hill/dp-fp.html)
+  Implementation of the HPF library in Fortran 90
+  (http://www.lpac.ac.uk/SEL-HPC/Materials/HPFlibrary/)
+
+Michael Hind
+  url: http://www.mcs.newpaltz.edu/faculty/hind.html
+  loc: SUNY at New Paltz, visiting IBM Research
+  Compiler optimizations and programming languages.
+
+C.A.R. Hoare
+  url: http://www.comlab.ox.ac.uk/oucl/people/tony.hoare.html
+  loc: Oxford
+  Programming methods and languages, proof techniques for programs,
+  distributed computing, category theory in computing science, C-mos
+  switching circuit design.
+
+Richard C. Holt
+  url: http://www.turing.toronto.edu/homes/holt/main.html
+  loc: University of Toronto
+  Object oriented programming languages and teaching programming.
+
+Urs Hölzle
+  url: http://www.cs.ucsb.edu/~urs
+  loc: University of California, Santa Barbara
+  Object-oriented programming languages, compilers for object-oriented
+  languages, run-time compilation.
+
+James Hook
+  url: http://www.cse.ogi.edu/~hook/hook.html
+  loc: Oregon Graduate Institute
+  Application of formal methods to software development, the theory and
+  practice of specification and programming languages, and type theory.
+
+Jim Horning
+  url: http://www.netcom.com/~jhorning
+  loc: InterTrust Technologies
+  Language design and implementation; specification languages and tools
+  (e.g., Larch (http://larch-www.lcs.mit.edu:8001/larch/)); C++ and the
+  Standard Template Library.
+
+Luke Hornof
+  url: http://www.irisa.fr/lande/hornof.html
+  loc: University of Rennes/IRISA
+  Partial evaluation, binding-time analysis, run-time code generation,
+  adaptive operating systems.
+
+Susan Horwitz
+  url: http://www.cs.wisc.edu/~horwitz/horwitz.html
+  loc: University of Wisconsin at Madison
+  Language-based programming environments; program slicing,
+  differencing, and merging; static analysis of programs; and
+  interprocedural dataflow analysis.
+
+Antony L. Hosking
+  url: http://www.cs.purdue.edu/people/hosking
+  loc: Purdue University
+  Programming language design and implementation: compilation,
+  interpretation, and optimization; run-time systems (e.g., garbage
+  collection). Object-oriented database systems; database and
+  persistent programming languages and systems. Empirical performance
+  evaluation of prototype systems.
+
+Brian Howard
+  url: http://www.cis.ksu.edu/~bhoward/home.html
+  loc: Kansas State
+  Programming language design and theory, particularly functional
+  languages, semantics, and type theory. Logic and computation. Natural
+  language processing.
+
+Paul Hudak
+  url: http://www.cs.yale.edu/HTML/YALE/CS/HyPlans/hudak-paul.html
+  loc: Yale
+  Functional programming, Haskell, parallel programming in Haskell,
+  modular interpreters, mutable abstract datatypes.
+
+Graham Hutton
+  url: http://www.cs.nott.ac.uk/Department/Staff/gmh/
+  loc: University of Nottingham
+  Functional programming; relational programming; polytypic
+  programming; programming calculi; recursion operators; categorical
+  methods.
+
+Graham Hutton
+  url: http://www.cs.ruu.nl/people/graham
+  loc: Utrecht University, The Netherlands
+  Functional and relational programming, category theory in computer
+  science, algebraic approaches to programming.
+
+S. Purushothaman Iyer
+  url: http://www4.ncsu.edu/~purush/www
+  loc: North Carolina State University
+  Abstract Interpretation, Concurrency, Formal methods.
+
+Daniel Jackson
+  url: /afs/cs/user/dnj/pub/www/home.html
+  loc: Carnegie Mellon
+  Tractable representations and analyses of designs and code.
+  Specifications, design methods, static analysis, model checking.
+
+Quinn Tyler Jackson
+  url: http://mypage.direct.ca/q/qjackson/
+  loc: Lambda Systems Ltd.
+  Pattern matching, language-to-language translation, OO-to-non-OO
+  modeling
+
+Suresh Jagannathan
+  url: http://www.neci.nj.nec.com/homepages/jagannathan.html
+  loc: NEC Research Institute
+  Advanced language and compiler technology for the Scheme programming
+  language; the incorporation of formal methods such as continuation
+  models, type inference, abstract interpretation, etc. as a foundation
+  for such a technology; parallel and distributed computing for
+  symbolic and irregular applications.
+
+Sverker Janson
+  url: http://www.sics.se/~sverker
+  loc: SICS (Swedish Institute of Computer Science)
+  Foundations, design, and implementation technology for multiparadigm
+  languages that offer a combination of concurrency (distribution),
+  constraints, and mutable state.
+
+Patrik Jansson
+  url: http://www.cs.chalmers.se/~patrikj/
+  loc: Chalmers
+  Polytypic programming, functional programming, program calculation
+
+Johan Jeuring
+  url: http://www.cs.chalmers.se/~johanj
+  loc: Chalmers
+  Program calculation, programming methodology, type systems and
+  programming languages for polytypic programming, functional
+  programming.
+
+Trevor Jim
+  url: http://www.cis.upenn.edu/~tjim/home.html
+  loc: University of Pennsylvania
+  Semantics, compilers, type inference.
+
+Chang-Hyun Jo
+  url: http://www.kyonggi.ac.kr/~chjo
+  loc: Kyonggi University, Korea
+  Programming language design and implementation (Parallel-C++.
+  CHILL96), language semantics and formal specification, software
+  testing, programming environments (CHILL96 Debugger).
+
+Cliff B. Jones
+  url: http://www.cs.man.ac.uk/fmethods/people/cliff-jones.html
+  loc: Manchester University
+  Compositional formal methods for parallel environments, support
+  systems for formal methods, LPF
+  (http://www.cs.man.ac.uk/fmethods/refs/lpf-refs.html).
+
+Mark P. Jones
+  url: http://www.cs.nott.ac.uk/Department/Staff/mpj/index.html
+  loc: University of Nottingham
+  Programming language design and implementation, type theory, module
+  systems, program transformation and analysis, functional programming.
+
+Jesper Jørgensen
+  url: ftp://ftp.diku.dk/diku/semantics/www/people/knud.html
+  loc: DIKU, University of Copenhagen
+  Semantic based program manipulation and program analyses. Program
+  specialization (e.g. partial evaluation, deforestation and
+  supercompilation), flow and binding-time analysis and representation
+  analysis.
+
+Martin Jourdan
+  url: http://www-rocq.inria.fr/~jourdan
+  loc: INRIA, Rocquencourt, France
+  Attribute grammars (esp. the FNC-2 system
+  (http://www-rocq.inria.fr/charme/FNC-2/)), program analysis, compiler
+  construction and generation.
+
+Bill Kalsow
+  url: http://www.research.digital.com/SRC/people/Bill_Kalsow/bio.html
+  loc: DEC SRC
+  Modula-3
+  (http://www.research.digital.com/SRC/modula-3/html/home.html),
+  programming languages and environments, compilers and runtime systems
+
+Fairouz Kamareddine
+  url: http://www.dcs.gla.ac.uk/~fairouz
+  loc: University of Glasgow
+  Logic, lambda calculus, type theory.
+
+Jasper Kamperman
+  url: http://www.cwi.nl/~jasper/
+  loc: CWI
+  Compilation of term rewriting systems, algebraic, equational and
+  functional languages, lazy rewriting, algebraic specifications.
+
+Uwe Kastens
+  url: http://www.uni-paderborn.de/cs/uwe.html
+  loc: University of Paderborn, Germany
+  Methods and tools for language implementation, compilation for
+  parallel machines.
+
+Dinesh Katiyar
+  url: http://Theory.Stanford.EDU/~katiyar/
+  loc: Sun Microsystems
+  Programming languages, object-oriented languages, multi-language
+  systems, interface definition languages, type theory
+
+Richard Kelsey
+  url: http://www.neci.nj.nec.com/homepages/kelsey.html
+  loc: NEC Research Institute
+  Compiling scheme, Scheme 48
+  (http://www-swiss.ai.mit.edu/~jar/s48.html), continuation-passing
+  style.
+
+Andrew Kennedy
+  url: http://www.cl.cam.ac.uk/users/ajk13
+  loc: University of Cambridge
+  Type systems, type inference, dimension types and the extension of
+  programming languages to support physical dimension, functional
+  programming.
+
+David Keppel
+  url: http://www.cs.washington.edu/homes/pardo/
+  loc: University of Washington
+  Abstractions, architectures, binding times, caches, compilers,
+  dynamic compilation, emulation, operating systems, performance
+  analysis, runtime code generation, runtime systems, self-modifying
+  code, instruction-set simulation, threads, tracing, value-specific
+  optimization.
+
+Maurice van Keulen
+  url: http://www.cs.utwente.nl/~keulen/
+  loc: University of Twente
+  Type systems, polymorphy, functional programming, database
+  specification, object-orientation, semantics of such languages.
+
+Gregor Kiczales
+  url: http://www.parc.xerox.com/spl/members/gregor/
+  loc: Xerox PARC
+  Object-oriented programming, reflection, metaobject protocols, open
+  compilers, efficient compilation of high-level programs.
+
+Sangwook Kim
+  url: http://woorisol.kyungpook.ac.kr/lab/prof/prof.html
+  loc: Kyungpook National University, Korea
+  Computer and programming languages, visual languages, multimedia
+  langugaes semantic analysis for visual concepts.
+
+David King
+  url: http://www.dcs.gla.ac.uk:80/~gnik/
+  loc: Glasgow
+  Expressing graph algorithms in Haskell, algorithm design and
+  correctness, imperative functional programming.
+
+Edgar Knapp
+  url: http://www.cs.purdue.edu/people/knapp
+  loc: Purdue
+  Formal methods for concurrent program development, tool support for
+  program design, retargetable implementation of concurrent programs.
+
+Todd Knoblock
+  url: http://www.research.microsoft.com/research/graphics/knoblock/
+  loc: Microsoft Research
+  4D graphics and interactivity, program specializaton, run time code
+  generation, partial evaluation, high level programming languages,
+  program analysis and optimization, and type theory.
+
+Dattatraya Kulkarni
+  url: http://www.cs.toronto.edu/~kulki
+  loc: University of Toronto
+  Compiler optimizations, program transformations
+
+Kwangkeun Yi
+  url: http://compiler.kaist.ac.kr/~kwang
+  loc: Korea Advanced Institute of Science and Technology
+  Compile-time program analysis, programming environments, program
+  analysis tools, safe programming.
+
+Monica Lam
+  url: http://suif.stanford.edu/~lam/index.html
+  loc: Stanford
+  Compiler optimizations, computer architectures, parallel computing,
+  SUIF (http://suif.stanford.edu/index.html).
+
+Leslie Lamport
+  url: http://www.research.digital.com/SRC/personal/Leslie_Lamport/home.html
+  loc: DEC SRC
+  TLA (the Temporal Logic of Actions)
+  (http://www.research.digital.com/SRC/personal/Leslie_Lamport/tla/tla.html),
+  writing proofs
+  (http://www.research.digital.com/SRC/personal/Leslie_Lamport/proofs/proofs.html).
+
+James Larus
+  url: http://www.cs.wisc.edu/~larus/larus.html
+  loc: University of Wisconsin at Madison
+  Programming languages and compilers, in particular languages and
+  compilers for parallel machines; design and programming of
+  shared-memory parallel computers; compiling symbolic languages;
+  program profiling and tracing; and program executable editing.
+
+Konstantin Läufer
+  url: http://www.math.luc.edu/~laufer/home.html
+  loc: Loyola University of Chicago
+  Programming languages and compilers, functional and object-oriented
+  programming, type systems, type inference, software engineering.
+
+John Launchbury
+  url: http://www.cse.ogi.edu/~jl/jl.html
+  loc: Oregon Graduate Institute
+  Functional programming, functional algorithms, the semantics of lazy
+  evaluation, incorporating destructive updates in Haskell, partial
+  evaulation, program analysis.
+  Programming and specification language design and semantics, formal
+  methods (program specification and verification), programming
+  methodology, object-oriented programming, functional programming,
+  distributed computer systems.
+
+Peter Lee
+  url: /afs/cs.cmu.edu/user/petel/pub/www/home.html
+  loc: Carnegie Mellon
+  Semantics-based compiler generation, program analysis and
+  optimization, ML, compiler support for advanced systems software.
+
+K. Rustan M. Leino
+  url: http://www.research.digital.com/SRC/personal/Rustan_Leino/home.html
+  loc: DEC SRC
+  Programming and program design technologies, programming languages
+  and systems, specification and verification, program semantics,
+  object-orientation and modularity.
+
+Mark Leone
+  url: http://www.cs.indiana.edu/~mleone
+  loc: Indiana University
+  Run-time code generation, partial evaluation, compiling functional
+  programs, program analysis and optimization, type theory.
+
+Xavier Leroy
+  url: http://pauillac.inria.fr/~xleroy
+  mel: xavier.leroy@inria.fr
+  loc: INRIA Rocquencourt
+  OCaml
+  Type systems, module systems, operational semantics, implementation
+  of ML, the Caml Light compiler.
+
+Michael Leuschel
+  url: http://www.cs.kuleuven.ac.be/~michael/
+  loc: Katholieke Universiteit Leuven
+  Partial evaluation and partial deduction, meta-programming and the
+  ground representation, specialised integrity checking.
+
+Raph Levien
+  url: http://http.cs.berkeley.edu/~raph
+  loc: UC Berkeley
+  Compilers for higher-order languages; analysis of memory access
+  patterns, closure representations, avoiding the need for garbage
+  collection.
+
+Sean Levy
+  url: http://paneer.ndim.edrc.cmu.edu:8888/~snl/Home.html
+  loc:Allen Dutoit (http://paneer.ndim.edrc.cmu.edu:8888/~ad1h/Home.html), Eric Gardner (http://paneer.ndim.edrc.cmu.edu:8888/~avatar/Home.html), Eswaran Subrahmanian (http://paneer.ndim.edrc.cmu.edu:8888/~sub/Home.html) - Carnegie Mellon
+  n-dim Group, Engineering Design Research Center, CMU
+  Object-oriented languages/environments, embeddable
+  languages/toolkits, support for evolutionary prototyping, user
+  interfaces, collaboration
+
+Sheng Liang
+  url: http://www.cs.yale.edu/users/liang-sheng
+  loc: Yale
+  Design and implementation of modern programming languages, modular
+  semantics, compiler generation, portable common back-ends.
+
+Leonid Libkin
+  url: http://www.cis.upenn.edu/~libkin/home.html
+  loc: University of Pennsylvania
+  Functional database query languages, semantics of programming
+  languages, partial information
+
+Karl Lieberherr
+  url: http://www.ccs.neu.edu/~lieber/
+  loc: Northeastern University
+  Adaptive Software, adaptive architecture description languages.
+
+Jim Lipton
+  url: http://www.cs.wesleyan.edu/~lipton
+  loc: Wesleyan University
+  Logic programming, type theory, intuitionistic semantics, programming
+  with relations, categorical logic.
+
+Björn Lisper
+  url: http://www.it.kth.se/~lisper/
+  loc: KTH, Dept. of Teleinformatics
+  Theory for efficient implementation of declarative languages; Data
+  parallel and functional programming; program transformations.
+
+Y. Annie Liu
+  url: http://www.cs.indiana.edu/hyplan/liu.html
+  loc: Indiana University
+  Program analyses and transformations for efficiency improvement,
+  optimizing compilers, language-based interactive systems, algorithm
+  design, program development methods.
+
+Luc Maranget
+  url: http://pauillac.inria.fr:80/~maranget/
+  loc: INRIA Rocquencourt
+  Lazy ML: compilation of pattern matching and parallel implementation;
+  strategies in term rewriting systems.
+
+Dave Mason
+  url: http://plg.uwaterloo.ca:80/~dmason/
+  loc: Waterloo
+  Compilation of functional programming languages, particularly of
+  Standard ML for systems programming purposes, literate programming
+  and other aspects of text formatting.
+
+Florian Matthes
+  url: http://idom-www.informatik.uni-hamburg.de/Personal/matthes.html
+  loc: Hamburg University, Germany
+  Persistent programming environments: extensible syntax, higher-order
+  type checking, static and dynamic code optimization, object store
+  interfaces
+
+Bernd Mathiske
+  url: http://idom-www.informatik.uni-hamburg.de/Personal/mathiske.html
+  loc: Hamburg University
+  Language implementation, portable multi-threaded runtime systems,
+  code generation; distributed persistent languages, code mobility,
+  thread mobility, autonomous network agents; bidirectional language
+  interfacing, cross-language exception handling.
+
+David McAllester
+  url: http://www.ai.mit.edu/people/dam/dam.html
+  loc: MIT AI Laboratory
+  Automated reasoning and type inference
+
+Erik Meijer
+  url: http://www.cs.ruu.nl/~erik
+  loc: Utrecht University
+  Functional programming, semantics directed compiler generation,
+  constructive algorithmics.
+
+Marjan Mernik
+  url: http://marcel.uni-mb.si/~marjan
+  loc: University of Maribor, Slovenia
+  Design and implementation of programming languages, formal language
+  definition, compiler generators, attribute grammars
+
+Olivier Michel
+  url: http://www.lri.fr/~michel
+  loc: LRI, Université Paris-Sud, Orsay (Paris XI)
+  Declarative languages, data-parallelism, representation of space,
+  implicit construction of programs, names and name capture, the 8 1/2
+  language.
+
+Dale Miller
+  url: http://www.cis.upenn.edu/~dale
+  loc: University of Pennsylvania
+  Computational logic, proof theory, design and theory of logic and
+  functional programming languages, unification of typed
+  lambda-calculi, lambda Prolog
+  (http://www.cis.upenn.edu/~dale/lProlog/index.html).
+
+Robin Milner
+  url: http://www.dcs.ed.ac.uk/infopages/rm.html
+  loc: Cambridge
+  Mathematical models of computation - models and calculi for
+  concurrent computation; how to present logics to machines; semantics
+  of high-level programming constructs.
+
+John Mitchell
+  url: http://theory.stanford.edu/people/jcm/home.html
+  loc: Stanford
+  Programming language analysis and design, including module systems,
+  object-oriented programming, type systems, and reasoning about
+  programs; applications of mathematical logic to programming languages
+  and automated reasoning; algorithms for static analysis of programs.
+
+Anwar M. Mohammed
+  url: /afs/cs.cmu.edu/user/anwar/mosaic/anwar-home.html
+  loc: Carnegie Mellon
+  Compilers: optimizing and parallelizing sequential languages,
+  parallel algorithms, languages, and architectures.
+
+Greg Morrisett
+  url: http://www.cs.cornell.edu/Info/People/jgm/home.html
+  loc: Cornell
+  Systems hacking in high-level languages, compilers, analysis via
+  types, modeling garbage collection, concurrency, threads.
+
+Christian Mossin
+  url: ftp://ftp.diku.dk/diku/semantics/www/people/mossin.html
+  loc: DIKU, University of Copenhagen
+  Type inference for analysis of functional programs. Program analysis,
+  type systems, logic, lambda calculus and (to some extent) category
+  theory.
+
+Frank Mueller
+  url: http://www.informatik.hu-berlin.de/~mueller/
+  loc: Humboldt-University Berlin
+  Compiler optimizations, concurrent programming, prediction of
+  execution time
+
+Robert Muller
+  url: http://www.cs.bc.edu/~muller
+  loc: Boston College
+  Compilers for higher-order languages, program representation, program
+  analysis and optimization, extensible parsers.
+
+Uwe Nestmann
+  url: http://pauillac.inria.fr/~nestmann/
+  loc: INRIA Rocquencourt
+  Formal Semantics, concurrency theory, translation correctness,
+  pi-calculus.
+
+Kristian Nielsen
+  url: ftp://ftp.diku.dk/diku/semantics/www/people/bombadil.html
+  loc: DIKU, University of Copenhagen
+  Deforestation, partial evaluation, supercompilation, program
+  analysis, implementation of functional programming languages, lazy
+  evaluation.
+
+Oscar Nierstrasz
+  url: http://iamwww.unibe.ch/~oscar
+  loc: University of Berne
+  Semantics of object-based concurrency; software composition
+  languages.
+
+Rishiyur Nikhil
+  url: http://www.research.digital.com/CRL/personal/nikhil/home.html
+  loc: DEC CRL
+  Parallel computing -- languages and implementations, runtime systems,
+  architectures. Functional languages and implementations, especially
+  parallel implementations.
+
+Tobias Nipkow
+  url: http://hpbroy3.informatik.tu-muenchen.de/MITARBEITER/nipkow/nipkow.html
+  loc: Technische Universität München
+  Automatic and interactive theorem proving, system verification,
+  rewriting, unification, lambda-calculus, type systems.
+
+Steve Novack
+  url: http://www.csrd.uiuc.edu/~snovack
+  loc: University of Illinois, Urbana-Champaign
+  The EVE Mutation Scheduling compiler, fine-grain parallelization,
+  code development environments, and hardware/software co-design. The
+  PROMIS compiler, interactions between source-level and
+  instruction-level transformations.
+
+Lars Nyland
+  url: http://www.cs.unc.edu/~nyland/
+  loc: University of North Carolina at Chapel Hill
+  High-level languages for prototyping parallel algorithms. Development
+  of complex parallel algorithms. Transformation of high-level code to
+  parallel implementations.
+
+Albert Nymeyer
+  url: http://www.cs.utwente.nl/~nymeyer
+  loc: University of Twente, The Netherlands
+  Co-author of "Practice and Principles of Compiler Building with C"
+  (Prentice Hall), 1996.
+  The theory and implementation of the bottom-up pattern-matching
+  code-generation technique; combined with a heuristic search method to
+  select optimal code.
+
+John O'Donnell
+  url: http://www.dcs.gla.ac.uk:80/~jtod/
+  loc: Glasgow
+  Using functional programming to specify and reason about parallel
+  systems such as digital circuits and data parallel architectures;
+  nondeterminism; debugging; functional programming environments.
+
+Peter O'Hearn
+  url: http://www.cis.syr.edu/people/ohearn
+  loc: Syracuse University
+  Semantic and logical foundations of imperative computation.
+
+Bryan O'Sullivan
+  url: http://sadhbh.scrg.cs.tcd.ie:80/~bos/
+  loc: Glasgow
+  Parallel computing, operating systems, compilers, partial evaluation,
+  functional programming languages, and all sorts of odd permutations
+  of these topics.
+
+James O'Toole
+  url: http://www-psrg.lcs.mit.edu/~james/whoami.html
+  loc: MIT
+  Storage systems design for information retrieval and persistent
+  object applications.
+
+Atsushi Ohori
+  url: http://www.kurims.kyoto-u.ac.jp/~ohori/index.html
+  loc: Kyoto University
+  Type inference, polymorphic record calculus, compilation,
+  parallelism.
+
+Martin Odersky
+  url: http://wwwipd.ira.uka.de/~odersky/
+  loc: University of Karlsruhe
+  Formal methods for the definition of programming languages and the
+  design and manipulation of programs. Special areas of interests are
+  program calculi, type systems, semantics of programming languages,
+  and programming language implementation.
+
+John Ophel
+  url: http://www.cs.latrobe.edu.au/~johno
+  loc: La Trobe University, Melbourne Australia
+  Polymorphic programming languages, first-class modules.
+
+Mehmet A. Orgun
+  url: http://www-comp.mpce.mq.edu.au/~mehmet/
+  loc: Macquarie University, Sydney
+  Logic programming, applied temporal logic, dataflow computation,
+  temporal databases.
+
+Jens Palsberg
+  url: http://theory.lcs.mit.edu/~palsberg
+  loc: MIT
+  Theory and implementation of programming languages.
+
+Didier Parigot
+  url: http://www-rocq.inria.fr/~parigot
+  loc: INRIA Rocquencourt
+  Attribute grammars, the FNC-2
+  (http://www-rocq.inria.fr/charme/FNC-2/) system.
+
+Algirdas Pakstas
+  url: http://ulke.grm.hia.no/~alp/
+  loc: Agder College
+  Distributed programming, system architect's language ALADDIN,
+  integrated compiler development environment GDT/PC ("Grammar
+  Debugging Tool and Parser Constuctor").
+
+Krishna Palem
+  url: http://cs.nyu.edu/cs/faculty/palem/index.html
+  loc: New York University
+  Optimizing compilers, instruction-level parallelism, instruction
+  scheduling and register allocation, compiling for embedded systems.
+
+George A. Papadopoulos
+  url: http://www.ucy.ac.cy/ucy/cs/papadopo.html
+  loc: University of Cyprus
+  Term graph rewriting systems, coordination models, logic, functional
+  and object-oriented programming.
+
+Larry Paulson
+  url: http://www.cl.cam.ac.uk/users/lcp/
+  loc: Cambridge
+  The Isabelle (http://www.cl.cam.ac.uk/Research/HVG/isabelle.html)
+  theorem prover. Formalizing axiomatic set theory. Formalizing
+  induction and coinduction principles in set theory and higher-order
+  logic. Standard ML.
+
+Michael Philippsen
+  url: http://www.icsi.berkeley.edu/~phlipp
+  loc: ICSI, Berkeley
+  Languages and compilers for parallel and distributed machines.
+
+John Plevyak
+  url: http://www-csag.cs.uiuc.edu/individual/jplevyak
+  loc: University of Illinois, Urbana-Champaign
+  Concurrent object-oriented programming language design and
+  compilation. Type Inference. Structure Analysis. Concurrent C++. The
+  Illinois Concert (http://www-csag.cs.uiuc.edu/projects/concert)
+  project.
+
+Gordon Plotkin
+  url: http://www.dcs.ed.ac.uk/infopages/gdp.html
+  loc: Edinburgh
+  Applications of logic, especially denotational and operational
+  semantics of programming languages; semantics of type systems,
+  monadic theories of computation, general proof theory and the
+  semantics of natural language, particularly type-free intensional
+  logics for situation theory.
+
+Lori L. Pollock
+  url: http://www.eecis.udel.edu/~pollock/homepage.html
+  loc: University of Delaware
+  Optimizing compilers for high performance architectures, compiler
+  phase integration, language and compiler support for cluster
+  computing, optimizing explicitly parallel programs, parallel
+  compilers.
+
+Salil Pradhan
+  url: http://www.ccs.neu.edu/~salil/
+  loc: Northeastern University
+  Adaptive architecture description languages.
+
+Vaughan Pratt
+  url: http://theory.stanford.edu/people/pratt/home.html
+  loc: Stanford
+  Semantics of parallel and distributed computing.
+
+Jan F. Prins
+  url: http://www.cs.unc.edu/~prins/
+  loc: University of North Carolina at Chapel Hill
+  High-level programming languages; formal techniques in program
+  development; parallel algorithms and parallel computation;
+  compilation of programs for parallel execution.
+
+William Pugh
+  url: http://www.cs.umd.edu/faculty/pugh.html
+  loc: University of Maryland
+  Algorithms and data structure design and analysis, skip lists,
+  compilers for massively parallel architectures, integer programming
+  for array data dependence analysis.
+
+Henrik Quintel
+  url: http://www.fh-worms.de/~quintel/
+  loc: Fachhochschule Worms, Deutschland, Germany
+  Development of parallel compilers and high-speed Front-end/Back-end
+  generators. Working on Q, a parallel, object-oriented programming
+  language.
+
+J. Ramanujam
+  url: http://www.ee.lsu.edu/jxr/jxr.html
+  loc: Louisiana State University
+  Parallelizing compilers, high-performance computing, programming
+  languages, computer architecture, programming environments.
+
+Norman Ramsey
+  url: http://www.cs.virginia.edu/~nr
+  loc: University of Virginia
+  Machine-code tools, retargetability, literate programming, and
+  debugging.
+
+Chris Reade
+  url: http://http2.brunel.ac.uk:8080/~csstcmr/
+  loc: Brunel University
+  Functional programming, functional I/O, theory of programming
+  languages, type theory, and formal methods.
+
+Jonathan Rees
+  url: http://www-swiss.ai.mit.edu/~jar/jar.html
+  loc: MIT
+  Scheme, user-defined data types, lexically scoped macros, modules,
+  categories, monads, Scheme-based operating systems.
+
+Jakob Rehof
+  url: http://www.diku.dk/research-groups/topps/personal/rehof.html
+  loc: DIKU, University of Copenhagen
+  Type systems; type inference; logical and computational aspects of
+  type systems; type systems in program analysis.
+
+Alastair Reid
+  url: http://www.dcs.gla.ac.uk:80/~areid/
+  loc: Glasgow
+  Use and implementation of functional languages (graphics, garbage
+  collection, user interfaces, debugging). Formal program development
+  (transformation and implementation of algebraic specifications of
+  abstract data types).
+
+John Reif
+  url: http://www.cs.duke.edu/~reif/HomePage.html
+  loc: Duke
+  Parallel algorithms, compilers for parallel machines, formal methods
+  for synthesis of parallel algorithms.
+
+Mark Reinhold
+  url: http://www.neci.nj.nec.com/homepages/reinhold.html
+  loc: NEC Research Institute
+  Garbage collection, compilation techniques, type systems, semantics,
+  and the visualization and analysis of program performance.
+
+Didier Remy
+  url: http://pauillac.inria.fr:80/~remy/
+  loc: INRIA Rocquencourt
+  Type systems; object oriented programming.
+
+Thomas Reps
+  url: http://www.cs.wisc.edu/~reps/reps.html
+  loc: University of Wisconsin at Madison
+  Language-based programming environments; program slicing,
+  differencing, and merging; interprocedural dataflow analysis; and
+  incremental algorithms.
+
+Jon G. Riecke
+  url: http://www.research.att.com/orgs/ssr/people/riecke
+  loc: Bell Laboratories
+  Theory of programming languages: operational and denotational
+  semantics, logics of programs, formal methods, type systems and
+  inference, abstraction. Higher-order languages with state, control,
+  polymorphism.
+
+Kristoffer Rose
+  url: http://www.diku.dk/~kris/
+  loc: DIKU, University of Copenhagen
+  Semantics, lambda calculus, rewrite systems, explicit substitution,
+  abstract machines, sharing, graph reduction.
+
+Guido van Rossum
+  url: http://www.cwi.nl/cwi/people/Guido.van.Rossum.html
+  loc: CWI (Centre for Mathemathics and Computer Science), Amsterdam
+  Object-oriented languages, scripting languages, prototyping
+  languages; designed and implemented Python, co-implemented ABC
+
+Francois Rouaix
+  url: http://pauillac.inria.fr/~rouaix/
+  loc: INRIA Rocquencourt
+  Extensions of the ML type system, overloading, object-oriented
+  programming, abstract types, type operators, modularity.
+
+Erik Ruf
+  url: http://www.research.microsoft.com/research/analysts/ruf/
+  loc: Microsoft Research
+  Design, implementation, and optimization of programming languages,
+  and the use of program analysis to support program understanding and
+  transformation.
+
+Barbara Ryder
+  url: http://www.cs.rutgers.edu/~ryder/
+  loc: Rutgers
+  Compile-time program analyses and software tools for
+  parallel/sequential programming environments. Chair of ACM SIGPLAN.
+
+Amr Sabry
+  url: http://www.cs.uoregon.edu/~sabry/home.html
+  loc: University of Oregon
+  Compilers, data flow analysis, abstract interpretation, programming
+  language calculi, and semantic foundations.
+
+David Sands
+  url: ftp://ftp.diku.dk/diku/semantics/www/people/dave.html
+  loc: DIKU, University of Copenhagen
+  Programming language semantics, and their applications to abstract
+  interpretation and related semantics based analysis techniques.
+
+Don Sannella
+  url: http://www.dcs.ed.ac.uk/staff/dts/index.html
+  loc: Edinburgh LFCS
+  Formal development of modular software from specifications.
+  Modularization mechanisms. Machine-assisted proof. Semantics.
+
+Patrick Sansom
+  url: http://www.dcs.gla.ac.uk:80/~sansom/
+  loc: Glasgow
+  Implementation and runtime support of pure functional languages,
+  including compiler analysis and optimisation, garbage collection, and
+  profiling.
+
+Joao A. Saraiva
+  url: http://shiva.di.uminho.pt/~jas
+  loc: Universidade do Minho
+  Compilers, attribute grammars, parallel compilation.
+
+Andre Scedrov
+  url: http://www.cis.upenn.edu/~andre/
+  loc: University of Pennsylvania
+  Mathematical logic, mathematical aspects of programming structures.
+
+Bill Scherlis
+  url: /afs/cs.cmu.edu/user/wls/www/home.html
+  loc: Carnegie Mellon
+  Semantics-based program analysis and manipulation, information
+  structures.
+
+David Schmidt
+  url: http://www.cis.ksu.edu/~schmidt/home.html
+  loc: Kansas State
+  Denotational semantics and intuitionistic type theory.
+
+Michael I. Schwartzbach
+  url: http://www.daimi.aau.dk/~mis/
+  loc: BRICS, University of Aarhus
+  Programming languages: type systems, type inference, static program
+  analysis, data types, language design, implementation.
+
+Cotton Seed
+  url: http://www.mit.edu:8001/afs/athena/user/c/o/cottons/www/homepage.html
+  loc: MIT and the Motorola Cambridge Research Center
+  Computer architecture, compilers for MPPs, dataflow and implicitly
+  parallel languages, program analysis, auto-parallelization.
+
+Peter Sestoft
+  url: http://www.dina.kvl.dk/~sestoft
+  loc: Royal Veterinary and Agricultural University, Denmark
+  Functional programming languages and their implementation, program
+  analysis and transformation, and partial evaluation.
+
+Zhong Shao
+  url: http://www.cs.yale.edu/HTML/YALE/CS/HyPlans/shao-zhong/index.html
+  loc: Yale
+  Efficient compilation of high-level languages, interaction of
+  languages and compilers with modern architectures, programming
+  environments, and formal methods.
+
+Tim Sheard
+  url: http://www.cse.ogi.edu/~sheard/sheard.html
+  loc: Oregon Graduate Institute
+  Compile-time reflection, type parametric programming, program
+  transformation, and algebraic programming.
+
+Olin Shivers
+  url: http://www.ai.mit.edu/~shivers/
+  loc: MIT
+  Advanced programming languages (such as Scheme
+  (http://www-swiss.ai.mit.edu/scheme-home.html) and ML), systems, and
+  personal user interfaces.
+
+Duncan Sinclair
+  url: http://www.dis.strath.ac.uk/people/sinclair/
+  loc: University of Strathclyde
+  Functional programming and in particular, how HCI research could be
+  used to make creation of graphical user interfaces for functional
+  programs easier.
+
+Satnam Singh
+  url: http://www.dcs.gla.ac.uk:80/~satnam/
+  loc: Glasgow
+  Using functional languages for hardware specification, synthesis and
+  analysis.
+
+Jonas Skeppstedt
+  url: http://www.hh.se/staff/jonas/
+  loc: Halmstad University, Sweden
+  Application-level code optimisation; data prefetching; cache
+  coherence protocols
+
+Anthony Sloane
+  url: http://www.cs.jcu.edu.au/~tony
+  loc: James Cook University
+  Generation of programming language implementations, tools and
+  environments from high-level specifications.
+
+Scott F. Smith
+  url: http://www.cs.jhu.edu/scott/home.html
+  loc: Johns Hopkins
+  Operational semantics of imperative, object-oriented, and concurrent
+  programming languages. Operational equivalence of programs, logics of
+  programs.
+
+Ellen Spertus
+  url: http://www.ai.mit.edu/people/ellens/ellens.html
+  loc: MIT
+  Value dependence graph IR, code generation and register allocation
+  for superscalar/superpipelined architectures.
+
+Vugranam C. Sreedhar
+  url: http://www-acaps.cs.mcgill.ca/~sreedhar
+  loc: McGill University
+  Data flow analysis, compiler optimization, instruction level
+  parallelism, multithreaded architecture, optimizing explicit parallel
+  programs, memory consistency models.
+
+Bjarne Steensgaard
+  url: http://www.research.microsoft.com/research/analysts/rusa/
+  loc: Microsoft Research
+  Static program analysis, program transformation, value dependence
+  graph IR, data flow analyses, store splitting, partial evaluation.
+
+Patrick Steyaert
+  url: http://progwww.vub.ac.be/prog/persons/prsteyae/prsteyae.html
+  loc: Brussels Free University
+  Reflection and object-oriented programming languages and systems;
+  User interfaces, user interface building, application building.
+
+Allen Stoughton
+  url: http://www.cis.ksu.edu/~allen/home.html
+  loc: Kansas State
+  Programming language semantics, full abstraction, models of the
+  applied typed lambda calculus PCF, logical relations and lambda
+  definability.
+
+David Stoutamire
+  url: http://www.icsi.berkeley.edu/~davids
+  loc: International Computer Science Institute
+  Compiling for distribution, compiling for locality, garbage
+  collection, Sather.
+
+Dave WJ Stringer-Calvert
+  url: http://www.york.ac.uk/~dwjsc100
+  loc: University of York, UK
+  Compiler verification and the PVS
+  (http://www.csl.sri.com/sri-csl-pvs.html) verification system.
+
+Walid Taha
+  url: http://www.cse.ogi.edu/~walidt/walidt.html
+  loc: Oregon Graduate Institute
+  Transformational programming systems, functional programming,
+  object-oriented programming, software engineering and compilers.
+
+Carolyn Talcott
+  url: http://www-formal.stanford.edu/pub/clt/home.html
+  loc: Stanford
+  Formal reasoning, semantics of programming languages, open
+  distributed systems, reflection.
+
+Domenico Talia
+  url: http://isi-cnr.deis.unical.it:1080/~talia
+  loc: ISI-CNR, Rende, Italy
+  Parallel computing architectures, concurrent programming languages,
+  distributed systems.
+
+Bob Tennent
+  url: http://www.dcs.ed.ac.uk/infopages/rdt.html
+  loc: Edinburgh
+  Semantics and design of programming languages and logics.
+
+George K. Thiruvathukal
+  url: http://www.lslabs.com/~gkt
+  loc: Lake Shore Labs; Metromail Corp; Illinois Institute of Technology
+  Object oriented languages, enhanced actors programming model, virtual
+  machines, parallel and distributed programming languages, class
+  libraries and typing systems.
+
+Stephen Thomas
+  url: http://www.cs.nott.ac.uk/Department/Staff/spt/index.html
+  loc: University of Nottingham
+  Use and implementation of functional languages; the design of
+  abstract architectures for functional languages, particularly the
+  TIM.
+
+Frank Tip
+  url: http://www.research.ibm.com/people/t/tip
+  loc: IBM T.J. Watson
+  Program analysis, program transformation/restructuring, program
+  slicing, optimizations of object-oriented programs.
+
+Mario Tokoro
+  url: http://www.mt.cs.keio.ac.jp/person/mario.html
+  loc: Keio University
+  Object-oriented computing, concurrent programming, distributed and
+  open systems, and cooperative problem solving.
+
+Andrew Tolmach
+  url: http://www.cs.pdx.edu/~apt/
+  loc: Portland State University
+  Functional language implementation and tools.
+
+David Toman
+  url: http://www.cis.ksu.edu/~david/home.html
+  loc: Kansas State
+  Implementation of PROLOG and LP languages, semantics of LP languages,
+  semantics and expressivity of database query languages.
+
+David N. Turner
+  url: http://www.dcs.gla.ac.uk/~dnt
+  loc: Glasgow
+  Type systems, type-based program analysis, functional programming,
+  pi-calculus, implementation of concurrent calculi.
+
+Chau-Wen Tseng
+  url: http://www.cs.umd.edu/~tseng
+  loc: University of Maryland
+  Compilers for scalable parallel architectures, compilers for
+  high-performance uniprocessors, parallel and distributed systems,
+  programming environments and tools, programming languages.
+
+Franklyn Turbak
+  url: http://www-swiss.ai.mit.edu/~lyn/lyn.html
+  loc: Wellesley College
+  Programming language semantics and implementation, deforestation,
+  type-based compilation, visual languages, robot languages.
+
+Mark Vandevoorde
+  url: http://larch-www.lcs.mit.edu:8001/~mtv
+  loc: MIT
+  Optimizing programs with specifications
+
+Eelco Visser
+  url: http://adam.fwi.uva.nl/~visser/
+  loc: University of Amsterdam
+  Formalisms and tools for language design and prototyping: syntax
+  definition, type systems, documentation tools; grammar formalisms,
+  parsing, algebraic specification, ASF+SDF.
+
+German Vidal
+  url: http://www.dsic.upv.es/users/elp/gvidal.html
+  loc: Technical University of Valencia, Spain
+  Integration of functional and logic programming languages, abstract
+  interpretation, sematics-based program transformation.
+
+Philip Wadler
+  url: http://www.dcs.gla.ac.uk/~wadler/
+  loc: Glasgow
+  Linear logic, monads, call by need, type classes, parametricity,
+  deforestation, strictness analysis, data abstraction, and garbage
+  collection.
+
+William M. Waite
+  url: http://www.cs.colorado.edu/~waite/
+  loc: University of Colorado at Boulder
+  Automation of compiler construction
+
+Chris Walton
+  url: http://www.dcs.ed.ac.uk/home/cdw/
+  loc: Edinburgh LFCS
+  Standard ML, type systems, mobile code
+
+Mitchell Wand
+  url: http://www.ccs.neu.edu/home/wand/
+  loc: Northeastern
+  Semantics, compiler correctness, type inference.
+
+David Watt
+  url: http://www.dcs.gla.ac.uk/~daw/
+  loc: University of Glasgow
+  Action semantics, language design, semantics-directed compiler
+  generation, rapid prototyping.
+
+Martin Weichert
+  url: http://www.cs.chalmers.se/~martinw
+  loc: Chalmers
+  Concurrency
+
+William E. Weihl
+  url: http://jukebox.lcs.mit.edu/~weihl/
+  loc: MIT
+  Parallel and distributed systems, programming languages, compilers,
+  operating systems, and computer architecture.
+
+Pierre Weis
+  url: http://pauillac.inria.fr/~weis
+  loc: INRIA
+  Design and implementation of functional programming languages, in
+  particular their compilation and type systems, and in particular the
+  Caml language.
+
+Daniel Weise
+  url: http://www.research.microsoft.com/research/analysts/daniel/
+  loc: Microsoft Research
+  Using advanced representations and analysis to build better compilers
+  and programming tools. Still seeking the holy grail of abstraction
+  without cost even though I don't explicitly hack partial evaluation
+  anymore.
+
+Morten Welinder
+  url: ftp://ftp.diku.dk/diku/semantics/www/people/terra.html
+  loc: DIKU, University of Copenhagen
+  Partial evaluation of Standard ML, binding-time analysis,
+  hand-writing program generator generators.
+
+David B. Whalley
+  url: http://www.cs.fsu.edu/~whalley
+  loc: Florida State University
+  Compiler optimizations, support tools for performance evaluation and
+  diagnosing compiler errors, predicting execution time.
+
+Paul R. Wilson
+  url: http://www.cs.utexas.edu/users/wilson
+  loc: University of Texas at Austin
+  Memory management (garbage collection, allocators), persistence
+  (Texas p-store), extensible languages and compilers (RScheme), memory
+  hierarchies, free software.
+
+Russel Winder
+  url: http://www.cs.ucl.ac.uk/people/russel.html
+  loc: University College London
+  Languages and environments for developing parallel object-oriented
+  systems; development of information systems, including processes,
+  techniques, tools, environments, and philosophical aspects.
+
+Jeannette Wing
+  url: /afs/cs.cmu.edu/user/wing/www/home.html
+  loc: Carnegie Mellon
+  Formal specifications, concurrent and distributed systems,
+  programming languages, programming methodology, and search and
+  retrieval in the information superhighway.
+
+Michael Winikoff
+  url: http://www.cs.mu.oz.au/~winikoff
+  loc: Melbourne University
+  Logic programming, linear logic, Lygon
+  (http://www.cs.mu.oz.au/~winikoff/lygon/lygon.html), functional
+  programming.
+
+Michael Wolfe
+  url: http://www.cse.ogi.edu/~mwolfe
+  loc: The Portland Group
+  Compiler optimizations, compiling for parallel machines
+
+David Wolfram
+  url: http://cs.anu.edu.au/~David.Wolfram
+  loc: The Australian National University
+  Semantics of declarative languages; higher-order languages and
+  meta-theories; semantics of concurrency in object-based languages;
+  effectiveness of implementations.
+
+David Wonnacott
+  url: http://www.haverford.edu/cmsc/davew/index.html
+  loc: Haverford College (http://www.haverford.edu/cmsc/deptinfo.html)
+  Analysis of array references (including array dataflow analysis),
+  constraint manipulation (Presburger Arithmetic), optimization for
+  memory locality.
+
+Limsoon Wong
+  url: http://www.cis.upenn.edu/~limsoon
+  loc: University of Pennsylvania. Institute of Systems Science, Singapore.
+  Interoperable systems, multimedia systems, programming methodologies,
+  query languages, and programming language semantics.
+
+Gao Xiaocheng
+  url: http://tobe.buaa.edu.cn
+  loc: Beijing University of Aero and Astro (BUAA)
+  Constraint hierarchy, object oriented languages, Linux.
+
+Takashi Yamanoue
+  url: http://www.tobata.isc.kyutech.ac.jp/staff/yamanoue/
+  loc: Kyushu Institute of Technology
+  Visual programming, parallel programming, compiler-compilers,
+  attributed grammars.
+
+Katherine Yelick
+  url: http://www.cs.berkeley.edu/~yelick
+  loc: U.C. Berkeley
+  Programming languages and runtime support for parallel machines;
+  optimizing explicitly parallel programs.
+
+Akinori Yonezawa
+  url: http://web.yl.is.s.u-tokyo.ac.jp/members/yonezawa/home.html
+  loc: University of Tokyo
+  Parallel computation models, programming languages, object-oriented
+  programming, and natural language processing.
+
+Guo-Qiang Zhang
+  url: http://www.cs.uga.edu/~gqz
+  loc: University of Georgia at Athens
+  Domain theory, semantics of programming languages, applied logic,
+  nonmonotonic reasoning.
+
+Benjamin Zorn
+  url: http://www.cs.colorado.edu/homes/zorn/public_html/Home.html
+  loc: University of Colorado at Boulder
+  Programming language design and implementation with specific emphasis
+  on language runtime systems and the ways in which they can support
+  efficient program execution and ease of programming.

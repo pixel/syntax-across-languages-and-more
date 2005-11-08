@@ -1,0 +1,76 @@
+<?
+
+function assign($a,$b) {
+    $a = $b;
+    print " local:$a";
+}
+
+function ref_assign(&$a,$b) {
+    $a = $b;
+    print " local:$a";
+}
+
+function add_int($a,$b) {
+    $a += $b;
+    print " local:" . tostring($a);
+}
+function ref_add_int(&$a,$b) {
+    $a += $b;
+    print " local:" . tostring($a);
+}
+
+function add_string($a,$b) {
+    $a .= $b;
+    print " local:" . tostring($a);
+}
+function ref_add_string(&$a,$b) {
+    $a .= $b;
+    print " local:" . tostring($a);
+}
+
+function add_list($a,$b) {
+    foreach ($b as $e) { array_push($a, $e); }
+    print " local:" . tostring($a);
+}
+function ref_add_list(&$a,$b) {
+    foreach ($b as $e) { array_push($a, $e); }
+    print " local:" . tostring($a);
+}
+
+function doit($sf, $f, $v1, $v2) {
+    $a = $v1;
+    $a2 = &$a;
+    $a3 = $a;
+    print "($sf) before:" . tostring($a);
+    $f($a, $v2);
+    print " after:" . join(" ", array_map(tostring, array($a, $a2, $a3))) . "\n";
+}
+
+doit("assign", assign, 0, 1);
+doit("assign", assign, "_", "X");
+doit("assign", assign, array(0), array(1));
+print "\n";
+doit("ref_assign", ref_assign, 0, 1);
+doit("ref_assign", ref_assign, "_", "X");
+doit("ref_assign", ref_assign, array(0), array(1));
+print "\n";
+doit("add ",  add_int, 0, 1);
+doit("add", add_string, "_", "X");
+doit("add", add_list, array(0), array(1));
+print "\n";
+doit("ref_add", ref_add_int, 0, 1);
+doit("ref_add", ref_add_string, "_", "X");
+doit("ref_add", ref_add_list, array(0), array(1));
+print "\n";
+
+function tostring($v) {
+    if (is_array($v)) {
+	return "[" . join(", ", $v) . "]";
+    } else {
+	return $v;
+    }
+}
+
+
+?>
+

@@ -1,0 +1,111 @@
+// -*- java -*-
+
+import java.util.ArrayList;
+
+abstract class Point implements Cloneable {
+    double x;
+
+    Point(double xx) { x = xx; }
+    
+    Point translate(double x)
+    {
+	try {
+	    Point p = (Point) clone();
+	    p.x += x;
+	    return p;
+	} catch (java.lang.CloneNotSupportedException e) {
+	    throw new RuntimeException("??");
+	}
+    }
+
+    abstract double length();
+}
+
+class Point2d extends Point {
+    double y;
+
+    Point2d(double xx, double yy) { super(xx); y = yy; }
+
+    double length()
+    {
+	return Math.sqrt(x*x + y*y); 
+    }
+
+    Point2d add(Point2d p)
+    {
+	return new Point2d(x + p.x, y + p.y);
+    }
+
+    public String toString()
+    {
+	return "[" + x + ", " + y + "]";
+    }
+}
+
+class Point3d extends Point2d {
+    double z;
+
+    Point3d(double xx, double yy, double zz) { super(xx, yy); z = zz; }
+
+    double length()
+    {
+	return Math.sqrt(x*x + y*y + z*z); 
+    }
+
+    Point3d add(Point3d p)
+    {
+	return new Point3d(x + p.x, y + p.y, z + p.z);
+    }
+
+    // wrapper function needed
+    // without it ((Point2d) p3d).add(p3d) doesn't compute a 3d add
+    Point2d add(Point2d p)
+    {
+	if (p instanceof Point3d)
+	    return add((Point3d) p);
+	else
+	    return p.add(this);
+    }
+
+    public String toString()
+    {
+	return "[" + x + ", " + y + ", " + z + "]";
+    }
+}
+
+public class java3 {
+
+    public static void test(Point p) {
+	System.out.print("" + p.length() + " " + p.translate(1) + " ");
+    }
+
+    public static Point2d twice(Point2d p) {
+	return p.add(p);
+    }
+
+    public static void main(String[] args) {
+	Point2d p2d = new Point2d(3, 4);
+	Point3d p3d = new Point3d(1, 2, 2);
+
+	Point2d[] l = { p2d, p3d };
+
+	test(p2d); test(p3d);
+	for (int i = 0; i < l.length; i++) System.out.print(" " + l[i].length());
+	System.out.println("");
+
+	// after translate, we have to down-cast back to Point3d
+	System.out.println(((Point3d) p3d.translate(1)).z);
+
+	System.out.print("" + twice(p2d) + " " + twice(p3d));
+	for (int i = 0; i < l.length; i++) System.out.print(" " + twice(l[i]));
+	System.out.println("");
+
+	System.out.println("" + p3d.add(p2d) + " " + p2d.add(p3d));
+
+	// after twice, we have to down-cast back to Point3d
+	System.out.println("" + ((Point3d) twice(p3d)).z);
+
+	// whereas after add, we still have a Point3d
+	System.out.println("" + p3d.add(p3d).z);	
+    }
+}

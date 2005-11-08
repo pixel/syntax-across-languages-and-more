@@ -1,0 +1,85 @@
+# -*- ruby -*-
+
+class Point
+  attr_accessor :x
+
+  def translate(x)
+    p = clone
+    p.x += x
+    p
+  end
+
+  def add(p)
+    if type == p.type
+      real_add(p)
+    else
+      fail "#{type}.add only works with #{type}'s"
+    end
+  end
+end
+
+
+class Point2d < Point
+  attr_accessor :y
+
+  def initialize(x, y)
+    @x, @y = x, y
+  end
+
+  def real_add(p)
+    Point2d.new(@x + p.x, @y + p.y)
+  end
+
+  def length()
+    Math.sqrt(@x * @x + @y * @y)
+  end
+
+  def to_s()
+      "[%g, %g]" % [@x, @y]
+  end
+end
+
+class Point3d < Point
+  attr_accessor :y, :z
+
+  def initialize(x, y, z)
+    @x, @y, @z = x, y, z
+  end
+
+  def real_add(p)
+    Point3d.new(@x + p.x, @y + p.y, @z + p.z)
+  end
+
+  def length()
+    Math.sqrt(@x * @x + @y * @y + @z * @z)
+  end
+
+  def to_s()
+      "[%g, %g, %g]" % [@x, @y, @z]
+  end
+end
+
+p2d = Point2d.new(3, 4)
+p3d = Point3d.new(1, 2, 2)
+
+l = [ p2d, p3d ]
+
+def test(p)
+  return p.length, p.translate(1)
+end
+
+print [ test(p2d), test(p3d), l.map{|p| p.length} ].join(" "), "\n"
+
+# after translate, we still have a Point3d
+print p3d.translate(1).z, "\n"
+
+def twice(p)
+  p.add(p)
+end
+
+print [ twice(p2d), twice(p3d), l.map{|p| twice(p)} ].join(" "), "\n"
+#print p2d.add(p3d)
+#print p3d.add(p2d)
+
+# after twice, we still have a Point3d
+print twice(p3d).z, "\n"

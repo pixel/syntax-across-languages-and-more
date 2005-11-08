@@ -1,0 +1,38 @@
+// -*- java -*-
+
+import java.util.Vector;
+
+
+class Point {
+    double x, y;
+
+    Point(double x_, double y_) { x = x_; y = y_; }
+
+    void translate(double x_, double y_) { x += x_; y += y_; }
+
+    public String toString() { return "Point(" + x + ", " + y + ")"; }
+};
+
+public class java {
+    public static void main(String[] args) {
+	int i = 1;
+	int i2 = i;
+	i2++;
+	System.out.println("i2: " + i2 + "\n" + " i: " + i);
+
+	String s = "hello";
+	String s2 = s;
+	s += "!";
+	System.out.println("s2: " + s2 + "\n" + " s: " + s);
+
+	Vector l = new Vector(); l.add("hello");
+	Vector l2 = l;
+	l2.add("world");
+	System.out.println("l2: " + l2 + "\n" + "l: " + l);
+
+	Point p = new Point(0, 1);
+	Point p2 = p;
+	p2.translate(1, 1);
+	System.out.println("p2: " + p2 + "\n" + "p: " + p);
+    }
+};

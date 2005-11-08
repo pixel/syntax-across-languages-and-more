@@ -1,0 +1,59 @@
+-- -*- haskell -*-
+
+class Show a => Point a where
+    translate :: a -> Double -> a
+    my_length :: a -> Double
+    pack :: a -> Packed_point
+    pack = Packed_point
+
+data Packed_point = forall a. Point a => Packed_point a
+
+data Point2d = Point2d(Double, Double) deriving Show
+data Point3d = Point3d(Double, Double, Double) deriving Show
+
+instance Point Point2d where
+    translate (Point2d(x1, y1)) x2 = Point2d(x1 + x2, y1)
+    my_length (Point2d(x, y)) = sqrt (x * x + y * y)
+
+instance Point Point3d where
+    translate (Point3d(x1, y1, z1)) x2 = Point3d(x1 + x2, y1, z1)
+    my_length (Point3d(x, y, z)) = sqrt (x * x + y * y + z * z)
+
+instance Show Packed_point where
+    show (Packed_point p) = show p
+
+instance Point Packed_point where
+    translate (Packed_point p) x = Packed_point(translate p x)
+    my_length (Packed_point p) = my_length p
+    pack = id
+
+class T_add a where
+    add :: a -> a -> a
+
+instance T_add Point2d where
+    add (Point2d(x1, y1)) (Point2d(x2, y2)) = Point2d(x1 + x2, y1 + y2)
+instance T_add Point3d where
+    add (Point3d(x1, y1, z1)) (Point3d(x2, y2, z2)) = Point3d(x1 + x2, y1 + y2, z1 + z2)
+
+get_z (Point3d(_, _, z)) = z
+
+
+p2d = Point2d(3, 4)
+p3d = Point3d(1, 2, 2)
+
+l = [ pack p2d, pack p3d ]
+
+test p = (my_length p, translate p 1)
+test1 = (test p2d, test p3d, map my_length l,
+
+	 -- after translate, we still have a Point3d
+	 get_z (translate p3d 1)) -- get_z (translate p2d 1) is not accepted
+
+twice p = add p p
+test2 = (twice p2d, twice p3d)
+         -- map twice l
+
+-- after twice, we still have a Point3d
+test4 = get_z (twice p3d) -- get_z (twice p2d) is not accepted
+
+main = print (test1, test2, test4)

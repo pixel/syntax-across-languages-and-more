@@ -1,0 +1,59 @@
+(* -*- caml -*- *)
+
+open List
+open Printf
+
+type point = Point2d of float * float | Point3d of float * float * float
+
+let translate p x2 = 
+  match p with
+  | Point2d(x, y   ) -> Point2d(x+.x2, y)
+  | Point3d(x, y, z) -> Point3d(x+.x2, y, z)
+
+let length = function
+  | Point2d(x, y   ) -> sqrt(x*.x +. y*.y)
+  | Point3d(x, y, z) -> sqrt(x*.x +. y*.y +. z*.z)
+
+let add p1 p2 =
+  match p1, p2 with
+  | Point3d(x1, y1, z1), Point3d(x2, y2, z2) -> Point3d(x1 +. x2, y1 +. y2, z1 +. z2)
+  | Point2d(x1, y1    ), Point2d(x2, y2    ) -> Point2d(x1 +. x2, y1 +. y2)
+  | Point2d(x1, y1    ), Point3d(x2, y2, _ ) -> Point2d(x1 +. x2, y1 +. y2)
+  | Point3d(x1, y1, _ ), Point2d(x2, y2    ) -> Point2d(x1 +. x2, y1 +. y2)
+
+let show = function
+  | Point2d(x, y   ) -> sprintf "[%g, %g]" x y
+  | Point3d(x, y, z) -> sprintf "[%g, %g, %g]" x y z
+
+let get_z = function
+  | Point2d _ -> failwith "don't call get_z with a Point2d"
+  | Point3d(_,_,z) -> z
+
+let test p = sprintf "%g %s" (length p) (show (translate p 1.))
+let twice p = add p p
+
+let _ =
+  let p2d = Point2d(3., 4.) in
+  let p3d = Point3d(1., 2., 2.) in
+
+  let l = [ p2d ; p3d ] in
+
+  print_endline (String.concat " " 
+		   (
+		    [ test p2d ; test p3d ] @ 
+		    map string_of_float (map length l) @
+
+		    (* after translate, we still have a Point3d *)
+		    [ string_of_float (get_z (translate p3d 1.)) ] @
+
+		    map show (
+		      [ twice p2d ; twice p3d ] @ 
+		      map twice l @
+		      [ add p2d p3d ; add p3d p2d ]
+		    ) @
+		    
+		    (* after twice, we still have a Point3d *)
+		    [ string_of_float (get_z (twice p3d)) ]
+		   )
+		 )
+

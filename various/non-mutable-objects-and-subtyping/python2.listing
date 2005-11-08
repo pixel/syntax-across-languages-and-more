@@ -1,0 +1,66 @@
+# -*- python -*-
+
+import copy
+import math
+
+class Point:
+    def translate(self, x):
+        p = copy.copy(self)
+        p.x += x
+        return p
+
+    def add(self, p):
+        if self.__class__ == p.__class__:
+            return self.real_add(p)
+        else:
+            raise "%s.add only works with %s's" % (self.__class__, p.__class__)
+    
+
+class Point2d(Point):
+    def __init__(self, x, y):
+        self.x, self.y = x, y
+
+    def real_add(self, p):
+        return Point2d(self.x + p.x, self.y + p.y)
+
+    def length(self):
+        return math.sqrt(self.x * self.x + self.y * self.y)
+
+    def __repr__(self):
+        return "[%g, %g]" % (self.x, self.y)
+
+class Point3d(Point2d):
+    def __init__(self, x, y, z):
+        self.x, self.y, self.z = x, y, z
+
+    def real_add(self, p):
+        return Point3d(self.x + p.x, self.y + p.y, self.z + p.z)
+
+    def length(self):
+        return math.sqrt(self.x * self.x + self.y * self.y + self.z * self.z)
+
+    def __repr__(self):
+        return "[%g, %g, %g]" % (self.x, self.y, self.z)
+
+p2d = Point2d(3, 4)
+p3d = Point3d(1, 2, 2)
+
+l = [ p2d, p3d ]
+
+def test(p):
+    return p.length(), p.translate(1)
+
+print test(p2d), test(p3d), map(lambda self: self.length(), l)
+
+# after translate, we still have a Point3d
+print p3d.translate(1).z
+
+def twice(p):
+    return p.add(p)
+
+print twice(p2d), twice(p3d), map(twice, l)
+#print p2d.add(p3d)
+#print p3d.add(p2d)
+
+# after twice, we still have a Point3d
+print twice(p3d).z

@@ -1,0 +1,46 @@
+# -*- merd -*-
+# working with merd 0.1.5
+
+Point = class
+    translate := o, Int -> o
+    my_length := o -> Int
+    add := o, o -> o
+
+X(Int) |&| Y(Int) !< Point
+X(Int) |&| Y(Int) |&| Z(Int) !< Point
+
+translate !! p, Int -> (p !< X(Int) |&| Y(Int)) ; p  # this is wrong and should not be needed. will get fixed!
+translate(X(x) |&| p, x2) = X(x+x2) |&| p
+
+my_length(X(x) |&| Y(y)         ) = sqrt(x * x + y * y)
+my_length(X(x) |&| Y(y) |&| Z(z)) = sqrt(x * x + y * y + z * z)
+
+add(X(x1) |&| Y(y1) |&| Z(z1), X(x2) |&| Y(y2) |&| Z(z2)) =
+        X(x1 + x2) |&| Y(y1 + y2) |&| Z(z1 + z2)
+add(X(x1) |&| Y(y1), X(x2) |&| Y(y2)) =
+        X(x1 + x2) |&| Y(y1 + y2)
+
+get_z(Z(z)) = z
+
+
+p2d = X(3) |&| Y(4)
+p3d = X(1) |&| Y(2) |&| Z(2)
+
+l = [ p2d, p3d ]
+# => l has type List((X(1) |&| Y|&|Z(2)) | (X(3) |&| Y(4))
+
+test(p) = my_length(p), translate(p, 1)
+# => test has type p -> (p !< &Point) ; Int, p
+
+test1 = test(p2d), test(p3d), l.map(my_length), p3d.translate(1).get_z
+                                              # p2d.translate(1).get_z is a compile time error:
+                                              # can't ensure Z(z) > X|&|Y(Int)
+
+twice(p) = add(p, p)
+test2 = twice(p2d), twice(p3d), l.map(twice), p3d.twice.get_z
+                                            # p2d.twice.get_z is a compile time error:
+                                            # can't ensure Z(z) > X|&|Y(Int)
+
+test3 = add(p2d, p3d), add(p3d, p2d)
+
+test1, test2, test3

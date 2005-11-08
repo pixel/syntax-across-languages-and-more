@@ -1,0 +1,174 @@
+I'll answer your second question first, and then I'll try to
+explain the differences between approaches of MetaOCaml and Dynamic Caml.
+
+Remi VANICAT wrote:
+ > Dmitry Lomov <dsl@intellij.com> writes:
+ >>I am pleased to announce the availability of Dynamic Caml v.0.2
+ >
+
+ > But it seem also (I may be wrong) that MetaOCaml enable more easily
+ > multi stage generation (that is program that generate program that
+ > generate program) Is this feasible with dml ?
+ >
+It is true that MetaOcaml supports multi-stage generation on a syntactic
+level:
+   let f x = .< fun y -> .< fun z -> x + y + z >. >.
+   let i = (.! (.! f 1) 2) 3 (* 6 *)
+Dynamic Caml currently does not have this kind of syntax, i.e.
+it does not support {< ... >} inside {< ... >}.
+But that does not mean that you cannot do multistage generation
+with Dynamic Caml.
+As often, if some consruct is not supported in Dynamic Caml, you
+can simulate it by functional wrappers.
+If dml supported embedded {< >}, the above code would look like:
+   let f x = {< fun y -> {< fun z -> ``x + `y + z >} >}
+   let i = (eval ((eval (f 1) 2) 3
+(note the number of backquotes before x and y).
+One can manually translate this into dynamically generated applications of
+Rtcg primitives - replacing "{< fun z -> ... >}" with
+(apply (quote abstr) (abstr (fun z -> ...))), "`y" with
+"(apply (quote quote) y)" etc,  resulting in the following:
+   let plus o1 o2 = int_bin o1 IOpADD o2
+   let f x =
+     abstr (fun y ->
+       apply (quote abstr)
+	   (abstr (fun z ->
+                        (apply
+			(apply (quote plus)
+			   (apply
+			      (apply (quote plus)
+					(quote (quote x)) (*1*)
+  	 	      )
+			      (apply (quote quote) y)
+			   )
+			)
+			z
+		     )
+		  )
+	   )
+	)
+   let i = (eval ((eval (f 1) 2) 3
+(* 1: direct translation of ``x will be (apply (quote quote) (quote x)),
+    but this can be obviously optimized
+  *)
+This works, though this looks ugly of course :) (so
+you probably wont be able to do any serious multi-staging this way).
+
+As you see, it is not impossible to add multi-staging to dml.
+The main reason why I have not done this yet is probably lack of
+motivation - not many real-life problems seriously benefit from
+more than 2 stages of computation. Even in benchmarks provided
+with MetaOCaml there are no programs with more than two stages.
+
+You may find further information on how to go from two-stage to
+multi-stage generation (for Scheme) in Robert Gluck and Jesper
+Jorgensen's paper "Efficient Multi-level Generating Extensions for
+Program Specialization" (they study multi-level partial evaluators,
+that is DCG with "implicit", or "BTA-style", annotations, but their
+implementation includes a multi-level DCG framework).
+
+ >
+ > As I see it, the main difference is that MetaOcaml is a modification
+ > of the ocaml compiler, and dml is an external library, but is there
+ > any more in depth difference between the two ? (By the way, MetaOCaml
+ > lack a good documentation).
+ >
+MetaOCaml is more of the research tool for multi-stage computations,
+while my motivation for Dynamic Caml was to build something moreless
+usable in real life. I believe that multi-stage features are nice
+to have in the language, but they are not (at current stage of
+research?) useful enough to dedicate a whole language (or even
+non-trivial compiler modifications) for :).
+
+I think also that tools like CamlP4 is indispensable for making this
+kind of external libraries - nicely integrated into language and still
+keeping the core language and technologies :) behind it intact.
+
+Now, to real stuff :).
+
+You are right in saying that the main difference between MetaOCaml and
+Dynamic Caml is the former being a new language while the latter is an
+external library. All other differences stem from this principal
+difference.
+
+1. Types.
+Main research efforts in types as related to DCG concentrate in
+avoiding the thing called "arguquoting" in dml manual, that is the
+code variable escaping its evaluation scope.
+There are two flavours of arguquoting:
+* "external arguquoting" can be demonstrated by the following:
+     let f = eval {< fun x -> `x >} in
+     let g = eval (abstr (fun y -> f 27)) in ...
+   Here x escapes its evaluation scope in f.
+* "internal arguquoting" happens when code variable is evaluated
+   before it's value is known:
+     let f = eval {< fun x -> @(eval {< x >}) >} in ...
+   Although x is defined in "eval {< x >}", evaluation of "eval {< x >}"
+   happens before construction of the function, and thus value of x
+   is undefined (not known yet).
+MetaOCaml fights "external arguquoting" with a technique called
+Cross-Stage Persistence (CSP). That is, MetaOCaml does not give
+the user access to "quote" primitive (or "`" operator) - it infers
+necessary "quoting level" from type of variable (that is, the level
+of .< >. surronding its declaration) and insert the neccessary amount
+of quotes.
+However, MetaOCaml is unable to detect "internal arguquoting"
+statically.
+
+Basically, all research around MetaML was, I believe, concentrated
+on finding the type system that prevents these two kinds of arguquoting
+without prohibiting "legal" programs. The core of the problem is that
+the term given to "eval" should not be contain any free variables
+from stages higher or equal to that at which eval is executed.
+In the latest papers on the subject (Walid Taha et al. "An Idealized
+MetaML: Simpler, and More Expressive") this seems to be achived,
+but at the cost of quite verbose syntax. However, it is still unclear
+AFAIK whether all legal programs are valid. Walid Taha's excellent
+papers on the subject are very interesting (they are available from
+his web page).
+
+Dynamic Caml, being just a library, cannot modify the type system,
+and hence cannot employ CSP, so it has to provide an explicit "quote"
+operator. The above examples of arguquoting will type check in
+Dynamic Caml, but their execution will result in exception
+UndefinedVariable.
+
+The first example is impossible in MetaOCaml, but the second is:
+     let f = .< fun x -> .~(.! .< x >.) >.
+MetaOCaml _fully type-checks_ the dynamically generated code at
+run-time, and the above will result in TypeCheckingException.
+
+So, MetaOCaml is probably more "sound" than Dynamic Caml,
+but this comes at a price of compiler and run-time system
+modification.
+
+2. Implementation
+First thing to say is that Dynamic Caml is faster than MetaOCaml.
+I implemented the benchmarks that come with MetaOCaml in
+Dynamic Caml, and code generation times of the latter are 3 to 8
+times less than of the former, and the execution time of generated code
+(i.e. generated code quality)is the same.
+
+I believe this is due to the facts that Dynamic Caml does not do the
+type checking at code generation time (while still detecting
+all the problems :)) and that Dynamic Caml uses a specially
+designed lightweight code generator and lower level
+internal program representation (MetaOCaml reuses ocamlc
+code generator which probably was not written with speed
+very much in mind :). In fact, the only code generation
+cost layer that has been removed in MetaOCaml is parsing.
+Type-checking, type inference etc. is there.)
+
+But, of course, not knowing type information at code generation
+time in Dynamic Caml leads to quite some problems. There are
+may constructs that are not supported natively.
+For example, getting a field of a record is tricky because
+at run-time there is no way to obtain an offset of a field.
+Dynamic Caml here inlines a functional wrapper (in fact,
+it get the information about the offset from the bytecode
+of a wrapper!).
+So it could probably benefit from a little help from his friend,
+ocaml compiler :).
+
+Hope this helps, and feel free to criticise this and ask
+if something's unclear.

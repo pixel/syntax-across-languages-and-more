@@ -1,0 +1,159 @@
+> Basically, the members of types are structured data elements, and the
+> type describes the structure, telling how the elements are constructed.
+
+this does not go along with many programming languages. In haskell the type of
+1 is (Num a => a) which doesn't describe the structure, but what you can *do*
+with it.
+
+Nowadays, types are more and more used to tell what-you-can-do, than
+what-is-the-structure of a value is. The what-you-can-do philosophy includes
+the what-is-the-structure (since the what-you-can-do for basic types are given
+as the minimal functions).
+
+what-you-can-do doesn't have any implicit subtyping rules, whereas
+what-is-the-structure do have implicit subtyping rules. But again many
+languages do not use implicit subtyping (strutural equivalence), prefering
+explicit/declared subtyping (declaration equivalence)
+
+The result is that there is no more any simple mapping from values to types.
+Values are tagged into types.
+
+If you dissociate values from types, you can still see types as sets, but only
+for supertyping:
+
+solution1:
+  true = True
+  false = False
+  
+  bool supertype of true and false
+  => bool = True \/ False
+  
+  and define the order relation as (classical subsetting)
+    True < True \/ False
+
+solution2:
+  vehicle = Vehicle
+  
+  car subtype of vehicle
+  => car = Vehicle /\ Car_
+  
+  and define the order relation as (inverse of subsetting)
+    Vehicle > Vehicle /\ Car_
+
+- solution1 nicely models extensible variants
+- solution2 nicely models the OO subtyping
+- so most languages do not follow any subsetting relation since most languages
+allow subtyping, but not supertyping.
+- true, false, bool are variables
+- True, False, Vehicle, Car_ are simple type constants
+- the subtyping relation is strictly structural
+  - every normalised types is a union of intersection of basic types
+  - basic types are all unrelied: we have neither C1 subtype of C2 or C2
+    subtype of C1
+  - the subtyping relation is defined only on /\ and \/
+  - normalisation of types is simple (see normalisation of functions below)
+- Car_ alone is not a legal type, but it won't appear alone in type
+expressions
+- programming languages usually do not allow mixing types, in that case 
+an expression can't have type "True /\ Vehicle" or "True \/ Vehicle"
+
+[...]
+
+> A key practical difference is that functions in the type A->B are
+> polymorphic whereas those in the set of functions from A to B are not.
+> This makes subtypes behave differently than subsets, so for example if
+> A[A' (A is a proper subtype of A') and B[B', then (A'->B)[(A->B'),
+> i.e. subtyping is co-variant on the domain.  This basic difference
+> shows up in the definition of records for example.
+
+the contravariance on parameters and covariance on result is a property of "->" :
+
+true -> false  defined as   True -> False
+bool -> false  defined as   True -> False /\ False -> False
+true -> bool   defined as   True -> True  \/ True  -> False
+bool -> bool   defined as   (True -> True /\ False -> True) \/ 
+                            (True -> False /\ False -> False)
+and we do have
+  bool -> true  <  true -> true  <  true -> bool
+
+
+vehicle -> vehicle   defined as   Vehicle -> Vehicle
+vehicle -> car       defined as   Vehicle -> Vehicle /\ Vehicle -> Car_
+car     -> vehicle   defined as   Vehicle -> Vehicle \/ Car_ -> Vehicle
+car     -> car       defined as   (Vehicle -> Vehicle /\ Vehicle -> Car_) \/ 
+                                  (Car_ -> Vehicle /\ Car_ -> Car_)
+and we do have
+  vehicle -> car <  vehicle -> vehicle  <  car -> vehicle
+
+
+* ad'hoc overloaded functions can be typed:
+  a function over Int returning Int, and also over String returning String
+    (Int -> Int) /\ (String -> String)
+  this type is compatible with:
+    (Int -> Int) /\ (String -> String)  <  (Int -> Int)
+    (Int -> Int) /\ (String -> String)  <  (String -> String)
+
+* specialisation
+   (car -> car) /\ (vehicle -> vehicle)
+
+* polymorphic functions can also be modeled:
+
+  forall x. (x -> x)  = 
+    True -> True /\ False -> False /\ (bool -> bool) /\ ...
+    (infinite intersection over every types)
+  
+  which verifies:
+  
+  forall x. (x -> x)  <  True -> True
+  forall x. (x -> x)  <  bool -> bool
+
+* with bounded polymorphism, one can type things like:
+  
+  f v = (print (nb_wheels v) ; v)
+  f :: (v < vehicle) => v -> v
+
+  - OO languages do not usually care about this, since they do not return the
+  object, only mutating it.
+  - Haskell has this via type classes
+     class Vehicle a where nb_wheels :: a -> Int
+     f v = v where nb = nb_wheels v
+     -- f :: Vehicle a => a -> a
+  - OCaml has this via objects (subtyping)
+     let f v = let _ = v#nb_wheels in v
+     (* val f : (< nb_wheels : 'b; .. > as 'a) -> 'a *)
+    and also polymorphic variants (supertyping)
+     let f b = if b = `True then b else b
+     (* val f : ([> `True] as 'a) -> 'a *)
+
+  bounded polymorphism is simply intersection over types following the bound.
+
+  (v < Vehicle) => v -> v  =
+     Vehicle -> Vehicle /\ (Vehicle /\ Car_ -> Vehicle /\ Car_) /\ ...
+
+  this intersection is infinite, but not all types "Vehicle /\ something" can
+  be obtained in a classical language, only those having be declared. 
+  For example, if "car" is the only subtype of "vehicle", "v" can only be
+  "vehicle" and "car".
+
+* mutability
+- mutable types are invariant: ref(t1) < ref(t2) if t1 = t2
+- beware of common place errors:
+  - record subtyping (aka data inheritance) 
+    ref(X(Int) /\ Y(Int))  <  ref(X(Int))  is *false*
+   but
+    X(ref(Int)) /\ Y(ref(Int))  <  X(ref(Int))  is true!
+    so no need for a special ugly rule for data inheritance.
+  - containers subtyping
+    ref(List(car))  <  ref(List(vehicle))  is *false*
+    List(ref(car))  <  List(ref(vehicle))  is *false*
+   but
+    List(car)  <  List(vehicle)  is true!
+    List(X(ref(Int)) /\ Y(ref(Int)))  <  List(X(ref(Int)))  is true!
+      (since List(X(ref(Int)) /\ Y(ref(Int))) = List(X(ref(Int))) /\ List(Y(ref(Int)))) 
+
+  OO languages have a hard time with this since they usually do not make the
+  difference between mutable and non-mutable data.
+
+* mutability2
+"ref" doesn't make the difference between read-write and write-only types.
+"out" is contravariant: out(t1) < out(t2) if t1 > t2

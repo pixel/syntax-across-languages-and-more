@@ -1,0 +1,107 @@
+{-# OPTIONS_GHC -fglasgow-exts #-}
+
+-- using phantom types
+-- no hierarchy for Animal vs Food
+
+data Entity t = Entity Int deriving Show
+
+class Kind a where
+    new :: Int -> Entity a
+    new = Entity
+
+energy (Entity e) = e
+
+
+data Cow
+data Rabbit
+data Human
+data Grass
+data Carrot
+data Beef
+data Dead_Rabbit
+data Dead_Human
+data NoMeat
+
+instance Kind Cow
+instance Kind Rabbit
+instance Kind Human
+instance Kind Grass
+instance Kind Carrot
+instance Kind Beef
+instance Kind Dead_Rabbit
+instance Kind Dead_Human
+instance Kind NoMeat
+
+class (Kind a, Kind b, Kind c) => Eat a b c | b -> c where
+
+    eat :: Entity a -> Entity b -> (Entity a, Entity c)
+    eat animal food = (new (energy food + energy animal), new (energy food))
+
+class (Kind a, Kind b) => Slaughter a b | a -> b where
+
+    slaughter :: Entity a -> Entity b
+    slaughter animal = new (energy animal)
+
+instance Eat Rabbit Carrot      Carrot
+instance Eat Cow    Grass       Grass
+instance Eat Human  Carrot      Carrot
+instance Eat Human  Beef        NoMeat
+instance Eat Human  Dead_Rabbit NoMeat
+instance Eat Human  Dead_Human  NoMeat
+
+instance Slaughter Rabbit Dead_Rabbit
+instance Slaughter Cow    Beef
+instance Slaughter Human  Dead_Human
+
+
+grass  = new 5 :: Entity Grass
+carrot = new 10 :: Entity Carrot
+
+a_rabbit      = new  100 :: Entity Rabbit
+a_cow         = new 1000 :: Entity Cow
+a_human       = new  300 :: Entity Human
+another_human = new  350 :: Entity Human
+
+data Unkown_entity = forall a. U (Entity a)
+animals = [ ("rabbit", U a_rabbit), ("cow", U a_cow), ("human", U a_human) ]  
+animals_s = unlines $ map (\ (name, U o) -> name ++ " -> " ++ show (energy o)) animals
+
+(a_rabbit2, _) = eat a_rabbit carrot
+(a_cow2, _) = eat a_cow grass
+
+a_dead_rabbit = slaughter a_rabbit2
+a_beef = slaughter a_cow2
+
+(a_human2, _) = eat a_human carrot
+(a_human3, _) = eat a_human2 carrot
+(a_human4, a_beef2)   = eat a_human3 a_beef
+(a_human5, a_dead_rabbit2) = eat a_human4 a_dead_rabbit
+
+a_dead_human = slaughter another_human
+
+(a_human6, _) = eat a_human5 a_dead_human
+
+main = if energy a_human6 == 1785 then putStrLn "ok" else putStrLn "pb"
+
+
+{-		 
+-- 8 should_fail's are detected at compile-time:
+f1 = eat a_beef grass -- No instance for (Eat Beef Grass Grass)
+f2 = slaughter a_beef -- No instance for (Slaughter Beef b)
+f3 = eat carrot grass -- No instance for (Eat Carrot Grass Grass)
+f4 = slaughter carrot -- No instance for (Slaughter Carrot b)
+f5 = eat a_cow carrot -- No instance for (Eat Cow Carrot Carrot)
+f6 = eat a_cow a_beef -- No instance for (Eat Cow Beef NoMeat)
+f7 = eat a_human6 a_cow -- No instance for (Eat Human Cow c)
+f8 = eat a_human6 grass -- No instance for (Eat Human Grass Grass)
+-}
+
+-- 3 should_fails succeed
+err1 = eat a_human a_beef -- a_beef is already eaten
+err2 = eat a_cow grass -- a_cow is dead, it can't eat
+err3 = slaughter a_cow -- a_cow is dead, it can't be slaughtered again
+
+
+-- Local Variables:
+-- mode:haskell
+-- End:

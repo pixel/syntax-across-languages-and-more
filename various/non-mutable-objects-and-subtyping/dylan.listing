@@ -1,0 +1,71 @@
+module: Dylan-test
+
+define method sqr(x)
+  x * x
+end;
+
+define method sqrt(x)
+  block(return)
+    for (i :: <integer> from 1 to x)
+      if (sqr(i) > x) return(i - 1) end
+    end
+  end
+end;
+
+
+define class <point2d> (<object>)
+  slot x, required-init-keyword: x:;
+  slot y, required-init-keyword: y:;
+end;
+
+define class <point3d> (<point2d>)
+  slot z, required-init-keyword: z:;
+end;
+
+define method translate(p, xx)
+  let p = clone(p);
+  p.x := p.x + xx;
+  p
+end;
+
+
+define method clone(p :: <point2d>)
+  make(<point2d>, x: p.x, y: p.y)
+end;
+define method clone(p :: <point3d>)
+  make(<point3d>, x: p.x, y: p.y, z: p.z)
+end;
+
+define method as (type == <string>, p :: <point2d>) => s :: <string>;
+  concatenate("[", integer-to-string(p.x), ", ", integer-to-string(p.y), "]")
+end;
+define method as (type == <string>, p :: <point3d>) => s :: <string>;
+  concatenate("[", integer-to-string(p.x), ", ", integer-to-string(p.y), ", ", integer-to-string(p.z), "]")
+end;
+
+define method my-length(p :: <point2d>)
+  sqrt(sqr(p.x) + sqr(p.y))
+end;
+define method my-length(p :: <point3d>)
+  sqrt(sqr(p.x) + sqr(p.y) + sqr(p.z))
+end;
+
+define method test(p)
+  list(my-length(p), as(<string>, translate(p, 1)))
+end;
+
+define method main (_argv0, #rest _noise)
+  let p2d = make(<point2d>, x: 3, y: 4);
+  let p3d = make(<point3d>, x: 1, y: 2, z: 2);
+  let l = list(p2d, p3d);
+
+  print(list(test(p2d), test(p3d), map(my-length, l)));
+
+  // after translate, we still have a Point3d
+  print(translate(p3d, 1).z);
+end;
+
+
+// Local Variables:
+// mode: dylan
+// End:

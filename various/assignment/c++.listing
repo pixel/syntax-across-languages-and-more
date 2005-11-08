@@ -1,0 +1,82 @@
+// -*- C++ -*-
+
+#include <stdio.h>
+#include <string>
+#include <vector>
+
+template<class C> void assign(C a, C b) {
+  a = b;
+  cout << " local:" << a;
+}
+
+template<class C> void add(C a, C b) {
+  a += b;
+  cout << " local:" << a;
+}
+
+template<class C> void ref_assign(C & a, C b) {
+  a = b;
+  cout << " local:" << a;
+}
+
+template<class C> void ref_add(C & a, C b) {
+  a += b;
+  cout << " local:" << a;
+}
+
+
+/* complete the vector with "<<" and "+=" */
+ostream& operator<<(ostream& os, vector<int> v) {
+  for (vector<int>::const_iterator p = v.begin(); p != v.end(); p++)
+    os << *p;
+
+  return os;
+}
+void operator+=(vector<int> &a, const vector<int> &b) {
+  for (vector<int>::const_iterator p = b.begin(); p != b.end(); p++) a.push_back(*p);
+}
+
+
+#define doit(f,t,v1,v2)             \
+  {				    \
+    t a = v1;		            \
+    t &a2 = a;		            \
+    t a3 = a;		            \
+    printf("(%-20s) before:", #f);  \
+    cout << a;                      \
+    f(a, v2);		            \
+    cout << " after:" << a << " " << a2 << " " << a3 << "\n"; \
+  }
+
+#define string_doit(f) doit(f, string, s1, s2)
+#define int_doit(f) doit(f, int, 0, 1)
+#define vector_doit(f) doit(f, vector<int>, v1, v2)
+
+int main() {
+  string s1 = "_";
+  string s2 = "X";
+
+  vector<int> v1;
+  vector<int> v2;
+  v1.push_back(0);
+  v2.push_back(1);
+
+  int_doit(assign);
+  string_doit(assign);
+  vector_doit(assign);
+
+  printf("\n");
+  int_doit(add);
+  string_doit(add);
+  vector_doit(add);
+
+  printf("\n\n");
+  int_doit(ref_assign);
+  string_doit(ref_assign);
+  vector_doit(ref_assign);
+
+  printf("\n");
+  int_doit(ref_add);
+  string_doit(ref_add);
+  vector_doit(ref_add);
+}

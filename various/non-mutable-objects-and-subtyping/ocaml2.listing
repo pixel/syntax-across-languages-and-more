@@ -1,0 +1,73 @@
+(* -*- caml -*- *)
+
+open List
+open Printf
+
+class virtual point (x : float) =
+  object
+    val x = x
+    method translate x' = {< x = x +. x' >}
+
+    method x = x
+    method virtual length : float
+    method virtual show : string
+  end
+
+(* "add" not included in point so that point2d and point3d can be cast to point *)
+class virtual t_add =
+  object(_ : 'a)
+    method virtual add : 'a -> 'a
+  end
+
+class point2d x (y : float) =
+  object(_ : 'a)
+    inherit point x
+    inherit t_add
+    val y = y
+
+    method y = y
+    method add p = {< x = x +. p#x ; y = y +. p#y >}
+    method length = sqrt(x*.x +. y*.y)
+    method show = sprintf "[%g, %g]" x y
+  end
+
+
+class point3d x (y : float) (z : float) =
+  object
+    inherit point2d x y (* notice that a point3d is *not* a point2d *)
+    val z = z
+
+    method z = z
+    method add p = {< x = x +. p#x ; y = y +. p#y ; z = z +. p#z >}
+    method length = sqrt(x*.x +. y*.y +. z*.z)
+    method show = sprintf "[%g, %g, %g]" x y z
+  end
+
+
+let test p = sprintf "%g %s" p#length (p#translate 1.)#show
+let twice p = p#add p
+
+let _ =
+  let p2d = new point2d 3. 4. in
+  let p3d = new point3d 1. 2. 2. in
+  let l = [ (p2d :> point) ; (p3d :> point) ] in 
+
+  print_endline (String.concat " " 
+		   (
+		    [ test p2d ; test p3d ] @ 
+		    map (fun p -> string_of_float p#length) l @
+
+		    (* after translate, we still have a Point3d *)
+		    [ string_of_float (p3d#translate 1.)#z ] @
+		    (* (p2d#translate 1.)#z is not accepted *)
+
+		    [ (twice p2d)#show ; (twice p3d)#show ] @
+		    (* or: map (fun p -> p#show) [ (twice p2d :> point) ; (twice p3d :> point) ] *)
+
+		    (* no way to make a list of points having the ability to use add *)
+
+		    (* after twice, we still have a Point3d *)
+		    [ string_of_float (twice p3d)#z ]
+		    (* (twice p2d)#z is not accepted *)
+		   )
+		 )

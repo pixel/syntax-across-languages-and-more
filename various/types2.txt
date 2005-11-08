@@ -1,0 +1,40 @@
+- advantages of static typing
+
+  - performance: the original goal for static typing is to allow
+  greater performance and memory consumption
+
+  - static analysis: another goal is to ensure things at compile-time
+
+  those 2 are usually mixed because of History. But these should now
+  be split apart:
+
+  - performance usually comes from a critical path, so some kind of
+  type annotation or analysis can be done to have the performance
+  advantage of static typing, but keeping most of the program
+  dynamically typed (bigloo ?)
+
+  - complex typing schemes (parametric polymorphism, runtime dispatch)
+  do not allow the full speed of simple static typing, nor the perfect
+  memory consumption (think boxing)
+
+  - even more complex typing schemes (row subtyping, polymorphic
+  variants) allow complex expressions but the runtime cost is
+  important.
+
+
+- some checks done in statically typed languages are not type related
+(existence of a function/method, of a variable), but comes together
+with the way compilation is done. Some tools can regain those checks
+in dynamically typed languages (use strict, pychecker...)
+
+
+- OO dynamically typed languages (Python/Ruby/Smalltalk) have types
+
+  - objects are types: 
+    - declaring an object is a type declaration
+    - if you have a look at a corresponding program
+  in Common Lisp, you'll see the many type annotations that are
+  implicit (via sugar) in Python/Ruby/Smalltalk. 
+
+  -> those languages have runtime type checks
+

@@ -1,0 +1,165 @@
+
+in untyped lambda-calculus
+
+  t  ::= \x. t | x | t t
+
+rewrite it that way:
+
+  t' ::= t1 | t2
+  t1 ::= \x1 x2 ... xn. t2
+  t2 ::= x | t2 t
+
+replace the typical evaluation rule:
+
+  (\x. t) v  -->  [x->v] t
+
+with
+
+  (\x1 x2 ... xn t2) v1 v2 ... vn  -->  [x1->v1 x2->v2 ... xn->vn] t2
+
+this patch apply on http://www.cis.upenn.edu/~bcpierce/tapl/checkers
+--- fulluntyped/core.ml.pix	2002-07-03 01:58:17.000000000 +0200
++++ fulluntyped/core.ml	2002-07-03 01:50:31.000000000 +0200
+@@ -2,11 +2,19 @@
+ open Syntax
+ open Support.Error
+ open Support.Pervasive
++open List
+ 
+ (* ------------------------   EVALUATION  ------------------------ *)
+ 
+ exception NoRuleApplies
+ 
++let rec split_at = function
++  | l, 0 -> [], l
++  | e::l, n -> 
++      let l1, l2 = split_at(l, n-1) in
++      e :: l1, l2
++  | _ -> failwith "split_at"
++
+ let rec isnumericval ctx t = match t with
+     TmZero(_) -> true
+   | TmSucc(_,t1) -> isnumericval ctx t1
+@@ -64,10 +72,20 @@
+   | TmProj(fi, t1, l) ->
+       let t1' = eval1 ctx t1 in
+       TmProj(fi, t1', l)
+-  | TmApp(fi,TmAbs(_,x,t12),v2) when isval ctx v2 ->
+-      termSubstTop v2 t12
++  | TmApp(fi,TmAbs(fi2,xs,TmAbs(fi3,xs2,t12)),v2) ->
++      (* rewriting in normal form *)
++      (* TODO: dropping fi3 *)
++      eval1 ctx (TmApp(fi,TmAbs(fi2,xs @ xs2,t12),v2))
++  | TmApp(fi,TmApp(fi2,t1,t2), t2') ->
++      (* rewriting in normal form *)
++      eval1 ctx (TmApp(fi, t1, t2 @ t2'))
++  | TmApp(fi,TmAbs(_,xs,t12),v2) when length v2 >= length xs ->
++      let v2', v2_kept = split_at(v2, length xs) in
++      let v2' = map (fun v -> if isval ctx v then v else eval1 ctx v) v2' in
++      let r = fold_left (fun v2 t12 -> termSubstTop t12 v2) t12 (rev v2') in
++      if v2_kept = [] then r else TmApp(fi, r, v2_kept)
+   | TmApp(fi,v1,t2) when isval ctx v1 ->
+-      let t2' = eval1 ctx t2 in
++      let t2' = map (eval1 ctx) t2 in
+       TmApp(fi, v1, t2')
+   | TmApp(fi,t1,t2) ->
+       let t1' = eval1 ctx t1 in
+--- fulluntyped/syntax.ml.pix	2002-07-03 01:58:17.000000000 +0200
++++ fulluntyped/syntax.ml	2002-07-03 01:02:17.000000000 +0200
+@@ -16,8 +16,8 @@
+   | TmRecord of info * (string * term) list
+   | TmProj of info * term * string
+   | TmVar of info * int * int
+-  | TmAbs of info * string * term
+-  | TmApp of info * term * term
++  | TmAbs of info * string list * term
++  | TmApp of info * term * term list
+   | TmLet of info * string * term * term
+   | TmString of info * string
+   | TmFloat of info * float
+@@ -56,6 +56,13 @@
+   if isnamebound ctx x then pickfreshname ctx (x^"'")
+   else ((x,NameBind)::ctx), x
+ 
++let rec pickfreshnames ctx = function
++  | [] -> ctx, []
++  | x::xs ->
++      let ctx, x' = pickfreshname ctx x in
++      let ctx, xs' = pickfreshnames ctx xs in
++      ctx, x'::xs'
++
+ let index2name fi ctx x =
+   try
+     let (xn,_) = List.nth ctx x in
+@@ -89,8 +96,8 @@
+                                                (li,walk c ti))
+                                     fields)
+   | TmVar(fi,x,n) -> onvar fi c x n
+-  | TmAbs(fi,x,t2) -> TmAbs(fi,x,walk (c+1) t2)
+-  | TmApp(fi,t1,t2) -> TmApp(fi,walk c t1,walk c t2)
++  | TmAbs(fi,xs,t2) -> TmAbs(fi,xs,walk (c+List.length xs) t2)
++  | TmApp(fi,t1,t2) -> TmApp(fi,walk c t1,List.map (walk c) t2)
+   | TmLet(fi,x,t1,t2) -> TmLet(fi,x,walk c t1,walk (c+1) t2)
+   | TmString _ as t -> t
+   | TmFloat _ as t -> t
+@@ -192,9 +199,9 @@
+        pr "else ";
+        printtm_Term false ctx t3;
+        cbox()
+-  | TmAbs(fi,x,t2) ->
+-      (let (ctx',x') = (pickfreshname ctx x) in
+-            obox(); pr "lambda "; pr x'; pr ".";
++  | TmAbs(fi,xs,t2) ->
++      (let (ctx',xs') = (pickfreshnames ctx xs) in
++            obox(); pr "lambda "; pr (String.concat " " xs'); pr ".";
+             if (small t2) && not outer then break() else print_space();
+             printtm_Term outer ctx' t2;
+             cbox())
+@@ -215,8 +222,7 @@
+   | TmApp(fi, t1, t2) ->
+       obox0();
+       printtm_AppTerm false ctx t1;
+-      print_space();
+-      printtm_ATerm false ctx t2;
++      List.iter (fun t -> print_space(); printtm_ATerm false ctx t) t2;
+       cbox()
+   | TmTimesfloat(_,t1,t2) ->
+        pr "timesfloat "; printtm_ATerm false ctx t2; 
+--- fulluntyped/syntax.mli.pix	2002-07-03 01:58:18.000000000 +0200
++++ fulluntyped/syntax.mli	2002-07-02 23:54:13.000000000 +0200
+@@ -15,8 +15,8 @@
+   | TmRecord of info * (string * term) list
+   | TmProj of info * term * string
+   | TmVar of info * int * int
+-  | TmAbs of info * string * term
+-  | TmApp of info * term * term
++  | TmAbs of info * string list * term
++  | TmApp of info * term * term list
+   | TmLet of info * string * term * term
+   | TmString of info * string
+   | TmFloat of info * float
+--- fulluntyped/parser.mly.pix	2002-07-03 02:02:34.000000000 +0200
++++ fulluntyped/parser.mly	2002-07-03 00:01:28.000000000 +0200
+@@ -139,11 +139,11 @@
+   | LAMBDA LCID DOT Term 
+       { fun ctx ->
+           let ctx1 = addname ctx $2.v in
+-          TmAbs($1, $2.v, $4 ctx1) }
++          TmAbs($1, [$2.v], $4 ctx1) }
+   | LAMBDA USCORE DOT Term 
+       { fun ctx ->
+           let ctx1 = addname ctx "_" in
+-          TmAbs($1, "_", $4 ctx1) }
++          TmAbs($1, ["_"], $4 ctx1) }
+   | LET LCID EQ Term IN Term
+       { fun ctx -> TmLet($1, $2.v, $4 ctx, $6 (addname ctx $2.v)) }
+   | LET USCORE EQ Term IN Term
+@@ -162,7 +162,7 @@
+       { fun ctx ->
+           let e1 = $1 ctx in
+           let e2 = $2 ctx in
+-          TmApp(tmInfo e1,e1,e2) }
++          TmApp(tmInfo e1,e1,[e2]) }
+   | TIMESFLOAT PathTerm PathTerm
+       { fun ctx -> TmTimesfloat($1, $2 ctx, $3 ctx) }
+ 

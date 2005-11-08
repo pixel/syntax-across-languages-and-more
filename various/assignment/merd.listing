@@ -1,0 +1,28 @@
+# -*- merd -*-
+
+assign(x, y) =
+    x = y
+    " local:{x}".print
+
+add(x, y) =
+    x = x + y
+    " local:{x}".print
+
+doit(sf, f, v1, v2) =
+    a = v1
+    a2 = a.ref
+    a3 = a
+    "({sf}) before:{a}".print
+    f(a, v2)
+    " after:{a} {a2} {a3}".println
+
+doit("assign", assign, 0, 1)
+doit("assign", assign, "_", "X")
+doit("assign", assign, ((0)), ((1)))
+doit("add   ", add,    0, 1)
+doit("add   ", add,    "_", "X")
+doit("add   ", add,    ((0)), ((1)))
+
+# assign !! (Inout(o), o) -> (o !< Serializable) ; ()
+# add    !! (Inout(o), o) -> (o !< Addable |&| Serializable) ; ()
+# doit   !! (Serializable, (v, v2 -> ()), v, v2) -> (v !< &Serializable) ; ()

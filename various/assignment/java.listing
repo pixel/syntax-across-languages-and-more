@@ -1,0 +1,84 @@
+// -*- java -*-
+
+import java.util.*;
+
+public class t  {
+
+    static void assign_int(int a, int b) {
+	a = b;
+	System.out.print(" local:" + a);
+    }
+    static void add_int(int a, int b) {
+	a += b;
+	System.out.print(" local:" + a);
+    }
+
+    static void assign_String(String a, String b) {
+	a = b;
+	System.out.print(" local:" + a);
+    }
+    static void add_String(String a, String b) {
+	a += b;
+	System.out.print(" local:" + a);
+    }
+
+    static void assign_vector(Vector a, Vector b) {
+	a = b;
+	System.out.print(" local:" + a);
+    }
+    static void add_vector(Vector a, Vector b) {
+	a.addAll(b);
+	System.out.print(" local:" + a);
+    }
+    
+    public static void main(String[] args) {
+
+        {
+	    int a = 0;
+            int v2 = 1;
+            System.out.print("(assign              ) before:" + a);
+	    assign_int(a, v2);
+	    System.out.print(" after:" + a + "\n");
+	}
+        {
+	    String a = "_";
+            String v2 = "X";
+            System.out.print("(assign              ) before:" + a);
+	    assign_String(a, v2);
+	    System.out.print(" after:" + a + "\n");
+	}
+        {
+	    Vector a = new Vector();
+	    a.add("_");
+            Vector v2 = new Vector();
+	    v2.add("X");
+            System.out.print("(assign              ) before:" + a);
+	    assign_vector(a, v2);
+	    System.out.print(" after:" + a + "\n");
+	}
+	System.out.println("");
+        {
+	    int a = 0;
+            int v2 = 1;
+            System.out.print("(add                 ) before:" + a);
+	    add_int(a, v2);
+	    System.out.print(" after:" + a + "\n");
+	}
+        {
+	    String a = "_";
+            String v2 = "X";
+            System.out.print("(add                 ) before:" + a);
+	    add_String(a, v2);
+	    System.out.print(" after:" + a + "\n");
+	}
+        {
+	    Vector a = new Vector();
+	    a.add("_");
+            Vector v2 = new Vector();
+	    v2.add("X");
+            System.out.print("(addAll              ) before:" + a);
+	    add_vector(a, v2);
+	    System.out.print(" after:" + a + "\n");
+	}
+    }
+};

@@ -1,0 +1,24 @@
+from http://members.aol.com/humansandt/papers/subtyping.htm
+(http://ootips.org/ellipse-circle.html)
+
+- A subtype is not a subtype in a reflective environment
+
+    is_gtk(o) = o.getClass.getName.contains("gtk")
+  
+  => subclassing foo_gtk in foo_ggttkk makes objects of type foo_ggttkk
+  answers "false" to is_gtk.
+
+- A subtype is not a subtype in a multi-user environment
+
+  When given a Polygon, some code may assume the number of edges won't change.
+
+    print_polygon(poly, do_something) =
+       nb = poly.nb_edges
+       do_something()
+       (1..nb).each{|i| poly.get_edge(i).print}
+    print_polygon(poly, (() -> poly.add_edge))
+ 
+  The do_something has changed the Polygon, breaking the assumption that a
+  Polygon is constant and won't change.
+
+http://okmij.org/ftp/Computation/Subtyping/

@@ -1,0 +1,36 @@
+# -*- python -*-
+
+i = 1
+i2 = i
+i2 += 1
+print "i2:", i2
+print "i :", i
+
+s = "hello"
+s2 = s
+s2 += "!"
+print "s2:", s2
+print "s :", s
+
+l = [ "hello" ]
+l2 = l
+l2.append("world")
+print "l2:", l2
+print "l :", l
+
+class Point:
+  def __init__(self, x, y):
+    self.x, self.y = x, y
+
+  def translate(self, x, y):
+    self.x += x
+    self.y += y
+
+  def __repr__(self):
+    return "Point(%g, %g)" % (self.x, self.y)
+
+p = Point(0, 1)
+p2 = p
+p2.translate(1, 1)
+print "p2:", p2
+print "p :", p

@@ -1,0 +1,93 @@
+// -*- C++ -*-
+
+#include <iostream>
+#include <string>
+#include <vector>
+#include <math.h>
+
+using namespace std;
+
+struct Point {
+  double x;
+
+  Point(double x) : x(x) {}
+
+  virtual Point *clone() const = 0;
+  virtual double length() const = 0;
+  virtual ostream & show(ostream &os) const = 0; 
+};
+
+// if you put translate inside Point, you loose precision on the returned type
+// the only solution is to have it standalone outside of any class
+template<class P> P *translate(const P *p, double x)
+{
+  P *pp = p->clone();
+  pp->x += x;
+  return pp;
+}
+
+struct Point2d : Point {
+  double y;
+
+  Point2d(double x, double y) : Point(x), y(y) {}
+  Point2d *clone() const { return new Point2d(x, y); }
+
+  double length() const
+  {
+    return sqrt(x*x + y*y); 
+  }
+
+  ostream & show(ostream &os) const
+  {
+    return os << "[" << x << ", " << y << "]";
+  }
+};
+
+struct Point3d : Point {
+  double y, z;
+
+  Point3d(double x, double y, double z) : Point(x), y(y), z(z) {}
+  Point3d *clone() const { return new Point3d(x, y, z); }
+
+  double length() const
+  {
+    return sqrt(x*x + y*y + z*z); 
+  }
+
+  ostream & show(ostream &os) const
+  {
+    return os << "[" << x << ", " << y << ", " << z << "]";
+  }
+};
+
+
+ostream& operator<<(ostream& os, const Point &p) {
+  return p.show(os);
+}
+
+
+template<class P> ostream& test(ostream &os, const P *p) {
+  return os << p->length() << ", " << *translate(p, 1);
+}
+
+int main() {
+  Point2d *p2d = new Point2d(3, 4);
+  Point3d *p3d = new Point3d(1, 2, 2);
+
+  vector<Point*> l;
+
+  l.push_back(p2d);
+  l.push_back(p3d);
+
+  test(cout, p2d) << " ";
+  test(cout, p3d) << " ";
+
+  for (vector<Point*>::iterator p = l.begin(); p != l.end(); p++)
+    cout << (*p)->length() << " ";
+
+  cout << endl;
+
+  // after translate, we still have a Point3d
+  cout << translate(p3d, 1)->z << endl;
+  // translate(p2d, 1)->z is not accepted
+}

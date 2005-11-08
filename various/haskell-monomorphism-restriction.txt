@@ -1,0 +1,119 @@
+http://www.haskell.org/pipermail/haskell/2001-October/001939.html
+
+>    Hmmm... This still sounds like nonsensical (as in counterintuitive
+>    and artificial) to me. In a definition like "let g = isNil"
+>    there cannot be any compelling reason to give "g" any type
+>    different than the type of "isNil".
+
+There are two reasons for the monomorphism restriction:
+
+- isNil (or any value with a non-empty context in its type) doesn't
+  really behave like a constant, but as a function taking a dictionary
+  of 'IsNil a' as an implicit argument, so it's recomputed each time
+  it it used...
+  
+  This point is silly in this case, because it is already a function
+  with an explicit argument! It makes more sense however when the type
+  is not of the form a->b. For example in 'n = 7*11*13' letting n have
+  the type 'Num a => a' implies that it is recomputed each time it
+  is used. Unless the compiler manages to optimize this, but it can't
+  in all cases (n can be used with different types in various places).
+
+- When a pattern binds several variables, it can happen that their
+  types need different sets of class constraints. Using such a variable
+  doesn't fully determine the type to perform the computation in.
+  It's thus ambiguous and an error.
+  
+  It's not ambiguous with monomorphic restriction, where all uses of
+  all variables contribute to finding the single type to perform the
+  computation in.
+
+  Even with a single variable it can happen that some uses will
+  constrain the type enough to determine the instance, and some will
+  not. Without monomorphic restrictions some uses are OK, but others
+  will stop the compilation. With monomorphic restriction all uses
+  contribute to a single type and typing might succeed.
+
+The general trouble with monomorphic restriction is that let bindings
+can mean two similar things:
+
+1. Create a single lazily evaluated object with the given definition
+   and make it or its components available through variables (pattern
+   binding).
+
+2. Define a possibly polymorphic function and perform the given
+   computation when it is applied (function binding).
+
+Degenerate forms of these cases look the same in Haskell: a single
+identifier is on the left. It's not clear which one the programmer
+meant. Often it doesn't matter. It really matters only when classes
+are involved: either to determine where to apply implicit arguments
+of class dictionaries or to disambiguate instances by making some
+types more concrete.
+
+Clean uses three forms of equal sign: => defined a function, := binds
+a single lazily evaluated object, and = means => on the toplevel and
+:= locally (if I remember the syntax). ML doesn't have this problem
+because it doesn't have classes.
+
+>>but two legal possibilities are
+>>- forall b . [b] -> Bool, and
+> 
+>    Choosing an explicit instance of IsNil. But this sounds
+>    nonsensical to me, too. No instance should be choosing unless the
+>    specific instance type is forced by the definition. Otherwise,
+>    if there are two insances, which one would it choose?
+
+Type inference defined in the traditional way is non-deterministic
+in nature.
+
+A good property of a type system is that it should not matter when
+various choices are made: as long as we succeed in deriving a type
+of the whole program, the overall meaning should be unambiguous.
+This property has a name - sorry, I forgot which.
+
+When we choose an instance too early, we might not succeed at all (if
+another instance happens to be needed). Unfortunately in this case we
+may fail in either case: no choice is sure to be better than the other.
+
+It might happen that by choosing this instance now it will be OK when
+f is used. The other possibility of the type for f would take away
+some freedom: we can't use this instance later with different choices
+for types of list elements, because both uses of g must make the same
+choices for type variables with class constraints. It's not visible yet
+(before choosing the instance) that the single type 'IsNil a => a'
+will expand into something containing quantified type variables without
+class constraints which can be instantiated independently!
+
+Of course it may also happen that completely different instances will
+be needed when f is used, so choosing the instance now is bad. That's
+the point: there is no universal choice. The property of principal
+types would allow us to derive some most general type of f, such that
+any other type is its instance. Unfortunately it doesn't hold. This
+case was not expected.
+
+>>- a -> Bool (without quantification and with "IsNil a" among the
+>>  predicates).
+> 
+>    This is something I didn't understand either. Which predicates?
+
+I think "isNil a" goes to the context of the whole expression
+containing the "let g = ..." (I'm not sure if Karl meant that).
+
+Generally for an expression the compiler determines a type and a
+set of collected class constraints, resulting from using identifiers
+having polymorphic types with constraints. A polymorphic type of an
+identifier which is used is instantiated using fresh type variables and
+constraints apply to these type variables.
+
+A let binding usually "eats" all constraints and puts them in the
+declaration. The constraints will reappear outside when the declared
+identifier is used, but they can appear in different configurations
+when the identifier is used polymorphically: instantiated to various
+types.
+
+But in a monomorphic let binding the same type variables can be used
+for both the body of the declaration and its usages: the variable is
+not polymorphic, all usages have the same type. So it makes sense to
+float the context out to the expression containing the whole let.
+It will be determined once for the whole body of f.

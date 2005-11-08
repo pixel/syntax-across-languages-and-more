@@ -1,0 +1,41 @@
+# -*- perl -*-
+$\ = "\n";
+
+my $i = 1;
+my $i2 = $i;
+$i2++;
+print "i2: $i2";
+print "i : $i";
+
+my $s = "hello";
+my $s2 = $s;
+$s2 =~ s/h/H/;
+print "s2: $s2";
+print "s : $s";
+
+my @l = "hello";
+my @l2 = @l;
+push @l2, "world";
+print "l2: @l2";
+print "l : @l";
+
+package Point;
+sub new { 
+    my ($class, $x, $y) = @_;
+    bless { x => $x, y => $y }, $class;
+}
+sub translate {
+    my ($p, $x, $y) = @_;
+    $p->{x} += $x;
+    $p->{y} += $y;
+}
+sub show {
+    my ($p) = @_;
+    sprintf "Point(%d,%d)", $p->{x}, $p->{y};
+}
+
+my $p = Point->new(0, 1);
+my $p2 = $p;
+$p2->translate(1, 1);
+print "p2: ", $p2->show;
+print "p : ", $p->show;

@@ -1,0 +1,64 @@
+-- -*- haskell -*-
+
+class Show a => Point a where
+    translate :: a -> Double -> a
+    my_length :: a -> Double
+    add :: a -> a -> a
+    pack :: a -> Packed_point
+    unpack :: a -> Points
+    pack = Packed_point
+
+data Packed_point = forall a. Point a => Packed_point a
+
+data Points = TPoint2d Point2d | TPoint3d Point3d
+data Point2d = Point2d(Double, Double) deriving Show
+data Point3d = Point3d(Double, Double, Double) deriving Show
+
+instance Point Point2d where
+    translate (Point2d(x1, y1)) x2 = Point2d(x1 + x2, y1)
+    my_length (Point2d(x, y)) = sqrt (x * x + y * y)
+    add (Point2d(x1, y1)) (Point2d(x2, y2)) = Point2d(x1 + x2, y1 + y2)
+    unpack = TPoint2d
+
+instance Point Point3d where
+    translate (Point3d(x1, y1, z1)) x2 = Point3d(x1 + x2, y1, z1)
+    my_length (Point3d(x, y, z)) = sqrt (x * x + y * y + z * z)
+    add (Point3d(x1, y1, z1)) (Point3d(x2, y2, z2)) = Point3d(x1 + x2, y1 + y2, z1 + z2)
+    unpack = TPoint3d
+
+instance Show Packed_point where
+    show (Packed_point p) = show p
+
+instance Point Packed_point where
+    translate (Packed_point p) x = Packed_point(translate p x)
+    my_length (Packed_point p) = my_length p
+    add (Packed_point p1) (Packed_point p2) = add' (unpack p1) (unpack p2)
+	where
+	add' (TPoint2d p1) (TPoint2d p2) = Packed_point(add p1 p2)
+	add' (TPoint3d p1) (TPoint3d p2) = Packed_point(add p1 p2)
+	add' (TPoint3d _ ) (TPoint2d _ ) = error "can't add a Point3d and a Point2d"
+	add' (TPoint2d _ ) (TPoint3d _ ) = error "can't add a Point2d and a Point3d"
+    -- not needed
+    -- unpack (Packed_point p) = unpack p
+
+get_z (Point3d(_, _, z)) = z
+
+
+p2d = Point2d(3, 4)
+p3d = Point3d(1, 2, 2)
+
+l = [ pack p2d, pack p3d ]
+
+test p = (my_length p, translate p 1)
+test1 = (test p2d, test p3d, map my_length l,
+
+	 -- after translate, we still have a Point3d
+	 get_z (translate p3d 1)) -- get_z (translate p2d 1) is not accepted
+
+twice p = add p p
+test2 = (twice p2d, twice p3d, map twice l)
+
+-- after twice, we still have a Point3d
+test4 = get_z (twice p3d) -- get_z (twice p2d) is not accepted
+
+main = print (test1, test2, test4)

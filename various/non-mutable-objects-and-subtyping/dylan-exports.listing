@@ -1,0 +1,13 @@
+Module: dylan-user
+
+define library dylan-test
+  use Dylan;
+  use String-Extensions;
+end library;
+
+define module dylan-test
+  use dylan;
+  use cheap-io;		// For puts
+  use extensions;	// For Main
+  use string-conversions;
+end module;

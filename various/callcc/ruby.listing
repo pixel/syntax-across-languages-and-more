@@ -1,0 +1,168 @@
+# -*- ruby -*-
+################################################################################
+# dumb examples
+################################################################################
+p callcc{|k| "foo"}		# => "foo"
+
+p callcc{|k| k.call("foo")}	# => "foo"
+                                # same as above since
+                                # callcc{|k| expr}  <=>  callcc{|k| k.call(expr)}
+
+p callcc{|k| 
+  k.call("foo")
+  raise "ignored"
+}				# => "foo"
+                                # everything after the call to "k" is ignored
+
+p "foo " + callcc{|k| "bar "} + "boo" # => "foo bar boo"
+
+################################################################################
+# imperative constructs
+################################################################################
+
+# "return"
+def inv(v)
+  callcc{|myreturn|
+    p "doing things"
+    myreturn.call(0) if v == 0	# special case for v = 0
+    p "otherwise doing other things"
+    1.0 / v
+  }
+end
+
+# "goto"
+p "doing things"
+label_here = nil
+# creating a label here
+callcc{|k| label_here = k}
+p "doing other things"
+label_here.call
+p "this won't be reached"
+
+
+# "goto" v.2
+def mygoto(continuation)
+  continuation.call(continuation)
+end
+
+p "doing things"
+label_here = callcc{|k| k}
+p "doing other things"
+mygoto(label_here)
+p "this won't be reached"
+
+
+################################################################################
+# returning a special value (dropping the stack of computations)
+################################################################################
+
+# return the first i where l[i] == e
+def listindex(e, l)
+  callcc{|not_found|		# using not_found for getting out of listindex
+			        # without computing the +1's
+    loop = proc{|l|
+      if l == [] then not_found.call(nil)
+      elsif e == l[0] then 0
+      else 1 + loop.call(l[1..-1])
+      end
+    }
+    loop.call(l)
+  }
+end
+
+def product(l)
+  callcc{|mybreak|
+    loop = proc{|l|
+      if l == [] then 1
+      elsif l[0] == 0 then mybreak.call(0) # using "break" as an optimization to drop the computation
+      else l[0] * loop.call(l[1..-1])
+      end
+    }
+    loop.call(l)
+  }
+end
+
+
+################################################################################
+# "delay"ing and coroutines (inspired by http://okmij.org/ftp/Scheme/enumerators-callcc.html)
+################################################################################
+
+# first here is an imperative generator (a dumb one)
+generate = proc{|f|
+  (0 .. 10).each{|i| print "." ; f.call(i) }
+}
+
+# we want to use it functionnally
+# for this, we generate the list out of the generator
+def generator2list(generator)
+  l = []
+  generator.call(proc{|e| l << e})
+  l
+end
+
+l = generator2list(generate)
+print "l is #{l}\n"
+
+# now, we want to create the list lazily, on demand.
+# the generator2list above can't do this
+
+# here is another version of generator2list that uses a coroutine to create the result
+def generator2list_(generator)
+  callcc{|k_main|
+    generator.call proc{|e|
+      callcc{|k_reenter|
+	k_main.call [e] + callcc{|k_new_main|
+			    k_main = k_new_main
+			    k_reenter.call
+			  }
+      }
+    }
+    k_main.call []
+  }
+end   
+
+
+l = generator2list_(generate)
+print "l is #{l}\n"
+
+# the advantage of the callcc version above is that it's easy to generate the list lazily
+def generator2lazy_list(generator)
+  proc{
+    callcc{|k_main|
+      generator.call proc{|e|
+        callcc{|k_reenter|
+      	  k_main.call(e, proc{callcc{|k_new_main|
+      			        k_main = k_new_main
+      			        k_reenter.call
+			 }})
+        }
+      }
+      k_main.call nil
+    }
+  }
+end   
+
+def lazy_list2list(lz)
+  l = []  
+  while lz = lz.call
+    (e, lz) = lz
+    l << e
+  end
+  l
+end
+
+lz = generator2lazy_list(generate)
+print "lz is"
+print " #{lazy_list2list(lz)}\n"
+
+
+################################################################################
+# weird examples
+################################################################################
+p callcc{|mygoto|
+  mystart, mynext, mylast =
+    proc{print "start " ; mygoto.call(mynext)},
+    proc{print "next "  ; mygoto.call(mylast)},
+    proc{print "last"   ; "done"}
+  mystart
+}.call			       # => returns "done", displays "start next last"

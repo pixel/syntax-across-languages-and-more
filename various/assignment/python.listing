@@ -1,0 +1,35 @@
+# -*- python -*-
+
+import copy
+
+def assign(a,b):
+  a = b
+  print " local:%s" % a,
+
+def add(a,b):
+  a += b
+  print " local:%s" % a,
+
+def add2(a,b):
+  a = a + b
+  print " local:%s" % a,
+
+def doit(sf, f, v1, v2):
+  a = copy.copy(v1)
+  a2 = a
+  a3 = copy.copy(a)
+  print "(%-20s) before:%s " % (sf, a),
+  f(a, v2)
+  print " after:%s %s %s" % (a, a2, a3)
+
+doit("assign", assign, 0, 1)
+doit("assign", assign, "_", "X")
+doit("assign", assign, [0], [1])
+print
+doit("add", add, 0, 1)
+doit("add", add, "_", "X")
+doit("add", add, [0], [1])
+print
+doit("add2", add2, 0, 1)
+doit("add2", add2, "_", "X")
+doit("add2", add2, [0], [1])

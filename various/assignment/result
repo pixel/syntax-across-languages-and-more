@@ -1,0 +1,88 @@
+Given:
+  def assign(a,b): a = b
+
+after calling "assign(a, b)" is "a" modified?
+(where the type of "a" and "b" is one of { Int, String, List })
+
+simple python example:
+  a = 0
+  assign(a, 1)
+  print a
+  #=> a is still 0, so answer is "N" 
+
+I S L (where I=Int S=String L=List)
+------------------------
+N N N Ruby
+N N N Python
+N N N Scheme
+N N N Java
+N N N PHP
+N N N C++
+Y Y Y C++ ref
+Y Y Y PHP ref
+Y Y Y merd
+Y Y _ Perl ref
+------------------------
+(Y => Yes, N => No)
+
+
+Given:  
+  def add(a,b): a += b
+
+after calling "add(a, b)" is "a" modified?
+
+I S L (where I=Int S=String L=List)
+------------------------
+N N N Ruby (+=)
+_ Y Y Ruby (<<)
+N N Y Python (+=)
+N N Y Scheme
+N N Y Java (+= += addAll)
+N N N PHP (+= .= foreach & array_push)
+N N N C++
+Y Y Y C++ ref
+Y Y Y PHP (+= .= foreach & array_push)
+Y Y Y merd
+Y Y _ Perl ref
+------------------------
+
+
+Ruby
+  pass-by-object-ref except for numbers
+  "a = b"  "a" is a new object
+  "a += b" "a" is a new object
+  "a << b" modify the existing object "a" (!not for numbers)
+
+Python
+  pass-by-object-ref
+  "a = b"  "a" is a new object
+  "a += b" it depends:
+	     for int/strings: "a" is a new object
+	     for lists: modify the existing object "a" 
+           (implies a+=b different from a=a+b)
+
+Java
+  pass-by-object-ref except for numbers
+  "a = b"  "a" is a new object
+  "a += b" "a" is a new object (only works numbers and strings)
+
+C++
+  pass-by-value (depth 1), with pass-by-ref possible (using "&")
+  "a = b"  modify the existing object "a"
+  "a += b" modify the existing object "a" (was not available on vector's)
+
+PHP
+  pass-by-value (deep), with pass-by-ref possible (using "&")
+  "a = b"  modify the existing object "a" (esp. when "a" is a reference)
+  "a += b"  modify the existing object "a" (esp. when "a" is a reference)
+
+merd
+  pass-by-value (deep) unless as a modified parameter where pass-by-ref is used
+  "a = b"  modify the existing object "a"
+  "a += b" modify the existing object "a"
+
+Perl
+  pass-by-value (depth 1), with pass-by-ref vaguely possible
+  "a = b"  modify the existing object "a" (but "a" can't be shared (?))
+  "a += b" modify the existing object "a" (but "a" can't be shared (?))
+  => no implicit reference so this is not a good test

@@ -1,0 +1,275 @@
+<h1><b><font color=#666699>Basic</b></font></h1><p>
+<ul><li><h2>Language evaluation criteria</h2>
+<li><h2>Types and values</h2>
+<li><h2>Functions and variables</h2>
+<li><h2>Syntax</h2>
+<li><h2>Memory management</h2>
+<ul><li>Pointers are dead!
+</ul></ul><br>
+<h1><b><font color=#666699>Evaluation criteria</b></font></h1><p>
+<ul><li><h2>Readability</h2>
+<ul><li>simplicity, orthogonality 1 fast learning curve
+</ul><li><h2>Writability</h2>
+<ul><li>expressivity
+<li>polymorphism
+</ul><li><h2>Reliability</h2>
+<ul><li>compile-time checking
+<li>readability
+</ul></ul><br>
+<h1><b><font color=#666699>Types and values (1)</b></font></h1><p>
+<ul><li><h2>Programming = manipulating values</h2>
+<li><h2>Builtin values: 1, 1.1, 'z'</h2>
+<li><h2>Low-level types:</h2>
+<ul><li>char, short, int, float, double, pointers
+<li>based on hardware representation
+</ul><li><h2>Higher-level types: lists, arrays</h2>
+</ul><br>
+<h1><b><font color=#666699>Types and values (2)</b></font></h1><p>
+<ul><li><h2>User defined:</h2>
+<ul><li>structs: point = { x: int; y: int }
+<li>enums, ranges: bool = { false, true }
+<li>datatypes: tree(a) = leaf(a) | node(tree(a),tree(a))
+</ul><li><h2>Subtyping</h2>
+<ul><li>3dpoint = { x: int; y: int; z: int }
+<li>can be used when a point (see above) is expected
+</ul><li><h2>Abstract types</h2>
+</ul><br>
+<h1><b><font color=#666699>Functions</b></font></h1><p>
+<ul><li><h2>Functions</h2>
+<ul><li>Mathematical meaning: parameters &micro; result
+<li>When parameters are evaluated?
+<ul><li>when used: lazy evaluation (haskell, eg: if)
+<li>when function is called: strict evaluation
+</ul></ul><li><h2>First class values = can be given as argument &amp; result</h2>
+<ul><li>arrays nor functions are first class in Pascal
+</ul></ul><br>
+<h1><b><font color=#666699>Functions (2)</b></font></h1><p>
+<ul><li><h2>Parameter passing mode</h2>
+<ul><li>in vs out vs inout
+<ul><li>out was used
+<ul><li>to return multiple values
+<li>let the caller allocate memory
+</ul><li>out deprecated by GCs and lists as first class values
+</ul></ul><li><h2>Purity:</h2>
+<ul><li>The function must not depend nor modify a global state. 
+<ul><li>consequence: same parameters 1 same result
+<li>eg: printf, ++ are unpure functions
+</ul></ul></ul><br>
+<h1><b><font color=#666699>Functions (3)</b></font></h1><p>
+<ul><li><h2>Extensions: </h2>
+<ul><li>Arguments
+<ul><li>variable number of arguments
+<li>named arguments
+</ul><li>Non stack based: continuations
+<ul><li>closure, backtracking, constraints, exceptions
+</ul></ul></ul><br>
+<h1><b><font color=#666699>Syntax: orthogonality</b></font></h1><p>
+<ul><li><h2>orthogonality = universality, no special case to know (least surprise)</h2>
+<li><h2>more orthogonality means</h2>
+<ul><li>faster learning curve
+<li>easier maintenance
+</ul></ul><li><h2>examples of non-orthogonality</h2>
+<ul><li>C's macros: language in the language
+<li>C's comments: can't be nested
+<li>Perl's horrors
+<ul><li>() used for grouping and lists and function calling
+<ul><li> eg: (&quot;Hello &quot; . $name) x 2
+</ul><li>filehandles
+<li>$_ used as default value in <i>some</i> functions (esp. split ' ')
+<li>{} used for blocks and hashes
+<li>if-then-else returns a value but is not an expression
+</ul></ul></ul></ul><br>
+<h1><b><font color=#666699>Syntax: terseness</b></font></h1><p>
+<ul><li><h2>Use of words (begin, def...)</h2>
+<ul></ul><li><h2>Operator overloading (semantic!)</h2>
+<li><h2>Special terse construct</h2>
+<ul><li>Perl!
+<ul><li>-&gt; optional sometimes
+<li>=&gt; allow removing quotes on its left
+<li>quoting: ' &quot; ` q qw qq...
+<li>|| vs or vs unless, &amp;&amp; vs and vs if
+</ul><li>list comprehension, pattern matching, case statement
+<li>!! Importance of good error messages
+</ul></ul><br>
+<h1><b><font color=#666699>Syntax: scope</b></font></h1><p>
+<ul><li><h2>block structure enables local definitions (variables and sometimes functions)</h2>
+<li><h2>lifetime is limited to the block 1 ease maintenance &amp; readability</h2>
+<li><h2>indentation based block structure: follows WYSIHIIP (What You See Is How It Is Parsed)</h2>
+<li><h2>namespaces</h2>
+<ul><li>can you have a type with a same name as a variable?
+<ul><li>if so types and variables have different <i>namespaces</i>
+</ul></ul></ul><br>
+<h1><b><font color=#666699>Syntax: statements</b></font></h1><p>
+<ul><li><h2>Expressions vs statements</h2>
+<ul><li>a statement is like a procedure, it doesn't return any value
+<ul><li>i=0 being a statement disallows: j=(i=0), if (i=0) ...
+</ul><li>ML enforces via types what Python does via syntax
+</ul></ul><br>
+<h1><b><font color=#666699>Memory management</b></font></h1><p>
+<ul><ul><li>Static: everything must be known at compile time
+<li>Stack: 
+<ul><li>enables recursion
+<li>enables stack allocated arrays (growing data)
+</ul><li>Heap:
+<ul><li>pros: data can outlive function
+<li>cons: need to free memory
+</ul><li>GC (Garbage Collector)
+<ul><li>Heap with no need to free memory by hand
+</ul></ul></ul><br>
+<h1><b><font color=#666699>Memory management: GC</b></font></h1><p>
+<ul><ul><li>pros:
+<ul><li>allows implicit memory allocation
+<ul><li>allows mutable lists in the language, eg: l = [1,2]
+</ul><li>favours data sharing, can be more efficient than hand-managed memory
+</ul><li>cons
+<ul><li>can be slow
+<li>finalization time is unknown
+</ul></ul><li><h2>implementation</h2>
+<ul><li>reference counting (incremental, but circular ref!)
+<li>mark &amp; sweep (can be incremental)
+<li>copying
+<li>generational (mixed of copying and mark&amp;sweep)
+</ul></ul></ul><br>
+<h1><b><font color=#666699>Memory management: Data sharing</b></font></h1><p>
+<ul><li><h2>shallow vs deep copy</h2>
+<li><h2>shallow vs deep comparison</h2>
+<li><h2>no such problem with purely functional data structures</h2>
+<ul><li>shallow and deep is the same
+<li>because use of copy on write
+</ul></ul><br>
+<h1><b><font color=#666699>Pointers are dead!</b></font></h1><p>
+<ul><li><h2>Datatype created in PL/I to access memory a la assembly</h2>
+<li><h2>Pros: liberty, powerful</h2>
+<li><h2>Cons:</h2>
+<ul><li>unsafe
+<li>don't get along with GC
+<li>char* is not a good representation of strings
+<ul><li>(see perl where substr is seldom used)
+</ul><li>arrays need a proper API
+</ul></ul><li><h2>Replaced by references</h2>
+<ul><li>no arithmetic operation allowed
+<li>only dereferencing
+</ul></ul></ul><br>
+<h1><b><font color=#666699>Advanced Programming</b></font></h1><p>
+<ul><li><h2>Typing</h2>
+<li><h2>Functional programming</h2>
+<li><h2>Programming howto</h2>
+<li><h2>Modules</h2>
+<li><h2>Type classes</h2>
+<li><h2>Polymorphism</h2>
+<li><h2>Classes, inheritance</h2>
+<li><h2>Performance</h2>
+</ul><br>
+<h1><b><font color=#666699>Typing (1)</b></font></h1><p>
+<ul><li><h2>Static explicit classical typing (since Algol)</h2>
+<ul><li>pros: tight checking, simple
+<li>cons: verbose (esp. for iteration variables)
+</ul><li><h2>Dynamic</h2>
+<ul><li>pros: 
+<ul><li>flexibility, expressivity (remove/create function/method at runtime)
+</ul><li>cons:
+<ul><li>nearly no verification at compile-time (-Wall, use strict usually available but half-baked solutions)
+<li>runtime cost
+</ul></ul></ul><br>
+<h1><b><font color=#666699>Typing (2)</b></font></h1><p>
+<ul><li><h2>Implicit static (invented in ML, 1977)</h2>
+<ul><li>find out variable and function types based on their use, eg:
+<ul><li>fact(x)= if x=0 then 1 else x*fact(x-1)
+<li>x compared with 0 implies x is a int
+<li>fact can return 1 implies fact returns a int
+<li>This inference works nicely with complex programs
+</ul><li>pros: 
+<ul><li>as good type checking as explicit static
+<li>most of the expressivity of dynamic typing
+</ul><li>cons: sometimes type error messages don't occur where you would except
+</ul></ul><br>
+<h1><b><font color=#666699>Functional programming</b></font></h1><p>
+<ul><li><h2>List handling (now available in dynamic languages)</h2>
+<li><h2>Partial application</h2>
+<ul><li>map (round 0.01) [ 1.333, 4 ]
+</ul><li><h2>Closure (now available in many languages)</h2>
+<ul><li>b1 = Gtk::Button.new(&quot;One&quot;)
+<li>b2 = Gtk::Button.new(&quot;Two&quot;)
+<li>b1.signal_connect(clicked =&gt; sub {
+<ul><li>b2.set_sensitive(0)
+</ul><li>})
+<li>Without closures, b2 should passed as a parameter (via void* ?) or via a global/class variable
+</ul></ul></ul><br>
+<h1><b><font color=#666699>Programming howto (1)</b></font></h1><p>
+<ul><li><h2>You have a task to do</h2>
+<ul><li>bottom-up
+<ul><li>you know how to achieve small tasks
+<li>you build the whole program from these parts
+</ul></ul><ul><li>Used when specifications are foggy
+</ul></ul></ul><br>
+<h1><b><font color=#666699>Programming howto (2)</b></font></h1><p>
+<ul><ul><li>top-down
+<ul><li>you split the problem into parts
+<li>until those parts are simple enough
+<li>Used when specifications are well established
+</ul></ul><li><h2>A mix of bottom-up and top-down is usually used</h2>
+<li><h2>1 Importance of modularity</h2>
+<ul><li>ease group-working and code reuse
+</ul></ul><br>
+<h1><b><font color=#666699>Modules</b></font></h1><p>
+<ul><li><h2>Separate namespaces</h2>
+<ul><li>for types, variables, functions
+<ul><li>avoid the need for prefixed names (eg: gtk_...)
+<li>avoid the need to prefix inside the module
+</ul></ul><li><h2>Facilities to import/export names</h2>
+<ul><li>the module can choose what is exported
+<li>ability to choose what to import 
+<ul><li>possibility to alias/rename when importing
+</ul></ul><li><h2>1 avoid name clashes</h2>
+<li><h2>1 provide abstraction via information hiding (encapsulation)</h2>
+</ul><br>
+<h1><b><font color=#666699>Type classes (mix-ins)</b></font></h1><p>
+<ul><li><h2>Type class = special kind of module</h2>
+<ul><li>some functions are virtual
+<li>specify the type of those functions (for static typing)
+<ul><li>1 ensure a common behaviour
+</ul><li>write other functions using those virtual functions
+<ul><li>1 inclusion polymorphism
+</ul></ul><li><h2>Example:</h2>
+<ul><li>class Eq(a) where
+<li> 	== :: a,a -&gt; bool
+<li> 	x!=y = ! (x==y)
+<li>(this type is parametric, more about it in next slide)
+</ul></ul></ul><br>
+<h1><b><font color=#666699>Polymorphism</b></font></h1><p>
+<ul><li><h2>Coercion polymorphism</h2>
+<ul><li>up-cast parameter (eg: int i = 1; sqr(i))
+</ul><li><h2>Overloading polymorphism</h2>
+<ul><li>same function name with different parameter types. eg: print(int) and print(char *)
+</ul><li><h2>Parametric polymorphism</h2>
+<ul><li>Parametric functions
+<ul><li>ML: sort :: (a,a-&gt;int), list(a) -&gt; list(a)
+<li>C++: template&lt;class A&gt; 
+</ul><li> 			vector&lt;A&gt; sort(vector&lt;A&gt;, int (*)(A,A))
+<li>Parametric type classes
+<li>Parametric classes (more about classes in next slide)
+</ul></ul><br>
+<h1><b><font color=#666699>Classes</b></font></h1><p>
+<ul><li><h2>A class is a type</h2>
+<ul><li>you can instanciate it, you get an object
+<li>it defines a data type (usually a struct)
+<li>it defines a collection of functions(called methods) an object have
+</ul><li><h2>1 object = first class anonymous module</h2>
+</ul><br>
+<h1><b><font color=#666699>Inheritance</b></font></h1><p>
+<ul><li><h2>importing another class (<i>inheriting</i>) implies subtyping (not so with mix-ins which are not types)</h2>
+<ul><li>here an object Square can be used as an object Figure
+<li>when calling a method on a object Figure, it can in fact be a Square, a Circle or ... 
+<li>1 the good method to call can only be chosen at runtime (<i>late</i> <i>binding</i>)
+</ul></ul><br>
+<h1><b><font color=#666699>Performance</b></font></h1><p>
+<ul><li><h2>www .bagley.org/~doug/shootout</h2>
+<li><h2>C++				76</h2>
+<li><h2>OCaml			76</h2>
+<li><h2>Java				69</h2>
+<li><h2>CommonLisp	55</h2>
+<li><h2>Perl				53</h2>
+<li><h2>Python			46</h2>
+<li><h2>Ruby				44</h2>
+<li><h2>!! benchmarks are dangerous and show only some use !!</h2>
+</ul><br>

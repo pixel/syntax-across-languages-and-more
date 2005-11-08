@@ -1,0 +1,49 @@
+; -*- lisp -*-
+
+(defun sqr (x) (* x x))
+
+(defclass Point2d ()
+  ((x :accessor x :initarg :x)
+   (y :accessor y :initarg :y)))
+
+(defclass Point3d (Point2d)
+  ((z :accessor z :initarg :z)))
+
+(defun translate (p x)
+  (let ((p (clone p)))
+    (setf (x p) (+ (x p) x)) p))
+
+(defmethod clone ((p Point2d)) (make-instance 'Point2d :x (x p) :y (y p)))
+(defmethod clone ((p Point3d)) (make-instance 'Point3d :x (x p) :y (y p) :z (z p)))
+
+(defmethod add ((p1 Point2d) (p2 Point2d)) (make-instance 'Point2d :x (+ (x p1) (x p2)) :y (+ (y p1) (y p2))))
+(defmethod add ((p1 Point3d) (p2 Point3d)) (make-instance 'Point3d :x (+ (x p1) (x p2)) :y (+ (y p1) (y p2)) :z (+ (z p1) (z p2))))
+
+(defmethod to-string ((p Point2d)) (format nil "[~F, ~F]" (x p) (y p)))
+(defmethod to-string ((p Point3d)) (format nil "[~F, ~F, ~F]" (x p) (y p) (z p)))
+
+(defmethod my-length ((p Point2d)) (sqrt (+ (sqr (x p)) (sqr (y p)))))
+(defmethod my-length ((p Point3d)) (sqrt (+ (sqr (x p)) (sqr (y p)) (sqr (z p)))))
+
+
+(setq p2d (make-instance 'Point2d :x 3 :y 4))
+(setq p3d (make-instance 'Point3d :x 1 :y 2 :z 2))
+(setq l (list p2d p3d))
+
+(defun test (p)
+  (list (my-length p) (to-string (translate p 1))))
+
+(setq test1 (list (test p2d) (test p3d) (mapcar #'my-length l)
+		  ; after translate, we still have a Point3d
+		  (z (translate p3d 1))))
+
+
+(defun twice (p) (add p p))
+
+(setq test2 (mapcar #'to-string (cons (twice p2d) (cons (twice p3d) (mapcar #'twice l)))))
+(setq test3 (mapcar #'to-string (list (add p2d p3d) (add p3d p2d))))
+
+; after twice, we still have a Point3d
+(setq test4 (z (twice p3d)))
+
+(list test1 test2 test3 test4)

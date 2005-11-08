@@ -1,0 +1,130 @@
+// -*- C++ -*-
+
+#include <iostream>
+#include <string>
+#include <vector>
+#include <math.h>
+
+using namespace std;
+
+struct Point {
+  double x;
+
+  Point(double x) : x(x) {}
+
+  virtual Point *clone() const = 0;
+  virtual double length() const = 0;
+  virtual ostream & show(ostream &os) const = 0; 
+};
+
+// if you put translate inside Point, you loose precision on the returned type
+// the only solution is to have it standalone outside of any class
+template<class P> P *translate(const P *p, double x)
+{
+  P *pp = p->clone();
+  pp->x += x;
+  return pp;
+}
+
+struct Point2d : Point {
+  double y;
+
+  Point2d(double x, double y) : Point(x), y(y) {}
+  virtual Point2d *clone() const { return new Point2d(x, y); }
+
+  virtual Point2d *add(const Point2d *p) const 
+  {
+    return new Point2d(x + p->x, y + p->y);
+  }
+
+  virtual double length() const
+  {
+    return sqrt(x*x + y*y); 
+  }
+
+  virtual ostream & show(ostream &os) const
+  {
+    return os << "[" << x << ", " << y << "]";
+  }
+};
+
+struct Point3d : Point2d {
+  double z;
+
+  Point3d(double x, double y, double z) : Point2d(x, y), z(z) {}
+  virtual Point3d *clone() const { return new Point3d(x, y, z); }
+
+  virtual Point3d *add(const Point3d *p) const
+  {
+    return new Point3d(x + p->x, y + p->y, z + p->z);
+  }
+
+  // wrapper function needed
+  // without it ((Point2d *) p3d)->add(p3d) doesn't compute a 3d add
+  virtual Point2d *add(const Point2d *p) const
+  {
+    if (const Point3d *pp = dynamic_cast<const Point3d *> (p))
+      return add(pp);
+    else
+      return p->add(this);
+  }
+
+  virtual double length() const
+  {
+    return sqrt(x*x + y*y + z*z); 
+  }
+
+  virtual ostream & show(ostream &os) const
+  {
+    return os << "[" << x << ", " << y << ", " << z << "]";
+  }
+};
+
+
+ostream& operator<<(ostream& os, const Point &p) {
+  return p.show(os);
+}
+
+
+ostream& test(ostream &os, const Point *p) {
+  return os << p->length() << ", " << *translate(p, 1);
+}
+
+template<class P>P *twice(const P *p) {
+  return p->add(p);
+}
+
+int main() {
+  Point2d *p2d = new Point2d(3, 4);
+  Point3d *p3d = new Point3d(1, 2, 2);
+
+  vector<Point2d*> l;
+
+  l.push_back(p2d);
+  l.push_back(p3d);
+
+  test(cout, p2d) << " ";
+  test(cout, p3d) << " ";
+
+  for (vector<Point2d*>::iterator p = l.begin(); p != l.end(); p++)
+    cout << (*p)->length() << " ";
+
+  cout << endl;
+
+  // after translate, we still have a Point3d
+  cout << translate(p3d, 1)->z << endl;
+  // translate(p2d, 1)->z is not accepted
+  
+  cout << *twice(p2d) << " " << *twice(p3d) << " ";
+
+  for (vector<Point2d*>::iterator p = l.begin(); p != l.end(); p++)
+    cout << *twice(*p) << " ";
+
+  cout << endl;
+
+  cout << *p3d->add(p2d) << " " << *p2d->add(p3d) << endl;
+
+  // after twice, we still have a Point3d
+  cout << twice(p3d)->z << endl;
+  // twice(p2d)->z is not accepted
+}

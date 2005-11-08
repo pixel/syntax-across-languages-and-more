@@ -1,0 +1,128 @@
+(* -*- caml -*- *)
+
+type vegetable_kind = Carrot | Grass 
+type meat_kind = Beef | Dead_rabbit | Dead_human
+type food_kind = Vegetable of vegetable_kind | Meat of meat_kind
+
+type animal_kind = Cow | Rabbit | Human
+
+let food_kind2name = function
+  | Vegetable Carrot -> "carrot" | Vegetable Grass -> "grass" 
+  | Meat Beef -> "beef" | Meat Dead_rabbit -> "dead_rabbit" | Meat Dead_human -> "dead_human"
+
+let animal_kind2name = function Cow -> "cow" | Rabbit -> "rabbit" | Human -> "human"
+
+let is_innumerable = function
+  | Vegetable _ -> true
+  | Meat _ -> false
+
+let slaughter = function
+  | Cow -> Beef
+  | Rabbit -> Dead_rabbit
+  | Human -> Dead_human
+
+let food_accepted = function
+  | Cow, Vegetable Grass
+  | Rabbit, Vegetable Carrot
+  | Human, Meat _
+  | Human, Vegetable Carrot
+      -> true
+  | _ -> false
+
+class food (kind : food_kind) (energy : int) = 
+  object
+    val mutable valid = true
+    val mutable energy = energy
+    val kind = kind
+
+    method kind = kind
+
+    method eaten =
+      if not valid then failwith "bad food" ;
+      if not (is_innumerable kind) then valid <- false ;
+      energy
+  end
+
+class animal (kind : animal_kind) (energy : int) = 
+  object
+    val mutable valid = true
+    val mutable energy = energy
+    val kind = kind
+
+    method energy = energy
+
+    method eat (food : food) =
+      if not valid then failwith "bad animal" ;
+        
+      if food_accepted (kind, food#kind) then
+        energy <- energy + food#eaten
+      else
+        failwith (animal_kind2name kind ^ " doesn't accept food " ^ food_kind2name food#kind)
+
+    method slaughter =
+      if not valid then failwith "bad animal" ;
+      valid <- false ;
+      new food (Meat (slaughter kind)) energy
+  end
+
+
+let new_grass = new food (Vegetable Grass)
+let new_carrot = new food (Vegetable Carrot)
+
+let new_cow = new animal Cow
+let new_rabbit = new animal Rabbit
+let new_human = new animal Human
+
+
+let should_work =
+  let grass    = new_grass 5 in
+  let carrot   = new_carrot 10 in
+
+  let a_rabbit      = new_rabbit 100 in
+  let a_cow         = new_cow 1000 in
+  let a_human       = new_human 300 in
+  let another_human = new_human 350 in
+
+  let animals = [ "rabbit", a_rabbit ; "cow", a_cow ; "human", a_human ] in
+  List.iter (fun (name, o) -> Printf.printf "%s -> %d\n" name o#energy) animals ;
+
+  a_rabbit#eat carrot ;
+  a_cow#eat grass ;
+
+  let a_dead_rabbit = a_rabbit#slaughter in
+  let a_beef = a_cow#slaughter in
+
+  a_human#eat carrot ;
+  a_human#eat carrot ;
+  a_human#eat a_beef ;
+  a_human#eat a_dead_rabbit ;
+
+  a_human#eat another_human#slaughter ;
+
+  if a_human#energy <> 1785 then failwith "failed" ;
+
+(*
+  5 should_fail's are detected at compile-time:
+
+  (new_cow 10)#slaughter#eat grass; (* => expression has type food, it has no method eat *)
+  (new_cow 10)#slaughter#slaughter; (* => expression has type food, it has no method slaughter *)
+  carrot#eat grass; (* => expression has type food, it has no method eat *)
+  carrot#slaughter; (* => expression has type food, it has no method slaughter *)
+  a_human#eat (new_cow 10); (* => This expression has type animal but is here used with type food *)
+*)
+
+  let should_fail = [
+  (fun () -> (new_cow 10)#eat carrot) ; (* cow do not eat carrot *)
+  (fun () -> (new_cow 10)#eat (new_cow 10)#slaughter) ;  (* cow do not eat beef *)
+  (fun () -> a_human#eat grass) ; (* human do not eat grass *)
+  (fun () -> a_human#eat a_beef) ; (* a_beef is already eaten *)
+  (fun () -> a_cow#eat grass) ; (* a_cow is dead, it can't eat *)
+  (fun () -> ignore a_cow#slaughter) ; (* a_cow is dead, it can't be slaughtered again *)
+  ] in
+
+  List.iter (fun f ->
+    if not (try f() ; false with Failure s -> Printf.eprintf "expected error: %s\n" s ; true) then
+      failwith "should fail"
+  ) should_fail ;
+
+  Printf.eprintf "all ok\n"

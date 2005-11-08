@@ -1,0 +1,109 @@
+I'd like to know if some (practical) work has been done on type
+distributivity(?), which is a stronger convariance. Languages having
+name-subtyping seem to miss the distinction.
+
+It only appears in languages having fine-grain subtyping,
+allowing   function `A,`A -> 0 | `B,`B -> 1
+to be typed `A,`A \/ `B,`B -> Int
+    and not `A\/`B, `A\/`B -> Int
+
+* Question: in which case does c(a) \/ c(b) = c(a\/b) holds?
+
+
+* Example: Maybe
+
+Maybe(a) = None \/ Some(a)
+
+Maybe(a \/ b) 
+  = None \/ Some(a \/ b)
+  = None \/ Some(a) \/ Some(b)
+  = (None \/ Some(a)) \/ (None \/ Some(b))
+  = Maybe(a) \/ Maybe(b)
+
+
+* Variance
+
+  c(a) \/ c(b) < c(a\/b)
+holds if "c" is covariant
+
+  c(a) \/ c(b) > c(a\/b)
+holds if "c" is ??? (distributive?)
+
+when "c" is contravariant, we have
+  c(a) /\ c(b) > c(a\/b)
+and also
+  c(a) \/ c(b) > c(a\/b)    (since  c(a) \/ c(b)  >  c(a)  >  c(a) /\ c(b))
+
+but Maybe is not contravariant. It is something in the middle, stricter than
+covariance...
+
+
+* Example: AB
+AB(a) = A(a) \/ B(a)             (it's the same as AB = A \/ B)
+
+AB(a\/b)
+  =    A(a\/b)     \/    B(a\/b)
+  = (A(a) \/ A(b)) \/ (B(a) \/ B(b))
+  = (A(a) \/ B(a)) \/ (A(b) \/ B(b))
+  =     AB(a)      \/     AB(b)
+
+
+* Example: AA
+AA(a) = A(a,a)
+
+- AA(a\/b) = A(a\/b, a\/b)
+- AA(a) \/ AA(b) = A(a,a) \/ A(b,b)
+- but A(a,a) \/ A(b,b)  and  A(a\/b, a\/b)  are NOT equivalent
+  (eg: A(a,b) is in not in A(a,a) \/ A(b,b))
+  just like (a,b) \/ (c,d)  is NOT (a\/c, b\/d)
+in fact A(a,b) \/ A(c,d)  => A((a,b) \/ (c,d))
+
+
+* Example: List
+List(a) = Nil \/ Cons(a, List(a))
+
+List(a\/b) contains Cons(a, Cons(b, Nil))
+but List(a) \/ List(b)  doesn't, so
+List(a) \/ List(b)  => is NOT List(a\/b)
+
+more concrete example:
+ are  List(Int) \/ List(String)  and  List(Int \/ String)  the same ?
+ answer: no, [ 1, "foo" ] is a List(Int \/ String)
+			  is not a List(Int) \/ List(String)
+
+
+
+* Result
+So in which case c(a) \/ c(b)  <=>  c(a\/b)  ??
+
+if c(a) = e1 \/ e2 \/ ... \/ en  where each ei uses at most one "a"
+   => it's true for Maybe ("Some" use only one "a", "None" use none)
+   => it's true for AB (both "A" and "B" use only one "a")
+   => it's false for AA
+
+
+################################################################################
+Some more about, in XDuce:
+
+bb[CC | DD]  and  bb[CC] | bb[DD]     are equivalent
+(CC | DD)?   and  (CC? | DD? )        are equivalent
+(CC | DD)*   and  (CC* | DD* )        are NOT equivalent
+(CC | DD){2} and  (CC{2}| DD{2} )     are NOT equivalent  (invented, x{2} = x,x)
+
+If there were some parametric polymorphic type:
+
+type ?(a)   = ()  | a
+type *(a)   = ()  | a, *(a)
+type +(a)   = a   | a, +(a)
+type aa1(a) = a   | CC[ aa1(a) ]
+type aa2(a) = a,a | CC[ aa2(a) ]
+type aa3(a) = a   | a[ aa3(a) ]     (with subtagging)
+
+I only wanted to know if there was some terminology for categorizing:
+- simple covariance { "*", "+", "aa2", "aa3", "{n,m} where m > 1" }
+- vs covariance + distributivity { "?", "bb", "aa1" }
+
+This surprised me since without thinking about it i didn't know there were
+different "level" of covariance. Of course all this comes from the 
+(a,b) | (c,d) not being equivalent to (a|b, c|d)  (same for subtagging), but
+it can be hidden (eg: "*").

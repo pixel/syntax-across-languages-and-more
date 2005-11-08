@@ -1,0 +1,136 @@
+{-# OPTIONS_GHC -fglasgow-exts #-}
+
+import Data.STRef
+import Control.Monad.ST
+import Control.Exception
+import DeepSeq
+
+-- imperative using references
+-- using phantom types
+-- no hierarchy for Animal vs Food
+
+data Entity s t = Entity { energy :: STRef s Int, valid :: STRef s Bool }
+
+class Kind a where
+    name :: Entity s a -> String
+
+    new :: Int -> ST s (Entity s a)
+    new energy = do b <- newSTRef True 
+		    e <- newSTRef energy
+		    return Entity { energy = e, valid = b }
+
+    eaten :: Entity s a -> ST s ()
+    eaten _ = return ()
+
+    get_energy :: Entity s a -> ST s Int
+    get_energy e = 
+	do is_valid <- readSTRef (valid e)
+	   if is_valid then readSTRef (energy e) else error ("bad " ++ name e)
+
+data Cow
+data Rabbit
+data Human
+data Grass
+data Carrot
+data Beef
+data Dead_Rabbit
+data Dead_Human
+
+instance Kind Cow    where name _ = "cow"
+instance Kind Rabbit where name _ = "rabbit"
+instance Kind Human  where name _ = "human"
+instance Kind Grass  where name _ = "grass"
+instance Kind Carrot where name _ = "carrot"
+instance Kind Beef   where name _ = "beef" ; eaten = set_invalid
+instance Kind Dead_Rabbit where name _ = "dead rabbit" ; eaten = set_invalid
+instance Kind Dead_Human  where name _ = "dead_human" ; eaten = set_invalid
+
+set_invalid meat = writeSTRef (valid meat) False
+
+class (Kind a, Kind b) => Eat a b where
+    eat :: Entity s a -> Entity s b -> ST s ()
+    eat animal food =
+	do food_energ <- get_energy food
+	   modifySTRef (energy animal) (+ food_energ)
+	   eaten food
+
+class (Kind a, Kind b) => Slaughter a b | a -> b where
+
+    slaughter :: Entity s a -> ST s (Entity s b)
+    slaughter animal = do e <- get_energy animal
+			  set_invalid animal
+			  new e
+
+instance Eat Rabbit Carrot
+instance Eat Cow    Grass
+instance Eat Human  Carrot
+instance Eat Human  Beef
+instance Eat Human  Dead_Rabbit
+instance Eat Human  Dead_Human
+
+instance Slaughter Rabbit Dead_Rabbit
+instance Slaughter Cow    Beef
+instance Slaughter Human  Dead_Human
+
+data Unkown_entity s = forall a. U (Entity s a)
+
+asserts = runST world where 
+   world =
+    do (grass  :: Entity s Grass)  <- new 5
+       (carrot :: Entity s Carrot) <- new 10
+
+       (a_rabbit       :: Entity s Rabbit) <- new  100
+       (a_cow          :: Entity s Cow   ) <- new 1000
+       (a_human        :: Entity s Human ) <- new  300
+       (another_human  :: Entity s Human ) <- new  350
+
+       let animals = [ ("rabbit", U a_rabbit), ("cow", U a_cow), ("human", U a_human) ]  
+
+       l <- mapM (\ (name, U o) -> 
+		  do e <- readSTRef (energy o)
+		     return $ name ++ " -> " ++ show e
+		 ) animals
+
+       let animals_s = unlines l
+
+       eat a_rabbit carrot
+       eat a_cow grass
+
+       a_dead_rabbit <- slaughter a_rabbit
+       a_beef <- slaughter a_cow
+
+       eat a_human carrot
+       eat a_human carrot
+       eat a_human a_beef
+       eat a_human a_dead_rabbit
+
+       a_dead_human <- slaughter another_human
+
+       eat a_human a_dead_human
+
+       assert1 <- fmap (== 1785) $ get_energy a_human	  
+
+{-
+       -- 8 should_fail's are detected at compile-time:
+       eat a_beef grass  -- No instance for (Eat Beef Grass)	
+       slaughter a_beef  -- No instance for (Slaughter Beef b)	
+       eat carrot grass  -- No instance for (Eat Carrot Grass)	
+       slaughter carrot  -- No instance for (Slaughter Carrot b)
+       eat a_cow carrot  -- No instance for (Eat Cow Carrot)	
+       eat a_cow a_beef  -- No instance for (Eat Cow Beef)	
+       eat a_human a_cow -- No instance for (Eat Human Cow)	
+       eat a_human grass -- No instance for (Eat Human Grass)   
+-}
+
+       -- 3 should_fails detected at runtime
+       --eat a_human a_beef -- a_beef is already eaten
+       --eat a_cow grass -- a_cow is dead, it can't eat
+       --slaughter a_cow -- a_cow is dead, it can't be slaughtered again
+
+       return [assert1]
+
+main = foldr assert () asserts `deepSeq` return ()
+
+-- Local Variables:
+-- mode:haskell
+-- End:

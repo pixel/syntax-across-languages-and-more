@@ -1,0 +1,163 @@
+<html>
+  <head>
+    <title>Is A Cow An Animal? ++</title>
+  </head>
+<body>
+
+<h1>Goals</h1>
+
+<ul>
+<li>The basic idea comes from <a href="http://www.visviva.com/transframe/papers/covar.htm">Is a Cow an Animal?</a>
+<li>The "OCaml with parametric class" implementation comes from <a href="http://pauillac.inria.fr/~remy/work/virtual/virtual005.html">this</a>
+</ul>
+
+From these examples, I've been trying to extract a real problem which "Is a
+Cow an Animal?" is trying to solve.
+
+<dl>
+<dt><a name="goal1">Goal #1</a><dd>
+implement the rules below, rejecting at runtime *any* malformed program. 
+
+<p>As seen below, it's pretty easy.
+
+<p>
+<dt><a name="goal2">Goal #2</a><dd>
+try to enforce the rules at <b>compile-time</b>,
+
+<p>this can be
+<ul>
+<li>quite easy (eg: ensuring one doesn't feed carrots with grass),
+<li>quite hard (eg: ensuring one doesn't feed cows with carrots or dead_rabbits),
+<li>or very hard (eg: ensuring meat can be eaten only once)
+</ul>
+
+</dl>
+
+
+<hr>
+<h1>Description of the World</h1>
+
+<ul>
+<li>everything has some amount of <i>energy</i>
+<li>there are <i>animal</i>s: <i>cow</i>, <i>rabbit</i>, <i>human</i>
+<li>there is <i>food</i>:
+  <ul><li><i>vegetable</i>: <i>grass</i>, <i>carrot</i>
+      <li><i>meat</i>: <i>beef</i>, <i>dead_rabbit</i>, <i>dead_human</i>
+  </ul>
+</ul>
+
+<p>general rules:
+<ul>
+<li>animals can <i>eat</i> some food, their energy is raised by the food's energy amount
+<li>animals can be <i>slaughter</i>ed, the result is meat ; the energy of the meat is
+the same as the energy of the animal
+<li>there should be a way to handle a list of animals and the energy of each animal
+<p>
+<li>slaughtered animals can't eat anymore nor be slaughtered again
+<li>meat can be eaten only once
+<li>whereas vegetable is innumerable and can be eaten more than once
+</ul>
+
+<p>animals' accepted food:
+<ul>
+<li>a cow only eats grass
+<li>a rabbit only eats carrots
+<li>a human eats carrots and *any* meat
+</ul>
+IMPORTANT: feeding a cow with something else than grass is a fatal error
+(same for feeding a human with grass...)
+
+<p>when slaughtered: 
+<ul>
+<li>a cow becomes beef
+<li>a rabbit becomes dead_rabbit
+<li>a human becomes dead_human
+</ul>
+
+<hr>
+<h1><a name="implementations">Implementations</a></h1>
+
+<table cellpadding=4>
+<tr><td><a href="python.listing">Python</a></td><td>0/11 should_fails detected at compile-time</td></tr>
+<tr><td><a href="ruby.listing">Ruby</a></td><td>0/11 should_fails detected at compile-time</td></tr>
+<tr><td><a href="scheme.listing">Scheme</a></td><td>0/11 should_fails detected at compile-time</td></tr>
+<tr><td><a href="c++.listing">C++</a></td><td>5/11 should_fails detected at compile-time</td></tr>
+<tr><td><a href="c++2.listing">C++ with parametric class</a></td><td>7/11 should_fails detected at compile-time</td></tr>
+<tr><td><a href="c++3.listing">C++ with parametric class and diamond multiple-inheritance</a></td><td>8/11 should_fails detected at compile-time</td></tr>
+<tr><td><a href="c++4.listing">C++ with parametric class and eaters tied to the food</a></td><td>8/11 should_fails detected at compile-time</td></tr>
+<tr><td><a href="ocaml.listing">OCaml</a></td><td>5/11 should_fails detected at compile-time</td></tr>
+<tr><td><a href="ocaml2.listing">OCaml with parametric class tentative</a></td><td>1/11 should_fails succeeds :-(, 7/11 should_fails detected at compile-time</td></tr>
+<tr><td><a href="ocaml3.listing">OCaml with parametric class and variants</a></td><td>8/11 should_fails detected at compile-time</td></tr>
+<tr><td><a href="ocaml5.listing">OCaml with parametric class and variants, purely functional</a></td><td>10/11 should_fails detected at compile-time, but doesn't ensure previous elements are not used</td></tr>
+<tr><td><a href="prolog.listing">Prolog tentative</a></td><td>3/11 should_fails succeeds :-( and 0/11 detected at compile-time</td></tr>
+<tr><td><a href="haskell.listing">Haskell faking OO, no monad</a></td><td>5/11 should_fails detected at compile-time, but doesn't ensure previous elements are not used</td></tr>
+<tr><td><a href="haskell2.listing">Haskell with phantom types (simple)</a></td><td>8/11 should_fails detected at compile-time, but doesn't ensure previous elements are not used</td></tr>
+<tr><td><a href="haskell2bis.listing">Haskell with phantom types (with type hierarchy)</a></td><td>8/11 should_fails detected at compile-time, but doesn't ensure previous elements are not used</td></tr>
+<tr><td><a href="haskell3.listing">Haskell with monads and phantom types</a></td><td>8/11 should_fails detected at compile-time</td></tr>
+</table>
+
+<hr>
+<h1>Test example</h1>
+
+(using Python's syntax, see the various <a href="#implementations">implementations</a> for some other syntaxes)
+
+<pre>
+
+grass    = new_grass(5)
+carrot   = new_carrot(10)
+
+a_rabbit      = new_rabbit(100)
+a_cow         = new_cow(1000)
+a_human       = new_human(300)
+another_human = new_human(350)
+
+for o in [ a_rabbit, a_cow, a_human ]:
+    print "%s -> %d" % (o.name, o.energy)
+
+a_rabbit.eat(carrot)
+a_cow.eat(grass)
+
+a_dead_rabbit = a_rabbit.slaughter()
+a_beef = a_cow.slaughter()
+
+a_human.eat(carrot)
+a_human.eat(carrot)
+a_human.eat(a_beef)
+a_human.eat(a_dead_rabbit)
+
+a_human.eat(another_human.slaughter())
+
+if a_human.energy != 1785: raise "failed"
+</pre>
+
+and here are some examples that should fail
+
+<pre>
+new_cow(10).slaughter().eat(grass) # meat (food) can't eat
+new_cow(10).slaughter().slaughter() # meat (food) can't be slaughtered
+carrot.eat(grass)      # vegetable (food) can't eat
+carrot.slaughter()     # vegetable (food) can't be slaughtered
+
+new_cow(10).eat(carrot) # cow do not eat carrot
+new_cow(10).eat(new_cow(10).slaughter()) # cow do not eat beef
+a_human.eat(new_cow(10)) # can't eat live animals
+a_human.eat(grass)     # human do not eat grass
+a_human.eat(a_beef)    # a_beef is already eaten
+a_cow.eat(grass)       # a_cow is dead, it can't eat
+a_cow.slaughter()      # a_cow is dead, it can't be slaughtered again
+</pre>
+
+<hr>
+<h1>Remarks</h1>
+<ul>
+<li>the implementation should allow to add new meats which must be accepted by human
+</ul>
+
+<hr>
+<address><a href="mailto:pixel@merd.net">Pixel</a></address>
+This document is licensed under <a href="http://www.gnu.org/copyleft/fdl.html">GFDL</a> (GNU Free Documentation License).
+<p>Release: $Id: index.html,v 1.13 2002/05/13 20:24:37 pixel Exp $
+
+<p><A HREF="http://www.estat.com/getstats?serial=1400113423"><IMG SRC="http://perso.estat.com/cgi-bin/perso/1400113423?page=language-study" BORDER=0></A>
+
+</body></html>

@@ -1,0 +1,33 @@
+# -*- merd -*-
+# working with merd 0.1.4
+
+Point = class
+    translate := o, Int -> o
+    my_length := o -> Int
+
+Point2d(Int, Int) !< Point
+Point3d(Int, Int, Int) !< Point
+
+translate(Point2d(x, y   ), x2) = Point2d(x+x2, y)
+translate(Point3d(x, y, z), x2) = Point3d(x+x2, y, z)
+
+my_length(Point2d(x, y   )) = sqrt(x * x + y * y)
+my_length(Point3d(x, y, z)) = sqrt(x * x + y * y + z * z)
+
+get_z(Point3d(_, _, z)) = z
+
+
+p2d = Point2d(3, 4)
+p3d = Point3d(1, 2, 2)
+
+l = [ p2d, p3d ]
+# => l has type List(Point2d(3, 4) | Point3d(1, 2, 2))
+
+test(p) = my_length(p), translate(p, 1)
+# => test has type p -> (p !< &Point) ; Int, p
+
+test1 = test(p2d), test(p3d), l.map(my_length),
+        # after translate, we still have a Point3d
+        translate(p3d, 1).get_z # translate(p2d, 1).get_z is not accepted
+
+test1

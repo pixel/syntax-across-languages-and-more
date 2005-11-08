@@ -1,0 +1,23 @@
+http://longhorn.msdn.microsoft.com/lhsdk/core/overviews/about%20xaml.aspx
+
+ <Canvas ID="root"
+ xmlns="http://schemas.microsoft.com/2003/xaml"
+ xmlns:def="Definition">
+    <Button ID="button1" Click="Clicked">Click Me!</Button>
+    <def:Code>
+         <![CDATA void Clicked(object sender, ClickEventArgs args)
+                 {
+                 button1.Content = "Hello World";
+                 }
+         ]]>
+    </def:Code>
+ </Canvas>
+
+vs
+
+  my $w = ugtk2->new('');
+  my $button;
+  gtkadd($w->{window},
+         gtksignal_connect($button = Gtk2::Button->new('Click Me!'),
+  			   clicked => sub { $button->set_label('Hello World') }),
+        );

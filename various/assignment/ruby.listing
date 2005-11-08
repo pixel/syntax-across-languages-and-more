@@ -1,0 +1,61 @@
+# -*- ruby -*-
+
+def assign(a,b)
+  a = b
+  print " local:#{a}"
+end
+
+def add(a,b)
+  a += b
+  print " local:#{a}"
+end
+
+def add2(a,b)
+  a << b  # arf, on numbers this does nothing ;p
+  print " local:#{a}"
+end
+
+def doit(sf, f, v1, v2)
+  a = v1.clone
+  a2 = a
+  a3 = a.clone
+  printf("(%-20s) before:#{a} ", sf)
+  f.call(a, v2)
+  print " after:#{a} #{a2} #{a3}\n"
+end
+
+doit("assign", proc{|*i| assign(*i)}, 0, 1)
+doit("assign", proc{|*i| assign(*i)}, "_", "X")
+doit("assign", proc{|*i| assign(*i)}, [0], [1])
+print "\n"
+doit("add", proc{|*i| add(*i)}, 0, 1)
+doit("add", proc{|*i| add(*i)}, "_", "X")
+doit("add", proc{|*i| add(*i)}, [0], [1])
+print "\n"
+doit("add2", proc{|*i| add2(*i)}, 0, 1)
+doit("add2", proc{|*i| add2(*i)}, "_", "X")
+doit("add2", proc{|*i| add2(*i)}, [0], [1])
+
+# [ruby-talk:29730]
+# > Do you really want to change the value of the integer object 1 into 2?
+# 
+# When you do
+#     s = "a"
+#     s.succ!
+# it does not change all strings "a" into string "b", so why should
+#     i=1
+#     i.succ!
+# change all integers 1 into integer 2?
+# 
+# I think that the real answer is that Numeric objects are immutable and
+# String objects are mutable.  A mutable integer class such as:
+#     class Int
+#         attr :value
+#     end
+# could do i.succ!.  I think Benoit is asking for your Fixnum to behave like
+# this Int class.
+# 
+# I personally think the performance advantages of your method of storing
+# Fixnum values is great enough to justify keeping Numeric immutable.
+# Unfortunately, this means everyone learning ruby must remember what is
+# mutable and what is not.

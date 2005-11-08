@@ -1,0 +1,26 @@
+; -*- scheme -*-
+
+(define i 1)
+(define i2 i)
+(set! i2 (+ i2 1))
+(for-each display (list "i2: " i2 " i: " i))
+
+(define s "hello")
+(define s2 s)
+(string-set! s2 0 #\H)
+(for-each display (list "s2: " s2 " s: " s))
+
+(define l '("hello"))
+(define l2 l)
+(set-cdr! l2 '("world"))
+(for-each display (list "l2: " l2 " l: " l))
+
+(define (new-point x y) (cons x y))
+(define (translate p x y)
+  (set-car! p (+ (car p) x))
+  (set-cdr! p (+ (cdr p) y)))
+
+(define p (new-point 0 1))
+(define p2 p)
+(translate p2 1 1)
+(for-each display (list "p2: " p2 " p: " p))

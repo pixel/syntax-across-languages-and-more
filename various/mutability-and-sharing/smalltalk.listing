@@ -1,0 +1,42 @@
+" -*- smalltalk -*- "
+
+Object subclass: #Point
+    instanceVariableNames: 'x y'
+    classVariableNames: ''
+    poolDictionaries: ''.
+
+!Point methods!
+set: xx and: yy
+    x := xx.
+    y := yy.
+!
+translate: dx and: dy
+    x := x + dx.
+    y := y + dy.
+!
+!
+
+
+| i i2 s s2 l l2 p p2 |
+
+i := 1.
+i2 := i.
+i2 := i2 + 1.
+'i : ' display. i displayNl. 'i2: ' display. i2 displayNl.
+
+s := 'hello' copy.
+s2 := s.
+s2 at: 1 put: $H.
+'s : ' display. s displayNl. 's2: ' display. s2 displayNl.
+
+l := { 'hello' . '' }.
+l2 := l.
+l2 at: 2 put: 'world'.
+'l : ' display. l displayNl. 'l2: ' display. l2 displayNl.
+
+p := Point new. p set: 0 and: 1.
+p2 := p.
+p2 translate: 1 and: 1.
+'p : ' display. p displayNl. 'p2: ' display. p2 displayNl.
+
+!

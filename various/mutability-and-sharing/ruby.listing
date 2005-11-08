@@ -1,0 +1,44 @@
+# -*- ruby -*-
+
+i = 1
+i2 = i
+i2 += 1
+print "i2: ", i2, "\n"
+print "i : ", i, "\n"
+
+s = "hello"
+s2 = s
+s2[0] = "H";
+print "s2: ", s2, "\n"
+print "s : ", s, "\n"
+
+l = [ "hello" ]
+l2 = l
+l2 << "world"
+print "l2: ", l2, "\n"
+print "l : ", l, "\n"
+
+
+class Point
+  attr_accessor :x, :y
+
+  def initialize(x, y)
+    @x, @y = x, y
+  end
+
+  def translate(x, y)
+    @x += x
+    @y += y
+  end
+
+  def to_s()
+      "Point(%d, %d)" % [@x, @y]
+  end
+end
+
+
+p = Point.new(0, 1)
+p2 = p
+p2.translate(1, 1)
+print "p2: ", p2, "\n"
+print "p : ", p, "\n"

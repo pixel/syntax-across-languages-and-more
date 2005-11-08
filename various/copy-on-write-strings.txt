@@ -1,0 +1,56 @@
+I was mostly just asking questions. Now that the ideas are settling
+in, the way you did it is making more and more sense. I just want the
+various memory structures we allocate to be as simple as possible,
+because I foresee a number of them, and it gets tricky remembering all
+of the constraints. It would be nice to limit the different cases to a
+small number (currently 3, for PMC, Buffer, and STRING?).
+
+So is this currently a valid mental model?:
+
+There are three types of managed structures we allocate from memory.
+
+First, there are PMCs, which are fixed-size. Subclasses differ only in
+the vtable and in what use they make of the ->data, ->cache, and
+private bits of the ->flags members. PMCs may manage memory directly,
+but will probably point to a Buffer or an array of Buffers for that
+purpose.
+
+Second are Buffers, which are used for pointing to memory. Most will
+be a certain fixed size, but the not-yet-implemented
+new_tracked_header() may be used to create larger subclasses. Those
+subclasses will require their own free pool, but otherwise will be
+managed as Buffers.
+
+Third are STRINGs, which may be thought of as COW-capable Buffers.
+Except they're more than that; they also can do efficient subrange
+operations, and they store additional fields that are probably only
+useful for character data. They can probably be subclassed in more or
+less the same way as Buffers. They have their own implementation of
+some memory management routines in order to support their COW feature,
+and some fields they share with Buffers may have different meaning.
+Most importantly, the memory they point to is no longer a completely
+free-form chunk of bytes. The main data area must be at least large
+enough to hold a pointer, it must be aligned so that a pointer at the
+very beginning can be followed, and there will be some extra space at
+the end for a tail structure.
+
+As usual, I've neglected to mention system-allocated Buffers which
+don't participate in garbage collection but still interact with the
+memory management subsystem.
+
+-----
+
+Assuming this is compatible with what you're thinking, then the only
+weirdness in there is the overloading of STRINGs and COW-able Buffers.
+But since right now we only have two types of Buffers (Buffer,STRING),
+there doesn't seem much point in splitting it out. If we later want
+other non-STRING Buffers to be COW-able, I would imagine going towards
+something more like:
+
+Buffer
+    COW Buffer
+        STRING
+PMC
+
+(that's supposed to be a "class" hierarchy)
+

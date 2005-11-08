@@ -1,0 +1,19 @@
+# -*- tcl -*-
+
+set i 1
+set i2 $i
+set i2 [ expr $i2 + 1 ]
+puts "i2: $i2"
+puts "i : $i"
+
+set s "hello"
+set s2 $s
+append s2 "!"
+puts "s2: $s2"
+puts "s : $s"
+
+set l [list "hello"]
+set l2 $l
+lappend l2 "world"
+puts "l2: $l2"
+puts "l : $l"

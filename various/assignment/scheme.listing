@@ -1,0 +1,36 @@
+; -*- scheme -*-
+
+(define (ldisplay l) (for-each display l))
+
+(define (deep-copy a)
+  (if (pair? a)
+      (cons (car a) (deep-copy (cdr a))))
+      a)
+
+(define (assign a b)
+  (set! a b)
+  (ldisplay (list " local:" a)))
+
+(define (add a b)
+  (if (pair? a)
+      (if (null? (cdr a)) (set-cdr! a b)
+	  (add (cdr a) b))      
+      (set! a ((if (string? b) string-append +) a b)))
+  (ldisplay (list " local:" a)))
+
+(define (doit f v1 v2)
+  (define a (deep-copy v1))
+  (define a2 a)
+  (define a3 (deep-copy a))
+  (ldisplay (list "(" f ") before:" a))
+  (eval (list f 'a 'v2))
+  (ldisplay (list " after:" a " " a2 " " a3 "
+")))
+
+(doit 'assign 0 1)
+(doit 'assign "_" "X")
+(doit 'assign '(0) '(1))
+
+(doit 'add 0 1)
+(doit 'add "_" "X")
+(doit 'add '(0) '(1))

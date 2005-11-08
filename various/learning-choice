@@ -1,0 +1,145 @@
+I find it quite surprising that people just recommand a language. What i find
+more interesting is to describe what exactly you want to teach. Different
+languages have different strength...
+
+Let's make some categories that will be used in the following:
+- Lisps: Common Lisp, Scheme
+- C-like: C, C++, Java, C#
+- Algol-like: Pascal, Ada, Modula, Oberon, Delphi
+- MLs: SML, OCaml, Haskell
+- ``scripting languages'': Perl, Tcl, Python, Ruby
+
+
+Data Structures
+---------------
+data structure is an important thing to learn (though maybe not so much
+important nowadays?)
+
+* Java, Smalltalk: only structs. Java doesn't emphasize on data structure, they
+are encapsulated the best possible so that people don't have to bother with
+them. The important point is abstract data (lists...).
+
+* Algol-like, C: low-level data structures, emphasize the record and the
+precision. Mutability is the rule, no garbage collector.
+
+* Lisps/Prolog: flexible data structures, enabling simple structs, trees,
+unions. Maybe too high-level for system-level programming, but enough for
+others.
+
+* MLs: variants (and structs). Higher-level than C, but powerful.
+
+* Perl/Python/Tcl: don't emphasize much on data structures. The lists and
+dictionnary/hash are the do-all solution.
+
+=> if you want to emphasize on data structures:
+   - implementation, memory management: Algol-like, C (though good variants are
+   missing)
+   - usage: Lisps/MLs
+   - immutable: MLs
+
+
+Syntax
+------
+there's a lot of choice here.
+
+* Lisps: simple to learn. The advantage is to merge the data and the program, you
+don't have to learn both.
+
+* C-like (C++, Java, C#, Perl): complex powerful syntax 
+(assignment is an expression, ++)
+
+* Algol-like (Pascal, Python, Ada, Modula...): less expressive/dangerous than C
+(assignment is an instruction)
+
+* MLs: pattern matching
+
+* others (Tcl, Smalltalk, Pliant, Beta, Prolog...)
+
+=> a powerful syntax means a language harder to master, and more problems for
+students. Alas, people don't have the time/skills to learn everything and C-like
+is mandatory. Starting with something simpler than C-like seems a good choice,
+IF the time is not too short.
+
+Nearly all languages have a scope concept which transpose easily from one
+language to another.
+
+
+The syntax errors are a nasty problem when you learn a language. Good error
+messages are a good help. As an example Perl's error messages are usually very
+good (especially with "use diagnostics"), and help a lot in that non-orthogonal
+syntax. At the opposite OCaml error messages can be very misleading.
+
+
+Strong-typing, safeness
+-----------------------
+This is very important to find out what's wrong 
+(because things will be wrong :)
+
+* Unsafe: C, C++, Pascal
+(no array bound checking, memory hand-managed)
+
+* Mostly safe: others
+(number operations overflow)
+
+An unsafe language means that when things go wrong, it will not always be
+detected at the moment things go wrong. This can be very hard for a student to
+understand what's happening. 
+
+A safe language means that the error will be detected and will generate a nice
+explicit error message.
+
+Typing
+------
+* dynamic typing: Lisps, Smalltalk, scripting languages
+Less verbose, nicer learning curve. Flexibility.
+
+* explicit static typing: C-like, Algol-like
+More precision, more errors caught, but verbose.
+
+* implicit static typing (type inference): MLs
+Some good points of both dynamic and static typing. 
+Maybe harder to understand because:
+  - often coupled with higher order?
+  - need explaining the type inference algorithm to help understand the type
+    error messages
+
+Program evaluation scheme
+-------------------------
+* imperative: C-like, Algol-like
+* functional: Lisps, MLs
+* lazy: Haskell
+* backtracking: Prolog
+
+The different schemes imply different way of thinking, which are not
+incompatible. Learning them all would be nice :)  but it's not always possible.
+The more important nowadays is still the imperative way, but learning functional
+may be easier (at least for scientists) and may be a good start before learning
+the imperative way.
+
+
+Interactivity
+-------------
+* compiler-only
+The fact that those languages are compiler-only could be solved, but it's the
+way things are.
+
+* interpreter: scripting languages, Lisps, MLs (Lisps and MLs can be compiled too)
+Usually an interpreter is easier to use and helps learning a language:
+  - interactive use using a question-answer style
+  - no compile time lost, better reactivity
+  - more powerful debuggers
+
+Fame
+----
+A language fame can be very important. People learn more faster things they
+like.
+
+
+Conclusion
+----------
+From a technical only point of vue, i would recommend Scheme as a first
+language, especially for mathematicians/scientists.
+
+BUT the technical point of vue is not the only one. People may already have
+learned other languages (eg: Pascal-like on a pocket-computer) and be more
+enthusiastic learning something alike.

@@ -1,0 +1,44 @@
+# -*- perl -*-
+
+sub assign {
+    my ($a, $b) = @_;
+    $a = $b;
+    print " local:$a";
+}
+
+sub ref_assign(\$\$) {
+    my ($a, $b) = @_;
+    $$a = $$b;
+    print " local:$$a";
+}
+
+sub doit {
+    my ($sf, $v1, $v2) = @_;
+    my $a = $v1;
+    my $a2 = $a;
+    printf("(%-20s) before:$a ", $sf);
+    $::{$sf}->($a, $v2);
+    print " after:$a $a2\n";
+}
+
+sub doit2 {
+    my ($sf, $f, $v1, $v2) = @_;
+    my $a = $v1;
+    my $a2 = $a;
+    printf("(%-20s) before:$a ", $sf);
+    ref_assign($a, $v2);
+    print " after:$a $a2\n";
+}
+
+sub clone {
+    use Data::Dumper;
+    eval Dumper $_[0];
+}
+
+doit("assign", 0, 1);
+doit("assign", "_", "X");
+
+print "\n";
+doit2("ref_assign", \&ref_assign, 0, 1);
+doit2("ref_assign", \&ref_assign, "_", "X");
+

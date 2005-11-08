@@ -1,0 +1,70 @@
+from ruby-talk:34360
+
+"Often, in comparisons of Ruby and Python, the statement is made that 
+"Python 2.2 now has iterators and generators and subclassable built-ins". 
+This is true. Does this mean that Python and Ruby are now equivalent? I 
+would say no.
+
+In many ways Ruby's OO nature is what Python has been striving towards for 
+years. Only recently have iterators and generators been added to Python. 
+Only recently has the type/class sytem been unified. In Ruby, those 
+features have been incorporated since day one. This may seem like an 
+academic point; after all, Python has those features /now/. Here's why it 
+isn't: because iterators have always been in Ruby, each built-in Ruby 
+class has a rich set of methods which exploit the power of iterators. With 
+arrays, for instance, you can apply an arbitrary block of code to every 
+element with each(); you can collect the result of applying a block to 
+every element with collect(); delete every element for which the block 
+matches with delete_if(); sort using an arbitrary code block; and other 
+operations. Every other built-in type has a large set of opertations that 
+exploit iterators to the fullest. Python provides iterators; but the 
+built-in classes do not (to my knowledge) lend themselves to iterative 
+operations out-of-box. In addition, the vast amount of libraries available 
+for Python do not yet have pervasive support for iterators.
+
+In a similar vein, built-in objects in python simply don't have as many 
+methods available as Ruby objects. Python's built-in types cause Python's 
+procedural heritage to show through. Much old code uses the old 
+string.method("mystring") functions, making it hard for the beginner to 
+know whether to use the string.* functions or the built-in string methods. 
+Worse, it is hard for the beginner to predict whether a particular 
+operation will be implemented as a free function or as a method. For 
+example, to find out if the string 'my_str' is all alphabetic, I call 
+my_str.isalpha; but if I want to know how long it is I must call 
+len(my_str). In Ruby, there would never be any ambiguity - any built-in 
+operation on a string is callable as a method of the string. Even worse is 
+the inconsistency between tuples and lists. Despite tuples being (to all 
+intents and purposes) the equivalent of a constant list, tuples have no 
+methods, whereas lists have many. There is no apparent reason for this 
+inconsistency.
+
+Thus, while Python provides many of the same features as Ruby, because 
+they were added so late in the game, it does not provide them in anything 
+like the pervasive way that Ruby does.
+
+On to other areas of comparison...
+
+1. Ruby has no free functions. Like smalltalk, every function is either a 
+class method or an object method. Even when you define a function outside 
+of any class, you're actually defining a class method of the class Object. 
+Not that this is inherently "better"; but it is more purely OO, according 
+to academic definitions of OO.
+
+2. Ruby has true open classes. Python allows you to redefine existing 
+classes; but when you do, existing instances of the redefined class do not 
+reflect any changes you made to the class. Only objects created after the 
+redefinition pick up on the changes. This can result in objects in the 
+same program that report the same type, but behave differently. When a 
+class is modified in Ruby, every object of that class immediately exhibits 
+the changed behavior/interface.
+
+3. 'self' as a keyword. In Python, you must put 'self' in the argument 
+declaration of every method; but you must remember to pretend that 
+argument doesn't exist when calling the method. Many Pythoneers have 
+praised the explicitness of having to define 'self'; but the Python FAQ 
+makes it quite clear that the only reason for this misfeature is that when 
+OO was being added to Python, this was simply the easiest way to hack it 
+in. In effect, Python forces the programmer to help the interpreter to 
+remember what object the method has been called on. In Ruby, 'self' is a 
+keyword; in a method body, 'self' always refers to the object that the 
+method was called from. No need to define 'self' in the argument list."

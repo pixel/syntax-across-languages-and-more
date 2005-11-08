@@ -1,0 +1,172 @@
+<html>
+  <head>
+    <title>Using Functional Objects in various languages</title>
+  </head>
+<body>
+
+Functional Objects are non-mutable objects. When you modify an object
+it returns the modified object instead of doing it in place.
+
+<h1>Goals</h1>
+
+Test various programming languages ability to code functional objects.
+<p>
+The test objects are <tt>Point2d</tt> and <tt>Point3d</tt>. No interface
+inheritance is needed, but it can help.
+
+<dl>
+<dt><a name="goal1">Goal #1</a><dd>
+
+Point2d and Point3d must have methods:
+<ul>
+<li><tt>translate</tt> which translates the point on the X-axis
+<br><tt>translate :: Point a =&gt; a -&gt; Double -&gt; a</tt>
+<li><tt>length</tt> which computes the distance to the origin
+<br><tt>length :: Point a =&gt; a -&gt; Double</tt>
+</ul>
+
+and you must have external access to Point3d'z:
+<ul>
+<li><tt>z</tt> or <tt>get_z :: Point3d -&gt; Double</tt>
+</ul>
+
+<p>
+<dt><a name="goal2">Goal #2</a><dd>
+
+Same as goal #1, but adding the (binary) method:
+<ul>
+<li><tt>add</tt> which adds the point coordinates
+<br><tt>add :: Point a =&gt; a -&gt; a -&gt; a</tt>
+</ul>
+
+Adding a Point2d and a Point3d should cause a compile-time error or
+runtime-error. This imply an absence of subtyping relationship between Point2d
+ad Point3d.
+
+<p>
+<dt><a name="goal3">Goal #3</a><dd>
+
+Same as goal #2, but having subtyping (or simulating it) between Point2d and
+Point3d for "<tt>add</tt>" method. This means the following combinaisons
+should be allowed:
+
+<ul>
+<li><tt>add :: Point2d -&gt; Point2d -&gt; Point2d</tt>
+<li><tt>add :: Point2d -&gt; Point3d -&gt; Point2d</tt>
+<li><tt>add :: Point3d -&gt; Point2d -&gt; Point2d</tt>
+<li><tt>add :: Point3d -&gt; Point3d -&gt; Point3d</tt>
+</ul>
+
+Note: p1.add(p2) returning a Point2d even if both p1 and p2 are Point3d's
+doesn't fulfill goal #3.
+
+</dl>
+
+<hr>
+<h1><a name="implementations">Implementations</a></h1>
+
+<dl>
+
+<p><dt>Goal #1<dd>
+<table cellpadding=4 border=1>
+<tr><td><a href="clisp.listing">Common Lisp</a></td><td></td></tr>
+<tr><td><a href="dylan.listing">Dylan</a></td><td></td></tr>
+<tr><td><a href="python.listing">Python</a></td><td></td></tr>
+<tr><td><a href="ruby.listing">Ruby</a></td><td></td></tr>
+<tr><td><a href="java.listing">Java</a></td><td>need some downcasting back from Point to Point2d or Point3d</td></tr>
+<tr><td><a href="c++.listing">C++</a></td><td><b>no runtime error</b></td></tr>
+<tr><td><a href="haskell.listing">Haskell</a></td><td><b>no runtime error</b> (uses existential types)</td></tr>
+<tr><td><a href="ocaml.listing">OCaml</a></td><td><b>no runtime error</b></td></tr>
+<tr><td><a href="merd.listing">merd</a></td><td><b>no runtime error</b></td></tr>
+<tr><td><a href="nice.listing">nice</a></td><td><b>no runtime error</b></td></tr>
+</table>
+
+<p><dt>Goal #2<dd>
+
+<table cellpadding=4 border=1>
+<tr><td><a href="clisp2.listing">Common Lisp</a></td><td></td></tr>
+<tr><td><a href="dylan2.listing">Dylan</a></td><td></td></tr>
+<tr><td><a href="python2.listing">Python</a></td><td>explicit "<tt>add</tt>" argument runtime type checking</td></tr>
+<tr><td><a href="ruby2.listing">Ruby</a></td><td>explicit "<tt>add</tt>" argument runtime type checking</td></tr>
+<tr><td><a href="java2.listing">Java</a></td><td>explicit "<tt>add</tt>" argument runtime type checking
+                                             <br>need some downcasting back from Point to Point2d or Point3d</td></tr>
+<tr><td><a href="c++2.listing">C++</a></td><td>explicit "<tt>add</tt>" argument runtime type checking</td></tr>
+<tr><td><a href="haskell2.listing">Haskell</a></td><td><b>no runtime error</b><br>but can't make a list of points having the ability to use "<tt>add</tt>"</td></tr>
+<tr><td><a href="haskell2bis.listing">Haskell</a></td><td>explicit "<tt>add</tt>" argument runtime type checking<br>uses unpacking from existential type back to real type</td></tr>
+<tr><td><a href="ocaml2.listing">OCaml</a></td><td><b>no runtime error</b><br>but can't make a list of points having the ability to use "<tt>add</tt>"</td></tr>
+<tr><td><a href="merd2.listing">merd</a></td><td><b>no runtime error</b></td></tr>
+<tr><td><a href="nice2.listing">nice</a></td><td><b>no runtime error</b></td></tr>
+</table>
+
+<p><dt>Goal #3<dd>
+
+<table cellpadding=4 border=1>
+<tr><td><a href="clisp3.listing">Common Lisp</a></td><td></td></tr>
+<tr><td><a href="dylan3.listing">Dylan</a></td><td></td></tr>
+<tr><td><a href="python3.listing">Python</a></td><td>explicit runtime dispatching</td></tr>
+<tr><td><a href="ruby3.listing">Ruby</a></td><td>explicit runtime dispatching</td></tr>
+<tr><td><a href="java3.listing">Java</a></td><td><b>no runtime error</b><br>explicit runtime dispatching<br>need some downcasting back from Point to Point2d or Point3d</td></tr>
+<tr><td><a href="c++3.listing">C++</a></td><td><b>no runtime error</b><br>explicit runtime dispatching</td></tr>
+<tr><td><a href="haskell3.listing">Haskell</a></td><td><b>no runtime error</b><br>explicit runtime dispatching<br>uses unpacking from existential type back to real type</td></tr>
+<tr><td><a href="haskell3bis.listing">Haskell</a></td><td>no OO, using a variant for unifying Point2d and Point3d</td></tr>
+<tr><td><a href="ocaml3bis.listing">OCaml</a></td><td>no OO, using a variant for unifying Point2d and Point3d</td></tr>
+<tr><td><a href="merd3.listing">merd</a></td><td><b>no runtime error</b></td></tr>
+<tr><td><a href="nice3.listing">nice</a></td><td><b>no runtime error</b></td></tr>
+</table>
+
+</dl>
+
+<hr>
+<h1><a name="remarks">Remarks</a></h1>
+
+<ul>
+<li>Versions using less compile-time checks are usually the easiest to write:
+  <ul>
+    <p><li>non-OO Haskell and OCaml versions are the simplest, but do not
+    allow precise enough typing: no distinction between Point2d and Point3d is
+    done at compile time. So the only way to have a function working only on
+    Point3d's is to raise an error when that function is called with a Point2d
+    (see <tt>get_z</tt>)
+
+    <p><li>Ruby and Python versions are quite simple, not bothering too much with
+    types. The only trick is the hand-written late-dispatching for
+    <tt>Point3d.add(Point2d)</tt> (Goal #3), and disallowing <tt>Point3d.add(Point2d)</tt>
+    and <tt>Point2d.add(Point3d)</tt> (Goal #2)
+
+    <p><li>Common Lisp & Dylan are alike Ruby/Python without the burden of
+    handling <tt>add(Point3d, Point2d)</tt> and <tt>add(Point2d,
+    Point3d)</tt>. The difference between Goal #2 or Goal #3 comes from having
+    Point3d a subtype of Point2d or not. multi-methods are nice :)
+
+    <p><li>Java do not benefit much from its type system.
+    The lack of generics do not allow much. For <tt>translate</tt> a solution
+    is to define it with the precise return type in both Point2d and Point3d.
+    <tt>twice</tt> returning a Point3d when given a Point3d is only possible
+    with <tt>twice</tt> defined as a method in both Point2d and Point3d.
+    Also note that <tt>const</tt> does not exist in Java.
+  </ul>
+
+<p>
+<li>C++ Goal #1 is quite good (though quite hard to write) and achieve perfect type
+safeness. C++ Goal #3 is a bit more complicated but also achieve perfect type
+safeness.
+To achieve this, template functions are used.
+Note that memory freeing is not done and would kill usability!
+
+<p>
+<li>OCaml Goal #2 is a quite good Goal #2
+
+<p>
+<li>merd versions are simply perfect (warning: the author may be biased on
+this one, make your own opinion)
+
+</ul>
+
+<hr>
+<address><a href="mailto:pixel@merd.net">Pixel</a></address>
+This document is licensed under <a href="http://www.gnu.org/copyleft/fdl.html">GFDL</a> (GNU Free Documentation License).
+<p>Release: $Id: index.html,v 1.18 2002/08/18 11:30:45 pixel Exp $
+
+<p><A HREF="http://www.estat.com/getstats?serial=1400113423"><IMG SRC="http://perso.estat.com/cgi-bin/perso/1400113423?page=language-study" BORDER=0></A>
+
+</body></html>

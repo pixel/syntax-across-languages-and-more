@@ -1,0 +1,36 @@
+; -*- lisp -*-
+
+(setq i 1)
+(setq i2 i)
+(incf i2)
+(print (format nil "i2: ~D" i2))
+(print (format nil " i: ~D" i))
+
+(setq s "hello")
+(setq s2 s)
+(nstring-capitalize s2) ; or (setf (aref s2 0) #\H)
+(print (format nil "s2: ~S" s2))
+(print (format nil " s: ~S" s))
+
+(setq l '("hello"))
+(setq l2 l)
+(setf (cdr l2) '("world"))
+(print (list "l2: " l2))
+(print (list "l: " l))
+
+
+(defclass Point ()
+  ((x :accessor x :initarg :x)
+   (y :accessor y :initarg :y)))
+
+(defun translate (p x y)
+  (setf (x p) (+ (x p) x))
+  (setf (y p) (+ (y p) y)))
+
+(defmethod show ((p Point)) (format nil "[~F, ~F]" (x p) (y p)))
+
+(setq p (make-instance 'Point :x 0 :y 1))
+(setq p2 p)
+(translate p2 1 1)
+(print (list "p2: " (show p2)))
+(print (list "p: " (show p)))

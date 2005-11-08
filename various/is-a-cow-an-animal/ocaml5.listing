@@ -1,0 +1,111 @@
+(* -*- caml -*- *)
+
+(* functional version inspired by a version from James Woodyatt *)
+
+class virtual ['_z] food =
+  object(_:'a)
+      method virtual eaten : int * 'a option
+  end
+
+class ['kind] vegetable (energy : int) = 
+  object
+    inherit ['kind] food
+    method eaten = energy, Some {< >}
+  end
+
+class ['kind] meat (energy : int) = 
+  object(_:'a)
+    inherit ['kind] food
+    method eaten = energy, (None : 'a option)
+  end
+
+class any_animal (energy : int) =
+  object
+    val energy = energy
+    method energy = energy
+  end
+
+type bad_animal = Bad_animal
+
+(* objects are typed only by (when_slaughtered, accepted_food) which uniquely describe the animal *)
+class ['accepted_food, 'when_slaughtered] animal energy = 
+  object
+    inherit any_animal energy
+
+    method eat (food : 'accepted_food food option) =
+      match food with
+      |	None -> failwith "bad food"
+      |	Some food ->
+	  let food_energy, food' = food#eaten in
+	  {< energy = energy + food_energy >}, food'
+
+    method slaughter =
+      Some (new meat energy :> 'when_slaughtered food), Bad_animal
+  end
+
+type human_food = [`Carrot | `Beef | `Dead_rabbit | `Dead_human]
+
+class grass  = [[`Grass]]  vegetable
+class carrot = [[`Carrot]] vegetable
+
+class cow    = [[`Grass],   [`Beef]]        animal
+class rabbit = [[`Carrot],  [`Dead_rabbit]] animal 
+class human  = [human_food, [`Dead_human]]  animal
+
+
+let should_work =
+  let grass    = Some (new grass 5) in
+  let carrot   = Some (new carrot 10) in
+
+  let a_rabbit      = new rabbit 100 in
+  let a_cow         = new cow 1000 in
+  let a_human       = new human 300 in
+  let another_human = new human 350 in
+
+  let animals = [ "rabbit", (a_rabbit :> any_animal) ; 
+		  "beef",   (a_cow    :> any_animal) ; 
+		  "human",  (a_human  :> any_animal) ] in
+  List.iter (fun (name, o) -> Printf.printf "%s -> %d\n" name o#energy) animals ;
+
+  let a_rabbit, carrot = a_rabbit#eat carrot in
+  let a_cow, grass = a_cow#eat grass in
+
+  let a_dead_rabbit, a_rabbit = a_rabbit#slaughter in
+  let a_beef, a_cow = a_cow#slaughter in
+
+  let a_human, a_beef = a_human#eat (a_beef :> human_food food option) in
+  let a_human, carrot = a_human#eat (carrot :> human_food food option) in
+  let a_human, carrot = a_human#eat (carrot :> human_food food option) in
+  let a_human, a_dead_rabbit = a_human#eat (a_dead_rabbit :> human_food food option) in
+
+  let dead_human, another_human = another_human#slaughter in
+  let a_human, dead_human = a_human#eat (dead_human :> human_food food option) in
+
+  if a_human#energy <> 1785 then failwith "failed" ;
+
+(*
+  10 should_fail's are detected at compile-time:
+
+  (new cow 10)#slaughter#eat grass ; (* => expression has type beef, it has no method eat *)
+  (new cow 10)#slaughter#slaughter ; (* => expression has type beef, it has no method slaughter *)
+  carrot#eat grass ; (* => expression has type carrot, it has no method eat *)
+  carrot#slaughter ; (* => expression has type carrot, it has no method slaughter *)
+  a_human#eat (new cow 10) ; (* => This expression has type cow but is here used with type food *)
+  (new cow 10)#eat carrot ; (* => This expression has type carrot but is here used with type grass *)
+  (new cow 10)#eat (new cow 10)#slaughter ; (* => This expression has type beef but is here used with type grass *)
+  a_human#eat (grass :> human_food food option) ; (* => This expression cannot be coerced to type human_food food; is has type [`Grass] food *)
+
+  a_cow#eat grass ; (* => This expression has type bad_animal, It has no method eat *)
+  ignore a_cow#slaughter ; (* => This expression has type bad_animal, It has no method slaughter *)
+*)
+
+  let should_fail = [
+  (fun () -> a_human#eat (a_beef :> human_food food option)) ; (* a_beef is already eaten *)
+  ] in
+
+  List.iter (fun f ->
+    if not (try f() ; false with Failure s -> Printf.eprintf "expected error: %s\n" s ; true) then
+      failwith "should fail"
+  ) should_fail ;
+
+  Printf.eprintf "all ok\n"

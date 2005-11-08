@@ -1,0 +1,67 @@
+// -*- java -*-
+
+using System.Collections;
+
+class csharp {
+    struct s_point {
+	public int x, y;
+    }
+
+    class point {
+	public int x, y;
+    }
+
+    static string show(string[] a) {
+	return System.String.Join(" ", a);
+    }
+
+    static string show(ArrayList p) {
+	string s = "";
+	foreach (string e in p) s += e + " ";
+	return s;
+    }
+
+    static string show(s_point p) {
+	return "{ x = " + p.x + ", y = " + p.y + " }";
+    }
+
+    static string show(point p) {
+	return "Point(" + p.x + ", " + p.y + ")";
+    }
+
+    static void Main() {
+	int i = 1;
+	int i2 = i;
+	i2++;
+	System.Console.WriteLine("i2: " + i2 + "\n" + " i: " + i);
+
+	string s = "hello";
+	string s2 = s;
+	s += "!";
+	System.Console.WriteLine("s2: " + s2 + "\n" + " s: " + s);
+
+
+	string[] a = { "hello", "" };
+	string[] a2 = a;
+	a2[1] = "world";
+	System.Console.WriteLine("a2: " + show(a2) + "\n" + " a: " + show(a));
+
+	ArrayList l = new ArrayList();
+	l.Add("hello");
+	ArrayList l2 = l;
+	l2.Add("world");
+	System.Console.WriteLine("l2: " + show(l2) + "\n" + " l: " + show(l));
+
+	s_point sp;
+	sp.x = 0; sp.y = 1;
+	s_point sp2 = sp;
+	sp2.x++; sp2.y++;
+	System.Console.WriteLine("sp2: " + show(sp2) + "\n" + " sp: " + show(sp));
+
+	point p = new point();
+	p.x = 0; p.y = 1;
+	point p2 = p;
+	p2.x++; p2.y++;
+	System.Console.WriteLine("p2: " + show(p2) + "\n" + " p: " + show(p));
+    }
+}

@@ -1,0 +1,82 @@
+; -*- scheme -*-
+
+(define (create kind energy) (list energy kind))
+(define kind cadr)
+(define energy car)
+(define set-energy! set-car!)
+(define (check! o) (if (< (energy o) 0) (error (kind o) "is invalid")))
+
+(define (is-meat f) (member f (list 'Beef 'Dead-rabbit 'Dead-human)))
+
+(define (invalidate! o) (set-energy! o -1))
+(define invalidate-animal! invalidate!)
+(define (invalidate-food! o) 
+  (if (is-meat (kind o)) 
+      (set-energy! o -1)))
+
+(define (can-eat a f)
+  (or (and (equal? a 'Cow)    (equal? f 'Grass))
+      (and (equal? a 'Rabbit) (equal? f 'Carrot))
+      (and (equal? a 'Human)  (or (equal? f 'Carrot) (is-meat f)))))
+
+(define (eat animal food)
+  (check! animal)
+  (check! food)
+  (if (can-eat (kind animal) (kind food))
+      (begin
+	(set-energy! animal (+ (energy animal) (energy food)))
+	(invalidate-food! food))
+      (error (kind animal) "can't eat" (kind food))))
+
+(define (slaughter animal)
+  (check! animal)
+  (let* ((a (kind animal))
+	 (e (energy animal))
+	 (new-kind (cond ((equal? a 'Cow) 'Beef)
+			 ((equal? a 'Rabbit) 'Dead-rabbit)
+			 ((equal? a 'Human) 'Dead-human)
+			 (else (error "can't slaughter" (kind animal))))))
+    (invalidate-animal! animal)
+    (create new-kind e)))
+
+(define grass (create 'Grass 5))
+(define carrot (create 'Carrot 10))
+
+(define a_rabbit (create 'Rabbit 100))
+(define a_cow (create 'Cow 1000))
+(define a_human (create 'Human 300))
+(define another_human (create 'Human 350))
+
+(for-each (lambda (o)
+   (display (kind o))
+   (display " -> ")
+   (display (energy o))) (list a_rabbit a_cow a_human))
+
+(eat a_rabbit carrot)
+(eat a_cow grass)
+
+(define a_dead_rabbit (slaughter a_rabbit))
+(define a_beef (slaughter a_cow))
+
+(eat a_human carrot)
+(eat a_human carrot)
+(eat a_human a_beef)
+(eat a_human a_dead_rabbit)
+
+(eat a_human (slaughter another_human))
+
+(if (= (energy a_human) 1785) '() (error "failed"))
+
+
+;(eat (slaughter (create 'Cow 10)) grass) ; meat (food) can't eat
+;(slaughter (slaughter (create 'Cow 10))) ; meat (food) can't be slaughtered
+;(eat carrot grass)      ; vegetable (food) can't eat
+;(slaughter carrot)     ; vegetable (food) can't be slaughtered
+
+;(eat (create 'Cow 10) carrot) ; cow do not eat carrot
+;(eat (create 'Cow 10) (slaughter (create 'Cow 10))) ; cow do not eat beef
+;(eat a_human (create 'Cow 10)) ; can't eat live animals
+;(eat a_human grass)     ; human do not eat grass
+;(eat a_human a_beef)    ; a_beef is already eaten
+;(eat a_cow grass)       ; a_cow is dead, it can't eat
+;(slaughter a_cow)      ; a_cow is dead, it can't be slaughtered again

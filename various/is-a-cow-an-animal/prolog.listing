@@ -1,0 +1,102 @@
+% -*- prolog -*-
+
+% constants: stone grass carrot beef dead_rabbit cow rabbit human
+
+is_meat(beef).
+is_meat(dead_rabbit).
+is_meat(dead_human).
+
+% :- pred can_eat(animal, food).
+% :- mode can_eat(in, in) is semidet.
+% (could also be :- mode can_eat(in, out) is multi.)
+can_eat(cow, grass).
+can_eat(rabbit, carrot).
+can_eat(human, carrot).
+can_eat(human, Meat) :- is_meat(Meat).
+
+% :- pre eat(animal, food, animal2).
+% :- mode eat(in, in, out) is semidet.
+eat(Animal, Food, Animal2) :-
+	(Animal_kind, Animal_energy) = Animal,
+	(Food_kind, Food_energy) = Food,
+	can_eat(Animal_kind, Food_kind),
+	Animal2_energy is Animal_energy + Food_energy,
+	Animal2 = (Animal_kind, Animal2_energy).
+
+% :- pred slaughter(animal, food)
+% :- mode slaughter(in, out) is det.
+% the in argument must be an animal
+slaughter_helper(cow, beef).
+slaughter_helper(human, dead_human).
+slaughter_helper(rabbit, dead_rabbit).
+slaughter((Animal_kind, Energy), (Food_kind, Energy)) :-
+	slaughter_helper(Animal_kind, Food_kind).
+
+should_work :- 
+	Grass = (grass, 5),
+	Carrot = (carrot, 10),
+
+	A_rabbit = (rabbit, 100),
+	A_cow = (cow, 1000),
+	A_human = (human, 300),
+	Another_human = (human, 350),
+
+	eat(A_rabbit, Carrot, A_rabbit2),
+	eat(A_cow, Grass, A_cow2),
+
+	slaughter(A_rabbit2, A_dead_rabbit),
+	slaughter(A_cow2, A_beef),
+
+	eat(A_human, Carrot, A_human2),
+	eat(A_human2, Carrot, A_human3),
+	eat(A_human3, A_beef, A_human4),
+	eat(A_human4, A_dead_rabbit, A_human5),
+
+	slaughter(A_human5, A_dead_human),
+	eat(Another_human, A_dead_human, Another_human2),
+
+	% the 3 below should fail
+	% => this implementation doesn't fulfill GOAL #1
+	eat((human, 300), A_beef, _), % a_beef is already eaten
+	eat(A_cow, (grass, 5), _),    % a_cow is dead, it can't eat
+	slaughter(A_cow, _),          % a_cow is dead, it can't be slaughtered again
+
+	(_, 1785) = Another_human2.
+
+
+fail01 :- slaughter((cow, 10), Meat1), eat(Meat1, (grass, 5), _) .% meat (food) can't eat
+fail02 :- slaughter((cow, 10), Meat2), slaughter(Meat2, _)  .% meat (food) can't be slaughtered
+fail03 :- eat((carrot, 10), (grass, 5), _)      .% vegetable (food) can't eat
+fail04 :- slaughter((carrot, 10), _)     .% vegetable (food) can't be slaughtered
+
+fail05 :- eat((cow, 10), (carrot, 10), _) .% cow do not eat carrot
+fail06 :- slaughter((cow, 10), Meat3), eat((cow, 10), Meat3, _) .% cow do not eat beef
+fail07 :- eat((human, 300), (cow, 10), _) .% can't eat live animals
+fail08 :- eat((human, 300), (grass, 5), _)     .% human do not eat grass
+
+must_fail(F) :- (call(F), !, write(F), write(' failed'), fail) ; true.
+
+these_should_fail :-
+	must_fail(fail00),
+	must_fail(fail01),
+	must_fail(fail02),
+	must_fail(fail03),
+	must_fail(fail04),
+	must_fail(fail05),
+	must_fail(fail06),
+	must_fail(fail07).
+	
+% some remarks:
+
+% errors
+% - nothing ensures a killed cow doesn't eat anymore
+% - nothing ensures A_beef or A_dead_rabbit is eaten only once
+% - nothing ensures A_human is not used when A_human2 exists
+
+% no compile time checks
+% - eat(some_food, _, _)
+% - eat(_, animal, _)
+% - slaughter(some_food, _)
+% - eat(A_human, Grass)
+% - eat(A_cow, Carrot)
+% - eat(A_cow, A_beef)

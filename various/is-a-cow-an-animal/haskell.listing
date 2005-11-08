@@ -1,0 +1,155 @@
+{-# OPTIONS_GHC -fglasgow-exts #-}
+
+-- OO like
+
+import Prelude
+import List
+import Control.Exception
+import DeepSeq
+
+
+data Object_data kind = Object_data { d_kind::kind, d_valid::Bool, d_energy::Int }   deriving Show
+class Object a kind | a -> kind where
+    -- data accessors
+    valid  :: a -> Bool
+    energy :: a -> Int
+    kind   :: a -> kind
+    new    :: kind -> Int -> a
+
+    -- inheritance stuff
+    get_data :: a -> Object_data kind
+    update_data :: a -> Object_data kind -> a
+    new_with_data :: Object_data kind -> a
+
+    valid  = d_valid  . get_data
+    energy = d_energy . get_data
+    kind   = d_kind   . get_data
+    new kind energy = new_with_data (Object_data { d_kind = kind,  d_valid = True, d_energy = energy })
+
+
+data Vegetable = Carrot | Grass   deriving Show
+data Meat = Beef | Dead_rabbit | Dead_human   deriving Show
+data Food_kind = Vegetable Vegetable | Meat Meat
+data Food = Food (Object_data Food_kind)   deriving Show
+
+instance Object Food Food_kind where
+    get_data (Food d) = d
+    update_data _ d = Food d
+    new_with_data d = Food d
+
+data Animal_kind = Cow | Rabbit | Human   deriving Show
+data Animal = Animal (Object_data Animal_kind)   deriving Show
+
+instance Object Animal Animal_kind where
+    get_data (Animal d) = d
+    update_data _ d = Animal d
+    new_with_data d = Animal d
+
+
+-- hide Vegetable vs Meat separation
+instance Show Food_kind where
+    show (Vegetable v) = show v
+    show (Meat m) = show m
+
+
+is_innumerable (Vegetable _) = True
+is_innumerable (Meat _) = False
+
+slaughter_kind Cow = Beef
+slaughter_kind Rabbit = Dead_rabbit
+slaughter_kind Human = Dead_human
+
+food_accepted Cow (Vegetable Grass) = True
+food_accepted Rabbit (Vegetable Carrot) = True
+food_accepted Human (Meat _) = True
+food_accepted Human (Vegetable Carrot) = True
+food_accepted _ _ = False
+
+eaten :: Food -> Food
+eaten food
+    | not (valid food) = error "bad food"
+    | is_innumerable (kind food) = food
+    | otherwise = update_data food (get_data food){ d_valid = False }
+
+eat :: Animal -> Food -> (Animal, Food)
+eat animal food
+    | not (valid animal) = error "bad animal"
+    | food_accepted (kind animal) (kind food) = (animal', food')
+    | otherwise = error (show (kind animal) ++ " doesn't accept food " ++ show (kind food))
+    where
+    animal' = update_data animal (get_data animal){ d_energy = energy animal + energy food }
+    food' = eaten food
+
+slaughter :: Animal -> (Food, Animal)
+slaughter animal
+    | not (valid animal) = error "bad animal"
+    | otherwise = (food, animal')
+    where
+    animal' = update_data animal (get_data animal){ d_valid = False }
+    food = new (Meat (slaughter_kind (kind animal))) (energy animal)
+
+
+(asserts, should_fail) = (asserts, should_fail)
+    where
+    grass  = new (Vegetable Grass) 5 :: Food
+    carrot = new (Vegetable Carrot) 10 :: Food
+
+    a_rabbit      = new Rabbit 100 :: Animal
+    a_cow         = new Cow 1000 :: Animal
+    a_human       = new Human 300 :: Animal
+    another_human = new Human 350 :: Animal
+    
+    animals = [ ("rabbit", a_rabbit), ("cow", a_cow), ("human", a_human) ]
+    animals_s = unlines $ map (\ (name, o) -> name ++ " -> " ++ show (energy o)) animals
+    
+    (a_rabbit2, _) = eat a_rabbit carrot
+    (a_cow2, _) = eat a_cow grass
+    
+    (a_dead_rabbit, a_rabbit3) = slaughter a_rabbit2
+    (a_beef, a_cow3) = slaughter a_cow2
+    
+    (a_human2, _) = eat a_human carrot
+    (a_human3, _) = eat a_human2 carrot
+    (a_human4, a_beef2) = eat a_human3 a_beef
+    (a_human5, a_dead_rabbit2) = eat a_human4 a_dead_rabbit
+    
+    (a_dead_human, another_human2) = slaughter another_human
+    
+    (a_human6, a_dead_human2) = eat a_human5 a_dead_human
+
+    assert1 = energy a_human6 == 1785
+    asserts = [ assert1 ]
+
+{-
+  5 should_fail's are detected at compile-time:
+
+    eat a_beef grass -- Couldn't match `Animal' against `Food'
+    slaughter a_beef -- Couldn't match `Animal' against `Food'
+    eat carrot grass -- Couldn't match `Animal' against `Food'
+    slaughter carrot -- Couldn't match `Animal' against `Food'	      
+    eat a_human a_cow -- Couldn't match `Food' against `Animal'
+-}
+
+    should_fail = [ 
+		    show $ eat a_cow carrot, -- cow do not eat carrot
+		    show $ eat a_cow a_beef, -- cow do not eat beef
+		    show $ eat a_human grass, -- human do not eat grass
+		    error ""
+		   ]
+{-
+  3 should_fail succeeds
+  eat a_human a_beef -- a_beef is already eaten
+  eat a_cow grass -- a_cow is dead, it can't eat
+  slaughter a_cow -- a_cow is dead, it can't be slaughtered again
+ -}
+
+main = 
+    foldr assert () asserts `deepSeq` mapM try_one should_fail
+    where
+    try_one expr = try (expr `deepSeq` return ()) >>= check
+    check (Right _) = error "should fail"
+    check (Left e) = putStrLn $ "expected error: " ++ show e
+
+-- Local Variables:
+-- mode:haskell
+-- End:

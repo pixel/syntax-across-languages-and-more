@@ -1,0 +1,24 @@
+<html>
+<head>
+<title>Slide 14</title>
+</head>
+<body text=#FFFFFF bgcolor=#C3C3C3 link=#000080 vlink=#800000 alink=#000080>
+<center>
+<a href="text0.htm">First page</a> <a href="text12.htm">Back</a> <a href="text14.htm">Continue</a> <a href="text28.htm">Last page</a> <a href="index.htm">Summary</a> <a href="img13.htm">Graphics</a></center><br>
+<h1><b><font color=#666699>Memory management: GC</b></font></h1><p>
+<ul><ul><li>pros:
+<ul><li>allows implicit memory allocation
+<ul><li>allows mutable lists in the language, eg: l = [1,2]
+</ul><li>favours data sharing, can be more efficient than hand-managed memory
+</ul><li>cons
+<ul><li>can be slow
+<li>finalization time is unknown
+</ul></ul><li><h2>implementation</h2>
+<ul><li>reference counting (incremental, but circular ref!)
+<li>mark &amp; sweep (can be incremental)
+<li>copying
+<li>generational (mixed of copying and mark&amp;sweep)
+</ul></ul></ul><br>
+<h3>Notes:</h3>
+</body>
+</html>

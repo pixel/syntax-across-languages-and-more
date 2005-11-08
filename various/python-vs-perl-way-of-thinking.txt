@@ -1,0 +1,16 @@
+From: Guido van Rossum <guido@python.org>
+Subject: Re: Anachronistic Acronyms in Parrot?
+To: Simon Cozens <simon@netthink.co.uk>
+cc: language-dev@netthink.co.uk
+Date: Thu Sep 20 16:02:15 2001 +0200
+
+> No. Thinking before programming is a virtue. Learning about the system
+> you're about to hack on is a virtue. Mnemonic value is a virtue.
+
+Sure.
+
+> Having to type lots of shit which is supposedly easier to understand
+> just to help dummies who don't know what they're doing muck stuff up
+> is quite definitely not a virtue.
+
+But this is arrogant bullshit.  Goodbye.

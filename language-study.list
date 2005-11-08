@@ -1,0 +1,641 @@
+*Fortran I
+  1957
+  Static implicit typing (type based on variable name)
+  Static allocation
+  DS:arrays
+  SY:1
+Fortran II
+  1958
+Fortran IV
+  1962
+*Fortran 77
+  1977
+  SY:2
+*Fortran 90
+  1990
+  Heap allocation
+  SY:3
+
+APL
+  1960
+  Dynamic implicit typing
+  Stack allocation
+  http://www.acm.org/sigapl/
+  DS:arrays
+  SY:4
+APL 2
+  1984
+APL 96
+  1996
+J
+  1997
+
+Forth
+  1969
+  Stack allocation
+  SY:1
+
+PostScript
+  1982
+  Forth
+  DS:strings
+PostScript level 2
+  1994
+  GC
+ 
+
+Flow-matic
+  1957
+  Static allocation
+  
+*Cobol
+  1960
+  Flow-matic
+  Static allocation
+  DS:records
+  SY:2
+
+Algol 58
+  1958
+  Fortran I
+  Stack allocation
+  DS:arrays
+  SY:2
+*Algol 60
+  1960
+Algol 68
+  1968
+  GC
+  SY:3
+
+*PL/I
+  1964
+  Algol 60,Fortran IV,Cobol
+  Static explicit typing
+  Stack allocation
+  SY:3
+
+Algol W
+  1966
+  Algol 60
+*Pascal
+  1971
+  Algol W,PL/I
+  Static explicit typing
+  Heap allocation  
+Pascal AFNOR
+  1983
+Objective Pascal
+  1985
+Delphi
+  1995
+
+Modula
+  1975
+  Pascal
+Modula-2
+  1977  
+Modula-3
+  1989
+  GC
+
+Oberon
+  1988
+  Modula-2
+
+Ada
+  1979
+  Pascal
+  SY:4
+*Ada 83
+  1983
+Ada 95
+  1995
+
+Basic
+  1964
+  Fortran IV,Algol 60
+  Dynamic implicit typing
+  GC
+  SY:2
+Quick Basic
+  1988
+Visual Basic
+  1990
+  http://www.microsoft.com/vbasic/
+  DS:objects
+
+Simula I
+  1963
+  Algol 60
+  Static explicit typing
+  http://www.cetus-links.org/oo_simula.html
+  Heap allocation
+Simula 67
+  1967
+  GC
+
+*Smalltalk
+  1969
+  Simula 67
+  SY:1
+Smalltalk 72
+  1972
+Smalltalk 74
+  1974
+Smalltalk 76
+  1976
+Smalltalk 78
+  1978
+*Smalltalk 80
+  1980
+  Dynamic implicit typing
+
+Beta
+  1976
+  Simula 67
+
+CLU
+  1974
+  Simula 67,Pascal
+
+BETA
+  1983
+  Smalltalk 80,Modula-2
+
+Self
+  1987
+  Smalltalk 80
+  SY:1
+
+AppleScript
+  1993
+  Smalltalk 80
+  Dynamic implicit typing
+
+*Eiffel
+  1986
+  Ada 83,Simula 67
+  Static explicit typing
+  GC
+Eiffel 2
+  1989
+Eiffel 3
+  1996
+
+Sather 0.1
+  1991
+  Eiffel 2
+Sather 1.0
+  1994
+#Sather 1.1
+#  1995
+#Sather 1.2.1
+#  1999
+
+CPL
+  1961
+  Algol 60
+  Heap allocation
+BCPL
+  1969
+B
+  1970
+C
+  1971
+  Static explicit weak typing
+  DS:records,arrays
+  SY:4
+*C (K&R)
+  1978
+
+*C++
+  1983
+  C (K&R),Simula 67,Algol 68
+  SY:5
+C++ (ARM)
+  1990
+  C++,Ada 83,CLU
+*C++ (ISO)
+  1998
+
+C (ANSI)
+  1989
+  C (K&R),C++
+  SY:4
+C 95
+  1995
+C 99
+  1999
+
+*Java
+  1991
+  C++ (ARM)
+  Static explicit typing (RTTI)
+  GC
+  SY:3
+Java 1
+  1995
+Java 2 (v1.2)
+  1998
+*Java 2 (v1.5 beta)
+  2004
+
+J++
+  1997
+  Java 1
+J++ 6.0
+  1999
+
+Limbo
+  1996
+  C 95,Java 1
+  GC
+
+Objective-C
+  1986
+  C (K&R),Smalltalk 80
+  Heap allocation
+
+.NET
+  1999
+
+*C#
+  2000
+  C++ (ISO),Java 2 (v1.2),.NET
+  GC
+  SY:4
+*C# 2.0 (beta)
+  2004
+
+VB.NET
+  2001
+  Visual Basic,.NET
+  http://dmoz.org/Computers/Programming/Languages/Visual_Basic/Visual_Basic.NET/
+
+J#
+  2002
+  J++ 6.0,.NET
+
+Snobol
+  1963
+  Dynamic implicit typing
+  GC
+  DS:strings
+Snobol4
+  1967
+
+Icon
+  1983
+  Snobol4,CLU,C (K&R)
+  http://ringer.cs.utsa.edu/research/icon/  
+
+sh
+  1971
+  Heap allocation
+  DS:strings
+  SY:3
+
+csh
+  1978
+  sh,C
+  Heap allocation
+
+ksh
+  1983
+  sh
+
+awk
+  1978
+  C,Snobol4
+  GC
+nawk
+  1985
+
+Rexx
+  1979
+  PL/I,Basic
+  Heap allocation
+Rexx 3.0
+  1982
+Object Rexx
+  1988
+NetRexx
+  1997
+
+
+bash
+  1989
+  sh,csh,ksh
+
+*Perl
+  1987
+  nawk
+  GC
+  DS:strings,lists
+  SY:5
+Perl 4
+  1991
+*Perl 5
+  1994
+Perl 5.005
+  1998
+Perl 5.6.0
+  2000
+
+JavaScript
+  1995
+  Java
+  GC
+  http://www.oreillynet.com/pub/a/javascript/2001/04/06/js_history.html
+
+Lua
+  1994
+  Perl,Pascal AFNOR
+  GC
+#Lua 3.0
+#  1997
+Lua 4.0
+  2000
+Lua 5.0
+  2003
+
+PHP
+  1995
+  Perl 5
+  GC
+PHP4
+  2000
+PHP5
+  2004
+
+*Tcl
+  1988
+  nawk
+  GC
+  DS:strings
+  SY:2
+Tcl 8.1
+  1999
+
+*Lisp
+  1959
+  Dynamic implicit typing
+  GC
+  DS:lists
+  SY:1
+
+*Scheme
+  Lisp,Algol 60
+  1975
+Scheme MIT
+  1978
+Scheme 84
+  1984
+Scheme R3RS
+  1986
+Scheme R4RS
+  1988
+*Scheme R5RS
+  1998
+
+*Common Lisp
+  1985
+  Scheme MIT,Lisp
+  SY:2
+Common Lisp (ANSI)
+  1994
+
+CLOS
+  1989
+  Common Lisp
+
+Logo
+  1967
+  Lisp
+
+*Python
+  1991
+  Modula-3,C (ANSI)
+  GC
+  DS:strings,lists
+  SY:2
+Python 1.5.2
+  1999
+*Python 2.0
+  2000
+  SY:3
+Python 2.2
+  2002
+  SY:3
+#Python 2.3
+#  2003
+Python 2.4
+  2004
+
+Pike
+  1996
+  C++ (ARM)
+  GC
+
+*Ruby
+  1995
+  Python,Perl,Smalltalk 80,Eiffel 2
+  GC
+  DS:strings,lists
+  SY:4
+Ruby 1.8
+  2003
+
+Cecil
+  1992
+  CLOS,Eiffel
+  GC
+
+Dylan
+  1992
+  CLOS,Smalltalk 80,C++ (ARM)
+  GC
+
+ISWIM
+  1966
+SASL
+  1976
+KRC
+  1981
+
+FP
+  1978
+  SY:1
+FL
+  1985
+
+*ML
+  1977
+  GC
+  DS:lists,datatypes
+  SY:2
+*SML
+  1984
+SML 90
+  1990
+SML 97
+  1997
+
+SML.NET
+  2002
+  SML 97,.NET
+
+*Caml
+  1987
+  SML
+*OCaml
+  1996
+  SY:3
+OCaml 3.0
+  2000
+  SY:4
+
+Pizza
+  1996
+  Java 1,SML
+
+F#
+  2002
+  OCaml 3.0,.NET
+  http://research.microsoft.com/projects/ilx/fsharp.htm
+Nemerle
+  2003
+  http://nemerle.org/
+
+Hope
+  1978
+  ML
+
+Lazy ML
+  1984
+  KRC,ML
+
+Lean
+  1985?
+  SML
+Clean
+  1987?
+Concurrent Clean
+  1989?
+
+Miranda
+  1985
+  KRC,SASL,ML,Hope
+  GC
+
+Haskell
+  1990
+  Miranda,Lazy ML
+  SY:4
+
+Gofer
+  1991
+  Haskell
+
+*Haskell 98
+  1998
+  Haskell,Gofer
+GHC 5.00
+  2001
+GHC 6.0
+  2003
+  
+Mondrian
+  2000
+  Haskell 98,.NET
+
+*Prolog
+  1970
+  GC
+  DS:lists,datatypes
+  SY:1
+Prolog ISO
+  1995
+  SY:2
+
+Erlang
+  1988
+  Common Lisp,Prolog
+
+CLIPS
+  1985
+  Prolog
+CLIPS 5.0
+  1991
+  CLIPS,CLOS
+
+Lambda Prolog
+  1989
+  Prolog,SML
+  SY:4
+
+Life
+  1988
+  Prolog
+
+Mercury
+  1993
+  Prolog,SML 90,Haskell
+  DS:datatypes
+  SY:3
+
+Oz 1
+  1995
+  Life
+  # info from http://www.info.ucl.ac.be/people/PVR/tut101000.ps, p.22
+Oz 3
+  1999
+
+Rebol
+  1998
+  CLOS
+  http://www.rebol.com/
+
+# A+   
+#   APL
+# K
+#   List,APL
+
+F-Script
+  1998
+  Smalltalk 80,APL
+  http://www.fscript.org/
+
+SEQUEL
+  1974
+SEQUEL/2
+  1976
+SQL
+  1977
+ANSI SQL
+  1986
+ISO SQL
+  1987
+SQL-92
+  1992
+SQL-1999
+  1999
+SQL-2003
+  2003
+
+Quilt
+  2000
+  SQL-92
+XQuery
+  2001
+
+Nice
+  2003
+  Java 2 (v1.2),OCaml,CLOS
+  http://nice.sf.net/
+
+Scala
+  2004
+  Java 2 (v1.2),.NET,OCaml
+  http://scala.epfl.ch/

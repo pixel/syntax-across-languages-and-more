@@ -1,0 +1,53 @@
+(* -*- caml -*- *)
+
+open List
+open Printf
+
+class virtual point (x : float) =
+  object
+    val x = x
+    method translate x' = {< x = x +. x' >}
+
+    method virtual length : float
+    method virtual show : string
+  end
+
+class point2d x (y : float) =
+  object
+    inherit point x
+    val y = y
+
+    method length = sqrt(x*.x +. y*.y)
+    method show = sprintf "[%g, %g]" x y
+  end
+
+
+class point3d x (y : float) (z : float) =
+  object
+    inherit point x
+    val y = y
+    val z = z
+
+    method z = z
+    method length = sqrt(x*.x +. y*.y +. z*.z)
+    method show = sprintf "[%g, %g, %g]" x y z
+  end
+
+
+let test p = sprintf "%g %s" p#length (p#translate 1.)#show
+
+let _ =
+  let p2d = new point2d 3. 4. in
+  let p3d = new point3d 1. 2. 2. in
+  let l = [ (p2d :> point) ; (p3d :> point) ] in 
+
+  print_endline (String.concat " " 
+		   (
+		    [ test p2d ; test p3d ] @ 
+		    map (fun p -> string_of_float p#length) l @
+
+		    (* after translate, we still have a Point3d *)
+		    [ string_of_float (p3d#translate 1.)#z ]
+		    (* (p2d#translate 1.)#z is not accepted *)
+		   )
+		 )

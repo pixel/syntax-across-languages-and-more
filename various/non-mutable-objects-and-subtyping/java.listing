@@ -1,0 +1,75 @@
+// -*- java -*-
+
+import java.util.ArrayList;
+
+abstract class Point implements Cloneable {
+    double x;
+
+    Point(double xx) { x = xx; }
+    
+    Point translate(double x)
+    {
+	try {
+	    Point p = (Point) clone();
+	    p.x += x;
+	    return p;
+	} catch (java.lang.CloneNotSupportedException e) {
+	    throw new RuntimeException("??");
+	}
+    }
+
+    abstract double length();
+}
+
+class Point2d extends Point {
+    double y;
+
+    Point2d(double xx, double yy) { super(xx); y = yy; }
+
+    double length()
+    {
+	return Math.sqrt(x*x + y*y); 
+    }
+
+    public String toString()
+    {
+	return "[" + x + ", " + y + "]";
+    }
+}
+
+class Point3d extends Point {
+    double y, z;
+
+    Point3d(double xx, double yy, double zz) { super(xx); y = yy; z = zz; }
+
+    double length()
+    {
+	return Math.sqrt(x*x + y*y + z*z); 
+    }
+
+    public String toString()
+    {
+	return "[" + x + ", " + y + ", " + z + "]";
+    }
+}
+
+public class java {
+
+    public static void test(Point p) {
+	System.out.print("" + p.length() + " " + p.translate(1) + " ");
+    }
+
+    public static void main(String[] args) {
+	Point2d p2d = new Point2d(3, 4);
+	Point3d p3d = new Point3d(1, 2, 2);
+
+	Point[] l = { p2d, p3d };
+
+	test(p2d); test(p3d);
+	for (int i = 0; i < l.length; i++) System.out.print(" " + l[i].length());
+	System.out.println("");
+
+	// after translate, we have to down-cast back to Point3d
+	System.out.println(((Point3d) p3d.translate(1)).z);
+    }
+}

@@ -1,0 +1,17 @@
+http://www.cs.yale.edu/homes/perlis-alan/quotes.html
+http://www.paulgraham.com/paulgraham/quotes.html
+
+#define private public
+    --Spotted in a C++ program just before a #include
+
+Object orientation is in the mind, not in the compiler. -- Alan Cox
+
+Programming language people have a term for making the syntax
+of a language pretty: syntactic sugar. XML is syntactic arsenic. -- Dr. Phillip J. Windley
+
+[...] memory leaks are quite acceptable in many applications [...]
+    -- The Design and Evolution of C++ - Bjarne Stroustrup
+
+C++: The power, elegance and simplicity of a hand grenade.
+
+He who re-invents the wheel, understands much better how a wheel works.

@@ -1,0 +1,65 @@
+
+hum, this need proof. IMO a good shell scripting language can also
+nicely support implementation of abstractions. eg: Ruby
+
+there *are* conflicting things between general purpose and shell
+scripting. here are features good for scripting, but bad for general
+purpose: (IMO of course :)
+
+- be failthrough, give a meaning to everything (think perl). 
+  eg: auto-growing, auto-created arrays/hashes
+- blurring string/number a la Perl (is that really good?)
+- poluting the namespace 
+  (not a such a pb with good namespace handling)
+- dynamic typing (?)
+- get rid of exception declarations (think Java)
+- get rid of control access (public/private/...)
+
+but there are also features that do not conflict with a general
+purpose language (yet again, IMO!):
+
+- at least have a short name for a "print" function,
+  it need not be tied to stdout, eg: "display" in smalltalk
+  (as perlists say, use huffman coding... ruby has function "p" !)
+- have a powerful printing function 
+  eg: interpolated strings, printf/format
+- have an easily available function to convert an object to a string
+  to_s(ruby)/str(python)/Dumper(perl) function
+- a complete system library, including things like system, ``...
+- a reasonable string library
+- powerful lists/arrays having both functionalities
+    When you are using a list, it doesn't mean you don't need
+    indexing. Conversely you sometimes need to remove some elements in
+    an array. Scripting languages (perl...) have blurred lists and
+    arrays successfully (in term of expressivity). Even better, one
+    should be able to easily switch from an list implementation to an
+    array implementation. One could even dream of an optimizing
+    compiler which would make the choice on its own...
+
+    (on this subject i highly recommend http://citeseer.nj.nec.com/peytonjones97bulk.html)
+
+- do not have the file name tied to a name in the source file 
+  (think Java). If there must be a link between the source file name
+  and some class/module, why not do it *automatically* (think
+  Python/OCaml)
+- a powerful debugger
+- an interpreter/compiler that is fast for small programs
+
+
+> To disallow the use of
+> appropriate abstractions in tests like these gives a skewed result, at best.
+
+i don't agree. What you get in that case is whether the language
+without including the libraries is good for scripting.
+
+i advocate that libraries (esp. strings, lists..., but also I/O) are
+an important part of a language.
+
+about libraries (IMO!):
+
+    Without anonymous functions, having simple things like "finding an
+    element in a list" or "a custom sort" is tedious. For example Java
+    doesn't even have a "find" method, acknowledging the difficulty to
+    use "find" without anonymous functions.
+
+    http://merd.net/libraries-need-features.html

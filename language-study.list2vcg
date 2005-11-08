@@ -1,0 +1,85 @@
+#!/usr/bin/perl
+
+sub min { (sort { $a <=> $b } @_)[0] }
+sub max { (sort { $b <=> $a } @_)[0] }
+sub round_down { my ($i, $r) = @_; $i = int $i; $i -= $i % $r; }
+sub round_up { my ($i, $r) = @_; $i = int $i; $i += $r - ($i + $r - 1) % $r - 1; }
+
+my $sons;
+my $was_empty = 1;
+while (<>) {
+    /^\s*#/ and next;
+    s/\s+$//;
+    if (/^\S/) {
+	# new language
+	$important{$_} = s/^\*//;
+	$links{$_} = $was_empty ? [] : [ $lang ];
+	$son{$_} = $was_empty ? $sons++ : $son{$lang};
+	$lang = $_;
+    } elsif (/^  (\d{4})\??$/) {
+	$date{$lang} = $1;
+    } elsif (/^  (http:.*)/) {
+	$url{$lang} = $1;
+    } elsif (/^  (.* typing.*)/) {
+	$typing{$lang} = $1;
+    } elsif (/^  (.*)/) {
+	my @l = split ',', $1;
+	$links{$_} or die "$ARGV $.: unknown lang $_\n" foreach @l;
+	$links{$lang} = \@l;
+    }
+    $was_empty = /^$/;
+}
+
+print '
+graph: { 
+orientation: left_to_right
+stretch: 1
+shrink: 2
+layout_downfactor: 10
+cmin: 20
+smax: 1000
+priority_phase: yes
+straight_phase: yes
+
+';
+
+my $step = 2;
+my $min = round_down(min(values %date), $step);
+my $max = round_up(max(values %date), $step);
+my ($prev);
+for ($date = $min; $date <= $max; $date += $step) {
+    print qq(node: { title: "$date" level: $date  }\n);
+    print qq(edge: { sourcename: "$prev" targetname: "$date" }\n) if $prev;
+    $prev = $date;
+}
+
+print '
+node.color: lightcyan
+edge.color: blue
+
+';
+
+while (my ($k, $imp) = each %importance) {
+    if (!$imp && !$bloated) {
+	delete $date{$k};
+	delete $links{$k};
+    }
+}
+
+while (my ($lang, $date) = each %date) {
+    print qq(node: { title: "$lang" level: $date );
+    print qq(}\n);
+}
+
+print "\n";
+
+while (my ($lang, $links) = each %links) {
+    print qq(edge: { sourcename: "$_"   targetname: "$lang" }\n) foreach @$links;
+}
+
+
+print '
+}
+';
+
+1;

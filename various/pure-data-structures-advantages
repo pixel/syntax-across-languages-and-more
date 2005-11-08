@@ -1,0 +1,87 @@
+> That may be a silly example, but it makes a lot of sense to me and I
+> could see making use of that property.  I guess my next question
+> then would be related to efficiency: isn't there a lot of copying
+> going on if you've got to make a new instance of your symbol table
+> just to add an element?  How does this work out in practice?
+
+That's where you need clever algorithmicians such as Chris Okasaki to
+design persistent data structures with efficient operations --
+ideally, as efficient as for equivalent non-persistent data structures
+(i.e. modified in place).
+
+To continue Jean-Christophe's symbol table example, persistent
+dictionaries can be implemented by balanced binary trees (as in the
+OCaml library module "Map").  Then, adding an entry to a symbol table
+requires at most one branch of the tree to be copied, which takes time
+and space O(log n); the other branches of the tree are simply shared
+between the original and the modified symbol tables.
+
+If you have efficiency concerns, it is interesting to compare the
+Hashtbl and Map modules from the OCaml library.  Both implement the
+dictionary data structure, one imperatively, the other in a purely
+functional way.  You'll find that Map operations are a bit slower than
+Hashtbl operations, but by a factor of 2 or less.  Moreover, the worst
+case for maps is still O(log n), while hash tables can degrade to O(n).
+
+For other data structures, it is much harder to achieve good
+asymptotic complexity for persistent data structures; that's where the
+kind of "tours de force" you see in Okasaki's book come into play.
+
+> Again, I'm not saying efficiency is the only metric for software,
+> but it does concern me when I see a large datastructure copied.  Is
+> there some sort of reference counted sharing going on, or are there
+> actually two copies of the data in memory if you wrote your example
+> in caml?
+
+Sharing is the key.  The beauty of immutable data structures is that
+sharing is always safe.  With well-designed data structures, this can
+lead to a lot more sharing of data in purely functional programs than
+what you typically see in imperative programs.
+
+A few more words on persistent, purely functional data structures.
+They are very useful in a number of cases:
+
+- When your application really needs to "go back in time".  Examples:
+the "back" button on a Web browser; the "undo" facility of a text
+editor; version control systems such as RCS or CVS; etc.  Of course,
+you can implement this by state + undo logs, but after a while the
+structure of the undo logs become quite complex and a purely
+functional data structure starts to make a lot of sense.
+
+- When your application needs to handle gracefully user interrupts
+and unexpected exceptions.  Consider an interactive toplevel loop
+such as Caml's.  In Caml Light, the symbol tables were implemented by
+mutable hash tables.  Thus, the user could interrupt the system in the
+middle of type-checking, when the symbol tables have been partially
+updated.  I had to put a rollback mechanism to undo these changes on
+user interrupt.  In effet, you need some atomic transaction mechanism.
+In OCaml, the symbol tables are purely functional maps, with only one
+reference holding the current stable symbol table.  The reference is
+updated by one atomic assignment when the user input has been
+successfully processed.  You can interrupt the processing at any time,
+the system will always be in a consistent state.
+
+- To implement a mathematical specification "to the letter".  E.g. you
+have an interpreter, type-checker, proof system, program
+transformation, etc, that is specified by inference rules or similar
+mathematical notation, and you wish to implement the spec faithfully
+and quickly.  Using purely functional data structures, the program is
+often a direct transliteration of the specs.  Using imperative data
+structures, you have to think more carefully about undoing
+modifications at the right time, make sure that there is no sharing,
+etc.
+
+- To prove formally properties of a program, especially mechanically
+checked proofs.  There are techniques to reason about imperative
+programs directly, but often a rewrite to a purely functional style
+makes it easier to "import" the program into a proof checker such as
+Coq and prove properties about it.
+
+This said, I agree with Chet that there is no reason to get religious
+about purely functional data structures.  Use what works best for
+you.  And indeed OCaml can support both styles, and its standard
+library offers a mixture of functional and imperative data
+structures.
+
+- Xavier Leroy
+

@@ -1,0 +1,45 @@
+<?
+
+$i = 1;
+$i2 = $i;
+$i2++;
+print "i2: $i2\n";
+print "i : $i\n";
+
+$s = "hello";
+$s2 = $s;
+$s2[0] = "H";
+print "s2: $s2\n";
+print "s : $s\n";
+
+$l = array("hello");
+$l2 = $l;
+array_push($l2, "world");
+print "l2: " . join(" ", $l2) . "\n";
+print "l : " . join(" ", $l) . "\n";
+
+
+class point {
+    function point($x, $y) {
+	$this->x = $x;
+	$this->y = $y;
+    }
+
+    function translate($x, $y) {
+	$this->x += $x;
+	$this->y += $y;
+    }
+
+    function show() {
+	return "Point($this->x, $this->y)";
+    }
+}
+
+$p = new point(0, 1);
+$p2 = $p;
+$p2->translate(1, 1);
+
+print "p2: " . $p2->show() . "\n";
+print "p : " . $p->show() . "\n";
+
+?>

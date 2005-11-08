@@ -1,0 +1,53 @@
+// -*- C++ -*-
+
+#include <iostream>
+#include <string>
+#include <vector>
+
+using namespace std;
+
+template<class V, class C> C sum(const V &v, const C &join = C()) {
+  typename V::const_iterator p, q;
+  C s = C();
+  if (v.begin() != v.end()) {
+    for (p = q = v.begin(), q++; q != v.end(); p = q, q++) s += *p + join;
+    s += *p;
+  }
+  return s;
+}
+
+typedef struct {
+  int x, y;
+} struct_point;
+
+ostream& operator<<(ostream& os, struct_point p) {
+  return os << "{ x = " << p.x << ", y = " << p.y << " }";
+}
+
+int main() {
+  int i = 1;
+  int i2 = i;
+  i2++;
+  cout << "i2: " << i2 << endl << " i: " << i << endl;
+
+  char *ss = strdup("hello");
+  char *ss2 = ss;
+  ss2[0] = 'H';
+  cout << "ss2: " << ss2 << endl << " ss: " << ss << endl;
+
+  string s = "hello";
+  string s2 = s;
+  s2[0] = 'H';
+  cout << "s2: " << s2 << endl << " s: " << s << endl;
+
+  vector<string> l; l.push_back("hello");
+  vector<string> l2 = l;
+  l2.push_back("world");
+  cout << "l2: " << sum(l2, string(" ")) << endl << "l: " << sum(l, string(" ")) << endl;
+
+  struct_point sp = { 0, 1 };
+  struct_point sp2 = sp;
+  sp2.x += 1;
+  sp2.y += 1;
+  cout << "sp2: " << sp2 << endl << " sp: " << sp << endl;
+}

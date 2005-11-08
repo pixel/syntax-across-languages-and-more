@@ -1,0 +1,220 @@
+
+<html>
+  <head>
+    <title>Mutability and sharing of various values in various languages</title>
+  </head>
+
+<body>
+
+The goal is to test how a programming language allows data sharing.
+
+
+<h1>In Various Languages</h1>
+
+I = Immutable, D = Deep, S = Shallow, C = Constructor is Constant (see below)
+
+<table border="1">
+<tr><th>Language   </th><th>integer</th><th>string</th><th>list/array</th><th>struct/object</th></tr>
+
+<tr><td><a href="c++.listing">   C++        </a></td><td>   I   </td><td>  D   </td><td>   D      </td><td>    D        </td></tr>
+<tr><td><a href="php.listing">   PHP        </a></td><td>   I   </td><td>  D   </td><td>   D      </td><td>    D        </td></tr>
+<tr><td><a href="perl.listing">  Perl       </a></td><td>   I   </td><td>  D(1)</td><td>   D      </td><td>    S        </td></tr>
+<tr><td><a href="tcl.listing">   Tcl        </a></td><td>   I   </td><td>  D?  </td><td>   D?     </td><td>    ?        </td></tr>
+
+<tr><td colspan=5></td></tr>
+<tr><td><a href="python.listing">Python     </a></td><td>   I   </td><td>  I   </td><td>   S      </td><td>    S        </td></tr>
+<tr><td><a href="java.listing">  Java       </a></td><td>   I   </td><td>  I   </td><td>   S      </td><td>    S        </td></tr>
+<tr><td><a href="csharp.listing">C#         </a></td><td>   I   </td><td>  I   </td><td>   S      </td><td>   D/S       </td></tr>
+
+<tr><td colspan=5></td></tr>
+<tr><td>                         C              </td><td>   I   </td><td>  S,C </td><td>   S      </td><td>    D        </td></tr>
+<tr><td><a href="smalltalk.listing">Smalltalk</a></td><td>  I   </td><td>  S,C </td><td>   S      </td><td>    S        </td></tr>
+<tr><td><a href="clisp.listing" >Common Lisp</a></td><td>   I   </td><td>  S,C </td><td>   S      </td><td>    S        </td></tr>
+<tr><td colspan=5></td></tr>
+<tr><td><a href="ocaml.listing" >OCaml      </a></td><td>   I   </td><td>  S   </td><td>  I/S     </td><td>    S        </td></tr>
+<tr><td><a href="scheme.listing">Scheme     </a></td><td>   I   </td><td>  S   </td><td>   S      </td><td>    S        </td></tr>
+<tr><td><a href="ruby.listing"  >Ruby       </a></td><td>   I   </td><td>  S   </td><td>   S      </td><td>    S        </td></tr>
+</table>
+
+(1) In Perl, <tt>"="</tt> deep copies strings, whereas function calls use shallow copy.
+
+<hr><h1>Explainations</h1>
+
+<h2>Deep vs Shallow Copy</h2>
+
+The simplest explanation is an example in C:
+
+<pre>
+Point *p2;
+ p2 =  p; // shallow copy
+*p2 = *p; // deep copy
+
+char *s2;
+s2 = s;        // shallow copy
+strcpy(s2, s); // deep copy
+</pre>
+
+When you <b>deep copy</b> a value, it <b>breaks</b> any sharing it has.
+<br>
+When you <b>shallow copy</b> a value, it <b>keeps</b> any sharing it has.
+
+<p>
+Languages using deep copy by default always have a special way to get a shallow copy:
+<ul>
+<li>in C: using the address-of operator "<tt>&amp;</tt>"
+<li>in Perl: take the reference with "<tt>\</tt>" <a href="#1">[1]</a>
+<li>in C++, Perl and PHP: a function can specify that a parameter should be passed by reference
+</ul>
+<p>
+
+Languages using shallow copy by default sometimes have a way to get deep copy: <tt>copy</tt> in Smalltalk, <tt>Clone</tt> in C#, <tt>copy.copy</tt> in Python...
+(<a href="http://merd.net/pixel/language-study/syntax-across-languages.html#Object Oriented & Reflexivity">more</a>, search "object cloning")
+
+
+
+
+<h2>Immutable Value</h2>
+
+An example of immutable value is <tt>1</tt>. The programming language doesn't
+give you any functions that would allow you to modify its value.
+
+<p>
+Deep or shallow copying have the same result for immutable values.
+
+  <h3>Mutating variables containing an immutable value</h3>
+
+  Most languages introduce a (more or less magical) construct to modify the
+  value contained by a variable. 
+
+  <ul>
+   <li>In C++, overloading plus pass-by-reference handles this. Even "<tt>=</tt>" can be redefined.
+
+   <li>In Java, Python or Ruby: "<tt>=</tt>" is <b>the</b> operator to change
+   the value of a variable. "<tt>+=</tt>" and "<tt>++</tt>" <a href="#2">[2]</a> are not methods
+   applied on the object, but mere macros relying on "<tt>=</tt>".
+  </ul>
+
+  The usage of 
+  <ul><li>immutable values together with special operators alike "<tt>+=</tt>"
+      <li>and implictly deep copied mutable values
+  </ul>is somewhat blurred.
+
+
+  <h3>Strings</h3>
+
+  Strings can be mutable or immutable. The current trend is immutable strings (Java, C#, Python) or deep copied mutable strings (Perl, PHP, C++)
+
+  <h3>Read-only strings</h3>
+
+  A mutable string can be <i>constant</i>. This is used for constant strings
+  encountered in a program:
+  <p>
+  In C, Smalltalk and Common Lisp, <tt>"hello"</tt> is a <i>constant</i>
+  value. If you try to modify it, you get a runtime error. 
+  <p>
+  Ruby and OCaml don't have readonly strings, all strings are mutable:
+  <ul>
+   <li>Ruby behaves as if a new <tt>"hello"</tt> string is created each time it is
+       encountered. In practice Ruby uses <a href="http://www.paulgrenyer.co.uk/articles/copy_on_write.htm">Copy On Write</a>
+       to duplicate the strings only when needed.
+   <li>strings found in OCaml programs are mutable and shared:
+    <pre>
+       # let f () = "hello" in  (f()).[0] &lt;- 'H'  ;  f();;
+       - : string = "Hello"
+    </pre>
+  </ul>
+
+
+<table border="1">
+<tr><th>Language</th><th>Code</th><th>Runtime Result</th></tr>
+<tr><td>C</td><td><tt>"hello"[0] = 'H';</tt></td><td>segmentation fault</td></tr>
+<tr><td>Smalltalk</td><td><tt>'hello' at: 1 put: $H</tt></td><td>object is read-only</td></tr>
+<tr><td>Common Lisp</td><td><tt>(setf (aref "hello" 0) #\H)</tt></td><td>Attempt to modify a read-only string</td></tr>
+<tr><td>Scheme</td><td><tt>(string-set! "hello" 0 #\H)</tt></td><td></td></tr>
+<tr><td>OCaml</td><td><tt>"hello".[0] &lt;- 'H'</tt></td><td></td></tr>
+<tr><td>Ruby</td><td><tt>"hello"[0] = "H"</tt></td><td></td></tr>
+
+<tr><td>Perl</td><td><tt>"hello" =~ s/h/H/</tt></td><td>Can't modify constant item</td></tr>
+</table>
+
+  <h3>Mutable Numbers?!</h3>
+
+  A language that would seek complete orthogonality could treat numbers the
+  same as other objects, i.e. have mutable numbers (Haskell notwithstanding of course).
+
+<ul>
+
+<li>With shallow copy, one gets:
+
+<table><tr>
+<td><pre>
+i = 1
+j = i
+j = j + 1
+</pre></td>
+
+<td>&nbsp; behaving alike this C++ code &nbsp;</td>
+
+<td><pre>
+int *i = new int(1);
+int *j = i;
+*j = *j + 1;
+</pre></td>
+
+</tr></table>
+
+And both <tt>i</tt> and <tt>j</tt> are now 2 !
+
+<p>This is really counter-intuitive ; no programming language have this behaviour.
+
+<li>With deep copy, the behaviour of mutable numbers is alike immutable
+numbers, with the advantage (?) of having "<tt>+=</tt>" and "<tt>++</tt>"
+being really methods.
+
+</ul>
+
+The main reason for having immutable numbers was performance and memory
+consumption. Maybe this will change?
+
+
+<!-- ------------------------------------------------------------------------------->
+<hr><h1>Notes</h1>
+
+<p><a name="1">[1]</a> The address-of operator of Perl and C are different
+from the "<tt>ref</tt>" reference constructor of SML and OCaml. In Perl and C, it allows sharing the <b>existing</b> value, whereas ML's "<tt>ref</tt>" <b>introduces</b> sharing.
+
+<table><tr>
+<td width="40%"><pre>
+int i = 1;
+int *p = &i;
+*p = *p + 1;
+</pre>
+<tt>i</tt> is modified
+</td>
+
+<td><pre>
+let i = 1 in
+let p = ref i in
+p := !p + 1
+</pre>
+<tt>i</tt> is not modified
+</td>
+</tr></table>
+
+<p><a name="2">[2]</a> To be precise "<tt>++</tt>" is not defined in Ruby. Some <a href="http://www.ruby-talk.org/cgi-bin/scat.rb/ruby/ruby-talk/37865">explanation</a> about this.
+
+<!-- ------------------------------------------------------------------------------->
+<hr><h1>Credits</h1>
+<ul>
+<li>Marcin 'Qrczak' Kowalczyk (fix the explanation about strings behaviour in OCaml and Ruby)
+</ul>
+
+<hr>
+<address><a href="mailto:pixel@merd.net">Pixel</a></address>
+This document is licensed under <a href="http://www.gnu.org/copyleft/fdl.html">GFDL</a> (GNU Free Documentation License).
+<p>Release: $Id: index.html,v 1.4 2002/12/11 19:56:40 pixel Exp $
+
+<p><A HREF="http://www.estat.com/getstats?serial=1400113423"><IMG SRC="http://perso.estat.com/cgi-bin/perso/1400113423?page=language-study" BORDER=0></A>
+
+</body>
+</html>

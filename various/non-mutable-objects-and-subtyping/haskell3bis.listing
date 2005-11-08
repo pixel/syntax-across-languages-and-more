@@ -1,0 +1,38 @@
+-- -*- haskell -*-
+
+data Point = Point2d(Double, Double) | Point3d(Double, Double, Double)
+	     deriving Show
+
+translate (Point2d(x, y   )) x2 = Point2d(x+x2, y)
+translate (Point3d(x, y, z)) x2 = Point3d(x+x2, y, z)
+
+my_length (Point2d(x, y   )) = sqrt (x * x + y * y)
+my_length (Point3d(x, y, z)) = sqrt (x * x + y * y + z * z)
+
+add (Point3d(x1, y1, z1)) (Point3d(x2, y2, z2)) = Point3d(x1 + x2, y1 + y2, z1 + z2)
+add (Point2d(x1, y1    )) (Point2d(x2, y2    )) = Point2d(x1 + x2, y1 + y2)
+add (Point2d(x1, y1    )) (Point3d(x2, y2, _ )) = Point2d(x1 + x2, y1 + y2)
+add (Point3d(x1, y1, _ )) (Point2d(x2, y2    )) = Point2d(x1 + x2, y1 + y2)
+
+get_z (Point2d _) = error "don't call get_z with a Point2d"
+get_z (Point3d(_, _, z)) = z
+
+p2d = Point2d(3, 4)
+p3d = Point3d(1, 2, 2)
+
+l = [ p2d, p3d ]
+
+test p = (my_length p, translate p 1)
+test1 = (test p2d, test p3d, map my_length l, 
+
+         -- after translate, we still have a Point3d
+	 get_z (translate p3d 1))
+
+twice p = add p p
+test2 = (twice p2d, twice p3d, map twice l)
+test3 = (add p2d p3d, add p3d p2d)
+
+-- after twice, we still have a Point3d
+test4 = get_z (twice p3d)
+
+main = print (test1, test2, test3, test4)

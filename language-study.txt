@@ -1,0 +1,1163 @@
+-*- fill-column: 1000 -*- This document is licensed under GFDL (GNU Free Documentation License).
+********************************************************************************
+Various
+
+  An Introduction to Programming Languages http://www.andrewcooke.free-online.co.uk/andrew/writing/lang.html (very good)
+  Structure and Interpretation of Computer Programs http://mitpress.mit.edu/sicp/full-text/sicp/book/book.html
+  Concepts, Techniques and Models of CP http://www.info.ucl.ac.be/~pvr/book.ps.gz
+
+  How To Design A (Scripting) Language (mostly syntax) http://www.geocities.com/tablizer/langopts.htm
+
+  http://web.cs.mun.ca/~ulf/pld/  
+  http://lsi.uniovi.es/~labra/APL.html
+  collected features: http://www.cs.colorado.edu/~humphrie/pl/
+  list The Dictionary of Programming Languages http://www.erols.com/ziring/dopl.html
+
+  early history http://www.computer.org/students/looking/spring97/janlee/
+  simple history http://www.princeton.edu/~ferguson/adw/programming_languages.shtml
+  history diagram http://perso.wanadoo.fr/levenez/lang/ http://www.epemag.com/zuse/Images/43ab.gif
+  features http://www.cs.fsu.edu/~engelen/courses/COP4020/notes1.html
+  features http://www.engin.umd.umich.edu/CIS/course.des/cis400/maxim/lectures/chp2.htm
+
+  Programming Languages Genealogy Project at http://everything2.com
+
+  Being Popular http://www.paulgraham.com/popular.html
+  Things to Say When You're Losing a Technical Argument http://pigdog.org/auto/mr_bads_list/shortcolumn/1914.html
+  rot13 in different languages (string manipulation) http://ucsub.colorado.edu/~kominek/rot13/
+  vier-neun in different languages (constraints programming) http://members.home.net/js.graham/vierneun.html
+  OO Example Code http://w3.one.net/~jweirich/oostuff/ http://www.angelfire.com/tx4/cus/shapes/index.html
+  pleac (Programming Language Examples Alike Cookbook) http://pleac.sf.net/
+  Examples of programs in different programming languages http://www.uni-karlsruhe.de/~uu9r/lang/html/lang.en.html
+
+  reference papers http://www.cs.uu.nl/people/franka/ref.html
+
+  Dylan design notes http://oop.rosweb.ru/dylan/design-notes/home.html
+
+********************************************************************************
+Syntax
+
+  888l syntax (http://www.cs.mdx.ac.uk/harold/papers/javaspae.html):
+    1. In Java the 32 bit numeral 71 can be made into a 64 bit numeral by appending a letter l, as in
+       71l. Arguably, the notation should make this sort of difference clearer. Or it would have been
+       easier if Java had been designed so numerals took just as many bits (char, int, long) as they 
+       required, and the compiler complained when there was numeric overflow.
+  suffix casts are more OO
+
+  Indentation to show block structure? http://www.cs.man.ac.uk/~pjj/cs2112/langdes/indent.html
+
+  Blocks and scoping (C vs C++, Python)
+
+  OO Examples http://w3.one.net/~jweirich/oostuff/
+
+  overloading: Koenig lookup http://devresource.hp.com/devresource/Docs/TechPapers/KoenigLookup.html
+
+  short-hands (things like perl's $_) http://www.research.microsoft.com/scripts/pubs/view.asp?TR_ID=MSR-TR-2000-03
+
+  Syntax Checking the Scripting Way http://www.unixreview.com/documents/uni1018986621203/
+
+  SML to OCaml http://www.ps.uni-sb.de/~rossberg/SMLvsOcaml.html
+
+********************************************************************************
+Macros
+
+  (from http://lambda.weblogs.com/discuss/msgReader$1245)
+   One use of macros is emulating higher-order polymorphic functions. In C, this is the only way to
+   achieve parametric polymorphism. For example, see "man 3 queue" on a BSD system. In C++, templates
+   serve the same purpose. Functional languages offer higher-order polymorphic functions natively.
+
+   Macros are essential in writing custom control structures in eager languages, e.g., assertions,
+   three-way conditionals, guarded execution (similar to evaluation of a clause in Prolog or a list
+   comprehension expression in Haskell).
+
+   Macros can be used as a poor-man configuration language: conditional compilation in C/C++,
+   configuration language in Lisp and Scheme. In a more refined form, macros can implement a limited
+   module system.
+
+  proposition for haskell (talks about other languages too) http://www.cl.cam.ac.uk/~kw217/research/papers.html#Wansbrough99:Macros
+  Meta Haskell (very good!) http://www.research.microsoft.com/~simonpj/papers/meta-haskell/
+
+********************************************************************************
+Value sharing, aliasing, references/pointers
+
+  simulating pointers in scheme,Python,ruby http://c2.com/cgi/wiki?SinisterSchemeSamplePerplexesPythonPorter
+
+
+********************************************************************************
+Lazyness, Iterators
+
+  Sather iterators http://www.icsi.berkeley.edu/~sather/Publications/toplas.html
+
+
+********************************************************************************
+Modules / package
+
+    Provide an abstraction or information hiding mechanism so that a module's
+  implementation can be changed without requiring any change to other modules. In
+  this respect they are similar to objects in an object-oriented language, though
+  a module may contain many procedures and/or functions which would correspond to
+  many objects.
+  
+    A module often has its own name space for identifiers so the same identifier
+  may be used to mean different things in different modules.
+  
+  created in Modula-2 (1978)
+  Available in all used languages except C
+
+********************************************************************************
+Polymorphism
+
+                 Polymorphism
+               /             \
+        Unified              Ad'hoc
+       /      \             /      \
+   Para     Inclusion   Overload   Coercion
+  ML,C++    subtyping  haskell,C++    C
+
+  explained in java http://www.javaworld.com/javaworld/jw-04-2001/jw-0413-polymorph_p.htm
+  see also http://research.microsoft.com/Users/luca/Papers/OnUnderstanding.pdf
+
+********************************************************************************
+Typing
+
+  - Static vs dynamic
+    static typing ensure no type error can occurs at runtime (except for dynamic cast, cf RTTI)
+
+  - Strong typing / weak typing (!! meaning can differ)
+    1: avaibility of a lot of coercions
+    2: can the program inappropriately use a value of one type as another type
+
+  - Type equivalence
+    name or structural
+
+  Fortran: int, floating points
+
+  format ocaml typing http://www.cs.jhu.edu/~scott/plbook/book/html/main.html
+
+  (not) complete type inference 
+     ocaml http://caml.inria.fr/archives/200111/msg00362.html
+
+  polymorphism and side-effects, value restriction 
+     http://www.cs.rice.edu/CS/PLT/Publications/lasc95-w.ps.gz
+     http://cm.bell-labs.com/cm/cs/what/smlnj/doc/Conversion/types.html
+
+  Various stuff about types (existancial types, subtyping) http://research.microsoft.com/Users/luca/Papers/OnUnderstanding.A4.pdf (good)
+    Quest: powerful subtyping http://gatekeeper.dec.com/pub/DEC/SRC/research-reports/abstracts/src-rr-045.html
+
+  typing C&pascal vs ML vs Perl http://perl.plover.com/yak/typing/typing.html
+
+  Dimension Types http://citeseer.nj.nec.com/kennedy94dimension.html
+
+  Alice (SML + first class modules + some RTTI + open types (?))
+    http://www.ps.uni-sb.de/alice/
+
+  Using types known at run-time in static typing (eg: getCode "FFT" "fft" loads code with type ...)
+    http://citeseer.nj.nec.com/shields97dynamic.html
+
+  Soft typing http://merd.net/types.html#soft_typing
+
+  rank 2 intersection types http://lambda.di.unito.it/rank2/
+
+  printf-like typing
+    - Cayenne (see below)
+    - ocaml's printf (special typing done by the compiler)
+      http://caml.inria.fr/oreilly-book/html/book-ora076.html#toc105
+    - ocaml's printf could also be achieved via camlp4 (?)
+    - you can also give up the sugar and write it (irk!):
+        format (int oo lit " is " oo str oo eol)
+      instead of
+        sprintf "%d is %s\n"
+      see "Functional Unparsing" http://www.brics.dk/RS/98/12/
+                                 http://tkb.mpl.com/~tkb/software.html (in ocaml)	
+				 http://www.informatik.uni-bonn.de/~ralf/publications.html#J11 (in haskell)
+
+  dependent types
+     (stalled though) http://www.ececs.uc.edu/~hwxi/DML/DML.html
+
+  ****************************************
+  Haskell typing
+  
+  Typing haskell in haskell http://www.cse.ogi.edu/~mpj/thih/
+  
+  Nuke contexts on data type declarations http://www.cs.chalmers.se/~rjmh/Haskell/Messages/Display.cgi?id=302
+  
+  existential types 
+    http://www.numeric-quest.com/haskell/hcompanion/extensions.html
+    http://www.mail-archive.com/haskell@haskell.org/msg08073.html
+    http://www.mail-archive.com/haskell@haskell.org/msg04998.html (dynamic type class casts proposal)
+    Combining Type Classes And Existential Types http://citeseer.nj.nec.com/laufer94combining.html
+
+  Polymorphic recursion
+    f :: (Eq a) => a -> Integer -> Bool
+    f x 0 = x == x
+    f x n = f [x] (n-1)
+
+  Generic default method (a la ``=='' in class Eq)
+    http://research.microsoft.com/~simonpj/Papers/derive.ps.gz
+    http://www.generic-haskell.org
+
+  Extending Fold and Unfold to Exponential (recursive) Types
+    http://citeseer.nj.nec.com/293490.html
+  
+  Overloading and Polymorphic Recursion with Decidable Type Inference
+    http://www.dcc.ufmg.br/~camarao/CT/
+    http://www.cse.ogi.edu/~mbs/pub/overloading/
+
+  A Second Look at Overloading http://citeseer.nj.nec.com/odersky95second.html
+
+  Cayenne type system http://www.cs.chalmers.se/~augustss/cayenne/
+
+********************************************************************************
+Analysis
+
+  Terminaison, space bound... http://www.cs.chalmers.se/~pareto/t.ps (good general intro)
+
+  design by contract: http://www.elj.com/eiffel/dbc/
+  Behavioral Contracts and Behavioral Subtyping http://citeseer.nj.nec.com/findler01behavioral.html
+
+  Extended Static Checking for Java http://research.compaq.com/SRC/esc/
+  (bound checking, null pointers dereference, bad down-casting...)
+  
+  linux kernel source checking http://www.stanford.edu/~engler http://www.stanford.edu/~engler/mc-osdi.ps
+             http://www.stanford.edu/~engler/p401-xie.pdf
+
+  Soft Typing http://merd.net/types.html#soft_typing
+
+ 
+********************************************************************************
+Memory management
+
+  The Memory Management Reference http://www.xanalys.com/software_tools/mm/ (very good)
+    (per languages http://www.xanalys.com/software_tools/mm/articles/lang.html)
+
+  Garbage Collection Can Be Faster Than Stack Allocation (in case you have
+  plenty of memory and don't care about keeping a lot of it allocated for a long
+  time) http://citeseer.nj.nec.com/appel87garbage.html
+
+  exception handling with manual memory management
+    a false sense of security http://cseng.aw.com/book/related/0,3833,020163371X+11,00.html
+
+  safe memory
+    http://www.srcf.ucam.org/~mrs35/comp/safe-c/
+
+  slab allocator (caching of pre-created objects when using many same objects and the cost of creating the object is important)
+    http://citeseer.nj.nec.com/bonwick94slab.html
+
+  region inference: replace most (in some programs, all) of the need of GC by stack-based memory management
+    introductions:
+      http://www.diku.dk/research-groups/topps/activities/kit2/summerschool/toc.html
+      http://www.acm.org/sigplan/pldi/pldi2001/pldi01-presentations/DavidGay.pdf
+      http://www.acm.org/sigplan/pldi/pldi2001/pldi01-presentations/DavidGay.ppt
+      http://www.memorymanagement.org/glossary/r.html#region.inference
+    http://citeseer.nj.nec.com/tofte98region.html
+    Portable, Modular Expression of Locality http://www.stoutamire.com/david/publications.html
+
+********************************************************************************
+OO
+
+  http://ootips.org/
+
+  simula history http://www.ifi.uio.no/~kristen/FORSKNINGSDOK_MAPPE/F_OO_start.html
+
+  object-centric: Self, JavaScript, ... (singletons)
+  class-centric: Smalltalk, C++, Java, OCaml ...
+  method-centric: CLOS, Dylan, ...
+  mixed: object&class-centric (Ruby)
+
+  object-oriented = data abstractions + object types + type inheritance
+
+  class == first-class namespace
+  ``inheritance emerged in Simula as a generalization of block nesting''
+  
+  first class citizen defined in
+  http://www.cs.chalmers.se/~patrikj/poly/afp98/genprogintro.ps.gz page 1
+
+  the case against "new" single entry point for object creation http://www.ddj.com/documents/s=7027/ddj0204a/0204a.htm
+    - "new" is monomorphic
+    - "new" always create a new object in memory
+  
+  OO is a moving target http://www.paulgraham.com/paulgraham/reesoo.html
+
+  O'Haskell subtyping http://www.cs.chalmers.se/~nordland/ohaskell/dtp.ps.gz
+
+  Covariance and contravariance http://citeseer.ist.psu.edu/castagna94covariance.html (good)
+  
+  (http://research.compaq.com/SRC/personal/luca/TheoryOfObjects/FAQ.html)
+  - What is the difference between inheritance and subtyping?
+  Subtyping is a relation between (object) types, having to do with keeping track of the messages that
+  objects can accept. Inheritance is a relation between classes, having to do with the
+  superclass-subclass relation and with method reuse. The usual connection between inheritance and
+  subtyping is the following: a subclass generates objects whose type is a subtype of the objects
+  generated by a superclass.
+  Initially, object-oriented languages confused classes with object types, and therefore ended up
+  blurring the distinction between implementations (classes) and interfaces (object types), and between
+  inheritance (code sharing) and subtyping (interface sharing). Recent object-oriented languages are
+  designed to make these distinctions and to take advantage of them.
+
+  introductory/various http://www.andrewcooke.free-online.co.uk/andrew/writing/oop.pdf
+
+  OOP criticism http://www.geocities.com/tablizer/oopbad.htm
+
+  Does OOP really separate interface from implementation? http://pobox.com/~oleg/ftp/Computation/Subtyping/
+
+  pbs with subtyping http://marshall-cline.home.att.net/cpp-faq-lite/proper-inheritance.html
+
+  Intersection Types and Bounded Polymorphism http://citeseer.nj.nec.com/54630.html
+
+  MacQueen HOT languages http://www.cs.bell-labs.com/who/dbm/Marktoberdorf/paper-a4.ps
+
+  design patterns
+    http://citeseer.nj.nec.com/bosch98design.html
+
+  multi methods
+    Efficient Compression of Generic Function Dispatch Tables http://www.cs.dartmouth.edu/reports/abstracts/TR2001-404/
+    Fast Algorithms for Compressed Multi-Method Dispatch Tables Generation http://citeseer.nj.nec.com/dujardin96fast.html
+    http://citeseer.nj.nec.com/ferragina99multimethod.html
+  late-binding (dispatching) in various languages comparison http://perso-info.enst-bretagne.fr/~beugnard/papiers/lb-sem.shtml
+
+********************************************************************************
+AOP
+
+  aspect programming seems to be give a way
+  - reflexivity: give a way to ``advice'' functions (think lisp), 
+                 aka doing things before/after a function call (enable logging, link an object to another)
+  - to rewrite a program in a more efficient way (de-foresting, only pass part of an object in corba calls)
+
+  aspectJ http://aspectj.org/servlets/AJSite?channel=documentation&subChannel=papersAndSlides (simple, demagogue)
+  http://www.parc.xerox.com/csl/groups/sda/publications/papers/Kiczales-ECOOP97/ (moot, verbose)
+
+********************************************************************************
+Languages critiques
+
+  http://tunes.org/Review/Languages.html
+  http://www.lib.uchicago.edu/keith/crisis/
+  comparaison for Scientific Processing http://www.azstarnet.com/~dmcclain/LanguageStudy.html
+
+  An empirical comparison of C, C++, Java, Perl, Python, Rexx, and Tcl for a search/string-processing 
+    http://citeseer.nj.nec.com/311372.html
+
+  simple OO features collected http://www.approximity.com/ruby/Comparison_rb_st_m_java.html http://www.smallscript.org/Language%20Comparison%20Chart.asp
+
+  Why People Aren't Using Haskell http://www.jelovic.com/articles/why_people_arent_using_haskell.htm
+  Haskell v Ada v C++ v Awk v ... http://haskell.org/papers/NSWC/jfp.ps
+
+  Return values ignoring
+    ignoring
+    - Algol68, C, C++, C#, Java
+    - Perl, Tcl, Python, Ruby, Lisp, Scheme, PHP(?)
+    not ignoring
+    - Pascal, Modula-2, Modula-3, Ada
+    - MLs (SML, Caml, OCaml), Haskell, Mercury
+    not a choice
+    - Prolog (no functional syntax)
+    - Forth, PostScript (stack based, need explicit dropping)
+
+  ****************************************
+  C:
+  The Case Against C http://www.comp-inspirations.com/docs/casec.pdf
+  
+  ****************************************
+  Java:
+  - no "const"ness for parameters/methods (a la C++)
+  - no parametric polymorphism
+  - no continuations (esp. closure), no local functions
+  - no functional programming
+  - basic library objects are final (eg: String)
+  - integers overflow, and no operator overloading to define your own bignums
+  - you can discard return value of functions without warning
+  - no variants (including enums)
+  - explicit typing
+  - no ``foreach'' or ``each'' operator/keyword
+  - critique http://www.cs.mdx.ac.uk/harold/papers/javaspae.html
+  - critique http://www.jwz.org/doc/java.html
+  - critique: Java Infrequently Asked Questions http://www.norvig.com/java-iaq.html
+  - critique: not typesafe http://www.cis.upenn.edu/~bcpierce/courses/629/papers/Saraswat-javabug.html
+  - critique: Double-Checked Locking is Broken http://www.cs.umd.edu/~pugh/java/memoryModel/DoubleCheckedLocking.html
+  - critique: 10 Reasons We Need Java 3.0 http://www.onjava.com/pub/a/onjava/2002/07/31/java3.html
+  JVM:
+    It is well known (e.g. see the Kawa implementation of Scheme on the
+    JVM) that the Java Virtual Machine is not well suited for functional
+    programming: function closures and tail-recursion calls (which are
+    actually jump with arguments) do not exist in the JVM, and emulating
+    them (e.g. closures as instances of specially generated classes) is
+    quite inefficient. The JVM is not as universal as Sun's marketing hype
+    claim it is...
+  will-be generics http://www.onjava.com/pub/a/onjava/2001/11/14/rmi3.html
+
+  ****************************************
+  Java 2:
+  + enums
+
+
+  ****************************************
+  C#:
+  java-like, but enum available
+    + foreach
+    + no difference between native values (ints...) and objects
+    + "+" operator is symmetric 2.2 + " " is "2.200000 "  and  " " + 2.2 is " 2.200000"
+      (weird? well this is explained by string operator+(string,object) and string operator+(object,string) being defined)
+    / java has exceptions in prototype, C# doesn't
+    / goto used instead of labeled break's
+    - no closure, no here function (nor "inner" methods)
+    - no default parameters
+      (http://www.gotdotnet.com/team/csharp/Information/faq/faq.aspx)
+        The reason we prefer overloading as the solution to this problem is that it allows you, 
+        at a later time, to change the default value of a parameter without having to recompile 
+        existing client code. With C++ style default values, the defaults get burned into the   
+        client code, and you can therefore never change them once you've published an API.      
+
+  - s1 == s2 is deep comparison, whereas (object) s1 == s2  is shallow comparison!
+  - why is true.ToString() giving "True" instead of "true"?
+  - no parametric polymorphism
+  - "break" mandatory for each case of a "switch", even for "default"
+  - Fergus Henderson http://www.haskell.org/pipermail/haskell-cafe/2000-November/000047.html
+
+  Mark Shields on C# http://www.cse.ogi.edu/~mbs/pub/csharp/talk.pdf
+  FAQ about C# http://www.gotdotnet.com/team/csharp/Information/faq/faq.aspx
+  http://www.25hoursaday.com/CsharpVsJava.html
+
+  - buffer overflow and safeness:
+    > Ah, that's the solution! Lets just write -proper- code.
+    > 
+    > Chain saw guards - not needed, just use them properly!
+    > Seat belts - not needed, just drive properly!
+    > Languages with checks - not needed - just code properly!
+    > Condoms ..., er, um....
+
+  ****************************************
+  C#2: (whidbey)
+
+  ++ generics
+
+  ****************************************
+  C#3:
+
+  ++ concise lambda expressions with type inference
+  + implicitly typed local variables (partial type inference)
+  + list comprehension, sql alike (linq)
+  + "extension methods", ie add functions to existing classes, and call them using method call syntax
+  + anonymous types
+
+  ****************************************
+  Eiffel:
+  -- no closures (a not-yet-standardized extension for Eiffel implements closures. Joachim Durchholz on c.l.f.)
+
+  ****************************************
+  Sather:
+  ++ partial type inference http://www.icsi.berkeley.edu/~sather/Documentation/LanguageDescription/webmaker/DescriptionX2Echapter2-1.html#HEADING1-167
+
+  http://citeseer.nj.nec.com/stoutamire96analysi.html
+
+  ****************************************
+  D:
+  http://www.digitalmars.com/d/
+  -- no boolean type
+  -- templates a la Ada => limited genericity and no container type (except for the builtin "array")
+  - fall through cases in a "switch"
+  + /+ ... +/ comments which can nest
+  anonymous functions and nested functions but no closures
+  interfaces a la Java, no multiple-inheritance
+  'xxx' strings a la perl  
+  some reflexivity
+       
+  ****************************************
+  C++:
+  - not strongly typed
+  - you can discard return value of functions without warning
+  - here is a better syntax for C++ http://www.csse.monash.edu.au/~damian/papers/PS/SPECS.ps
+  - What's wrong with C++ templates? http://www.kuro5hin.org/story/2003/5/26/22429/7674
+
+  more precisely STL:
+  - errors messages not readable (see http://www.bdsoft.com/tools/stlfilt.html)
+  - hard to debug
+  - compilation time
+  - missing many features (but very expandable) like join, cout<<vector
+
+  future directions:
+    I've just listened to this (actually, I'm writing this to a text file, as lambda seems
+    to be down, and will post tomorrow), all the way through.
+    * They seem to ignore the complexity of the language when wondering why libraries
+      aren't more popular (imho that complexity - which forces "programming conventions" -
+      stops libraries from working well together unless you lock in to one supplier)
+    * In general, there seems to be a need for guidance on conventions (look at all the
+      effective C++ books etc). Does it really need to be such an "open" language?
+      Especially as it seems (the impression I get from the talk) to be slipping from a
+      general language to one for systems programming.
+    * No-one mentioned GC until the very last question, and then the response only
+      extended to this. Don't they understand that no-one in their right mind wants to
+      manage memory after using a high level language? Not even when it's hidden as much
+      as possible by conventions and smart pointers.
+    * People seemed very impressed by ACE (a big emphasis on distributed computing).
+    * Stroustrup seemed quite content to hit a compiler error "once or twice a week"
+      ("doesn't warp the design").
+    * This book was mentioned; looks interesting (modulo usual rider about things
+      supported in other languages looking new and important just because they are complex
+      in C++).
+
+  ****************************************
+  Ada:
+
+  - languages *do* reduce errors
+  http://www2.dynamite.com.au/aebrain/ADACASE.HTM
+  http://www.stsc.hill.af.mil/crosstalk/2000/aug/mccormick.asp
+  http://www.rational.com/products/whitepapers/337.jsp
+  vs Java http://libre.act-europe.fr/Why_Ada/ada-on-jvm.pdf
+
+  ****************************************
+  Python:
+  -- library mixes functions/methods, in-place/functional (sort is in-place whereas strings are non-mutable)
+  -- (obsolete in 2.2) no block scoped variables (eg: def f: for i in range(2): pass \n return i  is legal)
+  - (obsolete in 2.0) no closure. solution used, default parameter to the function (eg: def f(i=i) ...)
+  - instructions vs expressions  
+  - lambda (for anonymous functions) want an expression, restricting a lot its use
+  - how to call insert taking a variable number of arguments when you have a tuple:
+    Listbox.insert(self, "end", tuple(l))  doesn't work because you must <<flatten>>
+  - syntactically clean/poor (no i++, but have operator overloading)
+  - vs perl http://lwn.net/1999/0826/a/tc-observations.html
+
+  ?? Functional Programming in Python http://gnosis.cx/publish/programming/charming_python_13.txt
+  Functional programming is syntaxically hard in Python: http://www.p-nand-q.com/lambda.htm
+  Python to Perl Conversions http://mail.python.org/pipermail/python-list/1999-August/009692.html
+  compared to Lisp http://www.norvig.com/python-lisp.html
+
+  ****************************************
+  Tcl
+
+  Why you should not use Tcl http://www.vanderburg.org/Tcl/war/
+
+  ****************************************
+  Perl
+
+  + closures enable functional programming.
+  + OO is possible (even if encapsulation is weak)
+  + lot of nice sugar
+  + ref count GC allows destruction of objects ASAP
+  
+  - lot of ugly sugar
+  - some important types missing (enums, set, assoc-list (aka hash which do not
+  loose the order), hash on any type (not only strings))
+  - ref count GC don't handle cycles
+  - perl never releases allocated memory
+
+  perl's advantages for conciseness (and i said conciseness, not more!) over other languages are: 
+  * no variable declaration/initialisation needed
+  * no differenciation between ints, floats and strings, with very few overloaded operators&functions
+  * read-safe and auto-allocate-on-write data-structures
+  * $_ and various default parameters (eg: "eof" uses the last file read, <> uses @ARGV)
+  * sugared regexps
+  * many functions in the language without using import
+
+  ****************************************
+  Ruby
+
+  bad points:
+  --- blocks do not introduce scoped variables if they already exist (should get fixed)
+      a = 1 ; l = [2, 4].collect{|a| a} ; p a #-> 4
+  --- `||' and `or' treats everything except nil as true
+      so (0 || 4) == 0,  ("" || 4) == ""
+  --- mix between iterators and functional way: either you take an iterator or
+    you return a list, you must choose. You end up defining both because
+    iterator syntax is nice, but is not as flexible as functional one
+  -- blocks and functions/methods are different beasts, adding unneeded complexity
+  -- no overloading (can be achieved manually, but hell...)
+  -- no type checking (really, there could be a mode paranoid that would catch most typos)
+  -- functions are not available if they are below current function (same as C & OCaml)
+  - "<<" is used for numbers as bit-shifting and for lists/strings as push.
+     => polymorphic code behaviour unpredictable
+  - no verification of #vars for blocks
+  - no named arguments (see Python) -> planned
+  - doc not as good as perl's :ppp
+  - error messages not explicit
+  - collect_with_index missing
+  - List.[] second arg is the number of values (defaults to 1)
+  good points:
+  ++ functional stuff (restricted (no partial application))
+  + ensure for exceptions
+  + intersection/union/... using + - for lists (arrays)
+  + no ';' needed, but can be used (as in Python)
+  + ? and ! are allowed as the last char of a function name (yeah nice)
+  remarks:
+  / in hash, { a => 1 } not allowed, must be { 'a' => 1 }
+  / no implicit transformation string <=> num
+  / hash are real hash -> can't keep order (use rassoc for Vector like behaviour)
+  / redefine a function -> no error unless -w
+  / no explicit references (\ in perl)
+  / you have to initialize before doing +=
+    -> for more error detection
+
+  ****************************************
+  Dylan
+  -- converting an integer to a string is hard
+  -- converting an float to a string is real hard
+  -- string concatenation is hard
+  -- mindy errors are pure shit
+  -- writing a program requires
+    - having "module: ..." at the beginning of the file
+    - having another file defining the various libraries+modules to
+      use. For example to convert a integer to a string, you use
+      integer-to-string which is in library String-Extensions, module
+      string-conversions :-(
+  -- running a program requires running the compiler (mindycomp) with
+    some quite hard parameters, then running the interpreter (mindy).
+    With the dylan compiler d2c, you need a kind of makefile xxx.lid.
+    Of course you still have to run the executable after compilation.
+  -- emacs mode is poor
+  -- documentation
+  - everything except #f is true (like Ruby) => not typed
+  - a lot of things on the web are dead about dylan
+  / optional typing
+  / named parameters
+  + multi-methods
+  + functional programming
+
+  reference manual http://core.federated.com/~jim/drm/drm-1.html
+
+  ****************************************
+  Smalltalk
+  --- 1+1*2 gives 4 !??!
+      => no priority
+      => no parentheses needed
+  - '1' + '2' gives '3'
+  / #(1 2) + 1 gives #(2 3)
+  / #(1 2) + #(3 4) gives #(4 6)
+  + function on booleans (like ifTrue) only work on booleans
+
+  ****************************************
+  PHP
+  -- no anonymous functions (well there is the ugly create_function which takes strings, closures are a dream far away)
+  -- no modules (package namespace)
+  - poor sugar for lists (called "array"s)
+  / deep copy by default
+  My list of PHP's shortcomings (Nathan Torkington) http://archive.develooper.com/advocacy@perl.org/msg01457.html
+
+  ****************************************
+  Scheme:
+  - no "!=" function, only "=" "<" ">" "<=" ">="
+  / fluid-let is perl's local
+
+  R5RS (Revised x 5 Report Scheme) http://www.schemers.org/Documents/Standards/R5RS/HTML/r5rs-Z-H-2.html
+  PLT Scheme http://www.cs.brown.edu/courses/cs173/2001/Lectures/2001-12-05.pdf
+  Teach Yourself Scheme in Fixnum Days http://www.cs.rice.edu/~dorai/t-y-scheme/t-y-scheme.html
+
+  ****************************************
+  SML:
+  - (based on SML'90, SML'97 must fix most) http://www.dcs.ed.ac.uk/home/dts/aps/papers/critique.ps.gz
+ 
+  Comparison of Haskell (GHC) and ML (SML/NJ) http://groups.google.com/groups?q=George+Russell+SML+GHC&hl=en&lr=&safe=off&rnum=1&seld=996462351&ic=1  
+
+  ****************************************
+  OCaml:
+  ++ back stepping in debugger
+  - no overloading => verbose
+  - syntax errors in imperative style not helpful
+  - limited libraries
+  - toplevel syntax different than in-function syntax (especially ";;")
+  - (::) is not allowed (since it is constructor)
+
+  books:  
+    Developing applications with Objective Caml http://caml.inria.fr/oreilly-book/html/
+    Développement d'applications avec Objective Caml http://www.pps.jussieu.fr/Livres/ora/DA-OCAML/
+
+  dynamic caml: generate code at runtime (eg: parse "x+1" and generate code for it) http://oops.tepkom.ru/dml/
+
+  Labeled and optional arguments for Objective Caml http://wwwfun.kurims.kyoto-u.ac.jp/~garrigue/papers/
+
+  ****************************************
+  Haskell:
+  - The Haskell string + class system anomaly http://www.md.chalmers.se/~hallgren/Thesis/haskell-comments.html
+
+  (thinking merd):
+  - notation [a] for type is bad (the meaning change between a value and a type)
+  - no set (or at least not easily available, result: people use "nub" and things
+  like that)
+  - doesn't try to ensure an Int is positive at compile time in things like
+  "take", "drop"... could take an UInt instead?
+
+  compared to Clean http://groups.google.com/groups?selm=3D2D52DE.93BEF1B1%40info.unicaen.fr
+
+  interesting generalisation of views, make PM more powerful http://www.cs.orst.edu/~erwig/papers/PGandTP_Haskell00.ps.gz
+
+  Global variables, implicit parameters... http://www.cs.chalmers.se/~rjmh/Globals.ps
+
+  ****************************************
+  TOM:
+  OO language, explictly typed
+
+
+  ****************************************
+  Pliant:
+  (!! most of the negative points may be fixed without changing the language in depth !!)
+  
+  -- no local variables:
+     var Int i := 1
+     if 1=1
+  	var Int i := 2
+     console "i should be 1 but is " i eol
+     
+  -- error messages (eg: try ``if 1'')
+  -- explicit typing
+  
+  -- yet another escaping in strings: 
+    "[lf]" is "foo\n"
+    "separate by a comma ([dq],[dq]) : "  (dq is ")
+  
+  -- no generic functions/types (?)
+  -- no higher order (?)
+  -- can't do functional programming (!?)
+     no closure, no "map" on lists
+  
+  -- across-architectures portability (x86 only for the moment)
+  
+  -- no debugger
+  
+  - no emacs/vim mode (i made a rough emacs mode, so this partly goes away)
+  - safeness based on debug level (eg: array bound checking done only if debug level >= 2)
+  
+  - function declarations must be ordered (how to achieve cross-linked recursive functions?)
+  
+  / strange exceptions handling
+  / safeness limited due to low level access
+  
+  ? no GC or ref count GC
+  ? mix-ins
+  
+  + pre-processing like via compile-time executed code
+    (using possibility to choose compile-time or runtime)
+  
+  + extremly powerful meta (dangerous?)
+    the called function decide how to interpret the parameter
+    ability to restrain the language power
+    -> can go down to a XML-like language completly declarative  
+    -> ability to choose a complexity level, forbid dangerous things...
+  
+  + low-level + high-level (much simpler?/cleaner than C++)
+  
+  + easy parallelism via multi-threading
+  
+  + open'ing files in safe mode, you get perl-like behaviour (no error reported)
+  
+  ++ good speed
+  ++ parametric classes/modules (first class(?))
+  
+  ++ block structure indentation based (more thoroughly than Python)
+
+  fullpliant:
+   (apropos config servlet (a la webmin))
+   -- not user-friendly
+     * do not restrict values to good one
+     * don't propose combo with ``classical'' values
+     * no invalidation of invalid values
+      (eg: IP address is not used for HTTP server only)
+     * look
+     * i18n
+   ? dangerous
+     * interpreter with no restrictions (except the rights)
+     * files modification/uploading (with no integrity check)
+
+  ****************************************
+  Felix (http://felix.sf.net/)
+  + no need to give the type of initialised variables
+  - expression vs statement pb (C-like)
+  / implementation: generates C++ (slow?)
+
+  ****************************************
+  VBStrict
+  Hating VBScript http://theflangynews.editthispage.com/stories/storyReader$168
+
+  ****************************************
+  Arc
+  http://www.paulgraham.com/arcll1.html
+  various comments from various people http://www.archub.org/arcsug.txt
+  -- rfn is not necessary (why not "foo = fn (x) (... (foo ...))")
+  -- cond make it easy to have errors (the cond and value are not grouped,
+    uneven lists allowed because of the last "default")
+    ("with", (eg: "(with (x 0 y 1) (+ x y))") doesn't have the pb since the
+    variable names are better checked)
+  -- Functions on Indices: ("hello" 2) -> "l"
+    dangerous without type inference for catching typos, function call being
+    the do-it-all function. Hard to read?
+    does ("hello" 2 4) works? in that case what does it do?
+  --- global variable *fail* on hash lookup error
+  --- "if", "while" binds variable "it":
+     "if (a x)" is equivalent to "if (it = (a x))", reminds the $_ in perl
+  -- "keep" and "sum" to ad'hoc for me. Do not scale. Either use grep/filter &
+    foldl, or use typical imperative programming (push & +=)
+  / Parameter Lists: overkill?
+  / how is solved the Python pb of scoping? (in Python variables are function-wide scoped)
+  / Strings Work Like Lists. ok but beware of unicode (perl doesn't have
+  indexing on strings and lives quite nicely)
+
+  ****************************************
+  Oz
+  * syntax apart, the language has a strong ocaml feeling:
+    + functional oriented
+    * most builtin values are immutable (numbers, strings, lists),
+      and no implicit reference for those.
+      so don't dream of doing "i = i + 1"
+    * arrays, objects are non-pure (mutable)
+    * int and float are 2 different things, with no subtyping between them.
+      * 1. is a float, 1 is an integer (see haskell for an alternative
+        solution)
+      * some functions apply on int, some on float, some on both, but you
+        can't mix.
+        -- division works on floats, so 1.5 / 2 is not allowed (caught at compile-time)
+        -- multiplication works on ints or floats, so 1.5 * 2 is not
+          allowed, well it compiles but gives a runtime exception! :-(
+    - default library is module based with few interface subtyping
+      (which can lead to the ocaml List.length vs Array.length vs
+       String.length verbosity)
+    -- default library is poor (except functional functions on lists)
+      - array functions are *really* poor
+      - string functions are poor (well, you have to treat strings as lists)
+  -- but it doesn't have ocaml static typing!
+    - 1.5 * 2 is detected at runtime
+    - if you swap Map parameters, you get the cryptic """Missing else clause [...] in file "/home/denys/Mozart/release/mozart/share/lib/base/List.oz", line 79"""
+    - Length on a number is detected at runtime with the cryptic """Missing else clause [...] in file "/home/denys/Mozart/release/mozart/share/lib/base/List.oz", line 79"""
+    - when you don't use the returned value, you get "illegal arity in application"
+      (no big deal when caught at compile time, you just need to
+       understand the cryptic error message)
+  - strings are lists of characters, but lists of characters are not
+    strings?? (see haskell for a good behaviour on this)
+  - unary minus is ~, so -3 - 2  must be written  ~3 - 2  giving ~5
+  - empty list is "nil", whereas "[]" is used to seperated "case ... of" expressions
+  + bignums
+
+  Features I've not looked at:
+  - OO
+  Features I'm no good enough to say much about:
+  - prolog features
+    - "=" is unification
+    - constraint
+  => interesting comparison: how does Oz compare with Mercury?
+     (a strong answer from Peter Van Roy
+        http://lists.tunes.org/archives/review/2000-May/000070.html,
+        http://www.info.ucl.ac.be/people/PVR/papers.html)
+  - distributed programming
+    (i've not even looked at it, i really know to little about this)
+  => interesting comparison: how does Oz compare with Erlang?
+  => interesting comparison: how does Oz compare with E? (http://www.erights.org)
+     (the question is there at http://mumble.net/e/faq.html#6-5, but no response yet ;)
+     (some answer http://www.erights.org/history/overview.html)
+     (some links to discussion on E mailing list:
+        http://www.eros-os.org/pipermail/e-lang/2000-January/003224.html
+        http://www.eros-os.org/pipermail/e-lang/2000-January/003227.html
+        http://www.eros-os.org/pipermail/e-lang/2000-January/003230.html
+        http://www.eros-os.org/pipermail/e-lang/2000-February/003247.html
+        http://www.eros-os.org/pipermail/e-lang/2000-February/003262.html)
+  => interesting comparison: how does Oz compare with O'Haskell
+
+  ****************************************
+  FL
+  The FL Project: The Design of a Functional Language (1994) http://citeseer.nj.nec.com/183013.html
+
+  ****************************************
+  Worse languages: sendmail, TeX
+
+********************************************************************************
+XML
+  Functional Programming and XML
+    http://www.xml.com/pub/a/2001/02/14/functional.html
+
+  HaXml http://www.cs.york.ac.uk/fp/HaXml/
+  XDuce http://xduce.sf.net/
+  CDuce http://www.cduce.org/
+  XMLambda http://citeseer.nj.nec.com/meijer00xmlambda.html
+
+  Pros and Cons http://www.zapthink.com/reports/proscons-view.html
+
+  XSLT syntax mock http://www.cs.uu.nl/~franka/xml-treatise
+
+  alternative XML syntaxes
+    sugared XSLT http://www.zanthan.com/ajm/xsltxt/
+    sugared XML http://www.langdale.com.au/SOX/
+    lisp-like http://okmij.org/ftp/Scheme/SXML.html
+    http://yaml.org/
+
+********************************************************************************
+Debugging
+
+  Time-travel debugger
+
+    Walk Backwards to Happiness -- Debugging by Time Travel http://citeseer.nj.nec.com/booth97walk.html
+
+    How does the OCaml debugger implements reverse execution?
+      Like all "time-travel" debuggers: by periodic checkpointing.  That is,
+      it saves the state of the program from time to time, and uses these
+      checkpoints to restore the state of the program at any time.  E.g.
+      say you stop the program and wish to execute it backwards one step.
+      Find the most recent checkpoint, which was taken N steps ago;
+      duplicate it, and run one copy N-1 steps forward.
+  
+      We learnt this trick from Andrew Tolmach's thesis: http://www.cs.pdx.edu/~apt/thesis.ps.Z
+      The only difference between Tolmach's system and ocamldebug is that
+      the former uses first-class continuations to capture the checkpoints,
+      while ocamldebug uses the fork() Unix system call.  Thus, each
+      checkpoint is really a separate process, and all of them communicate
+      with the debugger via sockets.
+
+********************************************************************************
+Implementation
+  continuations (CPS = Continuation Passing Style)
+    Compiling with continuations http://www.cup.org/Titles/416/0521416957.html
+    http://www.cs.rice.edu/~matthias/TSS/tss-sample.ps (verbose)
+    CPS unneeded http://citeseer.nj.nec.com/flanagan-essence.html
+
+    Representing Control in the Presence of First-Class Continuations http://citeseer.nj.nec.com/hieb90representing.html
+
+  interpreter vs binary
+    (from http://www.dpc-tech.com/dpc_ootech.html)    
+    One of the original purposes of Java was to "clean up C++" and to allow
+    programmers to "write code once, run it anywhere." However, the realization
+    of this promise is not without its own overhead. For example, since the
+    early 1990's, when the C++ language was "re-versioned" (our term) to refine
+    or add functionality in the compiler, programmers had to merely wait for the
+    next version of the compiler (and for all compilers to comply with the new
+    functionality for those having to write cross-platform applications). If the
+    Java language is re-versioned, not only does the Java compiler have to be
+    upgraded, but the browsers or interpreters must also be upgraded to
+    recognize the changes, which causes the programmer to have to wait for two
+    of the critical functional pieces of the development process to be
+    re-versioned instead of just one. With C++, this wait would cause
+    programming groups to opt to simply not use the new functionality from time
+    to time if the wait was too long. The Java development process can only
+    increase this classic development process 'wait time.'
+
+
+  Printing Floating-Point Numbers Quickly and Accurately http://citeseer.nj.nec.com/28233.html
+
+  argument order
+    optimizating when non asserting arguments' order http://www.inria.fr/RRRT/RT-0117.html
+
+  pb of ad'hoc + parametric polymorphism (eg: f(x,y) = x + y where "+" is overloaded, you can't know at compile time which "+" implementation to use)
+    Dictionary-free Overloading by Partial Evaluation http://www.cse.ogi.edu/~mpj/pubs/pepm94.html (see the Yale Technical report version)
+
+  compiling functional languages http://pauillac.inria.fr/~xleroy/talks/compilation-agay.pdf
+
+  heap memory allocation (malloc) http://g.oswego.edu/dl/html/malloc.html (used in Pliant)
+
+  sorting http://pythonowns.blogspot.com/2002_07_28_pythonowns_archive.html
+
+  boxing and unboxing
+    The effectiveness of type-based unboxing http://citeseer.nj.nec.com/88305.html
+
+  Language Independent Arithmetic (part 2)
+    http://anubis.dkuug.dk/JTC1/SC22/WG11/docs/n462.pdf
+
+  lambda calculus
+  - Explicit Substitutions http://citeseer.nj.nec.com/abadi91explicit.html
+
+  space and time cost of C++ various features http://std.dkuug.dk/jtc1/sc22/wg21/docs/papers/2002/n1359.pdf
+
+  .NET
+    CLR http://research.microsoft.com/~emeijer/Papers/CLR.pdf
+
+    Python on .NET
+      The general gist of our conclusions is that .NET's typing model makes it
+      really hard to envision efficient Python and Perl ports without either
+      changing .NET or, alternatively, solving some of the holy grails of Perl
+      and Python dev't work, e.g. static type analysis.  Mark's paper on the
+      topic goes into it in greater depth (see URL below).
+      (more at http://www.activestate.com/Initiatives/NET/Python_whitepaper.doc)
+      (some more at http://lambda.weblogs.com/discuss/msgReader$2884?mode=topic)
+      (http://starship.python.net/crew/mhammond/dotnet/index.html)
+  
+    One Runtime to Bind Them All http://www.javalobby.org/clr.html http://lists.ximian.com/archives/public/mono-list/2002-February/003203.html
+  
+    late binding and dynamic-vs-static typing http://www.razorsoft.net/weblog/2002/02/25.html http://www.razorsoft.net/weblog/2002/02/27.html
+
+    .NET not targeted for interpretation http://www2.fit.qut.edu.au/CompSci/PLAS//ComponentPascal/virtual_machines.pdf     
+
+  JIT (Xavier Leroy on caml-list@inria.fr)
+    
+    >  As I already mentioned here, we need a possibility to load a modules in
+    > runtime. Bytecode is fast, but not enough for a killer web architecture.
+    > So, we need a JIT, or, which will be much better, an object format
+    > including intermediate lambda-trees to compile it and link at runtime.
+    > Even a PIC code for native will not be enough, 'cause of a great overhead.
+    
+    I fail to see the logic in this argument.
+    
+    First, position-independent native code is indeed a bit slower than
+    statically-linked code on some platforms, but surely JIT-produced code
+    is much worse.  If you don't believe me, compare performance between
+    gcc -fpic -O and any Java implementation :-)
+    
+    In other terms: those who can, compile ahead of time; those who can't,
+    compile just in time.  A prime example of those who can't is Java:
+    they screwed the definition of their language so well that it makes
+    traditional compilation impossible; hence their propaganda about JITs.
+    We (Caml) can...
+    
+    Second, you (and others) seem to take for granted that a "servlet
+    container" must load servlets dynamically into its own memory image.
+    That's the Java way, but again that's not the only way.  Using
+    separate processes for the HTTP server/servlet container and for the
+    servlets (but not starting a new servlet process on each request like
+    CGI does) might very well work better: I'll bet the performance hit
+    would be insignificant, and you get a clean, well-specified
+    communication protocol between server and servlets.
+    
+    That's just one idea, but my general point is that the Java (or .NET)
+    approach is not necessarily the right approach.
+
+    (some more: http://caml.inria.fr/archives/200102/msg00190.html)
+
+  Algol68 to C http://www.sleitch.nildram.co.uk/
+
+********************************************************************************
+Optimizations
+
+  cache-conscious struct definition http://citeseer.nj.nec.com/article/chilimbi99cacheconscious.html    
+
+
+********************************************************************************
+Testing
+  automatic tests in haskell http://www.cs.chalmers.se/~rjmh/QuickCheck/
+
+
+
+
+********************************************************************************
+History
+
+  ACM SIGPLAN Conference on History of Programming Languages http://ropas.kaist.ac.kr/~saseo/cs320/hopl/
+
+  bugs http://wwwzenger.informatik.tu-muenchen.de/persons/huckle/bugse.html
+       http://www.cs.tau.ac.il/~nachumd/verify/horror.html
+
+  The Development of the C Language http://cm.bell-labs.com/cm/cs/who/dmr/chist.html
+
+  C and C++: siblings http://www.research.att.com/~bs/siblingrivalry.pdf
+
+  Hoare on programming language design. So obsolete! (esp 3.3) http://www.cs.berkeley.edu/~necula/cs263/handouts/hoarehints.pdf
+
+********************************************************************************
+Performance
+
+  performance http://www.bagley.org/~doug/shootout/craps.shtml
+  performance http://cm.bell-labs.com/cm/cs/who/bwk/interps/pap.html
+  
+  perl sorting http://www.sysarch.com/perl/sort_paper.html
+
+LINKS
+
+
+
+
+
+adaptive programming http://www.ccs.neu.edu/research/demeter/biblio/dem-book.html
+ (esp chap 4)
+InterpreterPattern http://c2.com/cgi-bin/wiki?InterpreterPattern
+
+
+
+
+
+research http://www.cs.rice.edu/CS/PLT/
+
+http://www.cs.chalmers.se/~patrikj/poly/others/CompAppr2PolyProg.ps.gz
+SableCC http://www.sablecc.org/
+The subject of errors vs. bottoms is discussed in http://research.microsoft.com/~simonpj/papers/imprecise-exceptions.ps.gz
+
+
+Efficient Compile-Time Garbage Collection for Arbitrary Data Structures http://citeseer.nj.nec.com/mohnen95efficient.html
+
+
+
+
+
+
+http://home.t-online.de/home/Ulrich.Eisenecker/meta.htm
+
+  [1] Andrea Asperti and Giussepe Longo. Categories, Types and Structures. An
+      introduction to Category Theory for the working computer
+      scientist. MIT Press, 1991.
+      URL: http://www.dmi.ens.fr/users/longo/download.html
+
+The impact of the lambda calculus in logic and computer science http://citeseer.nj.nec.com/barendregt97impact.html
+
+
+Introduction to Lambda Calculus http://citeseer.nj.nec.com/barendregt94introduction.html
+
+xinu book (pad: very good)
+
+on modules 
+ (short) http://citeseer.nj.nec.com/lillibridge97translucent.html
+ (long) http://www.dcs.ed.ac.uk/home/cvr/ECS-LFCS-98-389.html
+
+various papers http://avalon.cs.ucdavis.edu/~keen/Papers.html
+
+``From Type Classes to Module Constraints'' http://ist.unibw-muenchen.de/Haskell/ModConstraints/
+
+http://www.botik.ru/pub/local/Mechveliani/basAlgPropos/haskellInCA1.ps.zip
+
+Henk: a typed intermediate language http://citeseer.nj.nec.com/jones97henk.html
+
+Improving polymorphic type explanations ftp.cee.hw.ac.uk/pub/funcprog/yj.phd.ps.Z
+
+GC Train algorithm
+  Incremental Mature Garbage Collection Using the Train Algorithm http://www.daimi.au.dk/~beta/Papers/Train/train.abstract.html
+
+Design Patterns in Dynamic Programming http://www.norvig.com/design-patterns/
+
+Generic programming: an introduction http://www.cs.chalmers.se/~patrikj/poly/afp98/
+
+First-class Modules for Haskell http://research.microsoft.com/Users/simonpj/papers/first-class-modules/index.htm
+
+OO & protected objects ftp://ftp.cs.york.ac.uk/papers/rtspapers/R:Wellings:2000.ps
+
+cyclone (safe C) http://www.cs.cornell.edu/projects/cyclone/
+
+Regular Expression Types for XML http://citeseer.nj.nec.com/316019.html
+
+
+http://research.microsoft.com/~simonpj/papers/scoped-tyvars/scoped.ps
+
+http://research.microsoft.com/projects/ilx/fsharp.htm
+staged evaluation http://cs-www.cs.yale.edu/homes/taha/MetaOCaml/
+
+Bridging Functional and Object-Oriented Programming http://citeseer.nj.nec.com/383622.html
+Synthesizing Object-Oriented and Functional Design to Promote Re-use http://citeseer.nj.nec.com/krishnamurthi98synthesizing.html
+Pattern Transfer: bridging the gap between theory and practice http://citeseer.nj.nec.com/461895.html
+
+Composable and Compilable Macros: You Want it When? http://www.cs.utah.edu/plt/publications/macromod.pdf
+
+strongtalk http://www.cs.ucsb.edu/projects/strongtalk/pages/index.html
+
+Survey of OOPL http://www.rescomp.berkeley.edu/~hossman/cs263/paper.html
+http://www.nongnu.org/needle/
+
+macros http://citeseer.nj.nec.com/brabrand00growing.html
+
+CDuce
+
+Copying, Cloning, and Marshalling in .NET http://www.ondotnet.com/pub/a/dotnet/2002/11/25/copying.html
+
+Checked and unchecked exceptions in Java http://www.octopull.demon.co.uk/java/ExceptionalJava.html
+
+XML Is Too Hard For Programmers http://tbray.org/ongoing/When/200x/2003/03/16/XML-Prog
+
+How to make a fast curry: push/enter vs eval/apply http://www.research.microsoft.com/~simonpj/papers/eval-apply/
+
+Java 1.5 new features http://java.sun.com/features/2003/05/bloch_qa.html
+
+flowcaml http://cristal.inria.fr/~simonet/soft/flowcaml/
+
+Practical type inference for arbitrary-rank types http://research.microsoft.com/~simonpj/papers/putting/index.htm
+
+Reversible GC http://www.pipeline.com/~hbaker1/ReverseGC.html
+
+Alpha Prolog http://www.cs.cornell.edu/People/jcheney/aprolog/
+
+"A Comparative Study of Language Support for Generic
+Programming" includes a Generic Java version of a graph
+library. http://www.osl.iu.edu/publications/pubs/2003/comparing_generic_programming03.pdf
+
+Concepts: Design choices for template argument checking http://anubis.dkuug.dk/jtc1/sc22/wg21/docs/papers/2003/n1522.pdf
+
+iterators vs enumerators (and generators) are bad http://pobox.com/~oleg/ftp/papers/LL3-collections-enumerators.txt
+
+"Demand-Driven Type Inference with Subgoal Pruning: Trading Precision for Scalability." by Alexander Spoon
+
+XML concurrents
+  YAML (standard in ruby, used by perl's Module::Build for metadata)
+  JSON (JavaScript Object Notation)

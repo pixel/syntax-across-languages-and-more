@@ -1,0 +1,84 @@
+package goal2;
+
+/* Nice programming language: http://nice.sf.net */
+/* written by Daniel Bonniot */
+
+abstract class Point
+{
+  double x;
+  double y;
+
+  double length();
+}
+
+abstract interface Group {}
+
+class Point2d extends Point implements Group
+{
+  toString() = "[" + this.x + "," + this.y + "]";
+
+  length() = Math.sqrt(this.x * this.x + this.y * this.y);
+}
+
+
+<Point P> P translate(P, double);
+translate(p#Point2d, distance) = new Point2d(x: p.x + distance, y : p.y);
+
+class Point3d extends Point implements Group
+{
+  double z;
+
+  toString() = "[" + this.x + "," + this.y + "," + this.z + "]";
+
+  length() = Math.sqrt(this.x * this.x + this.y * this.y + this.z * this.z);
+}
+
+translate(p#Point3d, distance) = 
+  new Point3d(x: p.x + distance, y : p.y, z : p.z);
+
+<Group G> G add(G, G);
+
+add(p1#Point2d, p2#Point2d) = 
+  new Point2d(x: p1.x + p2.x, 
+	      y: p1.y + p2.y);
+
+add(p1#Point3d, p2#Point3d) = 
+  new Point3d(x: p1.x + p2.x, 
+	      y: p1.y + p2.y, 
+	      z: p1.z + p2.z);
+
+void test(Point p)
+{
+  print("" + p.length() + " " + p.translate(1) + " ");
+}
+
+<Point P> P twice(P p);
+twice(p#Point2d) = add(p, p);
+twice(p#Point3d) = add(p, p);
+
+// Test code
+void main(String[] args)
+{
+  Point2d p2d = new Point2d(x: 3, y: 4);
+  Point3d p3d = new Point3d(x: 1, y: 2, z: 2);
+
+  Point[] l = [ p2d, p3d ];
+
+  test(p2d);
+  test(p3d);
+
+  l.iter(Point p => print(" " + p.length()));
+  println("");
+
+  println(p3d.translate(1).z);
+
+  print("" + twice(p2d) + " " + twice(p3d));
+  l.foreach(Point p => print(" " + twice(p)));
+  println("");
+
+  // p3d.add(p2d) and p2d.add(p3d) disallowed at compile time
+
+  println("" + twice(p3d).z);
+
+  println("" + p3d.add(p3d).z);
+}

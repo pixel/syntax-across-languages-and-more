@@ -1,0 +1,91 @@
+<html>
+  <head>
+    <title>Usenet comp.lang.* Traffic Evolution</title>
+  </head>
+<body>
+
+<h2>Remarks</h2>
+
+<ul>
+<li>The plots below <b>do not</b> show the real use of a programming language.
+<li>The plots below <b>do not</b> show what is the best language to use.
+<li>The data used is very rough and must be taken with many grains of salt!
+<li>Java generates a lot of posts.
+<li>Posts on comp.lang.cobol peaked in 1999 and 2000 (remember W2K bug?!)
+<li>Perl traffic is declining (maybe the documentation is so good that... :)
+</ul>
+
+<h2>Methodology</h2>
+
+<dl>
+<dt>Getting the raw data<dd>
+
+<a href="get.pl">This script</a> asks <a href="http://www.google.com/grphp">Google Groups</a> 
+for the number of posts for each 5 days quanta. I tried with a bigger quanta
+(2 months) but when there is too many posts, Google returns a big number
+corresponding to the large number of posts spanning many months.
+
+<p>The script has a "sleep 1" so that Google is not bothered too much by this
+<i>attack</i>. The script is given to show exactly how the figures were gathered,
+<b>not</b> to have people using it. Please think before using it!
+
+<p>NB: the script searches for the string "sur un total d'environ" which is
+the french sentence that is interesting. Change the sentence to suit your own
+language.
+
+<dt>Treating the data and Rendering the plots<dd>
+
+<a href="plot_it.pl">This script</a> computes the mobile mean of the number of
+posts on a 6 months duration. It creates a data file for gnuplot, together
+with a script for gnuplot.
+
+</dl>
+
+<h2>Plots</h2>
+
+<dl>
+
+<dt>Groups with high traffic<dd>
+  <small>(note: C++ seems to include C ?)</small><br>
+<a href="langs1.png"><img src="langs1-small.png" border=0 alt="PNG,"></a>
+
+<a href="langs1.png">Big PNG version</a>,
+<a href="langs1.eps">EPS version</a>
+
+<dt>Groups with medium traffic<dd>
+<a href="langs2.png"><img src="langs2-small.png" border=0 alt="PNG,"></a>
+
+<a href="langs2.png">Big PNG version</a>,
+<a href="langs2.eps">EPS version</a>
+
+<dt>Groups with low traffic<dd>
+<a href="langs3.png"><img src="langs3-small.png" border=0 alt="PNG,"></a>
+
+<a href="langs3.png">Big PNG version</a>,
+<a href="langs3.eps">EPS version</a>
+
+<dt>Programming Concepts groups<dd>
+  <small>(note: comp.object is not really comp.lang)</small><br>
+<a href="langs4.png"><img src="langs4-small.png" border=0 alt="PNG,"></a>
+
+<a href="langs4.png">Big PNG version</a>,
+<a href="langs4.eps">EPS version</a>
+
+<dt>Collected data<dd>
+  <a href="data/">data</a>
+
+</dl>
+
+<h2>Similar Pages</h2>
+<ul>
+<li><a href="http://www.norvig.com/Lisp-retro.html">on Lisp</a>
+<li><a href="http://www.cs.berkeley.edu/~flab/languages.html">SourceForge projects</a>
+</ul>
+
+<hr>
+<address><a href="mailto:pixel@merd.net">Pixel</a></address>
+This document is licensed under <a href="http://www.gnu.org/copyleft/fdl.html">GFDL</a> (GNU Free Documentation License).
+
+<p><A HREF="http://www.estat.com/getstats?serial=1400113423"><IMG SRC="http://perso.estat.com/cgi-bin/perso/1400113423?page=language-study" BORDER=0></A>
+
+</body></html>
