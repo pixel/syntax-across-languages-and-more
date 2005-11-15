@@ -3757,14 +3757,14 @@ function in another language
 
 </ul>
 
-<p>This is of course <a href="${ref}syntax-across-languages-per-language/what-is-missing.html">incomplete</a>. I welcome <a href="mailto:pixel\@merd.net">contributions</a>!
+<p>This is of course <a href="${ref}syntax-across-languages-per-language/what-is-missing.html">incomplete</a>. I welcome <a href="mailto:pixel\@rigaux.org">contributions</a>!
 <p>
 You may also have a look at this information <a href="${ref}syntax-across-languages-per-language/">sorted by languages</a>.
 EOF
 }
 sub end {
     <<'EOF' . $macro_counter . "\n</body></html>";
-<hr><address><a href="mailto:pixel@merd.net">Pixel</a></address>
+<hr><address><a href="mailto:pixel@rigaux.org">Pixel</a></address>
 This document is licensed under <a href="http://www.gnu.org/copyleft/fdl.html">GFDL</a> (GNU Free Documentation License).
 EOF
 }
@@ -3835,8 +3835,8 @@ foreach my $lang (@langs_) {
 <p>
 The "Missing:"s below indicate that an entry is incomplete.
 <ul>
-<li>either the entry exist in the language, and <a href="mailto:pixel@merd.net">please tell</a>.
-<li>either the entry doesn't exist in the language, and <a href="mailto:pixel@merd.net">please tell so</a>.
+<li>either the entry exist in the language, and <a href="mailto:pixel@rigaux.org">please tell</a>.
+<li>either the entry doesn't exist in the language, and <a href="mailto:pixel@rigaux.org">please tell so</a>.
 The entry will be marked as such and won't appear as missing anymore.
 </ul>
 );

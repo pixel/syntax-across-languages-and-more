@@ -36,7 +36,7 @@ structured.
 </ul>
 <p>
 But these are missing a hell lot of functional/logic languages. So I tried making mine,
-<a href="mailto:pixel@merd.net">comments and critics are welcome!</a>
+<a href="mailto:pixel@rigaux.org">comments and critics are welcome!</a>
 <p>
 this is based on this <a href="diagram.dot">graphviz file</a> created with <a
 href="language-study.list">language-study.list</a> and <a
@@ -51,7 +51,7 @@ Some related pages:
 </ul>
 
 <hr>
-<address><a href="mailto:pixel@merd.net">Pixel</a></address>
+<address><a href="mailto:pixel@rigaux.org">Pixel</a></address>
 This document is licensed under <a href="http://www.gnu.org/copyleft/fdl.html">GFDL</a> (GNU Free Documentation License).
 
 MACRO_COUNTER(`language-study')

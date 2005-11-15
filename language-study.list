@@ -168,6 +168,10 @@ Self
   Smalltalk 80
   SY:1
 
+NewtonScript
+  1993
+  Self
+
 AppleScript
   1993
   Smalltalk 80
@@ -639,3 +643,7 @@ Scala
   2004
   Java 2 (v1.2),.NET,OCaml
   http://scala.epfl.ch/
+
+IO
+  2003
+  Smalltalk 80,Lua,NewtonScript

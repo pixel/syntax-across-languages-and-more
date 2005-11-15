@@ -2066,7 +2066,7 @@ There are few yet. I plan TODO:
 </ul>
 
 <p>
-Suggestions and comments <a href="mailto:pixel@merd.net"><b>welcome</b></a> (including spelling, grammatical and stylistic corrections :)
+Suggestions and comments <a href="mailto:pixel@rigaux.org"><b>welcome</b></a> (including spelling, grammatical and stylistic corrections :)
 >;
 }
 
@@ -2092,7 +2092,7 @@ print <<'EOF';
 <h3>Various</h3>
 
 <ul>
-<li><a href="http://merd.net/pixel/language-study/syntax-across-languages.html">Syntax Across Languages</a>
+<li><a href="http://rigaux.org/language-study/syntax-across-languages.html">Syntax Across Languages</a>
 <li><a href="http://shootout.alioth.debian.org/">The Great Computer Language Shootout</a> and <a href="http://dada.perl.it/shootout/">Win32 version</a> (benchmark comparison of a number of programming languages)
 <li><a href="http://www.angelfire.com/tx4/cus/shapes/index.html">OO shape examples</a>
 <li><a href="http://pleac.sf.net/">PLEAC</a> (Programming Language Examples Alike Cookbook)
@@ -2144,7 +2144,7 @@ EOF
 sub footer {
     print q<
 <hr>
-<address><a href="mailto:pixel@merd.net">Pixel</a></address>
+<address><a href="mailto:pixel@rigaux.org">Pixel</a></address>
 This document is licensed under <a href="http://www.gnu.org/copyleft/fdl.html">GFDL</a> (GNU Free Documentation License).
 <p>Automatically generated from this <a href="index_pl.txt">file</a>.
 
