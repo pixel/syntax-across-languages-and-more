@@ -902,6 +902,11 @@ end') => "ClassicREXX",
 
   ],
 
+  'ifnot_then (unless)' => 
+  [ { KIND => 'rare' },
+   'unless' => "EmacsLisp Perl",
+  ],
+
   'multiple selection (switch)' =>
   [ { MLANG => 'Awk Ruby Python PostScript Lua Pliant Smalltalk XSLT' },
    pre('switch (val) { 
