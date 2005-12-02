@@ -134,6 +134,8 @@ my $all = [
    'until end of line' =>
    [
     '///' => "C# Java",
+    '-- |' => "Haskell",
+    '-- ^' => "Haskell",
    ],
 
    'non nestable' =>
@@ -143,6 +145,7 @@ my $all = [
 
    '' =>
    [
+    '{-| ... -}' => "Haskell",
     '(** ... *)' => "OCaml",
     'indexing
               identifier: "...";' => "Eiffel",
