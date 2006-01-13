@@ -1819,6 +1819,8 @@ end p;') => "Ada",
     '{...}' => "Rebol",
     pre(q("...\n"
 "...\n")) => "C",
+    pre(q(... "...\n\\
+    \\...\n")) => "Haskell",
     pre(q("...",
 "...")) => "ClassicREXX",
   ],
@@ -3090,7 +3092,7 @@ Next' => "VisualBasic",
    'integers in base 2, octal and hexadecimal' =>
    [
     '0b1, 07, 0xf' => 'Ruby Pike Perl Oz',
-    '0b1, 0o7, 0xf' => 'OCaml',
+    '0b1, 0o7, 0xf' => 'OCaml Perl6',
     '07, 0xf' => "C C++ Python Tcl Awk JavaScript",
     '0xf' => "C# E",
     '07' => "B",
