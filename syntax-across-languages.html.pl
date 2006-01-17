@@ -538,6 +538,7 @@ def x():
      'f(a)' => "Mercury",
      'f(a,)' => "merd",
      '&f.assuming(var_name => a)' => "Perl6",
+     'functional.partial(f, a)' => "Python",
     ],
 
     'give the second argument' =>
@@ -2622,8 +2623,8 @@ Next' => "VisualBasic",
  ],
 
  'is the predicate true for an element' =>
- [ { KIND => 'has_lambda', MLANG => "Python Perl Scheme" },
-  'any' => "Haskell Mercury Scheme-SRFI1",
+ [ { KIND => 'has_lambda', MLANG => "Perl Scheme" },
+  'any' => "Haskell Mercury Scheme-SRFI1 Python",
   'any?' => "Ruby Dylan",
   'anySatisfy' => "Smalltalk",
   'exists' => "OCaml SML",
@@ -2633,8 +2634,8 @@ Next' => "VisualBasic",
  ],
 
  'is the predicate true for every element' =>
- [ { KIND => 'has_lambda', MLANG => "Python Perl Scheme" },
-  'all' => "Haskell SML Mercury",
+ [ { KIND => 'has_lambda', MLANG => "Perl Scheme" },
+  'all' => "Haskell SML Mercury Python",
   'All' => "Oz",
   'all?' => "Ruby merd",
   'allSatisfy' => "Smalltalk",
