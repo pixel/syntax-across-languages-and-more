@@ -2668,7 +2668,7 @@ Next' => "VisualBasic",
   'rjoin' => "E",
   'concat' => "OCaml",
   'l * glue' => "Pike Ruby",
-  "(macpconcat 'identity l glue)" => "EmacsLisp",
+  "(mapconcat 'identity l glue)" => "EmacsLisp",
   'componentsJoinedByString' => "Objective-C",
  ],
 
