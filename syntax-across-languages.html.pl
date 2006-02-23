@@ -16,7 +16,7 @@ my @functional_static =
 @static = (@OO_static, @functional_static,
   qw(C Cobol Pascal Fortran merd Modula-2 Modula-3 OCaml));
 @dynamic = (@functional_dynamic, @OO_dynamic,
-  qw(Awk Basic Dylan Forth Lua Icon XPath XSLT Pike PostScript Prolog sh Oz EmacsLisp CommonLisp ClassicREXX));
+  qw(Awk Basic Dylan Forth Lua Icon XPath XSLT Pike PostScript Prolog sh Oz EmacsLisp CommonLisp ClassicREXX Yorick));
 @OO = (@OO_dynamic, @OO_static, 
   qw(OCaml CommonLisp  Dylan merd));
 @functional = (@functional_dynamic, @functional_static, 
@@ -95,7 +95,7 @@ my $all = [
    'until end of line' =>
    [
     '#' => "Perl Perl6 Ruby Python Tcl Icon Awk sh PHP merd E Pliant YAML",
-    '//' => "BCPL C99 C++ C# Java Dylan Pike PHP JavaScript YCP",
+    '//' => "BCPL C99 C++ C# Java Dylan Pike PHP JavaScript YCP Yorick",
     '--' => "Cecil Eiffel Sather Simula Haskell Ada Lua SQL92",
     ';' => "EmacsLisp CommonLisp Scheme Rebol Assembler",
     '%' => "Prolog Mercury TeX Erlang PostScript Oz",
@@ -123,7 +123,7 @@ my $all = [
    'non nestable' =>
    [
     '" ... "' => "Smalltalk",
-    '/* ... */' => "C C++ C# Java B PL/I Pike PHP JavaScript Mercury YCP",
+    '/* ... */' => "C C++ C# Java B PL/I Pike PHP JavaScript Mercury YCP Yorick",
     '<!-- ... -->' => "HTML XML",
     '( ... )' => "Forth",
    ],
@@ -147,6 +147,7 @@ my $all = [
    [
     '{-| ... -}' => "Haskell",
     '(** ... *)' => "OCaml",
+    '/* DOCUMENT ... */' => "Yorick",
     'indexing
               identifier: "...";' => "Eiffel",
 
@@ -276,7 +277,7 @@ def x():
   [
    'assignment' =>
    [
-    '=' => "B C C++ C# Java Perl Perl6 Pike PHP Basic Erlang Icon Oz JavaScript Lua sh Awk YCP ClassicREXX",
+    '=' => "B C C++ C# Java Perl Perl6 Pike PHP Basic Erlang Icon Oz JavaScript Lua sh Awk YCP ClassicREXX Yorick",
     ':=' => "BCPL Ada Cecil Pascal Dylan Eiffel Sather Modula-3 Simula Smalltalk E Pliant",
     '<-' => "OCaml",
     '_ (displayed <- with a special character)' => "Squeak",
@@ -325,7 +326,7 @@ def x():
 
   'grouping expressions' =>
   [ { MLANG => 'EmacsLisp CommonLisp Scheme XSLT PostScript Forth' },
-   '( ... )' => "Beta BCPL B ClassicREXX C C++ C# YCP Java Eiffel Rebol MSH Pike Perl Perl6 Python Ruby Pascal Haskell OCaml Smalltalk SML merd E Tcl PHP JavaScript Lua Ada Awk Modula-3 Pliant XPath Oz SQL92",
+   '( ... )' => "Beta BCPL B ClassicREXX C C++ C# YCP Java Eiffel Rebol MSH Pike Perl Perl6 Python Ruby Pascal Haskell OCaml Smalltalk SML merd E Tcl PHP JavaScript Lua Ada Awk Modula-3 Pliant XPath Oz SQL92 Yorick",
    '[ ... ]' => "Rebol",
    'indentation' => "merd",
    '$ ...' => "Haskell",
@@ -336,7 +337,7 @@ def x():
 
   'block (grouping statements, especially when statements are not expressions)' =>
   [ { MLANG => 'OCaml Rebol SML XSLT CommonLisp Oz PostScript' },
-   '{ ... }' => "Pike PHP JavaScript Awk sh Tcl",
+   '{ ... }' => "Pike PHP JavaScript Awk sh Tcl Yorick",
    '{ ... } (introduce scope)' => "B C C++ C# Java Perl Perl6 E Haskell Modula-3 YCP",
    '( ... ) (introduce scope)' => "sh",
    '[ x. y. ... ]' => "Smalltalk",
@@ -362,7 +363,7 @@ def x():
   [
    'shallow' =>
    [
-    '== != ' => "B C C++ Java OCaml Pike Tcl Perl Perl6 Awk",
+    '== != ' => "B C C++ Java OCaml Pike Tcl Perl Perl6 Awk Yorick",
     '= /=' => "Fortran90 Eiffel",
     '= <>' => "Pliant Rebol",
     '= #' => "Modula-3",
@@ -408,7 +409,7 @@ def x():
   [ { ALL => 1 },
    '' =>
    [
-    '< > <= >=' => "Ada Awk Beta B C C++ C# YCP E Java Pascal Rebol Smalltalk VisualBasic Scheme Pike Perl Perl6 merd Tcl Haskell Ruby SML OCaml PHP Eiffel JavaScript EmacsLisp CommonLisp Dylan Lua Awk Modula-3 Python Pliant XPath ClassicREXX SQL92",
+    '< > <= >=' => "Ada Awk Beta B C C++ C# YCP E Java Pascal Rebol Smalltalk VisualBasic Scheme Pike Perl Perl6 merd Tcl Haskell Ruby SML OCaml PHP Eiffel JavaScript EmacsLisp CommonLisp Dylan Lua Awk Modula-3 Python Pliant XPath ClassicREXX SQL92 Yorick",
     '< > =< >=' => "Mercury Oz",
     '<< >> <<= >>= (deep comparison)' => "ClassicREXX",
     '@< / @=< / @> / @>=' => "Prolog",
@@ -575,6 +576,7 @@ def x():
     'f ...  or  f: para1 ...' => "Smalltalk",
     'f: func [para1 para2 ...] ...' => "Rebol",
     '/f { ... } def' => "PostScript",
+    'func f(a, b, c...) { ... }' => "Yorick",
     'typ0 f(typ1 para1, typ2 para2, ...) { ... }' => "C C++ C# Pike YCP",
     'function f(para1, para2) { ... }' => "Awk JavaScript",
     'function f(para1, para2) ... code ... end' => "Lua",
@@ -700,7 +702,7 @@ return') => "ClassicREXX",
   [ { MLANG => 'Prolog PostScript' },
    'breaks the control flow' => ($::return_a_value =
    [
-    'return' => "Awk B C C++ C# ClassicREXX Java E Pike YCP Perl Perl6 Ruby Rebol Python Tcl Ada PHP Pliant JavaScript sh ClassicREXX",
+    'return' => "Awk B C C++ C# ClassicREXX Java E Pike YCP Perl Perl6 Ruby Rebol Python Tcl Ada PHP Pliant JavaScript sh ClassicREXX Yorick",
     'return (in Lua, "return xxx" can only appear before a block end)' => "Lua",
     'Return' => "VisualBasic",
     'RETURN' => "Modula-3",
@@ -791,7 +793,7 @@ return') => "ClassicREXX",
    'if c b' => "Pliant Rebol Tcl",
    'if (c): b endif' => "PHP",
    'if c {b}' => "Perl6",
-   'if (c) {b}' => "Perl E",
+   'if (c) {b}' => "Perl E Yorick",
    'c -> b' => 'FL',
    'c b if' => "PostScript",
    'b if c' => "Perl Ruby",
@@ -840,7 +842,7 @@ end') => "ClassicREXX",
    'if (c) b1 elseif (c2) b2 else b3' => "PHP",
    'if (c): b1 elseif (c2): b2 else: b3 endif' => "PHP",
    'if (c) {b1} elsif (c2) {b2} else {b3}' => "Perl",
-   'if (c) {b1} else {b2}' => "E",
+   'if (c) {b1} else {b2}' => "E Yorick",
    '(if c b1 b2)' => "CommonLisp Scheme",
    '(if c then b1 else b2)' => "Mercury",
    '(c -> b1 ; c2 -> b2 ; b3)' => "Mercury",
@@ -855,7 +857,7 @@ end') => "ClassicREXX",
    'e | c = b1 | c2 = b2 | otherwise = b3 (the result goes to "e")' => "Haskell",
    'c b1 b2 ifelse' => "PostScript",
    'c if b1 else b2 then' => "Forth",
-   'c ? b1 : b2' => "Awk B C C++ C# Java Perl Ruby PHP JavaScript YCP",
+   'c ? b1 : b2' => "Awk B C C++ C# Java Perl Ruby PHP JavaScript YCP Yorick",
    'c ?? b1 :: b2' => "Perl6",
    'c -> b1, b2' => "BCPL",
    '(if c then b1 else b2 fi)' => "Beta",
@@ -1107,7 +1109,7 @@ end') => "ClassicREXX",
 
    'while condition do something' =>
    [
-    'while (cond) expr' => "Awk B C C++ C# Java E Pike Perl Perl6 Python Ruby PHP JavaScript YCP",
+    'while (cond) expr' => "Awk B C C++ C# Java E Pike Perl Perl6 Python Ruby PHP JavaScript YCP Yorick",
     'while cond expr' => "Tcl",
     'while cond loop expr end loop' => "Ada",
     'while cond do expr' => "BCPL SML Pascal",
@@ -1134,7 +1136,7 @@ end') => "ClassicREXX",
    [ { MLANG => 'Python OCaml SML Eiffel Pliant Smalltalk Tcl' },
     'do expr until cond' => "Perl6",
     'do {expr} until cond' => "Perl",
-    'do {expr} while (!cond) ' => "C C++ C# Java Awk Pike JavaScript",
+    'do {expr} while (!cond) ' => "C C++ C# Java Awk Pike JavaScript Yorick",
     'begin expr end until cond' => "Ruby",
     'REPEAT expr UNTIL cond' => "Modula-3", 
     'loop (# until ::< (# do cond -> value #) do expr #) ' => "Beta",
@@ -1204,7 +1206,7 @@ end') => "ClassicREXX",
 
    'for "a la C" (while + initialisation)' =>
    [ { MLANG => 'Ada B Pascal Python Rebol OCaml Smalltalk SML CommonLisp Ruby Pliant ClassicREXX' },
-    'for' => "Awk C C++ C# Java Perl Pike Tcl PHP MSH JavaScript",
+    'for' => "Awk C C++ C# Java Perl Pike Tcl PHP MSH JavaScript Yorick",
     'loop' => "Perl6",
     'for ((x = 0; x < 10; x++)); do ...; done' => "sh",
     'from init_code until cond loop ... incr_statement end' => "Eiffel",
@@ -1219,14 +1221,14 @@ end') => "ClassicREXX",
 
    'goto (unconditional jump)' =>
    [ { MLANG => 'Awk Ruby merd Beta E Python Lua PostScript Smalltalk Java Pliant JavaScript' },
-    'goto' => "BCPL B C C++ C# Perl Basic Pascal Fortran Cobol Ada",
+    'goto' => "BCPL B C C++ C# Perl Basic Pascal Fortran Cobol Ada Yorick",
     'go throw' => "CommonLisp",
     'signal' => "ClassicREXX",
    ],
 
    'continue / break' =>
    [ { MLANG => 'B Smalltalk' },
-    'continue / break' => "Awk C C++ C# Java E Pike JavaScript Python PHP YCP",
+    'continue / break' => "Awk C C++ C# Java E Pike JavaScript Python PHP YCP Yorick",
     'next / last' => "Perl Perl6",
     'next / break (see also catch/throw)' => "Ruby",
     '/ break' => "BCPL Lua",
@@ -1700,6 +1702,7 @@ end p;') => "Ada",
     'IMPORT p;' => "Modula-2",
     'import p.*' => "Java",
     'import "p"' => "YCP",
+    '#include "p"' => "Yorick",
     'from p import *' => "Python",
     'with p; use p;' => "Ada",
     'inherit c export {NONE} all end' => "Eiffel",
@@ -1806,7 +1809,7 @@ end p;') => "Ada",
 
    'end-of-line (without writing the real CR or LF character)' =>
    [ { MLANG => "ClassicREXX" },
-    '"\n"' => "C C++ C# Perl Perl6 Lua Python Ruby YCP Pike Java JavaScript",
+    '"\n"' => "C C++ C# Perl Perl6 Lua Python Ruby YCP Pike Java JavaScript Yorick",
     '"*n"' => "B BCPL",
     '"%N"' => "Eiffel",
     '"^/"' => "Rebol",
@@ -1886,7 +1889,7 @@ end p;') => "Ada",
    [
     'puts' => "C Dylan",
     'print' => "Awk Java merd Basic SML PHP",
-    'write' => "Pascal Pike JavaScript",
+    'write' => "Pascal Pike JavaScript Yorick",
     'putStr' => "Haskell",
     'print_string' => "OCaml",
     'console' => "Pliant",
@@ -3760,6 +3763,7 @@ sub credits {
 <li>Paul McJones (Modula-3 fixes)
 <li>Uwe Kolb (Smalltalk fixes)
 <li>Ciaran McNulty (PHP)
+<li>David B. Nagle (Yorick)
 </ul>
 EOF
 }
