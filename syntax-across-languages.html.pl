@@ -489,7 +489,7 @@ def x():
 
     '' => 
     [
-     'f(a,b,...)' => "Awk B C C++ C# Java YCP Pike Perl Perl6 Mercury merd Eiffel Python Ruby Pascal E PHP JavaScript Dylan Lua Ada Awk Modula-3 XPath Prolog",
+     'f(a,b,...)' => "Awk B C C++ C# Java YCP Pike Perl Perl6 Mercury merd Eiffel Python Ruby Pascal E PHP JavaScript Dylan Lua Ada Awk Modula-3 XPath Prolog Yorick",
      'f(a,b,...f) or f[a,b,...] depending on the version' => "BCPL",
      'f a b ...' => "SML Haskell OCaml Rebol Tcl Pliant sh MSH",
      '(f a b ...) (apply f l) ' => "Scheme",
@@ -498,6 +498,8 @@ def x():
      'f[a,b,...] or f.call(a,b,...)' => "Ruby",
      '&$f(a,b,...) or $f->(a,b,...)' => "Perl",
      '$f.(a,b,...)' => "Perl6",
+     'f a, b, ...' => "Perl",
+     'f, a, b, ... (procedure call)' => "Yorick",
      'v = f(a, b, ...) or call f a, b, ...' => "ClassicREXX",
      'a b ... f' => "PostScript Forth",
      'a f' => 'Smalltalk',
@@ -515,7 +517,7 @@ def x():
     'with no parameter' =>
     [
      'f' => "Ada Eiffel Pascal PostScript Rebol Ruby Perl MSH Perl6 Mercury Haskell Tcl Pliant sh Prolog", # Haskell egs: monads
-     'f()' => "Awk Pike Python C C++ C# YCP Java E Lua JavaScript",
+     'f()' => "Awk Pike Python C C++ C# YCP Java E Lua Perl JavaScript",
      "f() (there really is a parameter which is the empty tuple)" => "merd OCaml SML",
      '(f)' => "Scheme",
      '(f) (funcall f) ' => "EmacsLisp CommonLisp",
@@ -1702,7 +1704,6 @@ end p;') => "Ada",
     'IMPORT p;' => "Modula-2",
     'import p.*' => "Java",
     'import "p"' => "YCP",
-    '#include "p"' => "Yorick",
     'from p import *' => "Python",
     'with p; use p;' => "Ada",
     'inherit c export {NONE} all end' => "Eiffel",
@@ -1730,6 +1731,7 @@ end p;') => "Ada",
     'use p; (if names are not exported or are exported using @EXPORT_OK)' => "Perl",
     'require p' => "Perl",
     'require "p"' => "Ruby",
+    'require, "p"' => "Yorick",
     "(require 'p) (deprecated in ANSI Common Lisp, but used in ASDF)" => "CommonLisp",
     'with p;' => "Ada",
     'automatically done (using a correspondance from the package name to the file name)' => "OCaml Java",
