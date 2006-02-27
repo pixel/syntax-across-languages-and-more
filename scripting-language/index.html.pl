@@ -1832,7 +1832,7 @@ sub general {
      [  5, 'interactive interpreter (<a href="http://www.telent.net/cliki/REPL">REPL</a>)' => sub { $_[0]{interactive_interpreter} } ],
      [  5, 'debugger' => sub { $_[0]{debugger} } ],
      [  5, 'full interpreter in debugger' => sub { $_[0]{interpreter_in_debugger} } ],
-     [  2, 'verbose_execution' => sub { $_[0]{verbose_execution} } ],
+     [  2, 'trace execution (a la "sh -x")' => sub { $_[0]{verbose_execution} } ],
     );
 }
 
