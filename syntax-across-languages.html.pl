@@ -307,7 +307,7 @@ def x():
     'local V1 = e V2 = e2 in ... end' => "Oz",
     'global' => "Python",
     ':@' => "Beta",
-    ':' => "Ada Pascal Eiffel",
+    'v: t' => "Ada Pascal Eiffel",
     '| v1 v2 |' => 'Smalltalk',
     'auto v1, v2; extrn v3, v4;' => "B",
     'var' => "JavaScript",
@@ -1155,7 +1155,7 @@ Loop Until cond') => "VisualBasic",
    ],
 
    'for each value in a numeric range, 1 increment (see also the entries about ranges)' =>
-   [
+   [ { MLANG => 'Eiffel' },
     'for (int i = 1; i <= 10; i++) expr' => "C C#",
     'foreach my $i (1 .. 10) { expr }' => "Perl",
     'foreach ($i in 1..10) { expr }' => "MSH",
@@ -1183,6 +1183,7 @@ end') => "ClassicREXX",
     'for (int i = 10; i >= 1; i--) expr' => "C C#",
     'for (my $i = 10; $i >= 1; $i--) { expr }' => "Perl",
     'loop (my $i = 10; $i >= 1; $i--) { expr }' => "Perl6",
+    'from i := 10 until i < 1 loop expr i := i - 1 end' => "Eiffel",
     'for i in range(10, 0, -1)' => "Python",
     'for i in `seq 10 -1 1`; do expr; done' => "sh",
     '10 -1 1 expr for' => "PostScript",
@@ -1197,6 +1198,7 @@ end') => "ClassicREXX",
     'for (int i = 1; i <= 10; i += 2) expr' => "C C#",
     'for (my $i = 1; $i <= 10; $i += 2) { expr }' => "Perl",
     'loop (my $i = 1; $i <= 10; $i += 2) { expr }' => "Perl6",
+    'from i := 1 until i > 10 loop expr i := i + 2 end' => "Eiffel",
     'for i in range(1, 11, 2)' => "Python",
     'for i in `seq 1 2 10`; do expr; done' => "sh",
     '1 2 10 expr for' => "PostScript",
@@ -1403,7 +1405,7 @@ predefined_condition_name :
   ],
 
   'mutability, constness' =>
-  [ { ALL => 1, MLANG => "Smalltalk" },
+  [ { ALL => 1, MLANG => "Smalltalk Eiffel" },
    'type of a mutable value' =>
    [
     'it is the default' => "Ada C C++ Java C#",
@@ -1795,7 +1797,7 @@ end p;') => "Ada",
    ],
 
    'with interpolation' =>
-   [ { MLANG => "Haskell Beta C# ClassicREXX" },
+   [ { MLANG => "Haskell Beta C# ClassicREXX Eiffel" },
     '"... $v ..."' => "Perl Perl6 Tcl PHP sh",
     '"... {v} ..."' => "merd",
     '"... #{v} ..." "... #$v ..." "... #@v ..." "... #@@v ..."' => "Ruby",
@@ -1821,7 +1823,7 @@ end p;') => "Ada",
   ],
 
   'multi-line' =>
-  [ { MLANG => "C" },
+  [ { MLANG => "C Eiffel" },
    'all strings allow multi-line strings' => "E Perl Perl6 OCaml Ruby Scheme Pascal CommonLisp EmacsLisp YCP",
    '@"..."' => "C#",
     q('''...''', """...""") => "Python",
@@ -2299,6 +2301,7 @@ end p;') => "Ada",
    'a[]' => "C#",
    'List' => "Pliant",
    'Array or List' => "Perl6",
+   'ARRAY or LINKED_LIST' => "Eiffel",
  ],
 
  'list concatenation' =>
@@ -2460,7 +2463,7 @@ end p;') => "Ada",
  ],
 
  'all but the first element' =>
- [ { MLANG => 'Perl Python C++ Ruby JavaScript' },
+ [ { MLANG => 'Perl Python C++ Ruby JavaScript Eiffel' },
   'tail' => "Haskell",
   'tl' => "OCaml",
   'cdr' => "Scheme EmacsLisp CommonLisp",
@@ -2485,7 +2488,7 @@ end p;') => "Ada",
  ],
 
  'get the first element and remove it' =>
- [ { MLANG => 'Haskell Python C++ OCaml' },
+ [ { MLANG => 'Haskell Python C++ OCaml Eiffel' },
   'shift' => "Perl Perl6 Ruby JavaScript",
   'shift!' => "merd",
   'pop' => "CommonLisp",
@@ -2494,7 +2497,7 @@ end p;') => "Ada",
  ],
 
  'get the last element and remove it' =>
- [ { MLANG => 'Haskell C++ OCaml' },
+ [ { MLANG => 'Haskell C++ OCaml Eiffel' },
   'pop' => "E Perl Perl6 Ruby Python JavaScript",
   'pop!' => "merd",
   'array_pop' => "PHP",
@@ -2887,13 +2890,14 @@ Next' => "VisualBasic",
    'undef' => "Perl",
    'None' => "Python OCaml",
    'Nothing' => "Haskell",
+   'Void' => "Eiffel",
    '#f ()' => "EmacsLisp",
    '(empty) / ~ / null' => "YAML",
   ],
 
   'value' =>
   [
-   'v' => "Ada C C++ C# Java Perl JavaScript Smalltalk Python Perl Ruby EmacsLisp CommonLisp Lua Scheme",
+   'v' => "Ada C C++ C# Eiffel Java Perl JavaScript Smalltalk Python Perl Ruby EmacsLisp CommonLisp Lua Scheme",
    'Just v' => "Haskell",
    'Some v' => "OCaml",
   ],
@@ -2931,6 +2935,7 @@ Next' => "VisualBasic",
     '(k, v) Hashtbl.t' => "OCaml",
     'Dictionary' => "Pliant",
     'Hash' => "Perl6",
+    'HASH_TABLE' => "Eiffel",
   ],
 
   'constructor' =>
@@ -3051,7 +3056,7 @@ Next' => "VisualBasic",
  ],
 
  'range' => 
- [ { MLANG => 'C C++ OCaml Java ClassicREXX' },
+ [ { MLANG => 'C C++ OCaml Java ClassicREXX Eiffel' },
   'inclusive .. inclusive' =>
   [
    'a .. b' => "Ruby Perl Pascal merd E Ada MSH",
@@ -3084,6 +3089,7 @@ Next' => "VisualBasic",
    'Int' => "Perl6",
    'Int, uInt, Int8, Int16...' => "Pliant",
    'INTEGER, INT, SMALLINT' => "SQL92",
+   'INTEGER, INTEGER_8, NATURAL_8...' => "Eiffel",
   ],
 
   'decimal' =>
@@ -3093,6 +3099,7 @@ Next' => "VisualBasic",
    'Float, Float32, Float64' => "Pliant",
    'NUMERIC, DECIMAL, DOUBLE PRECISION' => "SQL92",
    'Rat' => "Perl6",
+   'DOUBLE, REAL' => "Eiffel",
   ],
  ],
 
@@ -3136,7 +3143,7 @@ Next' => "VisualBasic",
    [ { MLANG => 'sh' },
     '1000., 1E3' => 'C C++ E OCaml Java Python Scheme Tcl JavaScript Ada ClassicREXX SQL92',
     '1000., 1E3, 1,0' => 'Rebol',
-    '1000., 1.E3' => 'Oz',
+    '1000., 1.E3' => 'Oz Eiffel',
     '1000.0, 1E3' => 'C# Pike Ruby CommonLisp EmacsLisp Smalltalk',
     '1000.0, 1.0E3' => 'Haskell',
     '1000, 1000.0, 1E3 (integers are decimals)' => 'Awk Perl Perl6 merd',
@@ -3145,7 +3152,7 @@ Next' => "VisualBasic",
 
  'addition / subtraction / multiplication / division' =>
  [
-  '+ / - / * / /' => "C C++ Java C# Perl Perl6 Python Pliant Ruby sh merd Tcl Haskell Scheme CommonLisp EmacsLisp Smalltalk ClassicREXX SQL92",
+  '+ / - / * / /' => "C C++ Java Eiffel C# Perl Perl6 Python Pliant Ruby sh merd Tcl Haskell Scheme CommonLisp EmacsLisp Smalltalk ClassicREXX SQL92",
   '+ +. / - -. / * *. / / /. (with mathematical priorities)' => "OCaml",
   'add / sub / mul / idiv div' => "PostScript",
  ],
@@ -3190,13 +3197,13 @@ Next' => "VisualBasic",
  [ { MLANG => 'Scheme CommonLisp EmacsLisp' },
   'addition vs multiplication' =>
   [
-   'mathematical' => "C C++ Java C# Perl Perl6 Python Ruby sh merd Tcl Haskell ClassicREXX",
+   'mathematical' => "C C++ Java C# Eiffel Perl Perl6 Python Ruby sh merd Tcl Haskell ClassicREXX",
    'same priorities' => "Smalltalk",
   ],
 
   'exponentiation vs negation (is -3^2 equal to 9 or -9)' =>
   [ { MLANG => 'C C++' },
-   'mathematical' => "Perl Perl6 Ruby Python Haskell ClassicREXX",
+   'mathematical' => "Perl Perl6 Eiffel Ruby Python Haskell ClassicREXX",
    'negation first' => "OCaml",
   ],
  ],
@@ -3766,6 +3773,7 @@ sub credits {
 <li>Uwe Kolb (Smalltalk fixes)
 <li>Ciaran McNulty (PHP)
 <li>David B. Nagle (Yorick)
+<li>Michael Schaufelberger (Eiffel)
 </ul>
 EOF
 }
