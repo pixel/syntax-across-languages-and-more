@@ -2363,7 +2363,7 @@ end p;') => "Ada",
  ],
 
  'list/array indexing' =>
- [ { MLANG => "Beta" },
+ [ { MLANG => "Beta" }, # eiffeil favors a.put(v, i) for write access
   'a[i]' => "B C C++ C# Java Pike Ruby Python merd Pascal E PHP Perl Perl6 Dylan Lua JavaScript Modula-3 MSH",
   'a*[i] or a!i or a*(i) depending on the version' => "BCPL",
   'a[i]:default' => "YCP",
@@ -2412,7 +2412,7 @@ end p;') => "Ada",
  ],
 
  'adding an element at index' =>
- [ {},
+ [ { MLANG => 'Eiffel' },
   'return the new list (no side-effect)' =>
   [
   ],
@@ -3185,11 +3185,16 @@ Next' => "VisualBasic",
    'random number' =>
    [
     'rand' => 'Perl Perl6',
+  pre('r: RANDOM
+create r.make
+r.start
+r.item') => "Eiffel",    
    ],
 
    'seed the pseudo random generator' =>
    [
     'srand' => 'Perl Perl6',
+    'set_seed' => "Eiffel",
    ],
  ],
 
@@ -3287,6 +3292,7 @@ Next' => "VisualBasic",
    'remainder' => "Ruby Scheme",
    'rem' => "BCPL Ada Smalltalk",
    '//' => "Rebol ClassicREXX",
+   '\\\\' => "Eiffel",
   ],
  ],
 
