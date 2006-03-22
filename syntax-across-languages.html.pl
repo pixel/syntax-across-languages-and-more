@@ -704,7 +704,7 @@ return') => "ClassicREXX",
   [ { MLANG => 'Prolog PostScript' },
    'breaks the control flow' => ($::return_a_value =
    [
-    'return' => "Awk B C C++ C# ClassicREXX Java E Pike YCP Perl Perl6 Ruby Rebol Python Tcl Ada PHP Pliant JavaScript sh ClassicREXX Yorick",
+    'return' => "Awk B C C++ C# ClassicREXX Java E Pike YCP Perl Perl6 Ruby Rebol Python Tcl Ada PHP Pliant JavaScript sh Yorick",
     'return (in Lua, "return xxx" can only appear before a block end)' => "Lua",
     'Return' => "VisualBasic",
     'RETURN' => "Modula-3",
