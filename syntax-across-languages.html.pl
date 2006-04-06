@@ -201,11 +201,11 @@ def x():
 
     'if case sensitive, what is the standard way for <a href="http://c2.com/cgi/wiki?CapitalizationRules">scrunching together multiple words</a>' =>
     [
-     # see http://dotnet.di.unipi.it/EcmaSpec/CSharp/cont25.html for C#
+     # see http://dotnet.di.unipi.it/EcmaSpec/CSharp/cont25.html C.1.4 for C#
      # perl -ne '$l{$_} = 1 foreach /(\w*[a-z][_]\w*)/g; $m{$_} = 1 foreach /(\w*[a-z][A-Z]\w*)/g; END { print join(" ", keys %l), "\n", join(" ", keys %m), "\n" }'
-     'CamelCase' => "Haskell Java JavaScript Tcl Smalltalk C# E Pascal",
+     'CamelCase' => "Haskell Java JavaScript Tcl Smalltalk C# E Pascal VisualBasic",
      'underscores' => 'merd',
-     'hyphens' => "Rebol CommonLisp",
+     'hyphens' => "Rebol EmacsLisp CommonLisp",
      'underscores for functions, unclear for modules / types / constructors' => "OCaml",
      'UPPER_CASE' => "sh",
      'underscores, UPPER_CASE for class names' => "Eiffel",
@@ -489,7 +489,7 @@ def x():
 
     '' => 
     [
-     'f(a,b,...)' => "Awk B C C++ C# Java YCP Pike Perl Perl6 Mercury merd Eiffel Python Ruby Pascal E PHP JavaScript Dylan Lua Ada Awk Modula-3 XPath Prolog Yorick",
+     'f(a,b,...)' => "Awk B C C++ C# Java YCP Erlang Pike Perl Perl6 Mercury merd Eiffel Python Ruby Pascal E PHP JavaScript Dylan Lua Ada Awk Modula-3 XPath Prolog Yorick",
      'f(a,b,...f) or f[a,b,...] depending on the version' => "BCPL",
      'f a b ...' => "SML Haskell OCaml Rebol Tcl Pliant sh MSH",
      '(f a b ...) (apply f l) ' => "Scheme",
@@ -517,7 +517,7 @@ def x():
     'with no parameter' =>
     [
      'f' => "Ada Eiffel Pascal PostScript Rebol Ruby Perl MSH Perl6 Mercury Haskell Tcl Pliant sh Prolog", # Haskell egs: monads
-     'f()' => "Awk Pike Python C C++ C# YCP Java E Lua Perl JavaScript",
+     'f()' => "Awk Pike Erlang Python C C++ C# YCP Java E Lua Perl JavaScript",
      "f() (there really is a parameter which is the empty tuple)" => "merd OCaml SML",
      '(f)' => "Scheme",
      '(f) (funcall f) ' => "EmacsLisp CommonLisp",
@@ -533,7 +533,7 @@ def x():
   ],
 
   '<a href="http://www.haskell.org/hawiki/PartialApplication">partial application</a> (in the examples below, a normal call is "f(a,b)")' =>
-  [ { KIND => 'functional', ALL => 1, MLANG => "Smalltalk CommonLisp Scheme" },
+  [ { KIND => 'functional', ALL => 1, MLANG => "Smalltalk CommonLisp Scheme Erlang" },
 
     'give the first argument' =>
     [
@@ -715,7 +715,7 @@ return') => "ClassicREXX",
 
    'function body is the result' => 
    [
-    'no syntax needed' => "Haskell OCaml SML EmacsLisp Rebol CommonLisp Scheme Perl Perl6 Ruby Dylan Oz",
+    'no syntax needed' => "Haskell OCaml Erlang SML EmacsLisp Rebol CommonLisp Scheme Perl Perl6 Ruby Dylan Oz",
    ],
 
    'setting the result' => 
@@ -757,7 +757,7 @@ return') => "ClassicREXX",
   ],
 
   'identity function' =>
-  [ { KIND => 'functional', MLANG => 'OCaml', },
+  [ { KIND => 'functional', MLANG => 'OCaml Erlang', },
     'id' => "Haskell",
     'identity' => "CommonLisp",
     'yourself' => "Smalltalk",
@@ -3780,6 +3780,7 @@ sub credits {
 <li>Ciaran McNulty (PHP)
 <li>David B. Nagle (Yorick)
 <li>Michael Schaufelberger (Eiffel)
+<li>Samuel Charron (Erlang)
 </ul>
 EOF
 }
