@@ -861,6 +861,7 @@ end') => "ClassicREXX",
    'c if b1 else b2 then' => "Forth",
    'c ? b1 : b2' => "Awk B C C++ C# Java Perl Ruby PHP JavaScript YCP Yorick",
    'c ?? b1 :: b2' => "Perl6",
+   'b1 if c else b2' => "Python",
    'c -> b1, b2' => "BCPL",
    '(if c then b1 else b2 fi)' => "Beta",
 
