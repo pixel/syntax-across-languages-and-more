@@ -1836,6 +1836,8 @@ end p;') => "Ada",
     \\...\n")) => "Haskell",
     pre(q("...",
 "...")) => "ClassicREXX",
+    pre(q("...%N%
+%...%N")) => "Eiffel",
   ],
 
   'convert something to a string (see also string interpolation)' =>
