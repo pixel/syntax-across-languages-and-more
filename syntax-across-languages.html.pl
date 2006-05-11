@@ -1665,6 +1665,7 @@ predefined_condition_name :
     'namespace p { ... }' => "C++ C#",
     'module p where ...' => "Haskell",
     'module P ... end' => "Ruby",
+    'module P = struct ... end' => "OCaml",
     '{ module "p"; ... }' => "YCP",
     ':- module(p)' => "Prolog",
     "(defpackage p ...)" => "CommonLisp",
@@ -1689,6 +1690,8 @@ end p;') => "Ada",
     "(export 'name1 'name2)" => "CommonLisp",
     'attached to each name (public, private...) ' => "Java Pike",
     'append_features' => "Ruby",
+    pre(q(module type PType = sig val name1 : type1 ... end
+module P : PType  = struct ... end)) => "OCaml",
    ],
   ],
 
@@ -1814,7 +1817,7 @@ end p;') => "Ada",
 
    'end-of-line (without writing the real CR or LF character)' =>
    [ { MLANG => "ClassicREXX" },
-    '"\n"' => "C C++ C# Perl Perl6 Lua Python Ruby YCP Pike Java JavaScript Yorick",
+    '"\n"' => "C C++ C# Perl Perl6 Lua OCaml Python Ruby YCP Pike Java JavaScript Yorick",
     '"*n"' => "B BCPL",
     '"%N"' => "Eiffel",
     '"^/"' => "Rebol",
@@ -2380,6 +2383,7 @@ end p;') => "Ada",
   'at (for write access: a :at i :put o)' => "Smalltalk",
   'at (is range-checked whereas a[i] is not)' => "C++",
   'lindex' => "Tcl",
+  'nth' => "OCaml",
   'Nth' => "Oz",
   'nth / aref' => "EmacsLisp CommonLisp",
   'list-ref / vector-ref' => "Scheme",
@@ -2415,7 +2419,7 @@ end p;') => "Ada",
  ],
 
  'adding an element at index' =>
- [ { MLANG => 'Eiffel' },
+ [ { MLANG => 'Eiffel OCaml' },
   'return the new list (no side-effect)' =>
   [
   ],
@@ -3088,7 +3092,7 @@ Next' => "VisualBasic",
   'integers' =>
   [
    'short, int, long' => "C C#",
-   'int' => "YAML",
+   'int' => "YAML OCaml",
    'Int' => "Perl6",
    'Int, uInt, Int8, Int16...' => "Pliant",
    'INTEGER, INT, SMALLINT' => "SQL92",
@@ -3098,7 +3102,7 @@ Next' => "VisualBasic",
   'decimal' =>
   [
    'float, double' => "C C#",
-   'float' => "YAML",
+   'float' => "YAML OCaml",
    'Float, Float32, Float64' => "Pliant",
    'NUMERIC, DECIMAL, DOUBLE PRECISION' => "SQL92",
    'Rat' => "Perl6",
@@ -3188,6 +3192,7 @@ Next' => "VisualBasic",
    'random number' =>
    [
     'rand' => 'Perl Perl6',
+    'Random.int' => "OCaml",
   pre('r: RANDOM
 create r.make
 r.start
@@ -3198,6 +3203,7 @@ r.item') => "Eiffel",
    [
     'srand' => 'Perl Perl6',
     'set_seed' => "Eiffel",
+    'Random.init, Random.self_init' => "OCaml",
    ],
  ],
 
@@ -3784,6 +3790,7 @@ sub credits {
 <li>David B. Nagle (Yorick)
 <li>Michael Schaufelberger (Eiffel)
 <li>Samuel Charron (Erlang)
+<li>Kyle Ross (OCaml)
 </ul>
 EOF
 }
