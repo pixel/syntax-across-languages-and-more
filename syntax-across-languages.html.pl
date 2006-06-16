@@ -2514,7 +2514,13 @@ module P : PType  = struct ... end)) => "OCaml",
  'for each element do something' =>
  [ { MLANG => "XSLT" }, # could be KIND has_lambda, but many languages has special cases for this
   'each' => "Ruby merd Pliant",
-  'for in' => "Ruby Python E JavaScript",
+  'for v in l ...' => "Python Ruby E",
+  'for (v in l) ...' => "Awk Dylan",
+  'for (var v in l) { ... }' => "JavaScript",
+  'For Each v in l
+...
+Next' => "VisualBasic",
+  'for v in range loop .. end loop' => "Ada",
   'for' => "Perl",
   'foreach' => "Perl Pike Rebol Tcl Lua PHP",
   'foreach (t v in l) ...' => "C#",
@@ -2531,11 +2537,6 @@ module P : PType  = struct ... end)) => "OCaml",
   'app' => "SML",
   'mapc' => "EmacsLisp",
   'mapM_' => "Haskell",
-  'for (v in l) ...' => "Awk Dylan",
-  'For Each v in l
-...
-Next' => "VisualBasic",
-  'for v in range loop .. end loop' => "Ada",
   '(dolist (v l) ...)  (loop for v in l do ...)  mapc' => "CommonLisp",
   "list.iterate (# do current ... #) " => "Beta",
  ],
@@ -3188,10 +3189,10 @@ Next' => "VisualBasic",
  ],
 
  'random' =>
- [
+ [ { ALL => 1 },
    'random number' =>
    [
-    'rand' => 'Perl Perl6',
+    'rand' => 'Perl Perl6 Ruby',
     'Random.int' => "OCaml",
   pre('r: RANDOM
 create r.make
@@ -3201,7 +3202,7 @@ r.item') => "Eiffel",
 
    'seed the pseudo random generator' =>
    [
-    'srand' => 'Perl Perl6',
+    'srand' => 'Perl Perl6 Ruby',
     'set_seed' => "Eiffel",
     'Random.init, Random.self_init' => "OCaml",
    ],
@@ -3791,6 +3792,7 @@ sub credits {
 <li>Michael Schaufelberger (Eiffel)
 <li>Samuel Charron (Erlang)
 <li>Kyle Ross (OCaml)
+<li>Damien Krotkine (Ruby)
 </ul>
 EOF
 }
