@@ -1476,8 +1476,14 @@ predefined_condition_name :
 
   'object creation' =>
   [
-   'new' => "Ada Simula C# C++ Java Ruby Perl Perl6 PHP OCaml Pliant Smalltalk JavaScript",
+   'new' => "Ada Simula PHP Pliant",
+   'new class_name(...)' => "C++ C# Java Perl JavaScript VisualBasic",
+   'new class_name ...' => "OCaml",
+   'class_name.new(...)' => "Ruby Perl6",
+   'class_name new' => "Smalltalk",
    'class_name()' => "Pike Python",
+   'class_name v(...)' => "C++",
+   'class_name.Create' => "Delphi",
    '!class_name!constructor_name(...)' => "Eiffel",
    '&'  => "Beta",
    'make-object' => "MzScheme",
@@ -1506,9 +1512,9 @@ predefined_condition_name :
   ],
 
   "manually call an object's destructor" =>
-  [ { MLANG => 'OCaml Eiffel E Smalltalk Ruby' },
+  [ { MLANG => 'OCaml Eiffel E Smalltalk Ruby Java' },
    'delete' => "C++ JavaScript",
-   'destroy' => "Pike Java",
+   'destroy' => "Pike",
    'DESTROY' => "Perl",
    'dealloc' => "Objective-C",
    'Dispose' => "C#",
@@ -3793,6 +3799,7 @@ sub credits {
 <li>Samuel Charron (Erlang)
 <li>Kyle Ross (OCaml)
 <li>Damien Krotkine (Ruby)
+<li>Guillaume Cottenceau (Java)
 </ul>
 EOF
 }
