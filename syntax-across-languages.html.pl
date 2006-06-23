@@ -3836,6 +3836,7 @@ sub end {
     <<'EOF' . "\n</body></html>";
 <hr><address><a href="mailto:pixel@rigaux.org">Pixel</a></address>
 This document is licensed under <a href="http://www.gnu.org/copyleft/fdl.html">GFDL</a> (GNU Free Documentation License).
+<br> $Id$
 EOF
 }
 
