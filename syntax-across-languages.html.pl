@@ -3584,13 +3584,6 @@ my ($comments, %comments, %langs);
 
 $\ = "\n";
 
-if (!open F, "-|") {
-    open G, "|m4";
-    print G "include(`../mirrors.m4')MACRO_COUNTER(`language-study')";
-    exit 0;
-}
-my ($macro_counter) = <F>;
-
 system("rm -rf syntax-across-languages");
 mkdir "syntax-across-languages";
 
@@ -3840,7 +3833,7 @@ You may also have a look at this information <a href="${ref}syntax-across-langua
 EOF
 }
 sub end {
-    <<'EOF' . $macro_counter . "\n</body></html>";
+    <<'EOF' . "\n</body></html>";
 <hr><address><a href="mailto:pixel@rigaux.org">Pixel</a></address>
 This document is licensed under <a href="http://www.gnu.org/copyleft/fdl.html">GFDL</a> (GNU Free Documentation License).
 EOF

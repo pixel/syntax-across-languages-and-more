@@ -2148,8 +2148,6 @@ sub footer {
 This document is licensed under <a href="http://www.gnu.org/copyleft/fdl.html">GFDL</a> (GNU Free Documentation License).
 <p>Automatically generated from this <a href="index_pl.txt">file</a>.
 
-<p><A HREF="http://www.estat.com/getstats?serial=1400113423"><IMG SRC="http://perso.estat.com/cgi-bin/perso/1400113423?page=language-study" BORDER=0></A>
-
 </body>
 </html>
 >;
