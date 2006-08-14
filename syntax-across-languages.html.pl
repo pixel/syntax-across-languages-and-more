@@ -1210,12 +1210,13 @@ end') => "ClassicREXX",
 
    'for each value in a numeric range, free increment' =>
    [ { MLANG => 'OCaml' },
-    'for (int i = 1; i <= 10; i += 2) expr' => "C C#",
+    'for (int i = 1; i <= 10; i += 2) expr' => "C C# Pike",
+    'for (i = 1; i <= 10; i += 2) expr' => "Awk",
     'for (my $i = 1; $i <= 10; $i += 2) { expr }' => "Perl",
     'loop (my $i = 1; $i <= 10; $i += 2) { expr }' => "Perl6",
     'from i := 1 until i > 10 loop expr i := i + 2 end' => "Eiffel",
     'for i in range(1, 11, 2)' => "Python",
-    'for i in `seq 1 2 10`; do expr; done' => "sh",
+    'for ((x = 1; x <= 10; x += 2)); do ...; done' => "sh",
     'FOR I=1:2:10 expr' => "MUMPS",
     '1 2 10 expr for' => "PostScript",
     '(1..10).step(2) {|i| expr }' => "Ruby",
@@ -3821,6 +3822,7 @@ sub credits {
 <li>Damien Krotkine (Ruby)
 <li>Guillaume Cottenceau (Java)
 <li>David.Whitten (MUMPS)
+<li>Phil Howard (various)
 </ul>
 EOF
 }
