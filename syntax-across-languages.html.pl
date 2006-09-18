@@ -2671,12 +2671,14 @@ module P : PType  = struct ... end)) => "OCaml",
   [
    'export-clixml' => "MSH",
    'Marshal.to_string' => "OCaml",
+   'Marshal.dump' => "Ruby",
   ],
 
   'unserialize (un-marshaling)' =>
   [
    'import-clixml' => "MSH",
    'Marshal.from_string' => "OCaml",
+   'Marshal.load' => "Ruby",
   ],
 
   'sprintf-like' =>
@@ -4643,6 +4645,7 @@ sub credits {
 <li>Guillaume Cottenceau (Java)
 <li>David.Whitten (MUMPS)
 <li>Phil Howard (various)
+<li>Andrzej Zawadzki (Ruby)
 </ul>
 EOF
 }
