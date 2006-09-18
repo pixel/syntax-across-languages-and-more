@@ -1,717 +1,3 @@
-=head1
->
-> function called when a function is not defined:
-> (not possible)
->
->
-> runtime inspecting the called information:
-> evalin('caller',expression)
->
->
-> function composition:
-> (not possible)
->
->
-> control flow sequence:
-> , / ; / end-of-line
-> (note: end-of-line without ';' displays the last value evaluated or the last assigned variable)
->
->
-> if_then:
-> if c
->   b
-> end
->
-> or in a single line:
-> if c, b, end
->
->
-> if_then_else:
-> if c1
->   b1
-> elseif c2
->   b2
-> elseif c3
->   b3
-> ...
-> else
->   bN
-> end
-> (you can do the same in 1 line, with commas instead of end-of-lines)
->
->
-> unless:
-> (not possible)
->
->
-> switch:
-> switch val
->   case v1
->     expr1
->   case {v2,v3}
->     expr2
->   otherwise
->     expr3
-> end
-> (you can do the same on 1 line, with commas. identation is not important)
->
->
-> forever loop
-> while 1, expr, end
->
->
-> while condition do something:
-> while cond
->   expr
-> end
-> (or: "while cond, expr, end" in one line)
->
->
-> do something until condition:
-> while 1
->   expr
->   if cond, break, end
-> end
->
->
-> for each value in a numeric range:
-> for i=1:10, expr, end
-> (important note: all operators and functions support vectors/matrixes/n-d arrays, so usually the 'for' is avoided)
->
->
-> for each value, 1 decrement:
-> for i=10:-1:1, expr, end
->
->
-> for, fre increment:
-> for i=1:3:10, expr, end
->
->
-> for 'a la c':
-> (not possible)
->
->
-> breaking control flow:
-> returning a value
-> (normal functions: not possible)
-> (inline functions: 'return'. last evaluated value is returned)
->
->
-> goto:
-> (not possible)
->
->
-> continue / break:
-> continue / break
->
->
-> redo / retry:
-> (no possible)
->
->
-> throwing:
-> error
->
->
-> catching:
-> try
->   a
-> catch
->   b
-> end
->
->
-> cleanup:
-> (not possible)
->
->
-> retry:
-> (not possible)
->
->
-> call with current continuation:
-> (no possible)
->
->
-> types - declaration:
-> (not possible)
->
->
-> variable declaration:
-> (first usage is declaration)
->
->
-> upcast/downcast:
-> typecast(e,t)
->
->
-> computed conversion:
-> t(e)
->
->
-> mutable values - are the default
->
-> no consts.
->
->
-> method invcation:
-> method(object,para)
->
->
-> method invcation, no para:
-> method(object)
->
->
-> object creation:
-> class_name(...)
->
->
-> object cloning:
-> o2 = o
->
->
-> object destructor:
-> (not possible)
->
->
-> class declaration:
-> class
->
->
-> class membership:
-> isa
->
->
-> get class:
-> class
->
->
-> methods available:
-> methods
->
->
-> inheritance:
-> superiorto / inferiorto
->
->
-> has the method:
-> ismethod(obj,'method')
->
->
-> current instance:
-> first parameter
->
->
-> accessing parent method: TBD. i don't know.
->
->
-> package scope
-> /
-> (ie "packagename/functionname" calls the function)
->
->
-> package declare
-> (directory name is package name)
->
->
-> package selective export:
-> (all files in package directory are exported. files in /private sub-directory are not exported, but can be used by the package itself)
->
->
-> import package
-> addpath
->
->
-> import package selectively:
-> (not possible. language allows conflicts, which are resolved using path order. it is possible to manually call a function in a package using package scope)
->
->
-> package load:
-> (not possible. functions are loaded lazily)
->
->
->
-> string type name:
-> char
-> character type name:
-> char
-> (note: string and characted type names are the same, because everything in matlab is a n-dimensional matrix. a single char has all dimensions 1. a string has dimensions 1xn)
->
->
-> character "z":
-> 'z'
->
->
-> strings - verbatim:
-> '...'
->
->
-> with interpolation: TBD
->
->
-> end-of-line:
-> char(13)
->
->
-> multi-line: ?
->
->
-> convert something to string: ?
-> (see print objects, below)
->
->
-> un/serialize to string: ?
->
->
-> sprintf-like:
-> sprintf
->
->
-> simple print:
-> (nothing - just remove ';' at the end of the expression, and it will print it)
-> disp
->
->
-> on simple objects:
-> (nothing - just remove ';' at the end of the expression, and it will print it)
-> disp
->
->
-> on any object:
-> (nothing - just remove ';' at the end of the expression, and it will print it)
-> disp
->
->
-> printf-like
-> printf
->
->
-> string equality:
-> == / ~= / strcmp
-> (note: == and ~= return a vector of comparison results, 1 for each char)
->
->
-> string size:
-> length / numel / size
->
->
-> string concatenation:
-> [string1 string2]
->
->
-> duplicate n times:
-> repmat
->
->
-> upper/lower case char / string:
-> upper / lower
-> (same functions for char and string)
->
->
-> ascii to character:
-> char(c)
->
->
-> character to ascii
-> (done automatically when applying mathematical operations on char, such as +)
->
->
-> accessing n-th char:
-> s(n)
->
->
-> extracting a substring:
-> s(n:m)
->
->
-> locate a substring:
-> strfind
->
->
-> locate a substring, starting at the end:
-> t=strfind(s,p), t(end)
->
->
-> booleans:
-> logical
->
->
-> false value:
-> 0 / 0.0 / [] / {} / '' / false / logical array at least 1 false value
->
->
-> true value:
-> anything not false
->
->
-> logical not:
-> ~
->
->
-> short circuit:
-> && ||
->
->
-> non short circuit:
-> & |
->
->
-> bags and lists - type name:
-> cell (n-dimensional array of inhomogenous types)
-> (all other types are by definition n-dimensional arrays of a single predefined type)
->
->
-> list concatenation:
-> , (horizontal concatenation)
-> ; (vertical concatenation)
-> cat (concatenations in higher dimensions)
->
->
-> list flatening - one level:
-> (no built-in function. you can write your own)
->
->
-> list flatening - recursive:
-> (no built-in function. you can write your own)
->
->
-> list constructor:
-> [ a, b, c ] (horizontal dimension)
-> [ a; b; c ] (vertical dimension)
-> [ a, b, c; d, e, f ] (both dimensions)
-> both dimensions, shorthand:
-> [ a b c
->   d e f ]
-> list of the same type of element: use [] (array)
-> list with multiple element types: use {} (cell)
->
->
-> list / array indexing:
-> a(i)
-> a(i,j,k,...)
->
->
-> adding an element at the beginning: (return new list)
-> [e l]
->
->
-> adding element at index:
-> [a(1:i-1) e a(i:end)]
->
->
-> adding element at end: (return new list)
-> a(end+1)=e
->
->
-> first element:
-> a(1)
->
->
-> iterator:
-> (no exact equivalent)
->
->
-> all but first element:
-> a(2:end)
-> (works also if list is empty or has only 1 element)
->
->
-> last element:
-> a(end)
->
->
-> get first element and remove it:
-> elem=a(1);
-> a=a(2:end);
->
->
-> get last element and remove it:
-> elem=a(end);
-> a=a(1:end-1);
->
->
-> for each element do something:
-> for k=1:numel(a)
->
->
-> transform a list into another:
-> (nothing special to do, this is the default operation in matlab)
-> (for example: sin(x) computes sin() for every element in x)
->
->
-> transform two lists in parallel
-> (nothing special to do, this is the default operation in matlab for binary functions and operators)
->
->
-> find an element: (return index)
-> find(a==3)
->
->
-> find an element: (return boolean vector, which can be used as index. see next example)
-> a==3
->
->
-> keep elements matching:
-> a(a==3)
->
->
->
-> foldR/foldL: (no known form.)
->
->
-> split a list in 2 based on predicate:
-> a(p(a))
-> a(~p(a))
->
->
-> is an element in the list
-> any(a==3)
-> ismember(a,3)
->
->
-> is the predicate true for an element:
-> any
->
->
-> is the predicate tru for all elements:
-> all
->
->
-> smallest biggest element:
-> min / max
->
->
-> join a list of strings using a glue string:
-> strcat
-> (works for a single string, and also for a list of strings)
->
->
-> list size:
-> size   -- size in all dimensions (returns a vector)
-> numel   -- number of elements (equivalent to prod(size(a))
-> length  -- size in the first non-singleton dimension
->
->
-> iterate with index:
-> for i=v  (where v is the list containing indexes)
->
->
-> remove duplicates:
-> unique
->
->
-> sort:
-> sort
->
->
-> reverse:
-> (there are many dimensions, so many functions:)
-> fliplr  (flip left right)
-> flipud  (flip up down)
-> rot90  (rotate 90)
-> a'  (transpose)
-> a.'  (complex conjugate transpose)
-> flipdim  (flip higher dimensions such as 3d, 4d..)
->
->
-> list of couples from 2 lists:
-> [a b] or [a;b] depending on list dimensions (shape)
->
->
-> 2 lists from a list of couples
-> a(1,:)  (first)
-> a(2,:)  (second)
-> (there are various other forms depending on original list shape)
->
->
-> lookup an element in assoc list:
-> a.(lookupelement)
->
->
-> list out of a bag:
-> [a.(:)]
->
->
-> tuple type:
-> {a,b,c}
-> {}  -- empty
->
->
-> using a tuple for a function call:
-> f(t{:})
-> (if t contains {1,2,'a'}, the function call is: f(1,2,'a'))
->
->
-> pointers / references creation:
-> @  (function pointer. for example @sin creates a function pointer for sin())
-> (no pointers for data)
->
->
-> dereference:
-> (no derefence for data)
-> (if 'a' contain a function reference, a(1,2,3) calls the function a)
->
->
-> record selector:
-> a.field
-> (or a.('field') )
->
->
-> dictionary type name:
-> struct
->
->
-> constructor:
-> a.f1=1
-> a.f2='asd'
-> or:
-> struct('f1',a,'f2','asd',...)
->
->
-> access read/write:
-> a.('f')  or  a.f
->
->
-> has the key?
-> isfield
->
->
-> remove by key:
-> rmfield
->
->
-> list of keys:
-> fieldnames
->
->
-> list of values:
-> struct2cell
->
->
-> range, inclusive..inclusive:
-> a:b
->
->
-> inclusive:exclusive:
-> a:b-1
->
->
-> type name integers:
-> int8,uint8,int16,uint16,...64
->
->
-> decimal:
-> single, double
->
->
-> number syntax:
-> 1000, 1000., 1000.0
->
->
-> integer bases:
-> hex2dec,bin2dec,base2dec
->
->
-> integer throusands separator:
-> (none)
->
->
-> decimals:
-> 1000, 1000., 1000.0, 1e3, 1.1e3, 1e3+1i (all variables support automatic conversion to complex numbers, taking twice the space, done only when needed)
->
->
-> addition.subtract/etc:
-> +
-> -
-> *     matrix mult
-> .*    element-wise mult
-> /     matrix right div
-> ./    element-wise right div
-> \     matrix left div
-> .\    element-wise left div
->
->
->
-> exponentiation (power):
-> ^    matrix exp
-> .^   element-wise exp
->
->
-> negation:
-> -
->
->
-> random number:
-> rand
->
->
-> random seed:
-> rand('state',...)
-> (you can also get the current state)
->
->
-> operator priorities:
-> mathematical
->
->
-> "-3^2" is "-9"
-> (mathematical)
->
->
-> square root / exp / abs:
-> sqrt   -- element-wise square root, can create complex values
-> realsqrt   -- element-qise square root, puts NANs when negative
-> sqrtm   -- matrix square root (special matrix operation)
-> exp   - e^x
-> abs
->
->
-> trig:
-> sin / cos / tan
->
->
-> inverse:
-> asin / acos / atan / atan2
->
->
-> logarithm:
-> log    - base e
-> log2   - base 2
-> log10  - base 10
-> logm   - matrix logarithm
->
->
-> euclidian division:
-> (no operations does both quot and modulo. see below)
->
->
-> modulo of -3/2 is 1:
-> mod
->
->
-> modulo of -3/2 is -1:
-> rem
->
->
-> trunc/round/fl/ceil:
-> trunc / round / floor / ceil
->
->
-> bitwise operators:
-> bitand / bitor / bitxor
->
->
-> negation:
-> bitcmp  (invert all bits)
->
->
-> left/right shift:
-> bitshift
->
->
-> threads:
-> (no threads)
-=cut
 
 use strict;
 use vars qw(@static @dynamic @OO @functional @reflexive @typed @rare @has_lambda @various);
@@ -1453,6 +739,7 @@ return') => "ClassicREXX",
     'resultis / return ("return" is used when there is no value to return)' => "BCPL",
     'return from xxx / return' => "CommonLisp",
     '^' => "Smalltalk",
+    'Exit Function / Exit Sub' => "VisualBasic",
    ]),
 
    'function body is the result' => 
@@ -1464,6 +751,7 @@ return') => "ClassicREXX",
    'setting the result' => 
    [
     'Result := val' => "Eiffel",
+    '<function name> = val' => "VisualBasic",
     '<function name> := val' => "Pascal",
     '<retvar name> = val;' => "Matlab",
    ],
@@ -2558,7 +1846,7 @@ module P : PType  = struct ... end)) => "OCaml",
   ],
 
   'character type name' =>
-  [ { KIND => 'typed', MLANG => "Pike Pliant" },
+  [ { KIND => 'typed', MLANG => "Pike Pliant VisualBasic" },
    'char' => "C C++ C# OCaml",
    'char!' => "Rebol",
    'Char' => "merd Haskell Perl6",
@@ -2619,6 +1907,7 @@ module P : PType  = struct ... end)) => "OCaml",
     '"^/"' => "Rebol",
     '"~%" (when using format)' => "CommonLisp",
     '"[lf]"' => "Pliant",
+    'vb_nl' => "VisualBasic",
    ],  
   ],
 
@@ -2767,7 +2056,7 @@ module P : PType  = struct ... end)) => "OCaml",
    '= !=' => "XPath sh",
    '= /=' => "Ada",
    '= \=' => "ClassicREXX",
-   '= <>' => "OCaml SML Beta Pliant",
+   '= <>' => "OCaml VisualBasic SML Beta Pliant",
    '= ~=' => "Dylan Smalltalk",
    '== \== or = <> \=' => "ClassicREXX",
    '== ~=' => "Matlab",
@@ -2820,7 +2109,7 @@ module P : PType  = struct ... end)) => "OCaml",
  ],
 
  'duplicate n times' =>
- [ { MLANG => 'C C++ C# Java JavaScript Haskell Eiffel Beta OCaml SML Smalltalk' }, # Haskell is "concat (replicate n str)"
+ [ { MLANG => 'C C++ C# Java VisualBasic JavaScript Haskell Eiffel Beta OCaml SML Smalltalk' }, # Haskell is "concat (replicate n str)"
   '*' => "Ruby Pike Python E Ada",
   'x' => "Perl Perl6",
   'times' => "merd",
@@ -2880,6 +2169,7 @@ module P : PType  = struct ... end)) => "OCaml",
  'ascii to character' =>
  [ { MLANG => "Eiffel" },
   'chr' => "Ruby Perl Perl6 Python SML OCaml Haskell Pascal PHP",
+  'chr$' => "VisualBasic",
   'char' => "Matlab",
   'format %c $c' => "Tcl",
   'toChar' => "E",
@@ -2900,6 +2190,7 @@ module P : PType  = struct ... end)) => "OCaml",
  'character to ascii' =>
  [
   'ord' => "Perl Perl6 Python Haskell SML Pascal PHP",
+  'asc' => "VisualBasic",
   'getNumericValue' => "Java",
   'charCodeAt' => "JavaScript",
   'asciiValue' => "Smalltalk",
@@ -2921,7 +2212,7 @@ module P : PType  = struct ... end)) => "OCaml",
  ],
 
  'accessing n-th character' =>
- [ { MLANG => 'Perl Perl6 ClassicREXX' },
+ [ { MLANG => 'Perl Perl6 ClassicREXX VisualBasic' },
   's[n]' => "C C++ C# E Pike Python PHP Ruby",
   's(n)' => "Ada Matlab",
   's:n' => "Pliant",
@@ -2962,6 +2253,7 @@ module P : PType  = struct ... end)) => "OCaml",
   'SUB' => "Modula-3",
   'subseq' => "CommonLisp",
   'slice' => "JavaScript",
+  'mid$' => "JavaScript",
   'range' => "Tcl",
   'copy/part at s n len' => "Rebol",
   'copy/part at s n at s m' => "Rebol",
@@ -4646,6 +3938,7 @@ sub credits {
 <li>David.Whitten (MUMPS)
 <li>Phil Howard (various)
 <li>Andrzej Zawadzki (Ruby)
+<li>Stuart Brady (VisualBasic)
 </ul>
 EOF
 }
