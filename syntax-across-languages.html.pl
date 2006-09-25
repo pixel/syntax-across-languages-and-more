@@ -132,7 +132,7 @@ my $all = [
   ],
 
   'documentation comment' =>
-  [ { MLANG => "C ClassicREXX MUMPS" },
+  [ { MLANG => "C ClassicREXX MUMPS Prolog" },
    'until end of line' =>
    [
     '///' => "C# Java",
@@ -188,7 +188,7 @@ def x():
   ],
 
   'information about the current line and file' =>
-  [ { MLANG => "OCaml Ada MUMPS Matlab" },
+  [ { MLANG => "OCaml Ada MUMPS Matlab Prolog" },
    '__LINE__ __FILE__' => "C C++ Perl Pike PHP Ruby",
    '$?LINE $?FILE' => "Perl6",
    'inspect.stack()[0][2] inspect.stack()[0][1]' => "Python",
@@ -202,7 +202,7 @@ def x():
   [ { ALL => 1 },
     'case-sensitivity (keywords, variable identifiers...)' =>
     [ # see http://www.swiss.ai.mit.edu/~jaffer/r5rs_4.html#SEC14 for Scheme, Guile is an exception
-     'case-sensitive' => 'B C C++ C# Java JavaScript Lua Matlab Pike Perl Perl6 Python Ruby XML YAML Tcl Smalltalk sh OCaml Haskell merd Awk Modula-3 Pliant',
+     'case-sensitive' => 'B C C++ C# Java Prolog JavaScript Lua Matlab Pike Perl Perl6 Python Ruby XML YAML Tcl Smalltalk sh OCaml Haskell merd Awk Modula-3 Pliant',
      'case-insensitive' => "PL/I Pascal Rebol VisualBasic Eiffel Ada SGML HTML Scheme CommonLisp Forth Assembler ClassicREXX SQL92",
      'case-sensitive: variables<br>case-insensitive: keywords, functions, constants...' => "PHP",
      'case-sensitive: identifiers<br>case-insensitive: keywords' => "E",
@@ -225,6 +225,7 @@ def x():
      'CamelCase for modules and classes, ALL_CAPS for constants, underscores for functions, variables, ...' => 'Ruby',
      'CamelCase for modules and classes, ALLCAPS for macros, underscores for methods, constants and variables' => 'Pike',
      'CamelCase for modules, ALL_CAPS for constants, unclear for functions / variables' => "Perl Perl6",
+     'CamelCase for variables, underscores for predicates' => 'Prolog',
      'usually lowercase or underscores, ALL_CAPS for macros' => 'C',
      'usually underscores' => "C++",
      'Camel_Case' => "Ada",
@@ -278,7 +279,7 @@ def x():
   ],
 
   'breaking lines (useful when end-of-line and/or indentation has a special meaning)' =>
-  [ { MLANG => "Pliant MUMPS" },
+  [ { MLANG => "Pliant MUMPS Prolog" },
    'nothing needed' => 'Ada B C C++ C# Eiffel PostScript Rebol Java YCP JavaScript Pascal Perl Perl6 OCaml CommonLisp EmacsLisp Scheme SML Smalltalk XSLT Forth Oz',
    '\\' => "Awk Python Ruby Tcl E sh",
    '_' => "VisualBasic",
@@ -342,7 +343,7 @@ def x():
 
   'grouping expressions' =>
   [ { MLANG => 'EmacsLisp CommonLisp Scheme XSLT PostScript Forth' },
-   '( ... )' => "Beta BCPL B ClassicREXX C C++ C# Matlab YCP Java Eiffel Rebol MUMPS MSH Pike Perl Perl6 Python Ruby Pascal Haskell OCaml Smalltalk SML merd E Tcl PHP JavaScript Lua Ada Awk Modula-3 Pliant XPath Oz SQL92 Yorick",
+   '( ... )' => "Beta BCPL Prolog B ClassicREXX C C++ C# Matlab YCP Java Eiffel Rebol MUMPS MSH Pike Perl Perl6 Python Ruby Pascal Haskell OCaml Smalltalk SML merd E Tcl PHP JavaScript Lua Ada Awk Modula-3 Pliant XPath Oz SQL92 Yorick",
    '[ ... ]' => "Rebol",
    'indentation' => "merd",
    '$ ...' => "Haskell",
@@ -414,6 +415,7 @@ def x():
     '= <>' => "VisualBasic OCaml Rebol SML Beta Pascal SQL92",
     '= ~=' => "Dylan Smalltalk",
     '== ~= eq ne isequal isequalwithequalnans' => "Matlab",
+    '== \== / =@= \=@= / = \= / =:= =\= (normal / structural / unification / arithmetic)' => "Prolog",
     'equal?' => "Scheme",
     'equals' => "Java",
     'equal' => "EmacsLisp",
@@ -442,7 +444,7 @@ def x():
    [ { MLANG => 'B C C++ C# Ada Awk Modula-3 Lua XSLT Rebol PostScript ClassicREXX Matlab' },
     'a <=> b' => "Ruby Perl Perl6 merd",
     'cmp' => "Perl Perl6 Python",
-    'compare' => "OCaml Haskell Mercury Pliant Smalltalk",
+    'compare' => "OCaml Haskell Prolog Mercury Pliant Smalltalk",
     'strcmp' => "PHP",
     'three_way_comparison' => "Eiffel",
     'string compare' => "Tcl",
@@ -457,7 +459,7 @@ def x():
 
    'min / max (binary or more)' =>
    [ { MLANG => 'Ruby B C C# Awk XSLT' },
-    'min / max' => "Ada C++ Java Rebol Lua Beta Pike Matlab Python Smalltalk E Eiffel merd CommonLisp Scheme OCaml Haskell Dylan Pliant SQL92",
+    'min / max' => "Ada C++ Java Rebol Lua Beta Prolog Pike Matlab Python Smalltalk E Eiffel merd CommonLisp Scheme OCaml Haskell Dylan Pliant SQL92",
     'min minstr / max maxstr (in List::Util)' => "Perl",
     'Min / Max' => "Oz",
     'MIN / MAX' => "Modula-3 ClassicREXX",
@@ -478,6 +480,7 @@ def x():
    'do / reduce / compose / load' => "Rebol",
    '[...]' => "Tcl",
    '`...`' => "sh",
+   '=.. (Univ operator)' => "Prolog",
   ],
 
   'force garbage collection' =>
@@ -490,7 +493,7 @@ def x():
     'System.GC.Collect()' => "C#",
     'gc.collect()' => "Python",
     'full_collect' => "Eiffel",
-    'garbage_collect' => "Mercury",
+    'garbage_collect' => "Mercury Prolog",
     'collectgarbage' => "Lua",
     'VM.garbageCollect()' => "JavaScript",
     'Gc.full_major()' => "OCaml",
@@ -779,6 +782,7 @@ return') => "ClassicREXX",
    'backtrace' => "Pike",
    "trace 'I'" => "ClassicREXX",
    "evalin('caller', expression)" => "Matlab",
+   'current_predicate' => "Prolog",
   ],
 
   'function composition' =>
@@ -884,12 +888,13 @@ end') => "ClassicREXX",
    '(if c b1 b2)' => "CommonLisp Scheme",
    '(if c then b1 else b2)' => "Mercury",
    '(c -> b1 ; c2 -> b2 ; b3)' => "Mercury",
-   'c -> b1 ; c2' => "FL",
+   'c -> b1 ; b2' => "FL",
    'c ifTrue: b1 ifFalse: b2' => "Smalltalk",
    'shunt c b1 c2 b2 b3' => "Pliant",
    'either c b1 b2 / if/else c b1 b2' => "Rebol",
    '(cond (c b1) (c2 b2) (t b3))' => "EmacsLisp CommonLisp",
    '(cond (c b1) (c2 b2) (else b3))' => "Scheme",
+   'c -> b1 ; c2 -> b2 ; b3' => "Prolog",
    'case when c; b1 when c2; b2 else b3 end' => "Ruby",
    'test c then b1 or b2' => "BCPL",
    'e | c = b1 | c2 = b2 | otherwise = b3 (the result goes to "e")' => "Haskell",
@@ -1150,7 +1155,7 @@ END') => "SQL92",
   'loop' => 
   [ { ALL => 1 },
     'forever loop' =>
-    [ { MLANG => 'Awk B C C++ C# Java E Lua Matlab Pascal JavaScript Haskell Perl Perl6 Python OCaml Smalltalk SML Tcl Eiffel Pliant' }, # Haskell would be: loop f = f >> loop f
+    [ { MLANG => 'Awk B C C++ C# Java Prolog E Lua Matlab Pascal JavaScript Haskell Perl Perl6 Python OCaml Smalltalk SML Tcl Eiffel Pliant' }, # Haskell would be: loop f = f >> loop f
      'loop' => "Ruby merd PostScript",
      'loop expr end loop' => "Ada",
      'LOOP expr END' => "Modula-3",
@@ -1168,7 +1173,7 @@ end') => "ClassicREXX",
    ],
 
    'while condition do something' =>
-   [
+   [ { MLANG => 'Prolog' },
     'while (cond) expr' => "Awk B C C++ C# Java E Pike Perl Perl6 Python Ruby PHP JavaScript YCP Yorick",
     'while cond expr' => "Tcl",
     'while cond loop expr end loop' => "Ada",
@@ -1206,6 +1211,7 @@ end') => "ClassicREXX",
     'expr repeatuntil cond' => "BCPL",
     'repeat expr until cond' => "Lua Pascal",
     'repeat expr until (cond)' => "YCP",
+    'repeat, expr, cond' => "Prolog",
     'until [expr cond]' => "Rebol",
     '[expr . cond] whileFalse' => "Squeak",
     pre('Do 
@@ -1214,7 +1220,7 @@ Loop Until cond') => "VisualBasic",
    ],
 
    'for each value in a numeric range, 1 increment (see also the entries about ranges)' =>
-   [ { MLANG => 'Eiffel' },
+   [ { MLANG => 'Eiffel Prolog' },
     'for (int i = 1; i <= 10; i++) expr' => "C C#",
     'foreach my $i (1 .. 10) { expr }' => "Perl",
     'foreach ($i in 1..10) { expr }' => "MSH",
@@ -1237,7 +1243,7 @@ end') => "ClassicREXX",
    ],
 
    'for each value in a numeric range, 1 decrement' =>
-   [
+   [ { MLANG => 'Eiffel Prolog' },
     'for X := 10 downto 1 do expr' => "Pascal",
     'for i = 10 downto 1 do expr done' => "OCaml",
     'for i in reverse 1 .. 10 loop ... end loop' => "Ada",
@@ -1257,7 +1263,7 @@ end') => "ClassicREXX",
    ],
 
    'for each value in a numeric range, free increment' =>
-   [ { MLANG => 'OCaml' },
+   [ { MLANG => 'OCaml Eiffel Prolog' },
     'for (int i = 1; i <= 10; i += 2) expr' => "C C# Pike",
     'for (i = 1; i <= 10; i += 2) expr' => "Awk",
     'for (my $i = 1; $i <= 10; $i += 2) { expr }' => "Perl",
@@ -1275,7 +1281,7 @@ end') => "ClassicREXX",
    ],
 
    'for "a la C" (while + initialisation)' =>
-   [ { MLANG => 'Ada B Pascal Python Rebol Matlab OCaml Smalltalk SML CommonLisp Ruby Pliant ClassicREXX' },
+   [ { MLANG => 'Ada B Pascal Python Prolog Rebol Matlab OCaml Smalltalk SML CommonLisp Ruby Pliant ClassicREXX' },
     'for' => "Awk C C++ C# Java Perl Pike Tcl PHP MSH JavaScript Yorick",
     'loop' => "Perl6",
     'for ((x = 0; x < 10; x++)); do ...; done' => "sh",
@@ -1286,18 +1292,18 @@ end') => "ClassicREXX",
   ],
 
   'breaking control flow' =>
-  [ { ALL => 1, MLANG => "OCaml SML Beta PostScript Eiffel Oz", },
+  [ { ALL => 1, MLANG => "OCaml SML Beta Prolog PostScript Eiffel Oz", },
    'returning a value' => $::return_a_value,
 
    'goto (unconditional jump)' =>
-   [ { MLANG => 'Awk Ruby merd Beta E Matlab Python Lua PostScript Smalltalk Java Pliant JavaScript' },
+   [ { MLANG => 'Awk Prolog Ruby merd Beta E Matlab Python Lua PostScript Smalltalk Java Pliant JavaScript' },
     'goto' => "BCPL B C C++ C# Perl Basic MUMPS Pascal Fortran Cobol Ada Yorick",
     'go throw' => "CommonLisp",
     'signal' => "ClassicREXX",
    ],
 
    'continue / break' =>
-   [ { MLANG => 'B Smalltalk' },
+   [ { MLANG => 'B Prolog Smalltalk' },
     'continue / break' => "Awk C C++ C# Java E Matlab Pike JavaScript Python PHP YCP Yorick",
     'next / last' => "Perl Perl6",
     'next / break (see also catch/throw)' => "Ruby",
@@ -1325,7 +1331,7 @@ end') => "ClassicREXX",
     'raise' => "Python SML OCaml Scheme-SRFI34 merd Ruby Eiffel Ada",
     'RAISE' => "Modula-3",
     'raise ... end' => "Oz",
-    'throw' => "C# C++ Java Pike E Erlang Rebol JavaScript Haskell",
+    'throw' => "C# C++ Java Prolog Pike E Erlang Rebol JavaScript Haskell",
     'throw/name' => "Rebol",
     'die' => "Perl Perl6",
     'return -code' => "Tcl",
@@ -1351,7 +1357,7 @@ end') => "ClassicREXX",
     'eval {a}; if ($@) b' => "Perl",
     'exception when exception_name =>' => "Ada",
     'catch a (\e -> b) ' => "Haskell",
-    'catch' => "Erlang Rebol Tcl",
+    'catch' => "Erlang Prolog Rebol Tcl",
     'catch/name' => "Rebol",
     'catch(expr) or catch { ... };' => "Pike",
     'pcall' => "Lua",
@@ -1863,6 +1869,7 @@ module P : PType  = struct ... end)) => "OCaml",
    '#"z"' => "Rebol",
    '&z' => "Oz",
    '?z' => "Ruby EmacsLisp",
+   q('z' "z") => "Prolog",
   ],
 
   'strings' =>
@@ -1870,7 +1877,7 @@ module P : PType  = struct ... end)) => "OCaml",
    'verbatim' =>
    [
     "'...'" => "Perl Perl6 YAML Python Matlab Ruby PHP Lua JavaScript Pascal Smalltalk sh Beta Prolog ClassicREXX SQL92",
-    '"..."' => "C C++ C# Java YCP YAML E Rebol Pike Python MUMPS EmacsLisp Scheme CommonLisp OCaml Ada Haskell SML Eiffel JavaScript Dylan Lua Awk Modula-3 Pliant FL Oz ClassicREXX",
+    '"..."' => "C C++ C# Java YCP YAML E Prolog Rebol Pike Python MUMPS EmacsLisp Scheme CommonLisp OCaml Ada Haskell SML Eiffel JavaScript Dylan Lua Awk Modula-3 Pliant FL Oz ClassicREXX",
     q("..." or '...') => "XPath",
     q('''...''', """...""") => "Python",
     '[[ ... ]]' => "Lua",
@@ -1885,7 +1892,7 @@ module P : PType  = struct ... end)) => "OCaml",
    ],
 
    'with interpolation' =>
-   [ { MLANG => "Haskell Beta C# ClassicREXX Eiffel" },
+   [ { MLANG => "Haskell Beta Prolog C# ClassicREXX Eiffel" },
     '"... $v ..."' => "Perl Perl6 Tcl PHP sh",
     '"... {v} ..."' => "merd",
     '"... #{v} ..." "... #$v ..." "... #@v ..." "... #@@v ..."' => "Ruby",
@@ -1912,7 +1919,7 @@ module P : PType  = struct ... end)) => "OCaml",
   ],
 
   'multi-line' =>
-  [ { MLANG => "C Eiffel" },
+  [ { MLANG => "C Eiffel Prolog" },
    'all strings allow multi-line strings' => "E Perl Perl6 OCaml Ruby Scheme Pascal CommonLisp EmacsLisp YCP",
    '@"..."' => "C#",
     q('''...''', """...""") => "Python",
@@ -1957,14 +1964,14 @@ module P : PType  = struct ... end)) => "OCaml",
   ],
 
   'serialize (marshaling)' =>
-  [
+  [ { MLANG => 'Prolog' },
    'export-clixml' => "MSH",
    'Marshal.to_string' => "OCaml",
    'Marshal.dump' => "Ruby",
   ],
 
   'unserialize (un-marshaling)' =>
-  [
+  [ { MLANG => 'Prolog' },
    'import-clixml' => "MSH",
    'Marshal.from_string' => "OCaml",
    'Marshal.load' => "Ruby",
@@ -2038,7 +2045,7 @@ module P : PType  = struct ... end)) => "OCaml",
     'write' => "Pike",
     'WriteLine' => "C#",
     'putFormat' => "Beta",
-    'format (but not using the C-like %-syntax)' => "CommonLisp",
+    'format (but not using the C-like %-syntax)' => "CommonLisp Prolog",
    ],
   ],
 
@@ -2048,6 +2055,7 @@ module P : PType  = struct ... end)) => "OCaml",
    'strcmp' => "C Matlab",
    '== !=' => "Pike JavaScript",
    'isEqualToString (faster than isEqual)' => "Objective-C",
+   '= \=' => "Prolog",
 
    # below are deep equality/inequality entries
    '== !=' => "Awk C++ C# E Ruby merd Python YCP",
@@ -2102,14 +2110,14 @@ module P : PType  = struct ... end)) => "OCaml",
   'Cat' => "Modula-3",
   'strcat' => "C",
   'concat' => "XPath",
-  "append" => "Beta Rebol",
+  "append" => "Beta Rebol Prolog",
   'stringByAppendingString' => "Objective-C",
   ' ' => "Awk ClassicREXX",
   '[string1 string2]' => "Matlab",
  ],
 
  'duplicate n times' =>
- [ { MLANG => 'C C++ C# Java VisualBasic JavaScript Haskell Eiffel Beta OCaml SML Smalltalk' }, # Haskell is "concat (replicate n str)"
+ [ { MLANG => 'C C++ C# Java Prolog VisualBasic JavaScript Haskell Eiffel Beta OCaml SML Smalltalk' }, # Haskell is "concat (replicate n str)"
   '*' => "Ruby Pike Python E Ada",
   'x' => "Perl Perl6",
   'times' => "merd",
@@ -2149,6 +2157,7 @@ module P : PType  = struct ... end)) => "OCaml",
   'upcase / downcase' => "Ruby EmacsLisp",
   'upper / lower' => "Python SQL92 Matlab",
   'uppercase/lowercase' => "OCaml Rebol",
+  'upcase_atom/downcase_atom' => "Prolog",
   'toUpperCase / toLowerCase' => "Java E JavaScript",
   'ToUpper / ToLower' => "C#",
   'to_upper / to_lower' => "Eiffel Ada",
@@ -2185,6 +2194,7 @@ module P : PType  = struct ... end)) => "OCaml",
   'to char! / to-char' => "Rebol",
   'X2C, D2C' => "ClassicREXX",
   '$CHAR(s)' => "MUMPS",
+  'char_code' => "Prolog",
  ],
 
  'character to ascii' =>
@@ -2209,6 +2219,7 @@ module P : PType  = struct ... end)) => "OCaml",
   'C2X, C2D' => "ClassicREXX",
   '$ASCII(s)' => "MUMPS",
   '(done automatically when applying mathematical operations on char, such as +)' => "Matlab",
+  'char_code' => "Prolog",
  ],
 
  'accessing n-th character' =>
@@ -2262,6 +2273,7 @@ module P : PType  = struct ... end)) => "OCaml",
   '[s substringWithRange:NSMakeRange(n, len)]' => "Objective-C",
   'SUBSTRING(s FROM n len)' => "SQL92",
   '$EXTRACT(s, n, m)' => "MUMPS",
+  'sub_string / sub_atom' => "Prolog",
  ],
 
  'locate a substring' => 
@@ -2281,10 +2293,11 @@ module P : PType  = struct ... end)) => "OCaml",
   'rangeOfString' => "Objective-C",
   'POS' => "ClassicREXX",
   'POSITION(needle IN s)' => "SQL92",
+  'sub_string / sub_atom' => "Prolog",
  ],
 
  'locate a substring (starting at the end)' => 
- [
+ [ { MLANG => "Prolog" },
   'rindex' => "Ruby Perl Perl6 OCaml",
   'rfind' => "C++",
   'rfind / rindex' => "Python",
@@ -2435,7 +2448,7 @@ module P : PType  = struct ... end)) => "OCaml",
   'concat' => "Tcl JavaScript",
   'concatenate' => "Dylan",
   'append nconc' => "EmacsLisp CommonLisp",
-  "append" => "Beta Rebol Scheme",
+  "append" => "Beta Rebol Prolog Scheme",
   'Append' => "Oz",
   'arrayByAddingObjectsFromArray' => "Objective-C",
  ],
@@ -2445,7 +2458,7 @@ module P : PType  = struct ... end)) => "OCaml",
   'one level depth' =>
   [
    'concat' => "Haskell Mercury SML",
-   'flatten' => "OCaml merd YCP",
+   'flatten' => "OCaml merd YCP Prolog",
    'Flatten' => "Oz",
    'eval concat' => "Tcl",
   ],
@@ -2498,6 +2511,7 @@ module P : PType  = struct ... end)) => "OCaml",
   'nth' => "OCaml",
   'Nth' => "Oz",
   'nth / aref' => "EmacsLisp CommonLisp",
+  'nth0 / nth1' => "Prolog",
   'list-ref / vector-ref' => "Scheme",
   'element' => "Dylan",
   'slice' => "Ruby",
@@ -2532,7 +2546,7 @@ module P : PType  = struct ... end)) => "OCaml",
  ],
 
  'adding an element at index' =>
- [ { MLANG => 'Eiffel OCaml Matlab' },
+ [ { MLANG => 'Eiffel OCaml Prolog Matlab' },
   'return the new list (no side-effect)' =>
   [
   ],
@@ -2545,7 +2559,7 @@ module P : PType  = struct ... end)) => "OCaml",
  ],
 
  'adding an element at the end' =>
- [ { MLANG => 'CommonLisp Haskell Beta OCaml SML' },
+ [ { MLANG => 'CommonLisp Haskell Beta Prolog OCaml SML' },
   'return the new list (no side-effect)' =>
   [
    'push' => "merd",
@@ -2589,13 +2603,14 @@ module P : PType  = struct ... end)) => "OCaml",
   'cdr' => "Scheme EmacsLisp CommonLisp",
   'allButFirst' => "Smalltalk",
   'a(2:end)' => "Matlab",
+  'L = [_|ButFirst]' => "Prolog",
  ],
 
  'last element' =>
  [ { MLANG => 'C++ OCaml JavaScript' },
   '' =>
   [
-   'last' => "Eiffel Rebol Haskell Pliant Smalltalk E Scheme",
+   'last' => "Eiffel Rebol Haskell Prolog Pliant Smalltalk E Scheme",
    'Last' => "Oz",
    'lastObject' => "Objective-C",
    'a[-1]' => "Python Perl Pike Ruby",
@@ -2644,7 +2659,7 @@ Next' => "VisualBasic",
   'foreach(t v, l, { ... })' => "YCP",
   'for_each' => "C++",
   'for-each' => "Scheme",
-  'forall' => "PostScript",
+  'forall' => "PostScript Prolog",
   'ForAll' => "Oz",
   'iter' => "OCaml",
   'do' => "Smalltalk",
@@ -2662,6 +2677,7 @@ Next' => "VisualBasic",
   'Map' => "Oz",
   'mapcar' => "EmacsLisp CommonLisp",
   'maplist' => "YCP",
+  'maplist / sublist' => "Prolog",
   'for-each' => "XSLT",
   'foreach or selected' => "MSH",
   'collect' => "Ruby Smalltalk",
@@ -2679,6 +2695,7 @@ Next' => "VisualBasic",
   'Zip' => "Oz",
   'map' => "Scheme Python Dylan",
   'mapcar' => "CommonLisp",
+  'maplist2' => "Prolog",
   'l1 with: l2 collect: ...' => "Smalltalk",
   'transform' => "C++",
   'ListPair.map' => "SML",
@@ -2751,7 +2768,7 @@ Next' => "VisualBasic",
   'member?' => "Ruby merd Dylan",
   'include?' => "Ruby",
   'mem' => "OCaml",
-  'member' => "CommonLisp",
+  'member' => "CommonLisp Prolog",
   'member memq memv' => "Scheme",
   'Member' => "Oz",
   'contains' => "E YCP",
@@ -2790,7 +2807,7 @@ Next' => "VisualBasic",
  'smallest / biggest element' =>
  # accepting n-ary functions if a "*" tupling function exists		     
  [ { MLANG => 'OCaml JavaScript' },
-  'min / max' => "Eiffel Perl6 Pike Matlab Ruby Scheme Python CommonLisp Smalltalk Java",
+  'min / max' => "Eiffel Perl6 Pike Matlab Ruby Scheme Prolog Python CommonLisp Smalltalk Java",
   'minimum / maximum' => "Haskell Mercury merd",
   'minimum-of / maximum-of' => "Rebol",
   'min minstr / max maxstr (in List::Util)' => "Perl",
@@ -2804,6 +2821,7 @@ Next' => "VisualBasic",
   'rjoin' => "E",
   'concat' => "OCaml",
   'strcat' => "Matlab",
+  'concat_atom' => "Prolog",
   'l * glue' => "Pike Ruby",
   "(mapconcat 'identity l glue)" => "EmacsLisp",
   'componentsJoinedByString' => "Objective-C",
@@ -2827,7 +2845,7 @@ Next' => "VisualBasic",
  ],
 
  'iterate with index' =>
- [ { MLANG => 'Haskell Matlab Perl Python C++ OCaml Smalltalk JavaScript' }, # Haskell is "zipWith (\i v -> expr) [1..] l"
+ [ { MLANG => 'Haskell Matlab Prolog Perl Python C++ OCaml Smalltalk JavaScript' }, # Haskell is "zipWith (\i v -> expr) [1..] l"
   'each_with_index' => "Ruby merd",
   'foreach($l as $i => $v)' => "PHP",
   'for i => v in l' => "E",
@@ -2868,11 +2886,12 @@ Next' => "VisualBasic",
   'asort' => "Awk",
   'sort-object' => "MSH",
   'sortedArrayUsingSelector, sortUsingSelector' => "Objective-C",
+  'sort / predsort / keysort / mergesort' => "Prolog",
  ],
 
  'reverse' =>
  [
-  'reverse' => "Pike Rebol Ruby Haskell Perl Perl6 Java JavaScript Mercury Scheme Python merd Dylan EmacsLisp CommonLisp C++",
+  'reverse' => "Pike Rebol Ruby Haskell Prolog Perl Perl6 Java JavaScript Mercury Scheme Python merd Dylan EmacsLisp CommonLisp C++",
   'Reverse' => "C# Oz",
   'reversed' => "Smalltalk",
   'reverse_copy' => "C++",
@@ -2906,6 +2925,7 @@ Next' => "VisualBasic",
   'assoc' => "Ruby OCaml CommonLisp",
   'assoc assq' => "EmacsLisp",
   'assoc assq assv' => "Scheme",
+  'get_assoc' => "Prolog",
   'select' => "Rebol",
   'a.(e)' => "Matlab",
  ],
@@ -3018,7 +3038,7 @@ Next' => "VisualBasic",
  ],
 
  'optional value' => 
- [ { ALL => 1, MLANG => "ClassicREXX" },
+ [ { ALL => 1, MLANG => "ClassicREXX Prolog" },
   'null value' =>
   [
    '0' => 'C++',
@@ -3050,7 +3070,7 @@ Next' => "VisualBasic",
  ],
 
  'record selector' =>
- [ { MLANG => "Perl ClassicREXX" },
+ [ { MLANG => "Perl Prolog ClassicREXX" },
   '.' => "C C++ C# Ruby OCaml Matlab Ada Beta Pascal Python E Eiffel Java Modula-2 Modula-3 JavaScript Lua Oz",
   '::' => "XPath",
   '%' => "Fortran90",
@@ -3066,7 +3086,7 @@ Next' => "VisualBasic",
  ],
 
  'dictionary' =>
- [ { ALL => 1, MLANG => 'C Ada Haskell Smalltalk ClassicREXX' },
+ [ { ALL => 1, MLANG => 'C Ada Haskell Smalltalk ClassicREXX Prolog' },
 
   'type name' =>
   [ { KIND => 'typed' },
@@ -3188,6 +3208,7 @@ Next' => "VisualBasic",
    'getKeys' => "E",
    'array_keys' => "PHP",
    'fieldnames' => "Matlab",
+   'findall(Key, item(Key, _), Keys)' => 
   ],
 
   'list of values' =>
@@ -3212,6 +3233,7 @@ Next' => "VisualBasic",
    'range' => "PHP",
    'range(from: a, to: b, by: step)' => "Dylan",
    'List.number A B Step' => "Oz",
+   'numlist / between' => "Prolog",
   ],
 
   'inclusive .. exclusive' =>
@@ -3256,14 +3278,14 @@ Next' => "VisualBasic",
  [ { ALL => 1 },
    'integers' =>
    [
-    '1000' => 'Awk Ada C++ B Rebol C C# Haskell E Java JavaScript Pascal Pliant Pike Python sh Tcl Scheme Smalltalk Perl Perl6 Ruby Eiffel OCaml merd Oz SQL92',
+    '1000' => 'Awk Ada C++ B Prolog Rebol C C# Haskell E Java JavaScript Pascal Pliant Pike Python sh Tcl Scheme Smalltalk Perl Perl6 Ruby Eiffel OCaml merd Oz SQL92',
     '1000, 1000.' => 'CommonLisp EmacsLisp',
     '1000, 1000., 1000.0' => 'Awk Matlab',
     "1000, '1000'D" => "ClassicREXX",
    ],
 
    'integers in base 2, octal and hexadecimal' =>
-   [ { MLANG => "Matlab" },
+   [ { MLANG => "Matlab Prolog" },
     '0b1, 07, 0xf' => 'Ruby Pike Perl Oz',
     '0b1, 0o7, 0xf' => 'OCaml Perl6',
     '07, 0xf' => "C C++ Python Tcl Awk JavaScript",
@@ -3281,7 +3303,7 @@ Next' => "VisualBasic",
    ],
 
    'integer thousand-seperator' => 
-   [ { MLANG => "Awk C C++ C# Python Haskell Oz JavaScript CommonLisp ClassicREXX SQL92 Matlab" },
+   [ { MLANG => "Awk C C++ C# Python Prolog Haskell Oz JavaScript CommonLisp ClassicREXX SQL92 Matlab" },
     '1_000, 10_00, 100_0' => 'E Perl Perl6 Ruby Eiffel OCaml',
     "1'000, 10'00, 100'0" => 'Rebol',
     '1_000' => 'merd Ada',
@@ -3292,7 +3314,7 @@ Next' => "VisualBasic",
     '1000., 1E3' => 'C C++ E OCaml Java Python Scheme Tcl JavaScript Ada ClassicREXX SQL92',
     '1000., 1E3, 1,0' => 'Rebol',
     '1000., 1.E3' => 'Oz Eiffel',
-    '1000.0, 1E3' => 'C# Pike Ruby CommonLisp EmacsLisp Smalltalk',
+    '1000.0, 1E3' => 'C# Pike Ruby Prolog CommonLisp EmacsLisp Smalltalk',
     '1000.0, 1.0E3' => 'Haskell',
     '1000, 1000.0, 1E3 (integers are decimals)' => 'Awk Perl Perl6 merd',
    ],
@@ -3300,7 +3322,7 @@ Next' => "VisualBasic",
 
  'addition / subtraction / multiplication / division' =>
  [
-  '+ / - / * / /' => "C C++ Java Eiffel C# Perl Perl6 Matlab MUMPS Python Pliant Ruby sh merd Tcl Haskell Scheme CommonLisp EmacsLisp Smalltalk ClassicREXX SQL92",
+  '+ / - / * / /' => "C C++ Java Eiffel C# Perl Perl6 Matlab MUMPS Python Pliant Ruby sh merd Tcl Haskell Scheme CommonLisp EmacsLisp Smalltalk ClassicREXX SQL92 Prolog",
   '+ +. / - -. / * *. / / /. (with mathematical priorities)' => "OCaml",
   'add / sub / mul / idiv div' => "PostScript",
  ],
@@ -3333,6 +3355,7 @@ Next' => "VisualBasic",
    'random number' =>
    [
     'rand' => 'Perl Perl6 Ruby Matlab',
+    'random' => "Prolog",
     '$RANDOM' => "MUMPS",
     'Random.int' => "OCaml",
   pre('r: RANDOM
@@ -3342,7 +3365,7 @@ r.item') => "Eiffel",
    ],
 
    'seed the pseudo random generator' =>
-   [
+   [ { MLANG => "Prolog" },
     'srand' => 'Perl Perl6 Ruby',
     'set_seed' => "Eiffel",
     'Random.init, Random.self_init' => "OCaml",
@@ -3367,7 +3390,7 @@ r.item') => "Eiffel",
 
  'square root / e-exponential / absolute value' =>
  [
-  'sqrt / exp / abs' => 'C C++ Eiffel Ruby Smalltalk SML Python Perl Perl6 Pascal Tcl Java E PHP JavaScript Lua Ada Haskell OCaml EmacsLisp CommonLisp Scheme',
+  'sqrt / exp / abs' => 'C C++ Eiffel Prolog Ruby Smalltalk SML Python Perl Perl6 Pascal Tcl Java E PHP JavaScript Lua Ada Haskell OCaml EmacsLisp CommonLisp Scheme',
   'sqrt realsqrt / exp / abs' => "Matlab",
   'sqrt / exp /' => "Awk",
   'Sqrt / Exp / Abs' => 'C# Oz',
@@ -3383,7 +3406,7 @@ r.item') => "Eiffel",
  [ { ALL => 1 },
    'basic' => 
    [ # perl's tan is in Math::Trig
-    'sin / cos / tan' => "C C++ Pike Ruby Matlab Python Smalltalk SML Pascal Perl Perl6 Tcl Java E PHP JavaScript EmacsLisp CommonLisp Scheme Lua Ada Haskell OCaml Pliant",
+    'sin / cos / tan' => "C C++ Pike Prolog Ruby Matlab Python Smalltalk SML Pascal Perl Perl6 Tcl Java E PHP JavaScript EmacsLisp CommonLisp Scheme Lua Ada Haskell OCaml Pliant",
     'Sin / Cos / Tan' => "C# Oz ClassicREXX",
     'sin / cos /' => "Awk PostScript",
     'sine / cosine / tangent' => "Eiffel Rebol",
@@ -3391,7 +3414,7 @@ r.item') => "Eiffel",
 
    'inverse' =>
    [ # perl's are in Math::Trig, JavaScript are in Math
-    'asin / acos / atan (Ruby >= 1.7)' => "C C++ Pike Pliant CommonLisp Scheme Python OCaml Perl Perl6 Ruby JavaScript Ada",
+    'asin / acos / atan (Ruby >= 1.7)' => "C C++ Pike Prolog Pliant CommonLisp Scheme Python OCaml Perl Perl6 Ruby JavaScript Ada",
     'asin / acos / atan / atan2' => "Matlab",
     'Asin / Acos / Atan' => "C# Oz",
     'ASin / ACos / ATan' => "ClassicREXX",
@@ -3404,7 +3427,7 @@ r.item') => "Eiffel",
 
  'logarithm' =>
  [
-  'log / log10' => "C C++ Eiffel Perl Perl6 Ruby Python Tcl PHP Lua OCaml Pliant",
+  'log / log10' => "C C++ Eiffel Perl Prolog Perl6 Ruby Python Tcl PHP Lua OCaml Pliant",
   'log / log10 / log2' => "Matlab",
   'log /' => "Awk Pike Java E JavaScript EmacsLisp Scheme",
   'log / logBase 10' => "Haskell",
@@ -3438,13 +3461,14 @@ r.item') => "Eiffel",
    'mod' => "SML EmacsLisp CommonLisp Matlab Ada Haskell Prolog",
    'MOD' => "Modula-3",
    'modulo' => "Ruby Dylan",
+   'rem' => "Prolog",
   ],
 
   'modulo of -3 / 2 is -1' =>
   [
    '%' => "Awk B C C++ C# Java E PHP JavaScript Pliant",
    '#' => "MUMPS",
-   'mod' => "Pascal PostScript Lua OCaml XPath Oz",
+   'mod' => "Pascal PostScript Prolog Lua OCaml XPath Oz",
    'remainder' => "Ruby Scheme",
    'rem' => "BCPL Ada Smalltalk Matlab",
    '//' => "Rebol ClassicREXX",
@@ -3455,7 +3479,7 @@ r.item') => "Eiffel",
  'truncate / round / floor / ceil' =>
  [
   'trunc / round / floor / ceil' => "C C++ Matlab",
-  'truncate / round / floor / ceiling' => "CommonLisp Scheme PostScript Perl6",
+  'truncate / round / floor / ceiling' => "CommonLisp Scheme PostScript Prolog Perl6",
   'int / round / floor / ceil' => "Pike JavaScript Python",
   'to_i, Integer() / round / floor / ceil' => "Ruby",
   'TRUNC / FORMAT / Floor / Ceil' => "ClassicREXX",
@@ -3484,6 +3508,7 @@ r.item') => "Eiffel",
    'logand / logior / logxor (see also bit-and / bit-or / bit-xor)' => "CommonLisp",
    'bitand / bitor / bitxor' => "Matlab",
    'BITAND / BITOR / BITXOR' => "ClassicREXX",
+   '/\ / \/ / xor' => "Prolog",
   ],
 
   'negation' => 
@@ -3495,12 +3520,13 @@ r.item') => "Eiffel",
    'bitnot' => "Eiffel",
    'complement' => "Rebol",
    'bitcmp' => "Matlab",
+   '\' => "Prolog",
   ],
 
   'left shift / right shift / unsigned right shift' => 
   [
    '<< / >> / >>>' => "Java JavaScript",
-   '<< / >>' => "C C++ C# Pike Ruby Python Perl YCP",
+   '<< / >>' => "C C++ C# Pike Prolog Ruby Python Perl YCP",
    '|<< / |>>' => "Eiffel",
    'lsl / lsr or asr' => "OCaml",
    'bitshift' => "PostScript Matlab",
@@ -3925,7 +3951,7 @@ sub credits {
 <li>Tabitha Arrowny (Ruby, Python, Perl, ...)
 <li>Péter Varga (sh, Common Lisp)
 <li>Ian Henderson (Objective C)
-<li>Anthony Borla (Classic REXX)
+<li>Anthony Borla (Classic REXX, Prolog)
 <li>Paul McJones (Modula-3 fixes)
 <li>Uwe Kolb (Smalltalk fixes)
 <li>Ciaran McNulty (PHP)
