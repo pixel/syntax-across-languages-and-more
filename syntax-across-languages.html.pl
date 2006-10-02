@@ -356,7 +356,7 @@ def x():
   ],
 
   'block (grouping statements, especially when statements are not expressions)' =>
-  [ { MLANG => 'OCaml Rebol SML XSLT CommonLisp Maple Oz PostScript' },
+  [ { MLANG => 'OCaml Prolog Rebol SML XSLT CommonLisp Maple Oz PostScript' },
    '{ ... }' => "Pike PHP JavaScript Awk sh Tcl Yorick",
    '{ ... } (introduce scope)' => "B C C++ C# Java Perl Perl6 E Haskell Modula-3 YCP",
    '( ... ) (introduce scope)' => "sh",
@@ -416,7 +416,7 @@ def x():
     '== \=' => "Oz",
     '== \==' => "ClassicREXX",
     '= /=' => "Ada",
-    '= !=' => "XPath",
+    '= !=' => "XPath Maple",
     '= <>' => "VisualBasic OCaml Rebol SML Beta Pascal SQL92",
     '= ~=' => "Dylan Smalltalk",
     '== ~= eq ne isequal isequalwithequalnans' => "Matlab",
@@ -837,7 +837,7 @@ return') => "ClassicREXX",
   ],
 
   'if_then' =>
-  [ { MLANG => "SML Haskell" },
+  [ { MLANG => "SML Prolog Haskell" },
    'if c then b' => "OCaml merd Pascal",
    'if c then b end' => "Ruby Eiffel Lua Oz",
    'if c then b end if' => "Ada Maple",
@@ -1840,7 +1840,6 @@ module P : PType  = struct ... end)) => "OCaml",
     'import "p"' => "YCP",
     'from p import *' => "Python",
     'with p; use p;' => "Ada",
-    'with(p)' => "Maple",
     'inherit c export {NONE} all end' => "Eiffel",
     'include or even extend' => "Ruby",
     'do' => "Rebol",
@@ -1871,6 +1870,7 @@ module P : PType  = struct ... end)) => "OCaml",
     'require, "p"' => "Yorick",
     "(require 'p) (deprecated in ANSI Common Lisp, but used in ASDF)" => "CommonLisp",
     'with p;' => "Ada",
+    'with(p)' => "Maple",
     'automatically done (using a correspondance from the package name to the file name)' => "OCaml Java",
    ],
   ],
@@ -1902,8 +1902,8 @@ module P : PType  = struct ... end)) => "OCaml",
   ],
 
   'character "z"' =>
-  [ { MLANG => "Awk Perl Perl6 Python JavaScript" },
-   "'z'" => "B C C++ C# E OCaml Matlab Haskell Pike Pascal Eiffel Ada Prolog ClassicREXX",
+  [ { MLANG => "Awk Perl Perl6 Python JavaScript Prolog" },
+   "'z'" => "B C C++ C# E OCaml Matlab Haskell Pike Pascal Eiffel Ada ClassicREXX",
    '"z"' => "Maple merd sh ClassicREXX",
    '"z' => "Logo",
    '$z' => "Smalltalk",
@@ -1911,7 +1911,6 @@ module P : PType  = struct ... end)) => "OCaml",
    '#"z"' => "Rebol",
    '&z' => "Oz",
    '?z' => "Ruby EmacsLisp",
-   q('z' "z") => "Prolog",
   ],
 
   'strings' =>
@@ -1979,7 +1978,7 @@ module P : PType  = struct ... end)) => "OCaml",
   ],
 
   'convert something to a string (see also string interpolation)' =>
-  [ { MLANG => 'Awk B C C++ Beta OCaml Logo SML sh ClassicREXX' }, #- everything is a string in sh
+  [ { MLANG => 'Awk B C C++ Beta Prolog OCaml Logo SML sh ClassicREXX' }, #- everything is a string in sh
    'show' => "Haskell",
    'to_s, to_str, inspect, String()' => "Ruby",
    'to_string' => "merd Pliant",
@@ -2121,7 +2120,7 @@ module P : PType  = struct ... end)) => "OCaml",
 
   'string size' =>
   [
-   'length' => "Awk C++ Maple Perl Ruby Haskell PostScript Matlab CommonLisp OCaml Java JavaScript Beta Eiffel Objective-C",
+   'length' => "Awk C++ Maple Perl Prolog Ruby Haskell PostScript Matlab CommonLisp OCaml Java JavaScript Beta Eiffel Objective-C",
    'LENGTH' => "ClassicREXX",
    "'Length" => "Ada",
    'length?' => "Rebol",
@@ -2134,6 +2133,7 @@ module P : PType  = struct ... end)) => "OCaml",
    'count' => "Eiffel Logo",
    'bytes chars' => "Perl6",
    'CHARACTER_LENGTH' => "SQL92",
+   'atom_length' => "Prolog",
   ],
 
   'string concatenation' =>
@@ -2174,6 +2174,7 @@ module P : PType  = struct ... end)) => "OCaml",
   'repmat' => "Matlab",
   'insert/dup' => "Rebol",
   'COPIES' => "ClassicREXX",
+  'cat(s$n)' => "Maple",
  ],
 
  'upper / lower case character' =>
@@ -2197,6 +2198,7 @@ module P : PType  = struct ... end)) => "OCaml",
   'uppercase form / lowercase form' => "Rebol",
   'char-upcase / char-downcase' => "CommonLisp Scheme",
   'StringTools[UpperCase] / StringTools[LowerCase]' => "Maple",
+  'char_type(C_, to_upper(C)), char_type(C_, to_lower(C))' => "Prolog",
  ],
 
  'uppercase / lowercase / capitalized string' =>
@@ -2218,6 +2220,7 @@ module P : PType  = struct ... end)) => "OCaml",
   'string toupper / string tolower' => "Tcl",
   'string-upcase / string-downcase' => "CommonLisp Scheme",
   'asLowercase / asUppercase' => "Smalltalk",
+  'upcase_atom / downcase_atom' => "Prolog",
   "makeLC / makeUC" => "Beta",
   'parse upper var in_var out_var / parse lower var in_var out_var' => "ClassicREXX",
  ],
@@ -3070,6 +3073,7 @@ Next' => "VisualBasic",
    't' => "merd Perl",
    '*t' => "Ruby Python",
    't{:}' => "Matlab",
+   'L =.. [ F | Args ], call(L)' => "Prolog",
   ],
  ],
 
