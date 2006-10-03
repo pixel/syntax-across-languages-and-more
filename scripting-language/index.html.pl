@@ -643,7 +643,7 @@ foreach (c; `find / -name "*.c"`) {
           }
 }
 END
-        grep => <<'END',
+        grep_removed_cuz_using_external => <<'END',
 #include <unistd.h>
 
 extern char *optarg;
@@ -909,6 +909,94 @@ call reFree cre ; call reDropFuncs ; exit 0
 usage :
   say "usage: grep [-h] | [-F|-i] regexp [files...]"
   call reDropFuncs ; exit 1
+END
+  },
+
+################################################################################
+  Prolog => { 
+        www => 'www.swi-prolog.org',
+        implementation => "SWI-Prolog 5.6.x",
+        run_file => 'pl -q -t halt -g main -s %s -- ', file_extension => '.pl or .pro',
+	shebang_aware => 1,
+        interactive_interpreter => 'pl',
+#        verbose_execution => 'pl',
+        debugger => 'use debug/0', interpreter_in_debugger => 1,
+        smallest => 'main.', 
+        hello_world => q(main :- write('Hello World'), nl.),
+        argv => <<'END',
+main :- current_prolog_flag(argv, CmdLine),
+        append(_, [--, Arg1|_], CmdLine),
+        write(Arg1), nl.
+END
+        env => q(main :- getenv('HOME', Home), write(Home), nl.),
+        test_file_exists => q(main :- exists_file('/etc/mtab') -> halt(0) ; halt(1).),
+        test_file_readable => q(main :- access_file('/etc/mtab', read) -> halt(0) ; halt(1).),
+        formatting => q(main :- A is 1, B is 2, Result is A + B, format('~d + ~d = ~d\n', [A, B, Result]).),
+        system => <<'END',
+main :- shell('false', Status),
+        (Status \= 0 ->
+              current_stream(2, _, StdErr),
+              format(StdErr, 'false failed~n', [])
+           ;
+              true),
+        shell('echo done', _).
+END
+        sed_in_place => <<'END',
+main :-
+  getUserArg(1, File),
+  atom_concat(File, '.tmp', TmpFile),
+  strip_comments_from_file(File, TmpFile),
+  delete_file(File),
+  rename_file(TmpFile, File).
+
+strip_comments_from_file(FileIn, FileOut) :-
+  open(FileIn, read, In, [type(binary)]), 
+  open(FileOut, write, Out, [type(binary)]),
+  process_lines(In, Out),
+  close(In), close(Out).
+
+process_lines(In, _) :- at_end_of_stream(In), !.
+
+process_lines(In, Out) :-
+  read_line_to_codes(In, Line),
+  partition(Line, 35, Prefix, _),
+  format(Out, '~s~n', [Prefix]),
+  !, process_lines(In, Out).
+
+partition(ListIn, Element, Prefix, Suffix) :-
+  (member(Element, ListIn) ->
+    append(Prefix, [Element|Suffix], ListIn)
+  ;
+    Prefix = ListIn, Suffix = []).
+
+getUserArg(N, Arg) :-
+  current_prolog_flag(argv, Cmdline),
+  append(_, [--|Args], Cmdline),
+  nth1(N, Args, Arg).
+END
+        compile_what_must_be => <<'END',
+main :-
+  expand_file_name('*.c', CFiles),
+  forall(member(CFile, CFiles),
+	(sub_atom(CFile, 0, _, 2, BaseName),
+	 atom_concat(BaseName, '.o', ObjFile),
+	 (should_compile(CFile, ObjFile) -> compile(CFile, ObjFile) ; true))).
+
+should_compile(SrcFile, ObjFile) :-
+  (exists_file(ObjFile) ->
+    time_file(SrcFile, SrcTime), time_file(ObjFile, ObjTime), ObjTime < SrcTime
+  ;
+    true).
+
+compile(SrcFile, ObjFile) :-
+  concat_atom(['gcc -c "', SrcFile, '" -o "', ObjFile, '"'], '', Cmd),
+  format('compiling ~w to ~w\n', [SrcFile, ObjFile]),
+  trap(Cmd, _).
+
+trap(Cmd, Output) :-
+  open(pipe(Cmd), read, Input),
+  read_line_to_codes(Input, Output),
+  close(Input).
 END
   },
 
@@ -2136,7 +2224,7 @@ print <<'EOF';
 <li>Heilig (Cece) Szabolcs (PHP)
 <li>Túri Gábor (PHP enhancements)
 <li>Daniel Lowe (Common Lisp)
-<li>Anthony Borla (REXX)
+<li>Anthony Borla (REXX, Prolog)
 </ul>
 EOF
 }
