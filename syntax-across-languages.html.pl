@@ -4189,7 +4189,7 @@ foreach my $lang (@langs_) {
 	my $nb = boundit(0xff - $_->[1] * 0xff);
 	sprintf("<font color=#%02x%02x%02x>%s (%d/%d)</font>", $nb, $nb, $nb, $_->[0], $h->{$_->[0]}, $count{$_->[0]});
     } @l);
-    printf qq(<tr><td><a href="../syntax-across-languages-per-language/%s.html">%s</a></td><td>%s</td></tr>\n), url_quote($lang), html_quote($lang), $nb_text;
+    printf qq(<tr><td><a href="../syntax-across-languages-per-language/%s.html">%s</a> (%d)</td><td>%s</td></tr>\n), url_quote($lang), html_quote($lang), $count{$lang}, $nb_text;
 }
 print "</table>";
 print end();
