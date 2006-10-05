@@ -4183,10 +4183,10 @@ foreach my $lang (@langs_) {
     my @l = sort { $b->[1] <=> $a->[1] } map {
 	[ $_, $h->{$_} / ($count{$lang} + $count{$_}) * 2 ];
     } grep { $_ ne $lang && min($count{$lang}, $count{$_}) > 10 } keys %$h;
-    @l = grep { $_->[1] > 0.3 } @l or next;
+    @l = grep { $_->[1] > 0.25 } @l or next;
     
     my $nb_text = join(' ', map {
-	my $nb = boundit(0xff - $_->[1] * 0xff);
+	my $nb = boundit(0xff - ($_->[1] * 1.6 - 0.2) * 0xff);
 	sprintf("<font color=#%02x%02x%02x>%s (%d/%d)</font>", $nb, $nb, $nb, $_->[0], $h->{$_->[0]}, $count{$_->[0]});
     } @l);
     printf qq(<tr><td><a href="../syntax-across-languages-per-language/%s.html">%s</a> (%d)</td><td>%s</td></tr>\n), url_quote($lang), html_quote($lang), $count{$lang}, $nb_text;
