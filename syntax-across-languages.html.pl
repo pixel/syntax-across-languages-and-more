@@ -3774,6 +3774,8 @@ end Object_Name;') => "Ada",
 # normalize, using annotations to know missing entries #################################
 ########################################################################################
 my %missing;
+my %proximity;
+my %count;
 
 sub merge_options {
     my ($h1, $h2) = @_;
@@ -3920,6 +3922,13 @@ sub table {
 	my @langs = sort { lc $a cmp lc $b } split(" ", $langs);
         print $F "<td>", html_quote(join(", ", @langs)), "</td></tr>";
 	$i += 2;
+
+	foreach my $a (@langs) {
+	    $count{$a}++;
+	    foreach my $b (@langs) {
+		$proximity{$a}{$b}++ if $a ne $b;
+	    }
+	}
     }
     print $F "</table><p>";
 }
@@ -4160,7 +4169,27 @@ foreach (@langs_) {
     my $nb_text =
       sprintf("<font color=#%02x%02x00>", boundit(8 * $nb), boundit(0xff - 3 * ($nb - 16))) .
 	($nb == 0 ? 'all done' : "$nb Missings") . "</font>";
-    printf qq(<tr><td><a href="%s.html">%s</a></td><td>%s</td></tr>\n), url_quote($_), html_quote($_), $nb_text;;
+    printf qq(<tr><td><a href="%s.html">%s</a></td><td>%s</td></tr>\n), url_quote($_), html_quote($_), $nb_text;
+}
+print "</table>";
+print end();
+
+
+open STDOUT, ">syntax-across-languages/proximity.html" or die '';
+print "<html><head><title>Proximity between languages</title></head><body>";
+print "<table border=1>";
+foreach my $lang (@langs_) {
+    my $h = $proximity{$lang};
+    my @l = sort { $b->[1] <=> $a->[1] } map {
+	[ $_, $h->{$_} / ($count{$lang} + $count{$_}) * 2 ];
+    } grep { $_ ne $lang && min($count{$lang}, $count{$_}) > 10 } keys %$h;
+    @l = grep { $_->[1] > 0.3 } @l or next;
+    
+    my $nb_text = join(' ', map {
+	my $nb = boundit(0xff - $_->[1] * 0xff);
+	sprintf("<font color=#%02x%02x%02x>%s (%d/%d)</font>", $nb, $nb, $nb, $_->[0], $h->{$_->[0]}, $count{$_->[0]});
+    } @l);
+    printf qq(<tr><td><a href="../syntax-across-languages-per-language/%s.html">%s</a></td><td>%s</td></tr>\n), url_quote($lang), html_quote($lang), $nb_text;
 }
 print "</table>";
 print end();
@@ -4299,6 +4328,7 @@ sub uniq { my %l; $l{$_} = 1 foreach @_; grep { delete $l{$_} } @_ }
 sub difference2 { my %l; @l{@{$_[1]}} = (); grep { !exists $l{$_} } @{$_[0]} }
 sub intersection { my (%l, @m); @l{@{shift @_}} = (); foreach (@_) { @m = grep { exists $l{$_} } @$_; %l = (); @l{@m} = (); } keys %l }
 sub boundit { $_[0] < 0 ? 0 : $_[0] > 0xff ? 0xff : $_[0] }
+sub min  { my $n = shift; $_ < $n and $n = $_ foreach @_; $n }
 sub if_ {
     my $b = shift;
     $b or return ();
