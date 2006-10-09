@@ -17,7 +17,7 @@ my @functional_static =
 @static = (@OO_static, @functional_static,
   qw(C Cobol Pascal Fortran merd Modula-2 Modula-3 OCaml));
 @dynamic = (@functional_dynamic, @OO_dynamic,
-  qw(Awk Basic Dylan Forth Maple Lua Icon XPath XSLT Pike PostScript Prolog sh Oz EmacsLisp CommonLisp ClassicREXX Yorick));
+  qw(Awk Basic Dylan Forth Maple Lua Icon XPath XSLT Pike PostScript Prolog BourneShell Oz EmacsLisp CommonLisp ClassicREXX Yorick));
 @OO = (@OO_dynamic, @OO_static, 
   qw(OCaml CommonLisp  Dylan merd));
 @functional = (@functional_dynamic, @functional_static, 
@@ -66,6 +66,7 @@ my %hierarchy = (
   'MzScheme' => ['Scheme-SRFI1', 'Scheme-SRFI28','Scheme'],
   'Squeak' => ['Smalltalk'],
   'XSLT' => ['XPath', 'XML'],
+  'KornShell' => ['BourneShell'],
 );
 
 # complete kinds using the hierarchy of languages
@@ -95,7 +96,7 @@ my $all = [
   [
    'until end of line' =>
    [
-    '#' => "Perl Perl6 Maple Ruby Python Tcl Icon Awk sh PHP merd E Pliant YAML",
+    '#' => "Perl Perl6 Maple Ruby Python Tcl Icon Awk BourneShell PHP merd E Pliant YAML",
     '//' => "BCPL C99 C++ C# Java Dylan Pike PHP JavaScript YCP Yorick",
     '--' => "Cecil Eiffel Sather Simula Haskell Ada Lua SQL92",
     ';' => "EmacsLisp Logo CommonLisp Scheme Rebol Assembler MUMPS",
@@ -202,7 +203,7 @@ def x():
   [ { ALL => 1 },
     'case-sensitivity (keywords, variable identifiers...)' =>
     [ # see http://www.swiss.ai.mit.edu/~jaffer/r5rs_4.html#SEC14 for Scheme, Guile is an exception
-     'case-sensitive' => 'B C C++ C# Java Maple Prolog JavaScript Lua Matlab Pike Perl Perl6 Python Ruby XML YAML Tcl Smalltalk sh OCaml Haskell merd Awk Modula-3 Pliant',
+     'case-sensitive' => 'B C C++ C# Java Maple Prolog JavaScript Lua Matlab Pike Perl Perl6 Python Ruby XML YAML Tcl Smalltalk BourneShell OCaml Haskell merd Awk Modula-3 Pliant',
      'case-insensitive' => "PL/I Pascal Logo Rebol VisualBasic Eiffel Ada SGML HTML Scheme CommonLisp Forth Assembler ClassicREXX SQL92",
      'case-sensitive: variables<br>case-insensitive: keywords, functions, constants...' => "PHP",
      'case-sensitive: identifiers<br>case-insensitive: keywords' => "E",
@@ -218,7 +219,7 @@ def x():
      'dots' => "Logo",
      'hyphens' => "Rebol EmacsLisp CommonLisp",
      'underscores for functions, unclear for modules / types / constructors' => "OCaml",
-     'UPPER_CASE' => "sh",
+     'UPPER_CASE' => "BourneShell",
      'lowercasenoseparator' => 'Matlab',
      'underscores, UPPER_CASE for class names' => "Eiffel",
      'CamelCase for classes, underscores for methods' => "Python",
@@ -237,7 +238,7 @@ def x():
      '[a-zA-Z][a-zA-Z0-9]*' => "PL/I Smalltalk",
      "[a-zA-Z][_a-zA-Z0-9]*" => "Eiffel Matlab",
      "[a-zA-Z](_?[a-zA-Z0-9])*" => 'Ada',
-     "[_a-zA-Z][_a-zA-Z0-9]*" => 'B C C++ C# E Maple Python Perl Perl6 PHP Tcl Awk sh',
+     "[_a-zA-Z][_a-zA-Z0-9]*" => 'B C C++ C# E Maple Python Perl Perl6 PHP Tcl Awk BourneShell',
      "[_a-zA-Z][_a-zA-Z0-9]* or '[^']*'" => "Pliant",
      '[_a-zA-Z$][_a-zA-Z0-9$]*' => "Java JavaScript",
      '[a-zA-Z%][a-zA-Z0-9]*' => "MUMPS",
@@ -282,7 +283,7 @@ def x():
   'breaking lines (useful when end-of-line and/or indentation has a special meaning)' =>
   [ { MLANG => "Pliant MUMPS Prolog" },
    'nothing needed' => 'Ada B C C++ C# Maple Eiffel PostScript Rebol Java YCP JavaScript Pascal Perl Perl6 OCaml CommonLisp EmacsLisp Scheme SML Smalltalk XSLT Forth Oz',
-   '\\' => "Awk Python Ruby Tcl E sh",
+   '\\' => "Awk Python Ruby Tcl E BourneShell",
    '_' => "VisualBasic",
    ',' => "ClassicREXX",
    '~' => "Logo",
@@ -293,7 +294,7 @@ def x():
   [
    'assignment' =>
    [
-    '=' => "B C C++ C# Java Perl Perl6 Matlab Pike PHP Basic Erlang Icon Oz JavaScript Lua sh Awk YCP ClassicREXX Yorick",
+    '=' => "B C C++ C# Java Perl Perl6 Matlab Pike PHP Basic Erlang Icon Oz JavaScript Lua BourneShell Awk YCP ClassicREXX Yorick",
     ':=' => "BCPL Ada Cecil Pascal Dylan Eiffel Maple Sather Modula-3 Simula Smalltalk E Pliant",
     '<-' => "OCaml",
     '_ (displayed <- with a special character)' => "Squeak",
@@ -358,9 +359,9 @@ def x():
 
   'block (grouping statements, especially when statements are not expressions)' =>
   [ { MLANG => 'OCaml Prolog Rebol SML XSLT CommonLisp Maple Oz PostScript' },
-   '{ ... }' => "Pike PHP JavaScript Awk sh Tcl Yorick",
+   '{ ... }' => "Pike PHP JavaScript Awk BourneShell Tcl Yorick",
    '{ ... } (introduce scope)' => "B C C++ C# Java Perl Perl6 E Haskell Modula-3 YCP",
-   '( ... ) (introduce scope)' => "sh",
+   '( ... ) (introduce scope)' => "BourneShell",
    '[ ... ]' => "Logo",
    '[ x. y. ... ]' => "Smalltalk",
    'begin ... end (introduce scope)' => "Pascal Ada",
@@ -391,7 +392,7 @@ def x():
     '= /=' => "Fortran90 Eiffel",
     '= <>' => "Pliant Rebol Logo Maple Modula-2",
     '= # (in Modula-2, <> and # are synonyms)' => "Modula-2 Modula-3",
-    "= !=" => "sh",
+    "= !=" => "BourneShell",
     "== === != !== (=== and !== differ from == and != when the objects' type differ)" => "JavaScript PHP",
     "=== !==" => "PHP5",
     '== ~=' => "Lua",
@@ -441,7 +442,7 @@ def x():
     '<< >> <<= >>= (deep comparison)' => "ClassicREXX",
     '@< / @=< / @> / @>=' => "Prolog",
     'lt gt le ge' => "Perl Perl6 PostScript",
-    '-lt -gt -le -ge' => "sh MSH",
+    '-lt -gt -le -ge' => "BourneShell MSH",
     '.LT. .GT. .LE. .GE.' => "Fortran",
    ],
 
@@ -485,7 +486,7 @@ def x():
    'XECUTE' => "MUMPS",
    'do / reduce / compose / load' => "Rebol",
    '[...]' => "Tcl",
-   '`...`' => "sh",
+   '`...`' => "BourneShell",
    '=.. (Univ operator)' => "Prolog",
   ],
 
@@ -520,7 +521,7 @@ def x():
     '' => 
     [
      'f(a,b,...)' => "Awk B C C++ C# Maple Java YCP Matlab Erlang Pike Perl Perl6 Mercury merd Eiffel Python Ruby Pascal E PHP JavaScript Dylan Lua Ada Awk Modula-3 XPath Prolog Yorick",
-     'f a b ...' => "SML Haskell Logo OCaml Rebol Matlab Tcl Pliant sh MSH",
+     'f a b ...' => "SML Haskell Logo OCaml Rebol Matlab Tcl Pliant BourneShell MSH",
      'f(a,b,...f) or f[a,b,...] depending on the version' => "BCPL",
      '(f a b ...) (apply f l) ' => "Scheme EmacsLisp CommonLisp",
      '(funcall f a b ...)' => "EmacsLisp CommonLisp",
@@ -545,7 +546,7 @@ def x():
 
     'with no parameter' =>
     [
-     'f' => "Ada Eiffel Pascal PostScript Logo Matlab Rebol Ruby Perl MSH Perl6 Mercury Haskell Tcl Pliant sh Prolog", # Haskell egs: monads
+     'f' => "Ada Eiffel Pascal PostScript Logo Matlab Rebol Ruby Perl MSH Perl6 Mercury Haskell Tcl Pliant BourneShell Prolog", # Haskell egs: monads
      'f()' => "Awk Pike Maple Erlang Python C C++ C# YCP Java E Lua Perl JavaScript merd OCaml SML",
      '(f)' => "Scheme EmacsLisp CommonLisp",
      '(funcall f)' => "EmacsLisp CommonLisp",
@@ -611,6 +612,7 @@ def x():
     'typ0 f(typ1 para1, typ2 para2, ...) { ... }' => "C C++ C# Pike YCP",
     'function f(para1, para2) { ... }' => "Awk JavaScript",
     'function f(para1, para2) ... code ... end' => "Lua",
+    'function f { ... }' => "KornShell",
     'function f { param(para1, [typ2]para2, ...) ... }' => "MSH",
     '(define (f para1 para2) ...)' => "Scheme",
     '(defun f (para1 para2) ...)' => "EmacsLisp CommonLisp",
@@ -652,7 +654,7 @@ End Function' => "VisualBasic",
 
     ': f ... ;' => "Forth",
 
-    'f() { ... }' => 'sh',
+    'f() { ... }' => 'BourneShell',
 
     pre('f : procedure
   ...
@@ -744,7 +746,7 @@ return') => "ClassicREXX",
   [ { MLANG => 'Prolog PostScript' },
    'breaks the control flow' => ($::return_a_value =
    [
-    q(return (in Lua, "return xxx" can only appear before a block end. in Matlab, only in inline('...'))) => "Awk B BCPL CommonLisp C Maple C++ C# ClassicREXX Java E Pike YCP Perl Perl6 Ruby Rebol Python Tcl Ada PHP Pliant JavaScript sh Yorick Lua Matlab",
+    q(return (in Lua, "return xxx" can only appear before a block end. in Matlab, only in inline('...'))) => "Awk B BCPL CommonLisp C Maple C++ C# ClassicREXX Java E Pike YCP Perl Perl6 Ruby Rebol Python Tcl Ada PHP Pliant JavaScript BourneShell Yorick Lua Matlab",
     'Return' => "VisualBasic",
     'RETURN' => "Modula-3",
     'resultis ("return" is used when there is no value to return)' => "BCPL",
@@ -819,11 +821,11 @@ return') => "ClassicREXX",
   [ { MLANG => "Forth PostScript Oz" },
    ',' => "C C++ Perl Matlab Pike JavaScript Prolog",
    '.' => "Smalltalk",
-   ';' => "Awk Maple Beta PL/I B C C++ C# Java Matlab YCP Pike Pascal Python Ruby Perl Perl6 OCaml SML merd Tcl E PHP JavaScript Ada sh Haskell Modula-3 Pliant",
+   ';' => "Awk Maple Beta PL/I B C C++ C# Java Matlab YCP Pike Pascal Python Ruby Perl Perl6 OCaml SML merd Tcl E PHP JavaScript Ada BourneShell Haskell Modula-3 Pliant",
    ':' => "Maple",
    'nothing, optionally ;' => "Lua ClassicREXX",
    'space' => "Eiffel Rebol",
-   'end-of-line' => "Awk Ruby Python Lua merd Basic Tcl E Matlab Fortran Assembler JavaScript sh Haskell Pliant",
+   'end-of-line' => "Awk Ruby Python Lua merd Basic Tcl E Matlab Fortran Assembler JavaScript BourneShell Haskell Pliant",
    '(begin ...)' => "Scheme",
    '(progn ...) (prog1 ...) (prog2 ...) ' => "EmacsLisp CommonLisp",
    '>>' => "Haskell",
@@ -835,7 +837,7 @@ return') => "ClassicREXX",
    'if c then b end' => "Ruby Eiffel Lua Oz",
    'if c then b end if' => "Ada Maple",
    'if c then b fi' => "Maple",
-   'if c; then b; fi' => "sh",
+   'if c; then b; fi' => "BourneShell",
    'if (c) then b end' => "Dylan",
    'if c do b' => "BCPL",
    'IF c THEN b END' => "Modula-2 Modula-3",
@@ -893,7 +895,7 @@ end') => "ClassicREXX",
    'if c then begin b1 end else begin b2 end' => "Pascal",
    'if c b1 eif c2 b2 else b3' => "Pliant",
    'if c then b1 elif c2 then b2 else b3 end if' => "Maple",
-   'if c; then b1; elif c2; then b2; else b3; fi' => "sh",
+   'if c; then b1; elif c2; then b2; else b3; fi' => "BourneShell",
    'if c1, b1, elseif c2, b2, else, b3, end' => "Matlab",
    'if (c) b1 elseif (c2) b2 else b3' => "PHP",
    'if (c): b1 elseif (c2): b2 else: b3 endif' => "PHP",
@@ -1037,7 +1039,7 @@ end') => "Matlab",
    v1) statement1 ;;
    v2|v3) statement23 ;;
    *) statement_else ;;
-esac') => "sh",
+esac') => "BourneShell",
 
    pre('(if val
     // v1 then expr1
@@ -1189,14 +1191,15 @@ end') => "ClassicREXX",
 
    'while condition do something' =>
    [ { MLANG => 'Prolog' },
-    'while (cond) expr' => "Awk B C C++ C# Java E Pike Perl Perl6 Python Ruby PHP JavaScript YCP Yorick",
+    'while (cond) expr' => "Awk B C C++ C# Java E Pike Perl Perl6 Ruby PHP JavaScript YCP Yorick",
     'while cond expr' => "Tcl",
     'while cond loop expr end loop' => "Ada",
     'while cond do expr' => "BCPL SML Pascal",
     'while cond do expr done' => "OCaml",
     'while cond do expr end do' => "Maple",
     'WHILE cond DO expr end' => "Lua",
-    'while cond; do expr; done' => "sh",
+    'while cond: expr' => "Python",
+    'while cond; do expr; done' => "BourneShell",
     'while cond, expr, end' => "Matlab",
     'while [cond][expr]' => "Rebol",
     'while cond [expr]' => "Logo",
@@ -1251,7 +1254,7 @@ Loop Until cond') => "VisualBasic",
     'For i = 1 To 10 expr Next' => "VisualBasic",
     'for i in 1 .. 10 loop ... end loop' => "Ada",
     'for i in range(1, 11)' => "Python",
-    'for i in `seq 1 10`; do expr; done' => "sh",
+    'for i in `seq 1 10`; do expr; done' => "BourneShell",
     'FOR I=1:1:10 expr' => "MUMPS",
     'for i from 1 to 10 do expr end do' => "Maple",
     'for [i 1 10 +1] [expr]' => "Logo",
@@ -1275,7 +1278,7 @@ end') => "ClassicREXX",
     'from i := 10 until i < 1 loop expr i := i - 1 end' => "Eiffel",
     'for i = 10:-1:1, expr, end' => "Matlab",
     'for i in range(10, 0, -1)' => "Python",
-    'for i in `seq 10 -1 1`; do expr; done' => "sh",
+    'for i in `seq 10 -1 1`; do expr; done' => "BourneShell",
     'for i from 10 to 1 by -1 do expr end do' => "Maple",
     'for [i 1 10 -1] [expr]' => "Logo",
     'FOR I=10:-1:1 expr' => "MUMPS",
@@ -1295,7 +1298,7 @@ end') => "ClassicREXX",
     'from i := 1 until i > 10 loop expr i := i + 2 end' => "Eiffel",
     'for i = 1:3:10, expr, end' => "Matlab",
     'for i in range(1, 11, 2)' => "Python",
-    'for ((x = 1; x <= 10; x += 2)); do ...; done' => "sh",
+    'for ((x = 1; x <= 10; x += 2)); do ...; done' => "BourneShell",
     'for i from 1 to 10 by 2 do expr end do' => "Maple",
     'for [i 1 10 2] [expr]' => "Logo",
     'FOR I=1:2:10 expr' => "MUMPS",
@@ -1310,7 +1313,7 @@ end') => "ClassicREXX",
    [ { MLANG => 'Ada B Pascal Maple Python Prolog Rebol Matlab OCaml Smalltalk SML CommonLisp Ruby Pliant ClassicREXX' },
     'for' => "Awk C C++ C# Java Perl Pike Tcl PHP MSH JavaScript Yorick",
     'loop' => "Perl6",
-    'for ((x = 0; x < 10; x++)); do ...; done' => "sh",
+    'for ((x = 0; x < 10; x++)); do ...; done' => "BourneShell",
     'from init_code until cond loop ... incr_statement end' => "Eiffel",
      # 'for var in range loop exp end loop' => "Ada",
    ],
@@ -1465,12 +1468,13 @@ predefined_condition_name :
 
   'annotation (or variable declaration)' =>
   [ { MLANG => 'Smalltalk' },
-   ':' => "SML OCaml Eiffel E Ada Modula-3",
+   ':' => "SML Pascal OCaml Eiffel E Ada Modula-3",
    '::' => "Haskell Mercury Dylan",
    '!!' => "merd",
    't v' => "C C++ C# Java Pike Pliant Perl6 YCP",
    '(declare (v t))' => "CommonLisp",
    'v :@ t' => "Beta",
+   'typeset' => "BourneShell",
   ],
 
   'cast' => 
@@ -1835,6 +1839,8 @@ module P : PType  = struct ... end)) => "OCaml",
     'include or even extend' => "Ruby",
     'do' => "Rebol",
     'addpath' => "Matlab",
+    '. p' => "BourneShell",
+    'source p' => "BourneShell",
    ],
 
    'selectively' =>
@@ -1895,7 +1901,7 @@ module P : PType  = struct ... end)) => "OCaml",
   'character "z"' =>
   [ { MLANG => "Awk Perl Perl6 Python JavaScript Prolog" },
    "'z'" => "B C C++ C# E OCaml Matlab Haskell Pike Pascal Eiffel Ada ClassicREXX",
-   '"z"' => "Maple merd sh ClassicREXX",
+   '"z"' => "Maple merd BourneShell ClassicREXX",
    '"z' => "Logo",
    '$z' => "Smalltalk",
    '#\z' => "Scheme CommonLisp",
@@ -1908,12 +1914,12 @@ module P : PType  = struct ... end)) => "OCaml",
   [ { ALL => 1 },
    'verbatim' =>
    [
-    "'...'" => "Perl Perl6 XPath YAML Python Matlab Ruby PHP Lua JavaScript Pascal Smalltalk sh Beta Prolog ClassicREXX SQL92",
+    "'...'" => "Perl Perl6 XPath YAML Python Matlab Ruby PHP Lua JavaScript Pascal Smalltalk BourneShell Beta Prolog ClassicREXX SQL92",
     '"..."' => "C C++ C# Maple XPath Java YCP YAML E Prolog Rebol Pike Python MUMPS EmacsLisp Scheme CommonLisp OCaml Ada Haskell SML Eiffel JavaScript Dylan Lua Awk Modula-3 Pliant FL Oz ClassicREXX",
     '"...' => "Logo",
     q('''...''', """...""") => "Python",
     '[[ ... ]]' => "Lua",
-    "<<'MARK' ... MARK" => "sh Perl Ruby",
+    "<<'MARK' ... MARK" => "BourneShell Perl Ruby",
     '{...{...}...}' => "Tcl",
     '(...)' => "PostScript",
     'q(...(...)...), q[...], q{...}, q<...>, q/.../' => "Perl Perl6",
@@ -1925,10 +1931,10 @@ module P : PType  = struct ... end)) => "OCaml",
 
    'with interpolation' =>
    [ { MLANG => "Haskell Beta Maple Logo Prolog C# ClassicREXX Eiffel" },
-    '"... $v ..."' => "Perl Perl6 Tcl PHP sh",
+    '"... $v ..."' => "Perl Perl6 Tcl PHP BourneShell",
     '"... {v} ..."' => "merd",
     '"... #{v} ..." "... #$v ..." "... #@v ..." "... #@@v ..."' => "Ruby",
-    '<<MARK ... $v ... MARK' => "sh Perl",
+    '<<MARK ... $v ... MARK' => "BourneShell Perl",
     '<<MARK ... #{v} ... MARK' => "Ruby",
     '<<<MARK ... $v ... MARK' => "PHP",
     '[ subst {...{... $v ...}...} ]' => "Tcl",
@@ -1968,7 +1974,7 @@ module P : PType  = struct ... end)) => "OCaml",
   ],
 
   'convert something to a string (see also string interpolation)' =>
-  [ { MLANG => 'Awk B C C++ Beta Prolog OCaml Logo SML sh ClassicREXX' }, #- everything is a string in sh
+  [ { MLANG => 'Awk B C C++ Beta Prolog OCaml Logo SML BourneShell ClassicREXX' }, #- everything is a string in BourneShell
    'show' => "Haskell",
    'to_s, to_str, inspect, String()' => "Ruby",
    'to_string' => "merd Pliant",
@@ -2041,7 +2047,7 @@ module P : PType  = struct ... end)) => "OCaml",
     'print_endline (adding an end-of-line)' => "OCaml",
     'println (adding an end-of-line)' => "Java merd",
     'put_chars' => "Erlang",
-    'echo (in sh, adding an end-of-line)' => "PHP sh",
+    'echo (in BourneShell, adding an end-of-line)' => "PHP BourneShell",
     'emit' => "Forth",
     "putText" => "Beta",
     'say' => "ClassicREXX",
@@ -2093,7 +2099,7 @@ module P : PType  = struct ... end)) => "OCaml",
    '== !=' => "Awk C++ C# E Ruby merd Python YCP",
    '== /=' => "Haskell",
    '== \=' => "Oz",
-   '= !=' => "XPath sh Maple",
+   '= !=' => "XPath BourneShell Maple",
    '= /=' => "Ada",
    '= \=' => "ClassicREXX",
    '= <>' => "OCaml VisualBasic SML Beta Pliant",
@@ -2137,7 +2143,7 @@ module P : PType  = struct ... end)) => "OCaml",
   '_' => "MUMPS",
   '||' => "PL/I Cecil Icon Maple ClassicREXX SQL92",
   '++' => "Haskell",
-  '$a$b' => "Tcl sh",
+  '$a$b' => "Tcl BourneShell",
   'concatenate' => "Dylan CommonLisp",
   'string-append' => "Scheme",
   'cat' => "Maple",
@@ -2373,7 +2379,7 @@ module P : PType  = struct ... end)) => "OCaml",
 
  'false value' =>
  [
-   'false' => "C99 C++ BCPL C# OCaml Logo SML Pascal YCP Smalltalk PostScript Java E Ada Beta Pliant FL Oz Tcl Maple JavaScript Rebol Matlab sh PHP Ruby Lua YAML",
+   'false' => "C99 C++ BCPL C# OCaml Logo SML Pascal YCP Smalltalk PostScript Java E Ada Beta Pliant FL Oz Tcl Maple JavaScript Rebol Matlab BourneShell PHP Ruby Lua YAML",
    'False' => "VisualBasic Python Haskell merd Eiffel",
    'FALSE' => "Modula-3 SQL92",
    'false()' => "XPath",
@@ -2394,7 +2400,7 @@ module P : PType  = struct ... end)) => "OCaml",
    'fail' => "Prolog",
    'FAIL' => "Maple",
    'array containing at least one false value' => "Matlab",
-   'exit status different from 0' => "sh",
+   'exit status different from 0' => "BourneShell",
 
    '0 (beware of 0.0 which is true in Pike!)' => "B VisualBasic C99 C++ Tcl Python JavaScript ClassicREXX MUMPS Awk Perl Perl6 Matlab XPath C PHP Pike",
    '0.0' => "Matlab",
@@ -2414,7 +2420,7 @@ module P : PType  = struct ... end)) => "OCaml",
  [
   'TRUE' => "Modula-3 SQL92",
   'True' => "Haskell merd Eiffel VisualBasic Python",
-  'true' => "BCPL C# OCaml Maple SML Pascal Logo Smalltalk PostScript Java E Ada PHP Beta Pliant FL Oz YCP Tcl sh YAML Prolog Rebol",
+  'true' => "BCPL C# OCaml Maple SML Pascal Logo Smalltalk PostScript Java E Ada PHP Beta Pliant FL Oz YCP Tcl BourneShell YAML Prolog Rebol",
   'true()' => "XPath",
   't' => "EmacsLisp CommonLisp",
   '#t' => "Scheme Dylan",
@@ -2424,7 +2430,7 @@ module P : PType  = struct ... end)) => "OCaml",
 
   'on' => "Tcl YAML",
 
-  'exit status 0' => "sh",
+  'exit status 0' => "BourneShell",
   'anything not false' => "Awk Perl Perl6 B C Pike Matlab MUMPS XPath EmacsLisp CommonLisp Python Scheme Dylan Rebol",
 
   '1' => "ClassicREXX MUMPS",
@@ -2474,7 +2480,7 @@ module P : PType  = struct ... end)) => "OCaml",
 ],
 
 'Bags and Lists' => [
- { MLANG => "C Cobol Fortran Pascal Basic Ada sh ClassicREXX" },
+ { MLANG => "C Cobol Fortran Pascal Basic Ada BourneShell ClassicREXX" },
 
  'type name' =>
  [ { KIND => 'typed' },
@@ -2551,7 +2557,7 @@ module P : PType  = struct ... end)) => "OCaml",
 
  'list/array indexing' =>
  [ { MLANG => "Beta" }, # eiffeil favors a.put(v, i) for write access
-  'a[i]' => "B C C++ C# Java Pike Maple Ruby Python merd Pascal E PHP Perl Perl6 Dylan Lua JavaScript Modula-3 MSH",
+  'a[i]' => "B C C++ C# Java Pike BourneShell Maple Ruby Python merd Pascal E PHP Perl Perl6 Dylan Lua JavaScript Modula-3 MSH",
   'a*[i] or a!i or a*(i) depending on the version' => "BCPL",
   'a[i]:default' => "YCP",
   'a(i)' => "Ada Matlab",
@@ -2706,6 +2712,7 @@ module P : PType  = struct ... end)) => "OCaml",
  [ { MLANG => "XSLT Matlab" }, # could be KIND has_lambda, but many languages has special cases for this
   'each' => "Ruby merd Pliant",
   'for v in l ...' => "Python Ruby E Maple",
+  'for v in l; do ...; done' => "BourneShell",
   'for (v in l) ...' => "Awk Dylan",
   'for (var v in l) { ... }' => "JavaScript",
   'For Each v in l
@@ -3167,7 +3174,8 @@ Next' => "VisualBasic",
   [ { KIND => 'typed' },
     'map' => "YAML",
     '(k, v) Hashtbl.t' => "OCaml",
-    'Dictionary' => "Pliant",
+    'dict' => "Python",
+    'Dictionary' => "Pliant Smalltalk",
     'Hash' => "Perl6",
     'HASH_TABLE' => "Eiffel",
     'struct' => "Matlab",
@@ -3307,7 +3315,7 @@ Next' => "VisualBasic",
    'a:b' => "Matlab",
    '[ a .. b ]' => "Haskell",
    'to' => "Smalltalk",
-   'seq' => "sh",
+   'seq a b / jot - a b (jot on BSD)' => "BourneShell",
    'range' => "PHP",
    'range(from: a, to: b, by: step)' => "Dylan",
    'List.number A B Step' => "Oz",
@@ -3358,7 +3366,7 @@ Next' => "VisualBasic",
  [ { ALL => 1 },
    'integers' =>
    [
-    '1000' => 'Awk Ada C++ B Maple Prolog Logo Rebol C C# Haskell E Java JavaScript Pascal Pliant Pike Python sh Tcl Scheme Smalltalk Perl Perl6 Ruby Eiffel OCaml merd Oz SQL92',
+    '1000' => 'Awk Ada C++ B Maple Prolog Logo Rebol C C# Haskell E Java JavaScript Pascal Pliant Pike Python BourneShell Tcl Scheme Smalltalk Perl Perl6 Ruby Eiffel OCaml merd Oz SQL92',
     '1000, 1000.' => 'CommonLisp EmacsLisp',
     '1000, 1000., 1000.0' => 'Awk Matlab',
     "1000, '1000'D" => "ClassicREXX",
@@ -3390,7 +3398,7 @@ Next' => "VisualBasic",
    ],
 
    'decimals' =>
-   [ { MLANG => 'sh' },
+   [ { MLANG => 'BourneShell' },
     '1000., 1E3' => 'C C++ E Logo Maple OCaml Java Python Scheme Tcl JavaScript Ada ClassicREXX SQL92',
     '1000., 1E3, 1,0' => 'Rebol',
     '1000., 1.E3' => 'Oz Eiffel',
@@ -3402,7 +3410,7 @@ Next' => "VisualBasic",
 
  'addition / subtraction / multiplication / division' =>
  [
-  '+ / - / * / /' => "C C++ Java Eiffel Maple C# Logo Perl Perl6 Matlab MUMPS Python Pliant Ruby sh merd Tcl Haskell Scheme CommonLisp EmacsLisp Smalltalk ClassicREXX SQL92 Prolog",
+  '+ / - / * / /' => "C C++ Java Eiffel Maple C# Logo Perl Perl6 Matlab MUMPS Python Pliant Ruby BourneShell merd Tcl Haskell Scheme CommonLisp EmacsLisp Smalltalk ClassicREXX SQL92 Prolog",
   '+ +. / - -. / * *. / / /. (with mathematical priorities)' => "OCaml",
   'sum / difference / product / quotient' => "Logo",
   'add / sub / mul / idiv div' => "PostScript",
@@ -3425,9 +3433,9 @@ Next' => "VisualBasic",
 
  'negation' =>
  [
-  '-' => "B BCPL Awk Maple Logo C++ C C# E Java Matlab Rebol Pike MUMPS Pliant Haskell Python sh Tcl Scheme Smalltalk Perl Perl6 Ruby Eiffel merd EmacsLisp CommonLisp JavaScript Ada Prolog ClassicREXX",
+  '-' => "B BCPL Awk Maple Logo C++ C C# E Java Matlab Rebol Pike MUMPS Pliant Haskell Python BourneShell Tcl Scheme Smalltalk Perl Perl6 Ruby Eiffel merd EmacsLisp CommonLisp JavaScript Ada Prolog ClassicREXX",
   '- -.' => "OCaml",
-  '~' => "Oz",
+  '~' => "SML Oz",
   'neg' => "PostScript",
   'negate' => "Rebol",
   'minus' => "Logo",
@@ -3462,7 +3470,7 @@ r.item') => "Eiffel",
  [ { MLANG => 'Scheme CommonLisp EmacsLisp' },
   'addition vs multiplication' =>
   [
-   'mathematical' => "C C++ Maple Java C# Eiffel Perl Perl6 Python Ruby sh merd Matlab Tcl Haskell ClassicREXX",
+   'mathematical' => "C C++ Maple Java C# Eiffel Perl Perl6 Python Ruby BourneShell merd Matlab Tcl Haskell ClassicREXX",
    'same priorities' => "Smalltalk MUMPS",
   ],
 
@@ -4064,7 +4072,7 @@ sub credits {
 <li>Nathan Sharfi (C99, C#, C++)
 <li>Dirk Gerrits (Common Lisp, Scheme, Emacs Lisp)
 <li>Tabitha Arrowny (Ruby, Python, Perl, ...)
-<li>Péter Varga (sh, Common Lisp)
+<li>Péter Varga (BourneShell, Common Lisp, ...)
 <li>Ian Henderson (Objective C)
 <li>Anthony Borla (Classic REXX, Prolog, Logo)
 <li>Paul McJones (Modula-3 fixes)
