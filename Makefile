@@ -16,13 +16,13 @@ dirs:
 	convert -size 250x250 $< -resize 250x250 $@
 
 diagram-light.png: %.png: %.dot
-	dot -Tpng -Gsize="10,10" -Nfontname=Vera -Ncolor=light_cyan -Nstyle=filled $< > $@
+	dot -Tpng -Gsize="10,10" -Nfontname=Vera -Ncolor='#e0ffff' -Nstyle=filled $< > $@
 
 %.png: %.dot
-	dot -Tpng -Gsize="30,17" -Nfontname=Vera -Ncolor=light_cyan -Nstyle=filled $< > $@
+	dot -Tpng -Gsize="30,17" -Nfontname=Vera -Ncolor='#e0ffff' -Nstyle=filled $< > $@
 
 %.pdf: %.dot
-	dot -Tps2 -Gsize="10.5,7.8" -Nfontname=Helvetica -Nheight=0.9 -Ncolor=light_cyan -Nstyle=filled $< | ps2pdf - > $@
+	dot -Tps2 -Gsize="10.5,7.8" -Nfontname=Helvetica -Nheight=0.9 -Ncolor='#e0ffff' -Nstyle=filled $< | ps2pdf - > $@
 
 %.ps: %.dot
 	dot -Tps -Gsize="16,9.8" -Nfontname=Helvetica -Nheight=0.9 -Gpage="8.2,11" -Grotate=90 $< > $@
