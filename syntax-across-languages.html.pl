@@ -792,6 +792,7 @@ return') => "ClassicREXX",
    "trace 'I'" => "ClassicREXX",
    "evalin('caller', expression)" => "Matlab",
    'current_predicate' => "Prolog",
+   'thisContext sender' => "Smalltalk",
    'where(2)' => "Maple",
   ],
 
@@ -1259,6 +1260,7 @@ Loop Until cond') => "VisualBasic",
     '1 1 10 expr for' => "PostScript",
     '(1..10).each {|i| expr }' => "Ruby",
     '1.upto(10) {|i| expr }' => "Ruby",
+    '1 to: 10 do: [...]' => "Smalltalk",
     pre('do i = 1 for 10
   ...
 end') => "ClassicREXX",
@@ -1281,6 +1283,7 @@ end') => "ClassicREXX",
     'for [i 1 10 -1] [expr]' => "Logo",
     'FOR I=10:-1:1 expr' => "MUMPS",
     '10 -1 1 expr for' => "PostScript",
+    '1 to: 10 by: -1 do: [...]' => "Smalltalk",
     '10.downto(1) {|i| expr }' => "Ruby",
     pre('do i = 10 to 1 by -1
   ...
@@ -1301,6 +1304,7 @@ end') => "ClassicREXX",
     'for [i 1 10 2] [expr]' => "Logo",
     'FOR I=1:2:10 expr' => "MUMPS",
     '1 2 10 expr for' => "PostScript",
+    '1 to: 10 by: 2 do: [...]' => "Smalltalk",
     '(1..10).step(2) {|i| expr }' => "Ruby",
     pre('do i = 1 to 10 by 2
   ...
@@ -1956,7 +1960,7 @@ module P : PType  = struct ... end)) => "OCaml",
 
   'multi-line' =>
   [ { MLANG => "C Eiffel Prolog" },
-   'all strings allow multi-line strings' => "E Maple Perl Perl6 OCaml Ruby Scheme Pascal CommonLisp EmacsLisp YCP",
+   'all strings allow multi-line strings' => "E Maple Smalltalk Perl Perl6 OCaml Ruby Scheme Pascal CommonLisp EmacsLisp YCP",
    '@"..."' => "C#",
     q('''...''', """...""") => "Python",
     '[[ ... ]]' => "Lua",
@@ -2005,6 +2009,7 @@ module P : PType  = struct ... end)) => "OCaml",
    'export-clixml' => "MSH",
    'Marshal.to_string' => "OCaml",
    'Marshal.dump' => "Ruby",
+   'storeBinaryOn' => "Smalltalk",
   ],
 
   'unserialize (un-marshaling)' =>
@@ -2012,6 +2017,7 @@ module P : PType  = struct ... end)) => "OCaml",
    'import-clixml' => "MSH",
    'Marshal.from_string' => "OCaml",
    'Marshal.load' => "Ruby",
+   'readBinaryFrom' => "Smalltalk",
   ],
 
   'sprintf-like' =>
@@ -2327,6 +2333,7 @@ module P : PType  = struct ... end)) => "OCaml",
   'index' => "Ruby Perl Ada Perl6 Python",
   'indexOf' => "JavaScript Java",
   'IndexOf' => "C#",
+  'indexOfString' => "Smalltalk",
   'startOf' => "E",
   'search' => "Pike CommonLisp PostScript",
   'StringTools[Search]' => "Maple",
@@ -2353,6 +2360,7 @@ module P : PType  = struct ... end)) => "OCaml",
   'lastIndexOf' => "JavaScript Java",
   'last_index_of (ESI dialect)' => "Eiffel",
   'LastIndexOf' => "C#",
+  'lastIndexOfString' => "Smalltalk",
   '(search substring string :from-end t)' => "CommonLisp",
   '[string rangeOfString:substring options:NSBackwardsSearch]' => "Objective-C",
   'LASTPOS' => "ClassicREXX",
@@ -3387,6 +3395,7 @@ Next' => "VisualBasic",
     '2#1#, 8#7#, 16#f#' => "Ada",
     '2#{1}, #{F}' => "Rebol",
     '#b1, #o7, #xf' => "CommonLisp EmacsLisp Scheme",
+    '2r1, 8r7, 16rf' => "Smalltalk",
     '#2r1, #8r7, #16rf' => "CommonLisp EmacsLisp",
     '1b, Fh' => "Pliant",
     "'1'B, 'F'X" => "ClassicREXX",
@@ -3394,7 +3403,7 @@ Next' => "VisualBasic",
    ],
 
    'integer thousand-seperator' => 
-   [ { MLANG => "Awk C C++ C# Logo Maple Python Prolog Haskell Oz JavaScript CommonLisp ClassicREXX SQL92 Matlab" },
+   [ { MLANG => "Awk C C++ C# Logo Smalltalk Maple Python Prolog Haskell Oz JavaScript CommonLisp ClassicREXX SQL92 Matlab" },
     '1_000, 10_00, 100_0' => 'E Perl Perl6 Ruby Eiffel OCaml',
     "1'000, 10'00, 100'0" => 'Rebol',
     '1_000' => 'merd Ada',
@@ -3452,6 +3461,7 @@ Next' => "VisualBasic",
     'random' => "Prolog Logo",
     '$RANDOM' => "MUMPS",
     'Random.int' => "OCaml",
+    'Random new nextInteger' => "Smalltalk",
   pre('r: RANDOM
 create r.make
 r.start
@@ -3466,6 +3476,7 @@ r.item') => "Eiffel",
     "rand('state',...)" => "Matlab",
     'rerandom' => "Logo",
     'RandomTools[MersenneTwister][SetState]' => "Maple",
+    'Random new setSeed' => "Smalltalk",
    ],
  ],
 
@@ -3622,6 +3633,7 @@ r.item') => "Eiffel",
    'logand / logior / logxor (see also bit-and / bit-or / bit-xor)' => "CommonLisp",
    'bitand / bitor / bitxor' => "Matlab Logo",
    'BITAND / BITOR / BITXOR' => "ClassicREXX",
+   'bitAnd / bitOr / bitXor' => "Smalltalk",
    '/\ / \/ / xor' => "Prolog",
   ],
 
@@ -3634,6 +3646,7 @@ r.item') => "Eiffel",
    'bitnot' => "Eiffel Logo",
    'complement' => "Rebol",
    'bitcmp' => "Matlab",
+   'bitInvert' => "Smalltalk",
    '\\' => "Prolog",
   ],
 
@@ -3644,6 +3657,7 @@ r.item') => "Eiffel",
    '|<< / |>>' => "Eiffel",
    'lsl / lsr or asr' => "OCaml",
    'bitshift' => "PostScript Matlab",
+   'bitShift' => "Smalltalk",
    'ashift lshift' => "Logo",
    '(ash x positive-integer) / (ash x negative-integer) / ' => "CommonLisp",
   ],
@@ -4094,6 +4108,7 @@ sub credits {
 <li>Stuart Brady (VisualBasic)
 <li>Joris Gillis (Maple)
 <li>Garrett Wollman (Ruby, BourneShell, C...)
+<li>Claus Gittinger (Smalltalk)
 </ul>
 EOF
 }
