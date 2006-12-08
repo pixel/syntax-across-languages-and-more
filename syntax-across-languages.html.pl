@@ -854,6 +854,7 @@ return') => "ClassicREXX",
    'c if b1 then' => "Forth",
    '(if c b)' => "CommonLisp Scheme",
    '(when c b)' => "EmacsLisp",
+   'c and b' => "Perl Ruby",
    'c ifTrue: b' => "Smalltalk",
    '<xsl:if test="c">b</xsl:if>' => "XSLT",
 
@@ -984,6 +985,7 @@ ELSE b') => "MUMPS",
   'ifnot_then (unless)' => 
   [ { KIND => 'rare' },
    'unless' => "EmacsLisp Perl",
+   'ifFalse' => "Smalltalk",
   ],
 
   'multiple selection (switch)' =>
@@ -1235,7 +1237,7 @@ end') => "ClassicREXX",
     'until [expr cond]' => "Rebol",
     'until cond [expr]' => "Logo",
     'do.while [expr] cond' => "Logo",
-    '[expr . cond] whileFalse' => "Squeak",
+    '[expr . cond] whileFalse' => "Smalltalk",
     pre('Do 
 expr
 Loop Until cond') => "VisualBasic",
@@ -1652,7 +1654,7 @@ predefined_condition_name :
    'isa' => "Perl Matlab",
    'is_a? kind_of?' => "Ruby",
    'o.meta.isa' => "Perl6",
-   'isKindOf' => "Smalltalk",
+   'isKindOf (see also isMemberOf)' => "Smalltalk",
    'isKindOfClass' => "Objective-C",
    'dynamic_cast' => "C++",
    'instanceof' => "Java JavaScript",
@@ -1766,9 +1768,9 @@ predefined_condition_name :
 
   'package scope' =>
   [
-   '.' => "C# Java Python Ruby Modula-3 SML OCaml Pascal E Ada Haskell",
+   '.' => "C# Java Python Ruby Modula-3 SML OCaml Pascal E Ada Haskell Squeak",
    ':' => "XML",
-   '::' => "C++ Ruby Perl merd Tcl YCP",
+   '::' => "C++ Ruby Perl merd Tcl YCP Squeak",
    ': :: (":" is for external symbols only, recommended)' => "CommonLisp",
    ':-' => "Maple",
    "'" => "Perl",
@@ -2075,6 +2077,7 @@ module P : PType  = struct ... end)) => "OCaml",
     'display' => "Scheme",
     'write' => "Prolog Scheme CommonLisp",
     'print' => "CommonLisp",
+    'printOn' => "Smalltalk",
     'princ prin1' => "CommonLisp EmacsLisp",
     'WriteLine' => "C#",
     'nothing - just remove ";" at the end of the expression, and it will print it' => "Matlab",
@@ -2217,7 +2220,7 @@ module P : PType  = struct ... end)) => "OCaml",
   'strupper / strlower' => "Lua",
   'string toupper / string tolower' => "Tcl",
   'string-upcase / string-downcase' => "CommonLisp Scheme",
-  'asLowercase / asUppercase' => "Smalltalk",
+  'asLowercase / asUppercase / asUppercaseFirst' => "Smalltalk",
   'upcase_atom / downcase_atom' => "Prolog",
   "makeLC / makeUC" => "Beta",
   'parse upper var in_var out_var / parse lower var in_var out_var' => "ClassicREXX",
@@ -2498,6 +2501,7 @@ module P : PType  = struct ... end)) => "OCaml",
    'List' => "Pliant",
    'Array or List' => "Perl6",
    'ARRAY or LINKED_LIST' => "Eiffel",
+   'Array or OrderedCollection' => "Smalltalk",
    'cell' => "Matlab",
  ],
 
@@ -3132,8 +3136,8 @@ Next' => "VisualBasic",
   [
    '0' => 'C++',
    'NULL' => 'C SQL92 Maple',
-   'nil' => "Ruby EmacsLisp CommonLisp Lua Objective-C",
-   'null' => "C# JavaScript Java Smalltalk",
+   'nil' => "Ruby EmacsLisp CommonLisp Smalltalk Lua Objective-C",
+   'null' => "C# JavaScript Java",
    'Null (only for "access" types)' => "Ada",
    'undef' => "Perl",
    'None' => "Python OCaml",
@@ -3186,6 +3190,7 @@ Next' => "VisualBasic",
     'Dictionary' => "Pliant Smalltalk",
     'Hash' => "Perl6 Ruby",
     'HASH_TABLE' => "Eiffel",
+    'HashTable' => "Java",
     'struct' => "Matlab",
     'table' => "Maple",
   ],
@@ -3357,6 +3362,7 @@ Next' => "VisualBasic",
    'INTEGER, INTEGER_8, NATURAL_8...' => "Eiffel",
    'int8,uint8,int16,uint16,...64' => "Matlab",
    'Integer,FixNum,BigNum' => 'Ruby',
+   'Integer,SmallInteger,LargeInteger' => "Smalltalk",
   ],
 
   'decimal' =>
@@ -3369,6 +3375,7 @@ Next' => "VisualBasic",
    'Rat' => "Perl6",
    'DOUBLE, REAL' => "Eiffel",
    'single, double' => "Matlab",
+   'Float, Double, Fraction, FixedPoint' => "Smalltalk",
   ],
  ],
 
@@ -3673,7 +3680,6 @@ r.item') => "Eiffel",
    'task task_name is [entry entry_name[(parameter ...)]...] end task_name' => "Ada",
    'task type task_type_name is [entry entry_name[(parameter ...)]...] end task_type_name' => "Ada",
    'class class_name extends Thread {[override run method] }' => "Java",
-   '... fork' => "Smalltalk",
    'thread ...' => "Pliant",
    pre(q(parallel [threads nb_threads] [mini mini_threshold] [maxi maxi_threshold] [active]
    ...
@@ -3694,6 +3700,8 @@ r.item') => "Eiffel",
   [
    'MyTask : task_type_name;' => "Ada",
    'class_name MyThread = new class_name()' => "Java",
+   'p :=  [ ... ] newProcess.' => "Smalltalk",
+   'p :=  [ ... ] fork. (equivalent to newProcess + resume)' => "Smalltalk",
   ],
 
   'starting / stopping threads' =>
@@ -3705,9 +3713,10 @@ r.item') => "Eiffel",
   
   'passing data directly between threads' =>
   [
-   'call an entry with paramters' => "Ada",
+   'call an entry with parameters' => "Ada",
    'call any public method' => "Java",
    'common variables are copied at thread creation, in abscence of a "share" statement' => "Pliant",
+   'use messages, parameters or shared variables (a thread is created from a block, which is a closure on the variables as seen by the block)' => "Smalltalk",
   ],
   
   'terminating thread communication due to a time-out' =>
@@ -3726,6 +3735,7 @@ private
 shared data declaration
 end Object_Name;') => "Ada",
     'synchronize (this){ ... }' => "Java",
+    'SharedQueue, Semaphore critical: [...], Future, LazyValue' => "Smalltalk",
    ],
 	  
    'Synchronized Writing to a shared resource' =>
@@ -3776,6 +3786,7 @@ end Object_Name;') => "Ada",
    [
     'Set_Priority(Priority_Value);' => "Ada",
     'setPriority(newPriority);' => "Java",
+    'p priority: n' => "Smalltalk",
    ],
   ],
   
