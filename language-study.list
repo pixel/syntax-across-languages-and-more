@@ -214,7 +214,7 @@ C
   1978
 
 *C++
-  1983
+  1985
   C (K&R),Simula 67,Algol 68
   SY:5
 C++ (ARM)
@@ -402,6 +402,8 @@ Scheme R4RS
   1988
 *Scheme R5RS
   1998
+Scheme R6RS
+  2007
 
 *Common Lisp
   1985
