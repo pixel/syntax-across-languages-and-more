@@ -216,7 +216,8 @@ def x():
     [ { MLANG => 'MUMPS' },
      # see http://dotnet.di.unipi.it/EcmaSpec/CSharp/cont25.html C.1.4 for C#
      # perl -ne '$l{$_} = 1 foreach /(\w*[a-z][_]\w*)/g; $m{$_} = 1 foreach /(\w*[a-z][A-Z]\w*)/g; END { print join(" ", keys %l), "\n", join(" ", keys %m), "\n" }'
-     'CamelCase' => "Haskell Java JavaScript Tcl Smalltalk C# E Pascal VisualBasic",
+     'camelCase' => "JavaScript",
+     'CamelCase or camelCase' => "Haskell Java JavaScript Tcl Smalltalk C# E Pascal VisualBasic",
      'underscores' => 'merd',
      'dots' => "Logo",
      'hyphens' => "Rebol EmacsLisp CommonLisp",
@@ -579,6 +580,7 @@ def x():
     [ { MLANG => 'SML Haskell OCaml' },
      'f(,b)' => "merd",
      '&f.assuming(b => b)' => "Perl6",
+     'flip f b (it does not scale to 3rd argument)' => "Haskell",
     ],
 
     'give the first argument to operator ">"' =>
@@ -1963,7 +1965,7 @@ module P : PType  = struct ... end)) => "OCaml",
    'end-of-line (without writing the real CR or LF character)' =>
    [ { MLANG => "ClassicREXX Matlab Logo" },
     '\n' => "Tcl",
-    '"\n"' => "C C++ C# Perl Perl6 Maple Lua OCaml Python Ruby YCP Pike Java JavaScript Yorick",
+    '"\n"' => "C C++ C# Perl Perl6 Maple Lua Haskell OCaml Python Ruby YCP Pike Java JavaScript Yorick",
     '"*n"' => "B BCPL",
     '"%N"' => "Eiffel",
     '"^/"' => "Rebol",
@@ -2197,6 +2199,7 @@ module P : PType  = struct ... end)) => "OCaml",
   'insert/dup' => "Rebol",
   'COPIES' => "ClassicREXX",
   'cat(s$n)' => "Maple",
+  'concat $ replicate' => "Haskell",
  ],
 
  'upper / lower case character' =>
@@ -2350,6 +2353,7 @@ module P : PType  = struct ... end)) => "OCaml",
   'SUBSTRING(s FROM n len)' => "SQL92",
   '$EXTRACT(s, n, m)' => "MUMPS",
   'sub_string / sub_atom' => "Prolog",
+  '(take len . drop n) s' => "Haskell"
  ],
 
  'locate a substring' => 
@@ -2945,6 +2949,7 @@ Next' => "VisualBasic",
   'l * s' => "Pike Ruby",
   "(mapconcat 'identity l s)" => "EmacsLisp",
   'componentsJoinedByString' => "Objective-C",
+  'concat . intersperse s (see also unwords and unlines)' => "Haskell",
  ],
 
  'list size' =>
@@ -3220,7 +3225,7 @@ Next' => "VisualBasic",
  ],
 
  'dictionary' =>
- [ { ALL => 1, MLANG => 'C Ada Haskell Logo Smalltalk ClassicREXX Prolog Tcl' },
+ [ { ALL => 1, MLANG => 'C Ada Logo Smalltalk ClassicREXX Prolog Tcl' },
 
   'type name' =>
   [ { KIND => 'typed' },
@@ -3254,6 +3259,7 @@ Next' => "VisualBasic",
    'table([a=b, c=d])' => "Maple",
    'define table foo a => b; c => d end' => "Dylan",
    'dict create a b c d' => "Tcl8.5",
+   'fromList' => "Haskell",
    '[NSDictionary dictionaryWithObjectsAndKeys:b, a, d, c, nil]' => "Objective-C",
    pre('  a: b
   c: d') => "YAML",
@@ -3285,6 +3291,7 @@ Next' => "VisualBasic",
     'h[k]:default' => "YCP",
     'h.get(k, returned_value_when_k_unfound)' => "Python",
     'objectForKey' => "Objective-C",
+    'lookup' => "Haskell",
    ],
 
    'write' =>
@@ -3297,6 +3304,7 @@ Next' => "VisualBasic",
     'h[k]' => "YCP",
     'h at: k put: o' => "Smalltalk",
     '[h setObject:o forKey:k]' => "Objective-C",
+    'insert' => "Haskell",
    ],
   ],
 
@@ -3333,7 +3341,7 @@ Next' => "VisualBasic",
    'dict remove' => "Tcl8.5",
    'removeKey' => "E Smalltalk",
    'remhash' => "CommonLisp",
-   'delete' => "Ruby JavaScript Perl6",
+   'delete' => "Ruby Haskell JavaScript Perl6",
    'erase' => "C++",
    'm_delete' => "Pike",
    'removeObjectForKey' => "Objective-C",
@@ -3408,9 +3416,10 @@ Next' => "VisualBasic",
    'integer' => "Maple",
    'INTEGER, INT, SMALLINT' => "SQL92",
    'INTEGER, INTEGER_8, NATURAL_8...' => "Eiffel",
-   'int8,uint8,int16,uint16,...64' => "Matlab",
-   'Integer,FixNum,BigNum' => 'Ruby',
-   'Integer,SmallInteger,LargeInteger' => "Smalltalk",
+   'int8, uint8, int16, uint16, ...64' => "Matlab",
+   'Int, Integer, Int8, Int16, Int32, Int64' => "Haskell",
+   'Integer, FixNum, BigNum' => 'Ruby',
+   'Integer, SmallInteger, LargeInteger' => "Smalltalk",
   ],
 
   'decimal' =>
@@ -3423,6 +3432,7 @@ Next' => "VisualBasic",
    'Rat' => "Perl6",
    'DOUBLE, REAL' => "Eiffel",
    'single, double' => "Matlab",
+   'Float, Double, Ratio' => "Haskell",
    'Float, Double, Fraction, FixedPoint' => "Smalltalk",
    'float, decimal.Decimal' => "Python",
   ],
@@ -3516,6 +3526,7 @@ Next' => "VisualBasic",
     'rand' => 'Perl Perl6 Maple Ruby Matlab Tcl',
     'random' => "Prolog Logo Python",
     '$RANDOM' => "MUMPS",
+    'randomR' => "Haskell",
     'Random.int' => "OCaml",
     'Random new nextInteger' => "Smalltalk",
   pre('r: RANDOM
@@ -3534,6 +3545,7 @@ r.item') => "Eiffel",
     'rerandom' => "Logo",
     'RandomTools[MersenneTwister][SetState]' => "Maple",
     'Random new setSeed' => "Smalltalk",
+    'mkStdGen' => "Haskell",
    ],
  ],
 
@@ -3579,7 +3591,7 @@ r.item') => "Eiffel",
 
    'inverse' =>
    [ # perl's are in Math::Trig, JavaScript are in Math
-    'asin / acos / atan (Ruby >= 1.7)' => "C C++ Pike Tcl Prolog Pliant CommonLisp Scheme Python OCaml Perl Perl6 Ruby JavaScript Ada Matlab",
+    'asin / acos / atan (Ruby >= 1.7)' => "C C++ Haskell Pike Tcl Prolog Pliant CommonLisp Scheme Python OCaml Perl Perl6 Ruby JavaScript Ada Matlab",
     'Asin / Acos / Atan' => "C# Oz",
     'ASin / ACos / ATan' => "ClassicREXX",
     'arcsin / arccos / arctan' => "Maple",
@@ -3652,7 +3664,7 @@ r.item') => "Eiffel",
    '#' => "MUMPS",
    'mod' => "Pascal PostScript Prolog Lua OCaml XPath Oz",
    'remainder' => "Ruby Scheme Logo",
-   'rem' => "BCPL Ada Smalltalk Matlab",
+   'rem' => "BCPL Ada Haskell Smalltalk Matlab",
    '//' => "Rebol ClassicREXX",
    '\\\\' => "Eiffel",
   ],
@@ -3686,6 +3698,7 @@ r.item') => "Eiffel",
    '& / | / ^' => "C C++ C# Tcl E Eiffel Pike Ruby Python Perl Java JavaScript",
    '& / |' => "YCP",
    '+& / +| / +^' => "Perl6",
+   '.&. / .|. / xor (in module Data.Bits)' => "Haskell",
    'and / or / xor' => "Rebol PostScript",
    'land / lor / lxor' => "OCaml",
    'logand / logior / logxor (see also bit-and / bit-or / bit-xor)' => "CommonLisp",
@@ -3702,7 +3715,7 @@ r.item') => "Eiffel",
    'lnot' => "OCaml",
    'lognot (see also bit-not)' => "CommonLisp",
    'bitnot' => "Eiffel Logo",
-   'complement' => "Rebol",
+   'complement' => "Rebol Haskell",
    'bitcmp' => "Matlab",
    'bitInvert' => "Smalltalk",
    '\\' => "Prolog",
@@ -3717,6 +3730,7 @@ r.item') => "Eiffel",
    'bitshift' => "PostScript Matlab",
    'bitShift' => "Smalltalk",
    'ashift lshift' => "Logo",
+   'shiftL / / shiftR' => "Haskell",
    '(ash x positive-integer) / (ash x negative-integer) / ' => "CommonLisp",
   ],
  ],
@@ -4175,6 +4189,7 @@ sub credits {
 <li>Michael Schlenker (Tcl)
 <li>Alex Vondrak (Python)
 <li>Daniel Laberge (Pascal)
+<li>Daniel Wagner (Haskell)
 </ul>
 EOF
 }
