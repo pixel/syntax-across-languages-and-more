@@ -190,7 +190,7 @@ def x():
   ],
 
   'information about the current line and file' =>
-  [ { MLANG => "OCaml Ada MUMPS Matlab Prolog Tcl" },
+  [ { MLANG => "OCaml Ada MUMPS CommonLisp Matlab Prolog Tcl" },
    '__LINE__ __FILE__' => "C C++ Perl Pike PHP Ruby",
    '$?LINE $?FILE' => "Perl6",
    'inspect.stack()[0][2] inspect.stack()[0][1]' => "Python",
@@ -450,7 +450,7 @@ def x():
    ],
 
    'returns 3 values (i.e. inferior, equal or superior)' =>
-   [ { MLANG => 'B C C++ C# Ada Logo Awk Modula-3 Lua XSLT Rebol PostScript ClassicREXX Matlab' },
+   [ { MLANG => 'B C C++ C# Ada Logo CommonLisp Awk Modula-3 Lua XSLT Rebol PostScript ClassicREXX Matlab' },
     'a <=> b' => "Ruby Perl Perl6 merd",
     'cmp' => "Perl Perl6 Python",
     'compare' => "OCaml Haskell Prolog Mercury Pliant Smalltalk",
@@ -790,7 +790,7 @@ return') => "ClassicREXX",
   ],
 
   'runtime inspecting the caller information' =>
-  [ { KIND => 'dynamic', MLANG => 'E Logo' },
+  [ { KIND => 'dynamic', MLANG => 'E CommonLisp Logo' },
    'caller' => "Perl Perl6 Ruby",
    'inspect.stack()[1]' => "Python",
    'backtrace' => "Pike",
@@ -803,7 +803,7 @@ return') => "ClassicREXX",
   ],
 
   'function composition' =>
-  [ { KIND => 'functional', MLANG => 'OCaml Smalltalk Matlab Logo', },
+  [ { KIND => 'functional', MLANG => 'OCaml CommonLisp Smalltalk Matlab Logo', },
    '.' => "Haskell",
    '~' => "merd",
    'o' => "SML",
@@ -1275,6 +1275,7 @@ Loop Until cond') => "VisualBasic",
     '(1..10).each {|i| expr }' => "Ruby",
     '1.upto(10) {|i| expr }' => "Ruby",
     '1 to: 10 do: [...]' => "Smalltalk",
+    '(loop for i from 1 to 10 do expr)' => "CommonLisp",
     pre('do i = 1 for 10
   ...
 end') => "ClassicREXX",
@@ -1300,6 +1301,7 @@ end') => "ClassicREXX",
     '10 -1 1 expr for' => "PostScript",
     '1 to: 10 by: -1 do: [...]' => "Smalltalk",
     '10.downto(1) {|i| expr }' => "Ruby",
+    '(loop for i from 1 to 10 by -1 do expr)' => "CommonLisp",
     pre('do i = 10 to 1 by -1
   ...
 end') => "ClassicREXX",
@@ -1322,6 +1324,7 @@ end') => "ClassicREXX",
     '1 2 10 expr for' => "PostScript",
     '1 to: 10 by: 2 do: [...]' => "Smalltalk",
     '(1..10).step(2) {|i| expr }' => "Ruby",
+    '(loop for i from 1 to 10 by 2 do expr)' => "CommonLisp",
     pre('do i = 1 to 10 by 2
   ...
 end') => "ClassicREXX",
@@ -1623,7 +1626,7 @@ predefined_condition_name :
   ],
 
   'object cloning' =>
-  [ { MLANG => 'E' },
+  [ { MLANG => 'E CommonLisp' },
    'o.clone' => "Perl6",
    'o.clone (one level depth)' => "Ruby Eiffel",
    'o.deep_clone' => "Eiffel",
@@ -1641,7 +1644,7 @@ predefined_condition_name :
   ],
 
   "manually call an object's destructor" =>
-  [ { MLANG => 'OCaml Tcl Eiffel E Smalltalk Matlab Ruby Java' },
+  [ { MLANG => 'OCaml Tcl Eiffel E CommonLisp Smalltalk Matlab Ruby Java' },
    'delete' => "C++ JavaScript",
    'destroy' => "Pike",
    'DESTROY' => "Perl",
@@ -1701,7 +1704,7 @@ predefined_condition_name :
   ],
 
   'methods available' =>
-  [ { KIND => 'reflexive', MLANG => "Perl Pliant" },
+  [ { KIND => 'reflexive', MLANG => "Perl CommonLisp Pliant" },
    'methods' => "Ruby Matlab",
    'get_class_methods' => "PHP",
    'getMethods' => "Java",
@@ -1948,7 +1951,7 @@ module P : PType  = struct ... end)) => "OCaml",
    ],
 
    'with interpolation' =>
-   [ { MLANG => "Haskell Beta Maple Logo Prolog C# ClassicREXX Eiffel" },
+   [ { MLANG => "Haskell CommonLisp Beta Maple Logo Prolog C# ClassicREXX Eiffel" },
     '"... $v ..."' => "Perl Perl6 Tcl PHP BourneShell",
     '"... {v} ..."' => "merd",
     '"... #{v} ..." "... #$v ..." "... #@v ..." "... #@@v ..."' => "Ruby",
@@ -2029,6 +2032,7 @@ module P : PType  = struct ... end)) => "OCaml",
    'Marshal.dump' => "Ruby",
    'storeBinaryOn' => "Smalltalk",
    'pickle.dump (see also cPickle)' => "Python",
+   '(with-standard-io-syntax (write obj stream))' => "CommonLisp",
   ],
 
   'unserialize (un-marshaling)' =>
@@ -2038,6 +2042,7 @@ module P : PType  = struct ... end)) => "OCaml",
    'Marshal.load' => "Ruby",
    'readBinaryFrom' => "Smalltalk",
    'pickle.load' => "Python",
+   '(with-standard-io-syntax (read obj stream))' => "CommonLisp",
   ],
 
   'sprintf-like' =>
@@ -2187,7 +2192,7 @@ module P : PType  = struct ... end)) => "OCaml",
  ],
 
  'duplicate n times' =>
- [ { MLANG => 'C C++ C# Java Prolog Logo VisualBasic JavaScript Haskell Eiffel Beta OCaml SML Smalltalk' }, # Haskell is "concat (replicate n str)"
+ [ { MLANG => 'C C++ C# Java CommonLisp Prolog Logo VisualBasic JavaScript Haskell Eiffel Beta OCaml SML Smalltalk' }, # Haskell is "concat (replicate n str)"
   '*' => "Ruby Pike Python E Ada",
   'x' => "Perl Perl6",
   'times' => "merd",
@@ -3524,7 +3529,7 @@ Next' => "VisualBasic",
    'random number' =>
    [
     'rand' => 'Perl Perl6 Maple Ruby Matlab Tcl',
-    'random' => "Prolog Logo Python",
+    'random' => "Prolog Logo Python CommonLisp",
     '$RANDOM' => "MUMPS",
     'randomR' => "Haskell",
     'Random.int' => "OCaml",
@@ -3546,6 +3551,7 @@ r.item') => "Eiffel",
     'RandomTools[MersenneTwister][SetState]' => "Maple",
     'Random new setSeed' => "Smalltalk",
     'mkStdGen' => "Haskell",
+    'make-random-state' => "CommonLisp",
    ],
  ],
 
@@ -4190,6 +4196,7 @@ sub credits {
 <li>Alex Vondrak (Python)
 <li>Daniel Laberge (Pascal)
 <li>Daniel Wagner (Haskell)
+<li>Bob Bane (Common Lisp)
 </ul>
 EOF
 }
