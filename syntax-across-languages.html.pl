@@ -2046,10 +2046,10 @@ module P : PType  = struct ... end)) => "OCaml",
   ],
 
   'sprintf-like' =>
-  [ { MLANG => 'B Ada Haskell SML Eiffel Java JavaScript Scheme Smalltalk ClassicREXX' },
+  [ { MLANG => 'B Ada Haskell SML Eiffel JavaScript Scheme Smalltalk ClassicREXX' },
    'sprintf' => "Awk Maple C C++ Pike Matlab Perl Perl6 Ruby OCaml merd PHP",
    '%' => "Python Ruby",
-   'format' => "Tcl",
+   'format' => "Tcl Java",
    'format (but not using the C-like %-syntax)' => "Scheme-SRFI28 CommonLisp Erlang",
    'Format' => "C#",
    "putFormat" => "Beta",
@@ -4197,6 +4197,7 @@ sub credits {
 <li>Daniel Laberge (Pascal)
 <li>Daniel Wagner (Haskell)
 <li>Bob Bane (Common Lisp)
+<li>Alan Hogan (Java)
 </ul>
 EOF
 }
