@@ -367,6 +367,7 @@ def x():
    '( ... ) (introduce scope)' => "BourneShell",
    '[ ... ]' => "Logo",
    '[ x. y. ... ]' => "Smalltalk",
+   '"..."' => "Tcl",
    'begin ... end (introduce scope)' => "Pascal Ada",
    'do ... end' => "ClassicREXX",
    'do ... end (introduce scope)' => "PL/I Lua",
@@ -391,7 +392,7 @@ def x():
   [
    'shallow' =>
    [
-    '== != ' => "B C C++ Java OCaml Pike Tcl Perl Perl6 Awk Yorick",
+    '== != ' => "B C C++ Java OCaml Pike Perl Perl6 Awk Yorick",
     '= /=' => "Fortran90 Eiffel",
     '= <>' => "Pliant Rebol Logo Maple Modula-2",
     '= # (in Modula-2, <> and # are synonyms)' => "Modula-2 Modula-3",
@@ -414,7 +415,7 @@ def x():
 
    'deep' =>
    [
-    '== !=' => "Awk C++ C# E Ruby merd Python YCP PHP5",
+    '== !=' => "Awk C++ C# E Ruby Tcl merd Python YCP PHP5",
     '== <>' => "Python",
     '== /=' => "Haskell",
     '== \=' => "Oz",
@@ -529,6 +530,7 @@ def x():
      '(f a b ...) (apply f l) ' => "Scheme EmacsLisp CommonLisp",
      '(funcall f a b ...)' => "EmacsLisp CommonLisp",
      '{f a b}' => "Oz",
+     '[apply f a b]' => "Tcl8.5",
      'f[a,b,...] or f.call(a,b,...)' => "Ruby",
      '&$f(a,b,...) or $f->(a,b,...)' => "Perl",
      '$f.(a,b,...)' => "Perl6",
@@ -574,6 +576,7 @@ def x():
      'f(a,)' => "merd",
      '&f.assuming(var_name => a)' => "Perl6",
      'functools.partial(f, a)' => "Python",
+     'interp alias {} f_a {} f a' => "Tcl",
     ],
 
     'give the second argument' =>
@@ -721,6 +724,7 @@ return') => "ClassicREXX",
    '{ param(para1, [typ2]para2, ...) ... }' => "MSH",
    "{|a, b| ... } (this is a block, not precisely a function, but it's alike)" => "Ruby",
    '[:a :b| ... ]' => 'Smalltalk',
+   '[list {a b} {...}]' => "Tcl8.5",
    'lambda a, b: ...' => "Python",
    'lambda(typ1 para1, typ2, para2, ...) { ... };' => "Pike",
    '(a, b) => ...' => "C#3",
@@ -762,7 +766,7 @@ return') => "ClassicREXX",
 
    'function body is the result' => 
    [
-    'no syntax needed (in Matlab, only for anonymous function)' => "Maple Haskell OCaml Erlang SML EmacsLisp Rebol CommonLisp Scheme Perl Perl6 Ruby Dylan Oz Matlab",
+    'no syntax needed (in Matlab, only for anonymous function)' => "Maple Haskell OCaml Erlang SML EmacsLisp Tcl Rebol CommonLisp Scheme Perl Perl6 Ruby Dylan Oz Matlab",
    ],
 
    'setting the result' => 
@@ -1185,7 +1189,7 @@ END') => "SQL92",
   'loop' => 
   [ { ALL => 1 },
     'forever loop' =>
-    [ { MLANG => 'Awk B Maple C C++ C# Java Prolog E Lua Matlab Pascal JavaScript Haskell Perl Perl6 Python OCaml Smalltalk SML Tcl Eiffel Pliant' }, # Haskell would be: loop f = f >> loop f
+    [ { MLANG => 'Awk B Maple C C++ C# Tcl Java Prolog E Lua Matlab Pascal JavaScript Haskell Perl Perl6 Python OCaml Smalltalk SML Tcl Eiffel Pliant' }, # Haskell would be: loop f = f >> loop f
      'loop' => "Ruby merd PostScript",
      'loop expr end loop' => "Ada",
      'LOOP expr END' => "Modula-3",
@@ -1271,6 +1275,7 @@ Loop Until cond') => "VisualBasic",
     'FOR I=1:1:10 expr' => "MUMPS",
     'for i from 1 to 10 do expr end do' => "Maple",
     'for [i 1 10 +1] [expr]' => "Logo",
+    'for {set i 1} {$i <= 10} {incr i} {expr}' => "Tcl",
     '1 1 10 expr for' => "PostScript",
     '(1..10).each {|i| expr }' => "Ruby",
     '1.upto(10) {|i| expr }' => "Ruby",
@@ -1298,6 +1303,7 @@ end') => "ClassicREXX",
     'for i from 10 to 1 by -1 do expr end do' => "Maple",
     'for [i 1 10 -1] [expr]' => "Logo",
     'FOR I=10:-1:1 expr' => "MUMPS",
+    'for {set i 10} {$i >= 1} {incr i -1} {expr}' => "Tcl",
     '10 -1 1 expr for' => "PostScript",
     '1 to: 10 by: -1 do: [...]' => "Smalltalk",
     '10.downto(1) {|i| expr }' => "Ruby",
@@ -1321,6 +1327,7 @@ end') => "ClassicREXX",
     'for i from 1 to 10 by 2 do expr end do' => "Maple",
     'for [i 1 10 2] [expr]' => "Logo",
     'FOR I=1:2:10 expr' => "MUMPS",
+    'for {set i 0} {$i <= 10} {incr i 2} {expr}' => "Tcl",
     '1 2 10 expr for' => "PostScript",
     '1 to: 10 by: 2 do: [...]' => "Smalltalk",
     '(1..10).step(2) {|i| expr }' => "Ruby",
@@ -1810,7 +1817,8 @@ predefined_condition_name :
     ':- module(p)' => "Prolog",
     'p = module() ... end module' => "Maple",
     "(defpackage p ...)" => "CommonLisp",
-    'automatically done based on the file name' => "Python OCaml",
+    'automatically done based on the file name' => "Python OCaml Tcl8.5",
+    'package provide p 1.0' => "Tcl",
     'package declare (directory name is package name)' => "Matlab",
     '<node xmlns="namespace"> ... </node>' => "XML",
     pre('package p is
@@ -1832,6 +1840,7 @@ end p;') => "Ada",
     'p = module() export name1, name2, ...; ... end module' => "Maple",
     "(export 'name1 'name2)" => "CommonLisp",
     'attached to each name (public, private...) ' => "Java Pike",
+    'namespace export name1' => "Tcl",
     'append_features' => "Ruby",
     pre(q(module type PType = sig val name1 : type1 ... end
 module P : PType  = struct ... end)) => "OCaml",
@@ -1856,6 +1865,7 @@ module P : PType  = struct ... end)) => "OCaml",
     'import "p"' => "YCP",
     'from p import *' => "Python",
     'with p; use p;' => "Ada",
+    'namespace import p *' => "Tcl",
     'inherit c export {NONE} all end' => "Eiffel",
     'include or even extend' => "Ruby",
     'do' => "Rebol",
@@ -1872,6 +1882,7 @@ module P : PType  = struct ... end)) => "OCaml",
     'use p qw(name1 name2 ...)' => "Perl",
     'from p import name1, name2, ...' => "Python",
     'FROM p IMPORT name1, name2, ...;' => "Modula-2",
+    'namespace import p name1' => "Tcl",
     'using p::name1; using p::name2; ...' => "C++",
     'with p; use type p.type1; ...' => "Ada",
     'with(p[name1, name2,])' => "Maple",
@@ -1889,6 +1900,7 @@ module P : PType  = struct ... end)) => "OCaml",
     "(require 'p) (deprecated in ANSI Common Lisp, but used in ASDF)" => "CommonLisp",
     'with p;' => "Ada",
     'with(p)' => "Maple",
+    'package require p 1.0' => "Tcl",
     'automatically done (using a correspondance from the package name to the file name)' => "OCaml Java",
    ],
   ],
@@ -1952,6 +1964,7 @@ module P : PType  = struct ... end)) => "OCaml",
 
    'with interpolation' =>
    [ { MLANG => "Haskell CommonLisp Beta Maple Logo Prolog C# ClassicREXX Eiffel" },
+    '... (no spaces)' => "Tcl",
     '"... $v ..."' => "Perl Perl6 Tcl PHP BourneShell",
     '"... {v} ..."' => "merd",
     '"... #{v} ..." "... #$v ..." "... #@v ..." "... #@@v ..."' => "Ruby",
@@ -2564,6 +2577,7 @@ module P : PType  = struct ... end)) => "OCaml",
    'Flatten' => "Oz",
    'eval concat' => "Tcl",
    'ListTools[FlattenOnce]' => "Maple",
+   '{*}$l' => "Tcl8.5",
   ],
 
   'recursive' =>
@@ -2895,7 +2909,7 @@ Next' => "VisualBasic",
   'memberp / member?' => "Logo",
   'contains' => "E YCP",
   'containsObject' => "Objective-C",
-  'in' => "Python JavaScript SQL92",
+  'in' => "Tcl8.5 Python JavaScript SQL92",
   'in_array' => "PHP",
   'includes' => "Smalltalk",
   'elem' => "Haskell Mercury",
@@ -3077,6 +3091,7 @@ Next' => "VisualBasic",
   'list' => "Python",
   'map-as(<list>, bag)' => "Dylan",
   '[a.(:)]' => "Matlab",
+  'array get' => "Tcl",
  ],
 
 ],
@@ -3501,7 +3516,7 @@ Next' => "VisualBasic",
 
  'exponentiation (power)' =>
  [ { MLANG => 'Pascal' },
-  '**' => 'PL/I Perl Perl6 Rebol Ruby Python OCaml E Ada merd Fortran Prolog ClassicREXX',
+  '**' => 'PL/I Perl Perl6 Tcl8.5 Rebol Ruby Python OCaml E Ada merd Fortran Prolog ClassicREXX',
   '^' => 'Eiffel Awk Dylan Lua Matlab Pliant',
   '* (APL uses a real multiplication sign for multiplication from a special character set)' => 'APL',
   '**, ^' => 'Maple',
@@ -3582,6 +3597,7 @@ r.item') => "Eiffel",
   'sqrt / /' => "Pike",
   'square-root / exp / abs or absolute' => "Rebol",
   'Sqrt / Exp / ABS' => "ClassicREXX",
+  'sqrt,isqrt / exp / abs' => "Tcl8.5",
  ],
 
  'trigonometry' =>
@@ -3765,6 +3781,7 @@ r.item') => "Eiffel",
   'thread creation' =>
   [
    'object t=Thread.Thread(f)' => "Pike",
+   'set t [thread create {code}]' => "Tcl",
   ],
   
   'thread object creation' =>
@@ -3780,6 +3797,7 @@ r.item') => "Eiffel",
    'start() / stop() ("stop" is now deprecated)' => "Java",
    'resume / suspend / terminate' => "Smalltalk",
    'Tasks are started when created / call Stop entry or "abort task-object-name"' => "Ada",
+   'thread send $t {script}' => "Tcl",
   ],
   
   'passing data directly between threads' =>
@@ -3799,6 +3817,7 @@ r.item') => "Eiffel",
   [
    'Defining a Synchronized Shared Resource' =>
    [
+    'thread::mutex' => "Tcl",
     pre('protected Object_Name is [entry entry_name(Parameter : [in out] is type [...]);
 procedure procedure_name(Parameter : [in out] is type [...]);
 function function_name return type;
