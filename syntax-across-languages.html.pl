@@ -253,7 +253,7 @@ def x():
      "[a-zA-Z!?@#$_][a-zA-Z0-9!?@#$_]*" => "ClassicREXX",
      q([_a-zA-Z?!.'+*&|=~-][_a-zA-Z0-9?!.'+*&|=~-]* or 
 <br>[^0-9[](){}":;/][^ \n\t[](){}":;/]*) => "Rebol",
-     '\S+' => "Forth", # ??
+     'anything without a space and is not a number' => "CommonLisp Forth",
     ],
 
     'function identifier regexp (if different from variable identifier regexp)' =>
@@ -3258,6 +3258,7 @@ Next' => "VisualBasic",
     'HashTable' => "Java",
     'struct' => "Matlab",
     'table' => "Maple",
+    'Data.Map, Data.HashTable' => "Haskell",
   ],
 
   'constructor' =>
@@ -3344,6 +3345,7 @@ Next' => "VisualBasic",
    'k not in h' => "Python",
    'in' => "Awk",
    'mem' => "OCaml",
+   'member' => "Haskell",
    'isfield' => "Matlab",
    'find (returns an iterator)' => "C++",
    'h[k]' => "Pike",
@@ -3371,7 +3373,7 @@ Next' => "VisualBasic",
 
   'list of keys' =>
   [ { MLANG => 'C++ OCaml CommonLisp' },
-   'keys' => 'Perl Perl6 Maple Python MSH Ruby Smalltalk',
+   'keys' => 'Perl Perl6 Maple Python MSH Ruby Smalltalk Haskell',
    'dict keys' => "Tcl8.5",
    'keySet' => "Java",
    'allKeys' => "Objective-C",
@@ -3393,6 +3395,7 @@ Next' => "VisualBasic",
    'array_values' => "PHP",
    'struct2cell' => "Matlab",
    'entries' => "Maple",
+   'elems' => "Haskell",
   ],
  ],
 
