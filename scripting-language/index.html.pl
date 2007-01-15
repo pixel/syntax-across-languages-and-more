@@ -20,7 +20,7 @@ use strict;
 my @snippets = ('smallest', 'hello_world', 'argv', 'env', 'test_file_exists', 'test_file_readable', 'formatting', 'system', 'sed_in_place', 'compile_what_must_be', 'grep');
 my %snippets_comments =
   (
-   smallest => 'the smallest running program',
+   smallest => 'the smallest running program doing nothing',
    hello_world => 'print a simple string on stdout',   
    argv => 'access command line parameters (no segmentation fault accepted, nor silent exception, so some languages must explicitly check the presence of the argument)',
    env => 'access environment variable',
@@ -495,7 +495,7 @@ END
 	sed_in_place => <<'END',
 getFileAsString(#args[0]).replaceAll('#.*', '').writeToFile(#args[0]);
 END
-        compile_what_must_be => <<'END',
+        compile_what_must_be__NOT_VALID => <<'END',
 listFiles '*.c' recursive {
     if (!(o = $_.trunc(1) @ 'o').fileExists()) {
         . "Compiling $_ to ${o}";
@@ -931,7 +931,8 @@ END
         env => q(main :- getenv('HOME', Home), write(Home), nl.),
         test_file_exists => q(main :- exists_file('/etc/mtab') -> halt(0) ; halt(1).),
         test_file_readable => q(main :- access_file('/etc/mtab', read) -> halt(0) ; halt(1).),
-        formatting => q(main :- A is 1, B is 2, Result is A + B, format('~d + ~d = ~d\n', [A, B, Result]).),
+        formatting => q(main :- A is 1, B is 2, Result is A + B, 
+        format('~d + ~d = ~d\n', [A, B, Result]).),
         system => <<'END',
 main :- shell('false', Status),
         (Status \= 0 ->
@@ -980,11 +981,14 @@ main :-
   forall(member(CFile, CFiles),
 	(sub_atom(CFile, 0, _, 2, BaseName),
 	 atom_concat(BaseName, '.o', ObjFile),
-	 (should_compile(CFile, ObjFile) -> compile(CFile, ObjFile) ; true))).
+	 (should_compile(CFile, ObjFile) 
+            -> compile(CFile, ObjFile) ; true))).
 
 should_compile(SrcFile, ObjFile) :-
   (exists_file(ObjFile) ->
-    time_file(SrcFile, SrcTime), time_file(ObjFile, ObjTime), ObjTime < SrcTime
+    time_file(SrcFile, SrcTime), 
+    time_file(ObjFile, ObjTime), 
+    ObjTime < SrcTime
   ;
     true).
 
@@ -1268,6 +1272,38 @@ main =
        when (ret /= ExitSuccess) (hPutStrLn stderr "false failed")
        system "echo done"
 END
+        sed_in_place => <<'END',
+import System
+import System.IO
+import Monad
+import Control.Exception
+
+c = unlines . map (takeWhile(/= '#')) . lines
+fop f n = do l <- fmap f (readFile n)
+             evaluate (length l)
+             writeFile n l
+
+main = getArgs >>= (fop c) . head
+END
+        compile_what_must_be => <<'END',
+import System
+import System.IO
+import System.Directory
+import Data.List
+import Control.Monad
+
+gmt = getModificationTime
+op f = do catch (do ct <- gmt f; ot <- gmt o;
+                    when (ct > ot) comp)
+                (\_ -> comp)
+ where o = take (length f - 2) f ++ ".o"
+       comp = do putStrLn ("Compiling "++f++" to "++o)
+                 system ("ghc -c -o "++o++" "++f)
+                 return ()
+
+main = getCurrentDirectory >>= getDirectoryContents >>= sequence_ . map (op) . filter (".c" `isSuffixOf`)
+END
+
   },
 
 ################################################################################
@@ -2225,6 +2261,7 @@ print <<'EOF';
 <li>Túri Gábor (PHP enhancements)
 <li>Daniel Lowe (Common Lisp)
 <li>Anthony Borla (REXX, Prolog)
+<li>mgsloan (Haskell)
 </ul>
 EOF
 }
