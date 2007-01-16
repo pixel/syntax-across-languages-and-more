@@ -2062,6 +2062,7 @@ module P : PType  = struct ... end)) => "OCaml",
   'sprintf-like' =>
   [ { MLANG => 'B Ada Haskell SML Eiffel JavaScript Scheme Smalltalk ClassicREXX' },
    'sprintf' => "Awk Maple C C++ Pike Matlab Perl Perl6 Ruby OCaml merd PHP",
+   'printf' => "Haskell",
    '%' => "Python Ruby",
    'format' => "Tcl Java",
    'format (but not using the C-like %-syntax)' => "Scheme-SRFI28 CommonLisp Erlang",
@@ -2126,7 +2127,7 @@ module P : PType  = struct ... end)) => "OCaml",
 
    'printf-like' =>
    [
-    'printf' => "C C++ Maple Matlab Perl Ruby OCaml merd Awk PHP",
+    'printf' => "C C++ Haskell Maple Matlab Perl Ruby OCaml merd Awk PHP",
     'write' => "Pike",
     'WriteLine' => "C#",
     'putFormat' => "Beta",
