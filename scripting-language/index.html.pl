@@ -1301,7 +1301,8 @@ op f = do catch (do ct <- gmt f; ot <- gmt o;
                  system ("ghc -c -o "++o++" "++f)
                  return ()
 
-main = getCurrentDirectory >>= getDirectoryContents >>= sequence_ . map (op) . filter (".c" `isSuffixOf`)
+main = do files <- getDirectoryContents <<= getCurrentDirectory
+          mapM_ op $ filter (".c"`isSuffixOf`) files
 END
 
   },
@@ -2261,7 +2262,7 @@ print <<'EOF';
 <li>Túri Gábor (PHP enhancements)
 <li>Daniel Lowe (Common Lisp)
 <li>Anthony Borla (REXX, Prolog)
-<li>mgsloan (Haskell)
+<li>Michael Sloan (Haskell enhancements)
 </ul>
 EOF
 }
