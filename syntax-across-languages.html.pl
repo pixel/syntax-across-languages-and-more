@@ -286,7 +286,7 @@ def x():
   'breaking lines (useful when end-of-line and/or indentation has a special meaning)' =>
   [ { MLANG => "Pliant MUMPS Prolog" },
    'nothing needed' => 'Ada B C C++ C# Maple Eiffel PostScript Rebol Java YCP JavaScript Pascal Perl Perl6 OCaml CommonLisp EmacsLisp Scheme SML Smalltalk XSLT Forth Oz',
-   '\\' => "Awk Python Ruby Tcl E BourneShell",
+   '\\' => "Awk C Python Ruby Tcl E BourneShell",
    '_' => "VisualBasic",
    ',' => "ClassicREXX",
    '~' => "Logo",
@@ -799,7 +799,7 @@ return') => "ClassicREXX",
    'inspect.stack()[1]' => "Python",
    'backtrace' => "Pike",
    "trace 'I'" => "ClassicREXX",
-   "evalin('caller', expression)" => "Matlab",
+   "evalin('caller', ...)" => "Matlab",
    'current_predicate' => "Prolog",
    'thisContext sender' => "Smalltalk",
    'where(2)' => "Maple",
@@ -843,50 +843,49 @@ return') => "ClassicREXX",
 
   'if_then' =>
   [ { MLANG => "SML Prolog Haskell" },
-   'if c then b' => "OCaml Tcl merd Pascal",
-   'if c then b end' => "Ruby Eiffel Lua Oz",
-   'if c then b end if' => "Ada Maple",
-   'if c then b fi' => "Maple BourneShell",
-   'if (c) then b end' => "Dylan",
-   'if c do b' => "BCPL",
-   'IF c THEN b END' => "Modula-2 Modula-3",
-   'if (c) b' => "Awk B C C# C++ Java Pike PHP JavaScript YCP",
-   'if c: b' => "Python",
-   'if c b' => "Pliant Rebol Tcl",
-   'if (c): b endif' => "PHP",
-   'if c {b}' => "Perl6",
-   'if c [b]' => "Logo",
-   'if (c) {b}' => "Perl E Yorick",
-   'IF c b' => "MUMPS",
-   'c -> b' => 'FL',
-   'c b if' => "PostScript",
-   'b if c' => "Perl Ruby",
+   'if c then ...' => "OCaml Tcl merd Pascal",
+   'if c then ... end' => "Ruby Eiffel Lua Oz",
+   'if c then ... end if' => "Ada Maple",
+   'if c then ... fi' => "Maple BourneShell",
+   'if (c) then ... end' => "Dylan",
+   'if c do ...' => "BCPL",
+   'IF c THEN ... END' => "Modula-2 Modula-3",
+   'if (c) ...' => "Awk B C C# C++ Java Pike PHP JavaScript YCP",
+   'if c: ...' => "Python",
+   'if c ...' => "Pliant Rebol Tcl",
+   'if (c): ... endif' => "PHP",
+   'if c {...}' => "Perl6",
+   'if c [...]' => "Logo",
+   'if (c) {...}' => "Perl E Yorick",
+   'IF c ...' => "MUMPS",
+   'c -> ...' => 'FL',
+   'c ... if' => "PostScript",
+   '... if c' => "Perl Ruby",
    'c if b1 then' => "Forth",
-   '(if c b)' => "CommonLisp Scheme",
-   '(when c b)' => "EmacsLisp",
-   'c and b' => "Perl Ruby",
-   'c ifTrue: b' => "Smalltalk",
-   '<xsl:if test="c">b</xsl:if>' => "XSLT",
+   '(if c ...)' => "CommonLisp Scheme",
+   '(when c ...)' => "EmacsLisp",
+   'c and ...' => "Perl Ruby",
+   'c ifTrue: ...' => "Smalltalk",
+   '<xsl:if test="c">...</xsl:if>' => "XSLT",
 
-   'If c Then b' => "VisualBasic",
+   'If c Then ...' => "VisualBasic",
    pre('If c
-  b
+  ...
 End If') => "VisualBasic",
 
-   'if c; b end' => "Ruby",
-   'if c, b, end' => "Matlab",
+   'if c; ... end' => "Ruby",
+   'if c, ..., end' => "Matlab",
 
    pre('if c
-  b
+  ...
 end') => "Ruby Matlab",
 
-   pre('if c then ; b
+   pre('if c then ; ...
 
 if c then
-  b
+  ...
 
 if c then do
-  b
   ...
 end') => "ClassicREXX",
   ],
@@ -988,8 +987,8 @@ else do
   ...
 end') => "ClassicREXX",
 
-   pre('IF c b
-ELSE b') => "MUMPS",
+   pre('IF c ...
+ELSE ...') => "MUMPS",
 
   ],
 
@@ -1002,55 +1001,55 @@ ELSE b') => "MUMPS",
   'multiple selection (switch)' =>
   [ { MLANG => 'Awk Ruby Python Maple PostScript Lua Pliant Smalltalk XSLT' },
    pre('switch (val) { 
-   case v1: expr1; break; 
-   case v2: case v3: expr23; break; 
-   default: expr_else;
+   case v1: ...; break; 
+   case v2: case v3: ...; break; 
+   default: ...;
  }') => "C C++ Pike Java PHP JavaScript",
 
    pre('switch val { 
-   case v1: expr1; goto done;
-   case v2: case v3: expr23; goto done; 
+   case v1: ...; goto done;
+   case v2: case v3: ...; goto done; 
  }
- expr_else;
+ ...;
  done:
  ') => "B",
 
    pre('switch (val) { 
-   case v1: expr1; break; 
-   case v2: case v3: expr23; break; 
-   default: expr_else; break;
+   case v1: ...; break; 
+   case v2: case v3: ...; break; 
+   default: ...; break;
  }') . ' ("break"s are mandatory, even for "default"!)' => "C#",
 
    pre('switch (val) { 
-   match v1 { expr1 } 
-   match v2 { expr2 } 
-   match _ { expr_else }
+   match v1 { ... } 
+   match v2 { ... } 
+   match _ { ... }
 }') => "E",
 
    pre('switchon val  
-   case v1: expr1
-   case v2: expr2
-   default: expr_else') => "BCPL",
+   case v1: ...
+   case v2: ...
+   default: ...') => "BCPL",
 
     pre('switch val
   case v1
-    expr1
+    ...
   case {v2,v3}
-    expr2
+    ...
   otherwise
-    expr3
+    ...
 end') => "Matlab",
 
    pre('case val of
-   v1 : expr1; 
-   v2, v3 : expr23
-   else expr_else
+   v1 : ...; 
+   v2, v3 : ...
+   else ...
  end') => "Pascal",
 
     pre('switch val {
-    v1 {expr1} 
-    v2 - v3 {expr23}
-    default {expr_else}
+    v1 {...} 
+    v2 - v3 {...}
+    default {...}
 }') => 'Tcl',
 
    pre('case val in
@@ -1060,56 +1059,56 @@ end') => "Matlab",
 esac') => "BourneShell",
 
    pre('(if val
-    // v1 then expr1
-    // v2 then expr2 
-    else expr_else
+    // v1 then ...
+    // v2 then ... 
+    else ...
     if)') => "Beta",
 
    pre('match val with
- | v1 -> expr1
- | v2 | v3 -> expr23
- | _ -> expr_else') => "OCaml",
+ | v1 -> ...
+ | v2 | v3 -> ...
+ | _ -> ...') => "OCaml",
 
    pre('case val of
-   v1 => expr1
- | v2 => expr2
- | _ => expr_else') => "SML",
+   v1 => ...
+ | v2 => ...
+ | _ => ...') => "SML",
 
    pre('CASE val OF
-   v1 => expr1
- | v2 => expr2
- ELSE => expr_else END') => "Modula-3",
+   v1 => ...
+ | v2 => ...
+ ELSE => ... END') => "Modula-3",
 
    pre('case val of
-   v1 -> expr1
-   v2 -> expr2
-   _ -> expr_else') => "Haskell",
+   v1 -> ...
+   v2 -> ...
+   _ -> ...') => "Haskell",
 
    pre('val.
-   v1 -> expr1
-   v2 -> expr2
-   _ -> expr_else') => "merd",
+   v1 -> ...
+   v2 -> ...
+   _ -> ...') => "merd",
 
    pre('(case val
-   ((v1) expr1)
-   ((v2) expr2)
-   (otherwise expr_else))') => "CommonLisp",
+   ((v1) ...)
+   ((v2) ...)
+   (otherwise ...))') => "CommonLisp",
 
    pre('(case val
-   ((v1) expr1)
-   ((v2) expr2)
-   (else expr_else))') => "Scheme",
+   ((v1) ...)
+   ((v2) ...)
+   (else ...))') => "Scheme",
 
    pre('case val is
-   when v1 => expr1
-   when v2 | v3 => expr23
-   when others => expr_else
+   when v1 => ...
+   when v2 | v3 => ...
+   when others => ...
  end case;') => "Ada",
 
    pre('case val
-   when v1; expr1
-   when v2, v3; expr23
-   else expr_else
+   when v1; ...
+   when v2, v3; ...
+   else ...
  end') => "Ruby",
 
    pre('inspect val
@@ -1125,64 +1124,64 @@ esac') => "BourneShell",
  end;') => "PL/I",
 
    pre('X = val,
-(X = v1, expr1 ; X = v2, expr2 ; expr_else)') => "Prolog Mercury",
+(X = v1, ... ; X = v2, ... ; ...)') => "Prolog Mercury",
 
    pre('my %case = (
-    v1 => sub { expr1 },
-    v2 => sub { expr2 },
+    v1 => sub { ... },
+    v2 => sub { ... },
 ); 
-if ($case{val}) { $case{val}->() } else { expr_else }') => "Perl",
+if ($case{val}) { $case{val}->() } else { ... }') => "Perl",
 
    pre('use Switch;
 switch ($val) {
-    case v1 { expr1 }
-    case v2 { expr2 }
-    else expr_else
+    case v1 { ... }
+    case v2 { ... }
+    else ...
 })') . ' (Perl >= 5.8.0)' => "Perl",
 
    pre('given $val {
-    when v1 { expr1 }
-    when v2 { expr2 }
-    default { expr_else }
+    when v1 { ... }
+    when v2 { ... }
+    default { ... }
 }') => "Perl6",
 
    pre('Select val
     Case v1
-	expr1
+	...
     Case v2, v3
-	expr2
+	...
     Case Else
-	expr_else
+	...
 End Select') => "VisualBasic",
 
   pre('switch (val) {
-    v1 { expr1 }
-    v2 { expr2 }
-    default { expr_else }
+    v1 { ... }
+    v2 { ... }
+    default { ... }
   }') => "MSH",
 
   pre('switch val [
-    v1 [expr1]
-    v2 [expr2]
+    v1 [...]
+    v2 [...]
 ]
 
 switch/default [
-    v1 [expr1]
-    v2 [expr2]
-][expr_else]') => "Rebol",
+    v1 [...]
+    v2 [...]
+][...]') => "Rebol",
 
-   'val caseOf: {[v1]->[expr1]. [v2]->[expr2]} otherwise: expr_else' => "Squeak",
+   'val caseOf: {[v1]->[...]. [v2]->[...]} otherwise: ...' => "Squeak",
 
    pre('select
-  when v1 expr1
-  when v2 | v3 expr23
-  otherwise expr_else
+  when v1 ...
+  when v2 | v3 ...
+  otherwise ...
 end') => "ClassicREXX",
 
    pre('CASE val
-    WHEN v1 THEN expr1
-    WHEN v2 THEN expr2
-    ELSE expr_else
+    WHEN v1 THEN ...
+    WHEN v2 THEN ...
+    ELSE ...
 END') => "SQL92",
 
   ],
@@ -1192,14 +1191,14 @@ END') => "SQL92",
     'forever loop' =>
     [ { MLANG => 'Awk B Maple C C++ C# Tcl Java Prolog E Lua Matlab Pascal JavaScript Haskell Perl Perl6 Python OCaml Smalltalk SML Tcl Eiffel Pliant' }, # Haskell would be: loop f = f >> loop f
      'loop' => "Ruby merd PostScript",
-     'loop expr end loop' => "Ada",
-     'LOOP expr END' => "Modula-3",
-     '(loop do expr)' => "CommonLisp",
+     'loop ... end loop' => "Ada",
+     'LOOP ... END' => "Modula-3",
+     '(loop do ...)' => "CommonLisp",
      "cycle (# do ... #) " => "Beta",
      'repeat' => "Squeak",
      'forever' => "Rebol Logo",
      pre('Do
-    expr
+    ...
 Loop') => "VisualBasic",
      pre('do forever
   ...
@@ -1209,79 +1208,79 @@ end') => "ClassicREXX",
 
    'while condition do something' =>
    [ { MLANG => 'Prolog' },
-    'while (cond) expr' => "Awk B C C++ C# Java E Pike Perl Perl6 Ruby PHP JavaScript YCP Yorick",
-    'while cond expr' => "Tcl",
-    'while cond loop expr end loop' => "Ada",
-    'while cond do expr' => "BCPL SML Pascal",
-    'while cond do expr done' => "OCaml",
-    'while cond do expr end do' => "Maple",
-    'WHILE cond DO expr end' => "Lua",
-    'while cond: expr' => "Python",
-    'while cond; do expr; done' => "BourneShell",
-    'while cond, expr, end' => "Matlab",
-    'while [cond][expr]' => "Rebol",
-    'while cond [expr]' => "Logo",
-    'do.while [expr] cond' => "Logo",
-    'cond whileTrue: expr' => "Smalltalk",
-    '(loop while cond do expr)' => "CommonLisp",
-    'loop (# while ::< (# do cond -> value #) do expr #) ' => "Beta",
-    'begin cond while expr repeat' => "Forth",
-    'from until not cond loop expr end' => "Eiffel",
-    pre(q(while cond
-    expr)), => "Pliant",
-    pre('Do While cond 
-    expr
+    'while (c) ...' => "Awk B C C++ C# Java E Pike Perl Perl6 Ruby PHP JavaScript YCP Yorick",
+    'while c ...' => "Tcl",
+    'while c loop ... end loop' => "Ada",
+    'while c do ...' => "BCPL SML Pascal",
+    'while c do ... done' => "OCaml",
+    'while c do ... end do' => "Maple",
+    'WHILE c DO ... end' => "Lua",
+    'while c: ...' => "Python",
+    'while c; do ...; done' => "BourneShell",
+    'while c, ..., end' => "Matlab",
+    'while [c][...]' => "Rebol",
+    'while c [...]' => "Logo",
+    'do.while [...] c' => "Logo",
+    'c whileTrue: ...' => "Smalltalk",
+    '(loop while c do ...)' => "CommonLisp",
+    'loop (# while ::< (# do c -> value #) do ... #) ' => "Beta",
+    'begin c while ... repeat' => "Forth",
+    'from until not c loop ... end' => "Eiffel",
+    pre(q(while c
+    ...)), => "Pliant",
+    pre('Do While c 
+    ...
 Loop') => "VisualBasic",
-    pre('do while cond
+    pre('do while c
   ...
 end') => "ClassicREXX",
    ],
 
    'do something until condition' =>
    [ { MLANG => 'Python Maple OCaml SML Eiffel Matlab Pliant Smalltalk Tcl' },
-    'do expr until cond' => "Perl6",
-    'do {expr} until cond' => "Perl",
-    'do {expr} while (!cond) ' => "C C++ C# Java Awk Pike JavaScript Yorick",
-    'begin expr end until cond' => "Ruby",
-    'REPEAT expr UNTIL cond' => "Modula-3", 
-    'loop (# until ::< (# do cond -> value #) do expr #) ' => "Beta",
-    'loop expr exit when cond end loop' => "Ada",
-    '(loop do expr until cond)' => "CommonLisp",
-    'expr repeatuntil cond' => "BCPL",
-    'repeat expr until cond' => "Lua Pascal",
-    'repeat expr until (cond) ' => "YCP",
-    'repeat, expr, cond' => "Prolog",
-    'until [expr cond]' => "Rebol",
-    'until cond [expr]' => "Logo",
-    'do.while [expr] cond' => "Logo",
-    '[expr . cond] whileFalse' => "Smalltalk",
+    'do ... until c' => "Perl6",
+    'do {...} until c' => "Perl",
+    'do ... while (!c) ' => "C C++ C# Java Awk Pike JavaScript Yorick",
+    'begin ... end until c' => "Ruby",
+    'REPEAT ... UNTIL c' => "Modula-3", 
+    'loop (# until ::< (# do c -> value #) do ... #) ' => "Beta",
+    'loop ... exit when c end loop' => "Ada",
+    '(loop do ... until c)' => "CommonLisp",
+    '... repeatuntil c' => "BCPL",
+    'repeat ... until c' => "Lua Pascal",
+    'repeat ... until (c) ' => "YCP",
+    'repeat, ..., c' => "Prolog",
+    'until [... c]' => "Rebol",
+    'until c [...]' => "Logo",
+    'do.while [...] c' => "Logo",
+    '[... . c] whileFalse' => "Smalltalk",
     pre('Do 
-expr
-Loop Until cond') => "VisualBasic",
+...
+Loop Until c') => "VisualBasic",
    ],
 
    'for each value in a numeric range, 1 increment (see also the entries about ranges)' =>
    [ { MLANG => 'Eiffel Prolog' },
-    'for (int i = 1; i <= 10; i++) expr' => "C C#",
-    'foreach my $i (1 .. 10) { expr }' => "Perl",
-    'foreach ($i in 1..10) { expr }' => "MSH",
-    'for (1 .. 10) -> $i { expr }' => "Perl6",
-    'for i = 1:10, expr, end' => "Matlab",
-    'for i := 1 to 10 do expr' => "Pascal",
-    'for i = 1 to 10 do expr done' => "OCaml",
-    'For i = 1 To 10 expr Next' => "VisualBasic",
+    'for (int i = 1; i <= 10; i++) ...' => "C C#",
+    'foreach my $i (1 .. 10) { ... }' => "Perl",
+    'foreach ($i in 1..10) { ... }' => "MSH",
+    'for (1 .. 10) -> $i { ... }' => "Perl6",
+    'for i = 1:10, ..., end' => "Matlab",
+    'for i := 1 to 10 do ...' => "Pascal",
+    'for i = 1 to 10 do ... done' => "OCaml",
+    'For i = 1 To 10 ... Next' => "VisualBasic",
     'for i in 1 .. 10 loop ... end loop' => "Ada",
     'for i in range(1, 11)' => "Python",
-#    'for i in `seq 1 10`; do expr; done' => "BourneShell", seq is non standard
-    'FOR I=1:1:10 expr' => "MUMPS",
-    'for i from 1 to 10 do expr end do' => "Maple",
-    'for [i 1 10 +1] [expr]' => "Logo",
-    'for {set i 1} {$i <= 10} {incr i} {expr}' => "Tcl",
-    '1 1 10 expr for' => "PostScript",
-    '(1..10).each {|i| expr }' => "Ruby",
-    '1.upto(10) {|i| expr }' => "Ruby",
+#    'for i in `seq 1 10`; do ...; done' => "BourneShell", seq is non standard
+    'FOR I=1:1:10 ...' => "MUMPS",
+    'for i from 1 to 10 do ... end do' => "Maple",
+    'for [i 1 10 +1] [...]' => "Logo",
+    'for {set i 1} {$i <= 10} {incr i} {...}' => "Tcl",
+    '1 1 10 ... for' => "PostScript",
+    '(1..10).each {|i| ... }' => "Ruby",
+    '1.upto(10) {|i| ... }' => "Ruby",
     '1 to: 10 do: [...]' => "Smalltalk",
-    '(loop for i from 1 to 10 do expr)' => "CommonLisp",
+    '(loop for i from 1 to 10 do ...)' => "CommonLisp",
     pre('do i = 1 for 10
   ...
 end') => "ClassicREXX",
@@ -1290,25 +1289,25 @@ end') => "ClassicREXX",
 
    'for each value in a numeric range, 1 decrement' =>
    [ { MLANG => 'Eiffel Prolog' },
-    'for X := 10 downto 1 do expr' => "Pascal",
-    'for i = 10 downto 1 do expr done' => "OCaml",
+    'for X := 10 downto 1 do ...' => "Pascal",
+    'for i = 10 downto 1 do ... done' => "OCaml",
     'for i in reverse 1 .. 10 loop ... end loop' => "Ada",
-    'for (int i = 10; i >= 1; i--) expr' => "C C#",
-    'for (my $i = 10; $i >= 1; $i--) { expr }' => "Perl",
-    'loop (my $i = 10; $i >= 1; $i--) { expr }' => "Perl6",
-    'from i := 10 until i < 1 loop expr i := i - 1 end' => "Eiffel",
-    'for i = 10:-1:1, expr, end' => "Matlab",
-    'For i = 10 To 1 Step -1 expr Next' => "VisualBasic",
+    'for (int i = 10; i >= 1; i--) ...' => "C C#",
+    'for (my $i = 10; $i >= 1; $i--) { ... }' => "Perl",
+    'loop (my $i = 10; $i >= 1; $i--) { ... }' => "Perl6",
+    'from i := 10 until i < 1 loop ... i := i - 1 end' => "Eiffel",
+    'for i = 10:-1:1, ..., end' => "Matlab",
+    'For i = 10 To 1 Step -1 ... Next' => "VisualBasic",
     'for i in range(10, 0, -1)' => "Python",
-    'for i in `seq 10 -1 1`; do expr; done' => "BourneShell",
-    'for i from 10 to 1 by -1 do expr end do' => "Maple",
-    'for [i 1 10 -1] [expr]' => "Logo",
-    'FOR I=10:-1:1 expr' => "MUMPS",
-    'for {set i 10} {$i >= 1} {incr i -1} {expr}' => "Tcl",
-    '10 -1 1 expr for' => "PostScript",
+    'for i in `seq 10 -1 1`; do ...; done' => "BourneShell",
+    'for i from 10 to 1 by -1 do ... end do' => "Maple",
+    'for [i 1 10 -1] [...]' => "Logo",
+    'FOR I=10:-1:1 ...' => "MUMPS",
+    'for {set i 10} {$i >= 1} {incr i -1} {...}' => "Tcl",
+    '10 -1 1 ... for' => "PostScript",
     '1 to: 10 by: -1 do: [...]' => "Smalltalk",
-    '10.downto(1) {|i| expr }' => "Ruby",
-    '(loop for i from 1 to 10 by -1 do expr)' => "CommonLisp",
+    '10.downto(1) {|i| ... }' => "Ruby",
+    '(loop for i from 1 to 10 by -1 do ...)' => "CommonLisp",
     pre('do i = 10 to 1 by -1
   ...
 end') => "ClassicREXX",
@@ -1316,23 +1315,23 @@ end') => "ClassicREXX",
 
    'for each value in a numeric range, free increment' =>
    [ { MLANG => 'OCaml Eiffel Prolog' },
-    'for (int i = 1; i <= 10; i += 2) expr' => "C C# Pike",
-    'for (i = 1; i <= 10; i += 2) expr' => "Awk",
-    'for (my $i = 1; $i <= 10; $i += 2) { expr }' => "Perl",
-    'loop (my $i = 1; $i <= 10; $i += 2) { expr }' => "Perl6",
-    'from i := 1 until i > 10 loop expr i := i + 2 end' => "Eiffel",
-    'for i = 1:3:10, expr, end' => "Matlab",
-    'For i = 1 To 10 Step 2 expr Next' => "VisualBasic",
+    'for (int i = 1; i <= 10; i += 2) ...' => "C C# Pike",
+    'for (i = 1; i <= 10; i += 2) ...' => "Awk",
+    'for (my $i = 1; $i <= 10; $i += 2) { ... }' => "Perl",
+    'loop (my $i = 1; $i <= 10; $i += 2) { ... }' => "Perl6",
+    'from i := 1 until i > 10 loop ... i := i + 2 end' => "Eiffel",
+    'for i = 1:3:10, ..., end' => "Matlab",
+    'For i = 1 To 10 Step 2 ... Next' => "VisualBasic",
     'for i in range(1, 11, 2)' => "Python",
 #    'for ((x = 1; x <= 10; x += 2)); do ...; done' => "BourneShell",  it must be bash
-    'for i from 1 to 10 by 2 do expr end do' => "Maple",
-    'for [i 1 10 2] [expr]' => "Logo",
-    'FOR I=1:2:10 expr' => "MUMPS",
-    'for {set i 0} {$i <= 10} {incr i 2} {expr}' => "Tcl",
-    '1 2 10 expr for' => "PostScript",
+    'for i from 1 to 10 by 2 do ... end do' => "Maple",
+    'for [i 1 10 2] [...]' => "Logo",
+    'FOR I=1:2:10 ...' => "MUMPS",
+    'for {set i 0} {$i <= 10} {incr i 2} {...}' => "Tcl",
+    '1 2 10 ... for' => "PostScript",
     '1 to: 10 by: 2 do: [...]' => "Smalltalk",
-    '(1..10).step(2) {|i| expr }' => "Ruby",
-    '(loop for i from 1 to 10 by 2 do expr)' => "CommonLisp",
+    '(1..10).step(2) {|i| ... }' => "Ruby",
+    '(loop for i from 1 to 10 by 2 do ...)' => "CommonLisp",
     pre('do i = 1 to 10 by 2
   ...
 end') => "ClassicREXX",
@@ -1343,7 +1342,7 @@ end') => "ClassicREXX",
     'for' => "Awk C C++ C# Java Perl Pike Tcl PHP MSH JavaScript Yorick",
     'loop' => "Perl6",
     'for ((x = 0; x < 10; x++)); do ...; done' => "BourneShell",
-    'from init_code until cond loop ... incr_statement end' => "Eiffel",
+    'from init_code until c loop ... incr_statement end' => "Eiffel",
      # 'for var in range loop exp end loop' => "Ada",
    ],
 
@@ -1403,33 +1402,33 @@ end') => "ClassicREXX",
 
    'catching' =>
    [ { MLANG => 'Scheme' },
-    'try: a except exn: b' => "Python",
-    'try a with exn -> b' => "OCaml",
-    'try a catch (exn) b' => "C++ C# Java JavaScript",
-    'try a catch exn then b end' => "Oz",
-    'try a catch exn: b end try' => "Maple",
-    'try { a CATCH exn { b } }' => "Perl6",
-    'TRY a EXCEPT exn => b END' => "Modula-3",
-    'a handle exn => b' => "SML",
-    'a on: exception_name do: [:exn | b]' => "Smalltalk",
+    'try: a except exn: ...' => "Python",
+    'try a with exn -> ...' => "OCaml",
+    'try a catch (exn) ...' => "C++ C# Java JavaScript",
+    'try a catch exn then ... end' => "Oz",
+    'try a catch exn: ... end try' => "Maple",
+    'try { a CATCH exn { ... } }' => "Perl6",
+    'TRY a EXCEPT exn => ... END' => "Modula-3",
+    'a handle exn => ...' => "SML",
+    'a on: exception_name do: [:exn | ...]' => "Smalltalk",
     'ifCurtailed' => "Smalltalk",
     'rescue' => "Eiffel Ruby",
-    'eval {a}; if ($@) b' => "Perl",
+    'eval {a}; if ($@) ...' => "Perl",
     'exception when exception_name =>' => "Ada",
-    'catch a (\exn -> b) ' => "Haskell",
+    'catch a (\exn -> ...) ' => "Haskell",
     'catch' => "Erlang Prolog Logo Rebol Tcl",
     'catch/name' => "Rebol",
-    'catch(expr) or catch { ... };' => "Pike",
+    'catch(...) or catch { ... };' => "Pike",
     'pcall' => "Lua",
     'with-exception-handler or guard' => "Scheme-SRFI34",
-    'block a exception(exn) b end' => "Dylan",
+    'block a exception(exn) ... end' => "Dylan",
     '?, shy, safe' => "Pliant",
     'handler-bind handler-case ignore-errors' => "CommonLisp",
-    'NS_DURING a NS_HANDLER b NS_ENDHANDLER' => "Objective-C",
+    'NS_DURING a NS_HANDLER ... NS_ENDHANDLER' => "Objective-C",
      pre('try
   a
 catch
-  b
+  ...
 end') => "Matlab",
 
     pre('signal on predefined_condition_name
@@ -1540,7 +1539,7 @@ predefined_condition_name :
      't(e)' => "C++ Matlab",
      'e : t' => "E",
      'cast e t' => "Pliant",
-     'expr cast t' => "Pliant",
+     '... cast t' => "Pliant",
      'make t e / to t e' => "Rebol",
     ],
   ],
@@ -1549,7 +1548,7 @@ predefined_condition_name :
   [ { ALL => 1, MLANG => "Smalltalk Eiffel" },
    'type of a mutable value' =>
    [
-    'it is the default' => "Ada C C++ Java Matlab C#",
+    'mutability is the default' => "Ada C C++ Java Matlab C#",
     'val x: T' => "Pascal",
     'T ref' => "SML OCaml",
     'STRef a T' => "Haskell",
@@ -1560,7 +1559,7 @@ predefined_condition_name :
     'const T' => "C99 C++",
     'constant T' => "Ada",
     'const x: T' => "Pascal",
-    'it is the default' => "SML OCaml Haskell",
+    'constness is the default' => "SML OCaml Haskell",
    ],
 
    'special cases' =>
@@ -1946,7 +1945,7 @@ module P : PType  = struct ... end)) => "OCaml",
 
   'strings' =>
   [ { ALL => 1 },
-   'verbatim' =>
+   'with no interpolation of variables' =>
    [
     "'...'" => "Perl Perl6 CSS XPath YAML Python Matlab Ruby PHP Lua JavaScript Pascal Smalltalk BourneShell Beta Prolog ClassicREXX SQL92",
     '"..."' => "C C++ C# CSS Maple XPath Java YCP YAML E Prolog Rebol Pike Python MUMPS EmacsLisp Scheme CommonLisp OCaml Ada Haskell SML Eiffel JavaScript Dylan Lua Awk Modula-3 Pliant FL Oz ClassicREXX",
@@ -1963,8 +1962,8 @@ module P : PType  = struct ... end)) => "OCaml",
     '@"..."' => "Objective-C",
    ],
 
-   'with interpolation' =>
-   [ { MLANG => "Haskell CommonLisp Beta Maple Logo Prolog C# ClassicREXX Eiffel" },
+   'with interpolation of variables' =>
+   [ { MLANG => "Haskell CommonLisp Beta Maple Logo Prolog C C# ClassicREXX Eiffel" },
     '... (no spaces)' => "Tcl",
     '"... $v ..."' => "Perl Perl6 Tcl PHP BourneShell",
     '"... {v} ..."' => "merd",
@@ -2039,8 +2038,8 @@ module P : PType  = struct ... end)) => "OCaml",
    'description' => "Objective-C",
   ],
 
-  'serialize (marshaling)' =>
-  [ { MLANG => 'Prolog Logo Tcl' },
+  'serialize (marshalling)' =>
+  [ { MLANG => 'C Prolog Logo Tcl' },
    'export-clixml' => "MSH",
    'Marshal.to_string' => "OCaml",
    'Marshal.dump' => "Ruby",
@@ -2049,8 +2048,8 @@ module P : PType  = struct ... end)) => "OCaml",
    '(with-standard-io-syntax (write obj stream))' => "CommonLisp",
   ],
 
-  'unserialize (un-marshaling)' =>
-  [ { MLANG => 'Prolog Logo Tcl' },
+  'unserialize (un-marshalling)' =>
+  [ { MLANG => 'C Prolog Logo Tcl' },
    'import-clixml' => "MSH",
    'Marshal.from_string' => "OCaml",
    'Marshal.load' => "Ruby",
@@ -2465,7 +2464,7 @@ module P : PType  = struct ... end)) => "OCaml",
    '""' => "Python JavaScript Awk Perl Perl6 XPath PHP",
    '"0"' => "Awk Perl Perl6",
    "''" => "Matlab",
-   "'\0'" => "C99 C++ C",
+   q('\0') => "C99 C++ C",
 
    '()' => "Python Perl Perl6",
    '[]' => "Python Matlab",
@@ -3201,7 +3200,7 @@ Next' => "VisualBasic",
  [ { ALL => 1, MLANG => "ClassicREXX Prolog" },
   'null value' =>
   [
-   '0' => 'C++',
+   '0 (optional value is only for pointers)' => 'C++',
    'NULL' => 'C SQL92 Maple',
    'nil' => "Ruby EmacsLisp CommonLisp Smalltalk Lua Objective-C",
    'null' => "C# JavaScript Java",
@@ -3216,7 +3215,8 @@ Next' => "VisualBasic",
 
   'value' =>
   [
-   'v' => "Ada C C++ C# Eiffel Java Perl JavaScript Smalltalk Python Perl Ruby EmacsLisp CommonLisp Lua Scheme",
+   'v' => "Ada C# Eiffel Java Perl JavaScript Smalltalk Python Perl Ruby EmacsLisp CommonLisp Lua Scheme",
+   '*v (optional value is only for pointers)' => "C C++",
    'Just v' => "Haskell",
    'Some v' => "OCaml",
   ],
@@ -4222,6 +4222,7 @@ sub credits {
 <li>Daniel Wagner (Haskell)
 <li>Bob Bane (Common Lisp)
 <li>Alan Hogan (Java)
+<li>Steve Davison (C)
 </ul>
 EOF
 }
