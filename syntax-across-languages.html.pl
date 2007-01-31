@@ -190,7 +190,7 @@ def x():
   ],
 
   'information about the current line and file' =>
-  [ { MLANG => "OCaml Ada MUMPS CommonLisp Matlab Prolog Tcl" },
+  [ { MLANG => "OCaml Haskell Ada MUMPS CommonLisp Matlab Prolog Tcl" },
    '__LINE__ __FILE__' => "C C++ Perl Pike PHP Ruby",
    '$?LINE $?FILE' => "Perl6",
    'inspect.stack()[0][2] inspect.stack()[0][1]' => "Python",
@@ -495,7 +495,7 @@ def x():
   ],
 
   'force garbage collection' =>
-  [ { MLANG => 'Ada B C C++ Tcl CommonLisp Pascal XSLT ClassicREXX MUMPS Matlab', },
+  [ { MLANG => 'Ada B C C++ Tcl Haskell CommonLisp Pascal XSLT ClassicREXX MUMPS Matlab', },
     'doGC' => "Beta",
     'GC.start' => "Ruby",
     'gc' => "Logo Pike Maple",
@@ -1538,6 +1538,7 @@ predefined_condition_name :
      '[t] e' => "MSH",
      't(e)' => "C++ Matlab",
      'e : t' => "E",
+     'e :: t' => "Haskell", #- eg: 11111111111111111111 :: Int   is allowed even if overflow
      'cast e t' => "Pliant",
      '... cast t' => "Pliant",
      'make t e / to t e' => "Rebol",
@@ -2043,6 +2044,7 @@ module P : PType  = struct ... end)) => "OCaml",
    'export-clixml' => "MSH",
    'Marshal.to_string' => "OCaml",
    'Marshal.dump' => "Ruby",
+   'Data.Binary.encode' => "Haskell",
    'storeBinaryOn' => "Smalltalk",
    'pickle.dump (see also cPickle)' => "Python",
    '(with-standard-io-syntax (write obj stream))' => "CommonLisp",
@@ -2053,6 +2055,7 @@ module P : PType  = struct ... end)) => "OCaml",
    'import-clixml' => "MSH",
    'Marshal.from_string' => "OCaml",
    'Marshal.load' => "Ruby",
+   'Data.Binary.decode' => "Haskell",
    'readBinaryFrom' => "Smalltalk",
    'pickle.load' => "Python",
    '(with-standard-io-syntax (read obj stream))' => "CommonLisp",
