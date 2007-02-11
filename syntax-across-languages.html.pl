@@ -552,7 +552,7 @@ def x():
     'with no parameter' =>
     [
      'f' => "Ada Eiffel Pascal PostScript Logo Matlab Rebol Ruby Perl MSH Perl6 Mercury Haskell Tcl Pliant BourneShell Prolog", # Haskell egs: monads
-     'f()' => "Awk Pike Maple Erlang Python C C++ C# YCP Java E Lua Perl JavaScript merd OCaml SML",
+     'f()' => "Awk PHP Pike Maple Erlang Python C C++ C# YCP Java E Lua Perl JavaScript merd OCaml SML",
      '(f)' => "Scheme EmacsLisp CommonLisp",
      '(funcall f)' => "EmacsLisp CommonLisp",
      '{f}' => "Oz",
@@ -1262,6 +1262,8 @@ Loop Until c') => "VisualBasic",
    'for each value in a numeric range, 1 increment (see also the entries about ranges)' =>
    [ { MLANG => 'Eiffel Prolog' },
     'for (int i = 1; i <= 10; i++) ...' => "C C#",
+    'for (i = 1; i <= 10; i++) ...' => "Awk JavaScript",
+    'for ($i = 1; $i <= 10; $i++) ...' => "PHP",
     'foreach my $i (1 .. 10) { ... }' => "Perl",
     'foreach ($i in 1..10) { ... }' => "MSH",
     'for (1 .. 10) -> $i { ... }' => "Perl6",
@@ -1295,6 +1297,8 @@ end') => "ClassicREXX",
     'for (int i = 10; i >= 1; i--) ...' => "C C#",
     'for (my $i = 10; $i >= 1; $i--) { ... }' => "Perl",
     'loop (my $i = 10; $i >= 1; $i--) { ... }' => "Perl6",
+    'for (i = 1; i <= 10; i--) ...' => "Awk JavaScript",
+    'for ($i = 1; $i <= 10; $i--) ...' => "PHP",
     'from i := 10 until i < 1 loop ... i := i - 1 end' => "Eiffel",
     'for i = 10:-1:1, ..., end' => "Matlab",
     'For i = 10 To 1 Step -1 ... Next' => "VisualBasic",
@@ -1316,7 +1320,8 @@ end') => "ClassicREXX",
    'for each value in a numeric range, free increment' =>
    [ { MLANG => 'OCaml Eiffel Prolog' },
     'for (int i = 1; i <= 10; i += 2) ...' => "C C# Pike",
-    'for (i = 1; i <= 10; i += 2) ...' => "Awk",
+    'for (i = 1; i <= 10; i += 2) ...' => "Awk JavaScript",
+    'for ($i = 1; $i <= 10; $i += 2) ...' => "PHP",
     'for (my $i = 1; $i <= 10; $i += 2) { ... }' => "Perl",
     'loop (my $i = 1; $i <= 10; $i += 2) { ... }' => "Perl6",
     'from i := 1 until i > 10 loop ... i := i + 2 end' => "Eiffel",
@@ -1391,6 +1396,7 @@ end') => "ClassicREXX",
     'raise ... end' => "Oz",
     'throw' => "C# C++ Java Prolog Pike Logo E Erlang Rebol JavaScript Haskell",
     'throw/name' => "Rebol",
+    'throw new exception' => "PHP5",
     'die' => "Perl Perl6",
     'return -code' => "Tcl",
     'error' => "EmacsLisp Maple CommonLisp Dylan Matlab Lua Pliant Lua",
@@ -1404,7 +1410,7 @@ end') => "ClassicREXX",
    [ { MLANG => 'Scheme' },
     'try: a except exn: ...' => "Python",
     'try a with exn -> ...' => "OCaml",
-    'try a catch (exn) ...' => "C++ C# Java JavaScript",
+    'try a catch (exn) ...' => "C++ C# Java JavaScript PHP5",
     'try a catch exn then ... end' => "Oz",
     'try a catch exn: ... end try' => "Maple",
     'try { a CATCH exn { ... } }' => "Perl6",
@@ -1536,7 +1542,7 @@ predefined_condition_name :
     [     
      '(t) e' => "C++ Pike",
      '[t] e' => "MSH",
-     't(e)' => "C++ Matlab",
+     't(e)' => "Python C++ Matlab",
      'e : t' => "E",
      'e :: t' => "Haskell", #- eg: 11111111111111111111 :: Int   is allowed even if overflow
      'cast e t' => "Pliant",
@@ -1617,7 +1623,7 @@ predefined_condition_name :
   'object creation' =>
   [
    'new' => "Ada Simula PHP Pliant",
-   'new class_name(...)' => "C++ C# Java Perl JavaScript VisualBasic",
+   'new class_name(...)' => "C++ C# Java Perl JavaScript VisualBasic PHP",
    'new class_name ...' => "OCaml",
    'class_name.new(...)' => "Ruby Perl6",
    'class_name new' => "Smalltalk",
@@ -1640,6 +1646,7 @@ predefined_condition_name :
    'o.deep_clone' => "Eiffel",
    'o.clone()' => "Java",
    'o.Clone()' => "C#",
+   'clone $o' => "PHP5",
    'clone / copy or deepCopy' => "Smalltalk",
    'dclone' => "Perl",
    '[o copy]' => "Objective-C",
@@ -1647,6 +1654,7 @@ predefined_condition_name :
    'purecopy' => "EmacsLisp",
    '{< >}  or  Oo.copy o' => "OCaml",
    'o2 = o (object cloning is the default, uses the copy constructor in C++)' => "C++ PHP Matlab",
+   '$o2 = $o' => "PHP",
    'o2.all := o.all' => "Ada",
    'make o []' => "Rebol",
   ],
@@ -1846,6 +1854,7 @@ end p;') => "Ada",
     pre(q(module type PType = sig val name1 : type1 ... end
 module P : PType  = struct ... end)) => "OCaml",
     'all files in package directory are exported. files in /private sub-directory are not exported, but can be used by the package itself' => "Matlab",
+    '__all__ = [ ... ]' => "Python",
    ],
   ],
 
@@ -2042,6 +2051,7 @@ module P : PType  = struct ... end)) => "OCaml",
   'serialize (marshalling)' =>
   [ { MLANG => 'C Prolog Logo Tcl' },
    'export-clixml' => "MSH",
+   'serialize' => "PHP",
    'Marshal.to_string' => "OCaml",
    'Marshal.dump' => "Ruby",
    'Data.Binary.encode' => "Haskell",
@@ -2053,6 +2063,7 @@ module P : PType  = struct ... end)) => "OCaml",
   'unserialize (un-marshalling)' =>
   [ { MLANG => 'C Prolog Logo Tcl' },
    'import-clixml' => "MSH",
+   'unserialize' => "PHP",
    'Marshal.from_string' => "OCaml",
    'Marshal.load' => "Ruby",
    'Data.Binary.decode' => "Haskell",
@@ -2450,7 +2461,7 @@ module P : PType  = struct ... end)) => "OCaml",
    'none' => "Rebol",
    'None' => "Python",
    'null' => "JavaScript",
-   'NULL' => "C99 C++ C",
+   'NULL' => "C99 C++ C PHP",
    'off' => "Tcl YAML",
    'undef' => "Perl Perl6",
    'undefined' => "JavaScript",
@@ -2461,17 +2472,18 @@ module P : PType  = struct ... end)) => "OCaml",
    'exit status different from 0' => "BourneShell",
 
    '0 (beware of 0.0 which is true in Pike!)' => "B VisualBasic C99 C++ Tcl Python JavaScript ClassicREXX MUMPS Awk Perl Perl6 Matlab XPath C PHP Pike",
-   '0.0' => "Matlab",
+   '0.0' => "Matlab PHP",
    'NaN' => "JavaScript XPath",
 
    '""' => "Python JavaScript Awk Perl Perl6 XPath PHP",
-   '"0"' => "Awk Perl Perl6",
+   '"0"' => "Awk Perl PHP Perl6",
    "''" => "Matlab",
    q('\0') => "C99 C++ C",
 
    '()' => "Python Perl Perl6",
    '[]' => "Python Matlab",
    '{}' => "Python Matlab",
+   'array()' => "PHP",
  ],
 
  'true value' =>
@@ -3052,6 +3064,7 @@ Next' => "VisualBasic",
   'array_reverse' => "PHP",
   'ListTools[Reverse]' => "Maple",
   'fliplr flipud...' => "Matlab",
+  'l[::-1]' => "Python",
  ],
 
  'list of couples from 2 lists' =>
@@ -3357,12 +3370,14 @@ Next' => "VisualBasic",
    '(gethash k h)' => "CommonLisp",
    'maps' => "E",
    'known' => "PostScript",
+   'isset(h[k]), array_key_exists(k, h)' => "PHP",
   ],
 
   'remove by key' =>
   [
    'delete $h{k}' => "Perl",
    'del h[k]' => "Python",
+   'unset(h[k])' => "PHP",
    'remove' => "Eiffel Java OCaml YCP",
    'Remove' => "C#",
    'dict remove' => "Tcl8.5",
@@ -3772,6 +3787,7 @@ r.item') => "Eiffel",
 
   'thread definition' =>
   [
+   'class class_name(threading.Thread) {[override run method] }' => "Python",
    'task task_name is [entry entry_name[(parameter ...)]...] end task_name' => "Ada",
    'task type task_type_name is [entry entry_name[(parameter ...)]...] end task_type_name' => "Ada",
    'class class_name extends Thread {[override run method] }' => "Java",
@@ -3859,7 +3875,7 @@ end Object_Name;') => "Ada",
    'Suspending a thread until another thread completes' =>
    [
     'Call task entry serviced just before task termination' => "Ada",
-    'OtherThread.join();' => "Java",
+    'OtherThread.join()' => "Java Python",
    ],
 	 
    'Suspending a Thread Until Another Thread Establishes An Internal State' =>
@@ -4226,6 +4242,7 @@ sub credits {
 <li>Bob Bane (Common Lisp)
 <li>Alan Hogan (Java)
 <li>Steve Davison (C)
+<li>Konstantin Yegupov (PHP, Python...)
 </ul>
 EOF
 }
