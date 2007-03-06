@@ -212,7 +212,7 @@ def x():
      'case-sensitive: identifiers<br>case-insensitive: commands' => "MUMPS",
     ],
 
-    'if case sensitive, what is the standard way for <a href="http://c2.com/cgi/wiki?CapitalizationRules">scrunching together multiple words</a>' =>
+    'what is the standard way for <a href="http://c2.com/cgi/wiki?CapitalizationRules">scrunching together multiple words</a>' =>
     [ { MLANG => 'MUMPS' },
      # see http://dotnet.di.unipi.it/EcmaSpec/CSharp/cont25.html C.1.4 for C#
      # perl -ne '$l{$_} = 1 foreach /(\w*[a-z][_]\w*)/g; $m{$_} = 1 foreach /(\w*[a-z][A-Z]\w*)/g; END { print join(" ", keys %l), "\n", join(" ", keys %m), "\n" }'
@@ -298,7 +298,7 @@ def x():
    'assignment' =>
    [
     '=' => "B C C++ C# Java Perl Perl6 Matlab Pike PHP Basic Erlang Icon Oz JavaScript Lua BourneShell Awk YCP ClassicREXX Yorick",
-    ':=' => "BCPL Ada Cecil Pascal Dylan Eiffel Maple Sather Modula-3 Simula Smalltalk E Pliant",
+    ':=' => "BCPL Ada SML Cecil Pascal Dylan Eiffel Maple Sather Modula-3 Simula Smalltalk E Pliant",
     '<-' => "OCaml",
     '_ (displayed <- with a special character)' => "Squeak",
     ':' => "BCPL Rebol",
@@ -315,10 +315,11 @@ def x():
 
    'declaration' =>
    [
-    '=' => "Haskell SML Prolog Mercury",
+    '=' => "Haskell Prolog Mercury",
     '<-' => "Haskell",
     ':-' => "Prolog",
     'let v = e in' => "OCaml",
+    'let val v = e in' => "SML",
     'let v = e' => "BCPL",
     'def v := e / var v := e' => "E",
     'my / our / local / use vars' => "Perl",
@@ -333,6 +334,7 @@ def x():
     ':@' => "Beta",
     'NEW v' => "MUMPS",
     'v: t' => "Ada Pascal Eiffel",
+    't v' => "C C++ C# Java",
     '| v1 v2 |' => 'Smalltalk',
     'auto v1, v2; extrn v3, v4;' => "B",
     'var' => "JavaScript Pliant",
@@ -356,7 +358,6 @@ def x():
    'indentation' => "merd",
    '$ ...' => "Haskell",
    'begin ... end' => "OCaml Ruby",
-   'BEGIN ... END' => "Modula-3",
    'space (cf <a href="http://merd.net/choices_syntax.html#horizontal_layout">horizontal layout</a>)' => "merd",
   ],
 
@@ -369,6 +370,7 @@ def x():
    '[ x. y. ... ]' => "Smalltalk",
    '"..."' => "Tcl",
    'begin ... end (introduce scope)' => "Pascal Ada",
+   'BEGIN ... END' => "Modula-3",
    'do ... end' => "ClassicREXX",
    'do ... end (introduce scope)' => "PL/I Lua",
    'indentation' => "Python Pliant MUMPS",
@@ -455,7 +457,7 @@ def x():
     'a <=> b' => "Ruby Perl Perl6 merd",
     'cmp' => "Perl Perl6 Python",
     'compare' => "OCaml Haskell Prolog Mercury Pliant Smalltalk",
-    'strcmp' => "PHP",
+    'strcmp' => "PHP C",
     'three_way_comparison' => "Eiffel",
     'string compare' => "Tcl",
     'compareTo' => 'Java',
@@ -580,7 +582,7 @@ def x():
     ],
 
     'give the second argument' =>
-    [ { MLANG => 'SML Haskell OCaml' },
+      [ { MLANG => 'SML Haskell OCaml' },
      'f(,b)' => "merd",
      '&f.assuming(b => b)' => "Perl6",
      'flip f b (it does not scale to 3rd argument)' => "Haskell",
@@ -624,6 +626,7 @@ def x():
     '(define (f para1 para2) ...)' => "Scheme",
     '(defun f (para1 para2) ...)' => "EmacsLisp CommonLisp",
     'fun { F Para1 Para2 } ... end' => "Oz",
+    'fun f para1 para2 = ...' => 'SML',
     'proc f {para1 para2} { ... }' => "Tcl",
     pre('function retval = f(para1, para2)
 retval = ...') => "Matlab",
@@ -1260,7 +1263,7 @@ Loop Until c') => "VisualBasic",
    ],
 
    'for each value in a numeric range, 1 increment (see also the entries about ranges)' =>
-   [ { MLANG => 'Eiffel Prolog' },
+   [ { MLANG => 'SML Eiffel Prolog' },
     'for (int i = 1; i <= 10; i++) ...' => "C C#",
     'for (i = 1; i <= 10; i++) ...' => "Awk JavaScript",
     'for ($i = 1; $i <= 10; $i++) ...' => "PHP",
@@ -1290,7 +1293,7 @@ end') => "ClassicREXX",
    ],
 
    'for each value in a numeric range, 1 decrement' =>
-   [ { MLANG => 'Eiffel Prolog' },
+   [ { MLANG => 'SML Eiffel Prolog' },
     'for X := 10 downto 1 do ...' => "Pascal",
     'for i = 10 downto 1 do ... done' => "OCaml",
     'for i in reverse 1 .. 10 loop ... end loop' => "Ada",
@@ -1318,7 +1321,7 @@ end') => "ClassicREXX",
    ],
 
    'for each value in a numeric range, free increment' =>
-   [ { MLANG => 'OCaml Eiffel Prolog' },
+   [ { MLANG => 'SML OCaml Eiffel Prolog' },
     'for (int i = 1; i <= 10; i += 2) ...' => "C C# Pike",
     'for (i = 1; i <= 10; i += 2) ...' => "Awk JavaScript",
     'for ($i = 1; $i <= 10; $i += 2) ...' => "PHP",
@@ -1922,7 +1925,7 @@ module P : PType  = struct ... end)) => "OCaml",
   [ { KIND => 'typed' },
    'char[]' => "C",
    'char const[]' => "C++",
-   'string' => "C++ C# Maple OCaml Pike Pascal YCP",
+   'string' => "C++ C# Maple SML OCaml Pike Pascal YCP",
    'string!' => "Rebol",
    'String' => "C# merd Ruby Haskell Java JavaScript VisualBasic Smalltalk Ada",
    'STRING' => "Eiffel",
@@ -1934,7 +1937,7 @@ module P : PType  = struct ... end)) => "OCaml",
 
   'character type name' =>
   [ { KIND => 'typed', MLANG => "Maple Pike Pliant VisualBasic" },
-   'char' => "C C++ C# OCaml",
+   'char' => "C C++ C# OCaml SML",
    'char!' => "Rebol",
    'Char' => "merd Haskell Perl6",
    'Character' => "Smalltalk Ada",
@@ -1948,7 +1951,7 @@ module P : PType  = struct ... end)) => "OCaml",
    '"z' => "Logo",
    '$z' => "Smalltalk",
    '#\z' => "Scheme CommonLisp",
-   '#"z"' => "Rebol",
+   '#"z"' => "Rebol SML",
    '&z' => "Oz",
    '?z' => "Ruby EmacsLisp",
   ],
@@ -1973,7 +1976,7 @@ module P : PType  = struct ... end)) => "OCaml",
    ],
 
    'with interpolation of variables' =>
-   [ { MLANG => "Haskell CommonLisp Beta Maple Logo Prolog C C# ClassicREXX Eiffel" },
+   [ { MLANG => "SML Haskell CommonLisp Beta Maple Logo Prolog C C# ClassicREXX Eiffel" },
     '... (no spaces)' => "Tcl",
     '"... $v ..."' => "Perl Perl6 Tcl PHP BourneShell",
     '"... {v} ..."' => "merd",
@@ -2439,7 +2442,7 @@ module P : PType  = struct ... end)) => "OCaml",
  'type name' =>
  [ { KIND => 'typed', MLANG => 'C Pike' },
   'Bool' => "Perl6 Haskell Pliant",
-  'bool' => "C# C++ C99 OCaml Python YAML",
+  'bool' => "C# C++ C99 SML OCaml Python YAML",
   'Boolean' => "Smalltalk Lua Pascal VisualBasic Ada",
   'boolean' => "Java CommonLisp YCP Maple",
   'BOOLEAN' => "Eiffel",
@@ -2556,7 +2559,7 @@ module P : PType  = struct ... end)) => "OCaml",
  'type name' =>
  [ { KIND => 'typed' },
    'seq' => "YAML",
-   'a list' => "OCaml",
+   'a list' => "SML OCaml",
    '[a]' => 'Haskell',
    'a[]' => "C#",
    'list' => "Python Maple",
@@ -3118,7 +3121,7 @@ Next' => "VisualBasic",
 
  'tuple type' =>
  [ { KIND => 'typed', MLANG => 'C C++ C# Maple Eiffel Pascal Java Smalltalk JavaScript Ada' },
-   't1 * ... * tn' => "OCaml",
+   't1 * ... * tn' => "SML OCaml",
    '(t1, ..., tn)' => "Haskell",
    't1, ..., tn' => "merd",
    'tuple' => "Python",
@@ -3224,6 +3227,7 @@ Next' => "VisualBasic",
    'Null (only for "access" types)' => "Ada",
    'undef' => "Perl",
    'None' => "Python OCaml",
+   'NONE' => "SML",
    'Nothing' => "Haskell",
    'Void' => "Eiffel",
    '#f ()' => "EmacsLisp",
@@ -3236,11 +3240,12 @@ Next' => "VisualBasic",
    '*v (optional value is only for pointers)' => "C C++",
    'Just v' => "Haskell",
    'Some v' => "OCaml",
+   'SOME v' => "OCaml",
   ],
 
   'type name' =>
   [ { KIND => 'functional typed', MLANG => "Smalltalk" },
-    'option' => "OCaml",
+    'option' => "SML OCaml",
     'Maybe' => "Haskell",
   ],
 
@@ -3453,7 +3458,7 @@ Next' => "VisualBasic",
   'integers' =>
   [
    'short, int, long' => "C C#",
-   'int' => "YAML OCaml",
+   'int' => "YAML SML OCaml",
    'Int' => "Perl6",
    'Int, uInt, Int8, Int16...' => "Pliant",
    'int, long (long is a big integer)' => "Python",
@@ -3469,7 +3474,7 @@ Next' => "VisualBasic",
   'decimal' =>
   [
    'float, double' => "C C#",
-   'float' => "YAML OCaml Maple",
+   'float' => "YAML SML OCaml Maple",
    'Float' => "Ruby",
    'Float, Float32, Float64' => "Pliant",
    'NUMERIC, DECIMAL, DOUBLE PRECISION' => "SQL92",
@@ -3567,7 +3572,7 @@ Next' => "VisualBasic",
  [ { ALL => 1 },
    'random number' =>
    [
-    'rand' => 'Perl Perl6 Maple Ruby Matlab Tcl',
+    'rand' => 'C Perl Perl6 Maple Ruby Matlab Tcl',
     'random' => "Prolog Logo Python CommonLisp",
     '$RANDOM' => "MUMPS",
     'randomR' => "Haskell",
@@ -3581,7 +3586,7 @@ r.item') => "Eiffel",
 
    'seed the pseudo random generator' =>
    [ { MLANG => "Prolog" },
-    'srand' => 'Perl Perl6 Ruby Tcl',
+    'srand' => 'C Perl Perl6 Ruby Tcl',
     'set_seed' => "Eiffel",
     'random.seed' => "Python",
     'Random.init, Random.self_init' => "OCaml",
