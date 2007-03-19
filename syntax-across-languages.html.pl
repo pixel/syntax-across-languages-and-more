@@ -1509,7 +1509,7 @@ predefined_condition_name :
    '::' => "Haskell Mercury Dylan",
    '!!' => "merd",
    't v' => "C C++ C# Java Pike Pliant Perl6 YCP",
-   '(declare (v t))' => "CommonLisp",
+   '(declare (t v))' => "CommonLisp",
    'v :@ t' => "Beta",
    'typeset' => "BourneShell",
   ],
