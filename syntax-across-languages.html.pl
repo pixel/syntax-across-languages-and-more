@@ -499,7 +499,7 @@ def x():
   ],
 
   'force garbage collection' =>
-  [ { MLANG => 'Ada B C C++ Tcl Haskell CommonLisp Pascal XSLT ClassicREXX MUMPS Matlab', },
+  [ { MLANG => 'Ada B C C++ Tcl CommonLisp Pascal XSLT ClassicREXX MUMPS Matlab', },
     'doGC' => "Beta",
     'GC.start' => "Ruby",
     'gc' => "Logo Pike Maple",
@@ -514,6 +514,7 @@ def x():
     'VM.garbageCollect()' => "JavaScript",
     'Gc.full_major()' => "OCaml",
     'Smalltalk garbageCollect' => "Smalltalk",
+    'System.Mem.performGC' => 'Haskell',
     'incremental garbage collection => not needed' => "Perl Perl6",
     'recycle' => "Rebol",
     'interp.gc()' => 'E',
@@ -1777,6 +1778,7 @@ predefined_condition_name :
    '@interface child : parent { ... } ... @end' => "Objective-C",
    '@ISA = qw(parent1 parent2)' => "Perl",
    'clone , setProtos, setProto, prependProto, appendProto' => "Io",
+   'instance Parent Child where ...' => "Haskell",
   ],
 				     
   'has the method' =>
@@ -3784,7 +3786,7 @@ r.item') => "Eiffel",
  'truncate / round / floor / ceil' =>
  [
   'trunc / round / floor / ceil' => "C C++ Maple Matlab",
-  'truncate / round / floor / ceiling' => "CommonLisp Scheme PostScript Prolog Perl6",
+  'truncate / round / floor / ceiling' => "CommonLisp Haskell Scheme PostScript Prolog Perl6",
   'int / round / floor / ceil' => "Pike JavaScript Python",
   'int / round / /' => "Logo",
   'to_i, Integer() / round / floor / ceil' => "Ruby",
@@ -3792,7 +3794,7 @@ r.item') => "Eiffel",
   '/ round / floor / ceil' => "SML Tcl Java E PHP Lua Io",
   '/ Round / Floor / Ceiling' => "C#",
   '/ Round / Floor / Ceil' => "Oz",
-  '/ round / floor / ceiling' => "PostScript Dylan EmacsLisp Haskell XPath",
+  '/ round / floor / ceiling' => "PostScript Dylan EmacsLisp XPath",
   '/ ROUND / FLOOR / CEILING' => "Modula-3",
   '/ rounded / floor / ceiling' => "Smalltalk Eiffel",
   'int / / floor / ceil' => "Perl",
