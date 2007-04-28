@@ -3643,6 +3643,8 @@ Next' => "VisualBasic",
 create r.make
 r.start
 r.item') => "Eiffel",    
+    pre('Random ran = new Random();
+ran.Next(...);') => "C#",
    ],
 
    'seed the pseudo random generator' =>
