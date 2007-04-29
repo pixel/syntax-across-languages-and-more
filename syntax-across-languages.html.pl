@@ -717,6 +717,16 @@ End Sub' => "VisualBasic",
 return') => "ClassicREXX",
    ],
 
+    'variable number of arguments' =>
+    [
+      'one can use overloading on different number of arguments' => "C++ Java",
+      'sub f { ... @_ }' => 'Perl',
+      pre('function f(varargin)
+for i=1:nargin
+ ...(varargin{i})
+end') => 'Matlab',
+    ],
+
    'predicates' => 
    [
     'f(Para1, Para2, ....) :- ... .' => "Prolog",
