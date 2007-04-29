@@ -2621,7 +2621,6 @@ module P : PType  = struct ... end)) => "OCaml",
    'ARRAY or LINKED_LIST' => "Eiffel",
    'Array or OrderedCollection' => "Smalltalk",
    'cell' => "Matlab",
-   'typeset -a' => 'KornShell',
  ],
 
  'list concatenation' =>
@@ -3349,7 +3348,6 @@ Next' => "VisualBasic",
     'struct' => "Matlab",
     'table' => "Maple",
     'Data.Map, Data.HashTable' => "Haskell",
-    'typeset -A' => 'KornShell',
   ],
 
   'constructor' =>
