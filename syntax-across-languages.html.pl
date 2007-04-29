@@ -1492,7 +1492,6 @@ predefined_condition_name :
    [ { KIND => 'rare' },
     'retry' => "Eiffel Smalltalk Ruby",
     'restart' => "Dylan",
-    'continue' => "Python",
    ],
 
    'resume execution where the exception took place' =>
@@ -1924,6 +1923,7 @@ module P : PType  = struct ... end)) => "OCaml",
     'addpath' => "Matlab",
     '. p' => "BourneShell",
     'source p' => "BourneShell",
+    'builtin -f /path/to/lib.so' => 'KornShell',
    ],
 
    'selectively' =>
@@ -2189,7 +2189,7 @@ module P : PType  = struct ... end)) => "OCaml",
 
    'printf-like' =>
    [
-    'printf' => "C C++ Haskell Maple Matlab Perl Ruby OCaml merd Awk PHP",
+    'printf' => "C C++ Haskell KornShell Maple Matlab Perl Ruby OCaml merd Awk PHP",
     'write' => "Pike",
     'WriteLine' => "C#",
     'putFormat' => "Beta",
@@ -2621,6 +2621,7 @@ module P : PType  = struct ... end)) => "OCaml",
    'ARRAY or LINKED_LIST' => "Eiffel",
    'Array or OrderedCollection' => "Smalltalk",
    'cell' => "Matlab",
+   'typeset -a' => 'KornShell',
  ],
 
  'list concatenation' =>
@@ -2688,7 +2689,7 @@ module P : PType  = struct ... end)) => "OCaml",
 
  'list/array indexing' =>
  [ { MLANG => "Beta" }, # eiffeil favors a.put(v, i) for write access
-  'a[i]' => "B C C++ C# Java Pike BourneShell Maple Ruby Python merd Pascal E PHP Perl Perl6 Dylan Lua JavaScript Modula-3 MSH",
+  'a[i]' => "B C C++ C# Java Pike BourneShell KornShell Maple Ruby Python merd Pascal E PHP Perl Perl6 Dylan Lua JavaScript Modula-3 MSH",
   'a*[i] or a!i or a*(i) depending on the version' => "BCPL",
   'a[i]:default' => "YCP",
   'a(i)' => "Ada Matlab",
@@ -3348,6 +3349,7 @@ Next' => "VisualBasic",
     'struct' => "Matlab",
     'table' => "Maple",
     'Data.Map, Data.HashTable' => "Haskell",
+    'typeset -A' => 'KornShell',
   ],
 
   'constructor' =>
@@ -3363,6 +3365,7 @@ Next' => "VisualBasic",
    '{ a = b, c = d }' => "Lua",
    '@{ a = b; c = d }' => "MSH",
    '([ a:b, c:d ])' => "Pike",
+   '([a]=b [c]=d)' => 'KornShell',
    '<< a b c d >>' => "PostScript",
    "struct(a, b, c, d)" => "Matlab",
    'Hash[ a, b, c, d ]' => "Ruby",
@@ -3399,6 +3402,7 @@ Next' => "VisualBasic",
     'at' => "Smalltalk Io",
     'h@k or h.at(k)' => "Eiffel",
     'h[k]:default' => "YCP",
+    '${h[k]}' => 'KornShell',
     'h.get(k, returned_value_when_k_unfound)' => "Python",
     'objectForKey' => "Objective-C",
     'lookup' => "Haskell",
@@ -3411,7 +3415,7 @@ Next' => "VisualBasic",
     'add, replace' => "OCaml",
     'store' => "Ruby",
     'dict set' => "Tcl8.5",
-    'h[k]' => "YCP",
+    'h[k]' => "YCP KornShell",
     'atPut' => "Io",
     'h at: k put: o' => "Smalltalk",
     '[h setObject:o forKey:k]' => "Objective-C",
@@ -3478,6 +3482,7 @@ Next' => "VisualBasic",
    'array_keys' => "PHP",
    'fieldnames' => "Matlab",
    'findall(Key, item(Key, _), Keys)' => 
+   '${!h[@]}' => 'KornShell',
   ],
 
   'list of values' =>
@@ -3490,6 +3495,7 @@ Next' => "VisualBasic",
    'struct2cell' => "Matlab",
    'entries' => "Maple",
    'elems' => "Haskell",
+   '${h[@]}' => 'KornShell',
   ],
  ],
 
@@ -3502,6 +3508,7 @@ Next' => "VisualBasic",
    '[ a .. b ]' => "Haskell",
    'to' => "Smalltalk Io",
    'seq a b / jot - a b (jot on BSD)' => "BourneShell",
+   '{a..b}' => 'KornShell',
    'range' => "PHP",
    'range(from: a, to: b, by: step)' => "Dylan",
    'Range with' => "Io",
@@ -3836,7 +3843,7 @@ ran.Next(...);') => "C#",
 
   'negation' => 
   [
-   '~' => "C C++ C# Pike Ruby Tcl Python Perl Java JavaScript YCP",
+   '~' => "C C++ C# Pike Ruby Tcl Python Perl Java JavaScript YCP SML",
    'not' => 'Eiffel PostScript',
    'lnot' => "OCaml",
    'lognot (see also bit-not)' => "CommonLisp",
