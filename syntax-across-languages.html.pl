@@ -205,7 +205,7 @@ def x():
   [ { ALL => 1 },
     'case-sensitivity (keywords, variable identifiers...)' =>
     [ # see http://www.swiss.ai.mit.edu/~jaffer/r5rs_4.html#SEC14 for Scheme, Guile is an exception
-     'case-sensitive' => 'B C C++ C# Io Java Maple Prolog JavaScript Lua Matlab Pike Perl Perl6 Python Ruby XML YAML Tcl Smalltalk BourneShell OCaml Haskell merd Awk Modula-3 Pliant',
+     'case-sensitive' => 'B C C++ C# Io Java Maple Prolog JavaScript Lua Matlab Pike Perl Perl6 Python Ruby XML YAML Tcl Smalltalk BourneShell OCaml Haskell merd Awk Modula-3 Pliant Yorick',
      'case-insensitive' => "PL/I CSS Pascal Logo Rebol VisualBasic Eiffel Ada SGML HTML Scheme CommonLisp Forth Assembler ClassicREXX SQL92",
      'case-sensitive: variables<br>case-insensitive: keywords, functions, constants...' => "PHP",
      'case-sensitive: identifiers<br>case-insensitive: keywords' => "E",
@@ -472,7 +472,7 @@ def x():
 
    'min / max (binary or more)' =>
    [ { MLANG => 'Ruby B C C# Awk XSLT Tcl' },
-    'min / max' => "Ada Io C++ Java Tcl8.5 Rebol Maple Lua Beta Prolog Pike Matlab Python Smalltalk E Eiffel merd CommonLisp Scheme OCaml Haskell Dylan Pliant SQL92",
+    'min / max' => "Ada Io C++ Java Tcl8.5 Rebol Maple Lua Beta Prolog Pike Matlab Python Smalltalk E Eiffel merd CommonLisp Scheme OCaml Haskell Dylan Pliant SQL92 Yorick",
     'min minstr / max maxstr (in List::Util)' => "Perl",
     'Min / Max' => "Oz",
     'MIN / MAX' => "Modula-3 ClassicREXX",
@@ -557,7 +557,7 @@ def x():
 
     'with no parameter' =>
     [
-     'f' => "Ada Eiffel Io Pascal PostScript Logo Matlab Rebol Ruby Perl MSH Perl6 Mercury Haskell Tcl Pliant BourneShell Prolog", # Haskell egs: monads
+     'f' => "Ada Eiffel Io Pascal PostScript Logo Matlab Rebol Ruby Perl MSH Perl6 Mercury Haskell Tcl Pliant BourneShell Prolog Yorick", # Haskell egs: monads
      'f()' => "Awk PHP Pike Maple Erlang Python C C++ C# YCP Java E Lua Perl JavaScript merd OCaml SML",
      '(f)' => "Scheme EmacsLisp CommonLisp",
      '(funcall f)' => "EmacsLisp CommonLisp",
@@ -1432,7 +1432,7 @@ end') => "ClassicREXX",
     'throw new exception' => "PHP5",
     'die' => "Perl Perl6",
     'return -code' => "Tcl",
-    'error' => "EmacsLisp Maple CommonLisp Dylan Matlab Lua Pliant Lua",
+    'error' => "EmacsLisp Maple CommonLisp Dylan Matlab Lua Pliant Lua Yorick",
     'signal' => "CommonLisp Dylan Smalltalk",
     'signal predefined_condition_name' => "ClassicREXX",
     'cerror warn' => "CommonLisp",
@@ -1459,6 +1459,7 @@ end') => "ClassicREXX",
     'catch' => "Erlang Prolog Logo Rebol Tcl",
     'catch/name' => "Rebol",
     'catch(...) or catch { ... };' => "Pike",
+     'if (catch(exn)) { ... } a' => "Yorick",
     'pcall' => "Lua",
     'with-exception-handler or guard' => "Scheme-SRFI34",
     'block a exception(exn) ... end' => "Dylan",
@@ -2092,6 +2093,7 @@ module P : PType  = struct ... end)) => "OCaml",
    'prin1-to-string' => "EmacsLisp",
    'to string! / to-string / to ""' => "Rebol",
    'description' => "Objective-C",
+   'pr1' => "Yorick",
   ],
 
   'serialize (marshalling)' =>
@@ -2325,7 +2327,7 @@ module P : PType  = struct ... end)) => "OCaml",
   'StringTools[UpperCase] / StringTools[LowerCase] / StringTools[Capitalize]' => "Maple",
   'uppercaseString / lowercaseString / capitalizedString' => "Objective-C",
   'UCase / LCase' => "VisualBasic",
-  'strtoupper / strtolower' => "PHP",
+  'strtoupper / strtolower' => "PHP Yorick",
   'strupper / strlower' => "Lua",
   'string toupper / string tolower / string totitle' => "Tcl",
   'string-upcase / string-downcase' => "CommonLisp Scheme",
@@ -2390,7 +2392,7 @@ module P : PType  = struct ... end)) => "OCaml",
  ],
 
  'accessing n-th character' =>
- [ { MLANG => 'Perl Perl6 ClassicREXX VisualBasic' },
+ [ { MLANG => 'Perl Perl6 ClassicREXX VisualBasic Yorick' },
   's[n]' => "Maple C C++ C# E Pike Python PHP Ruby",
   's(n)' => "Ada Matlab",
   's:n' => "Pliant",
@@ -2434,6 +2436,7 @@ module P : PType  = struct ... end)) => "OCaml",
   'slice' => "JavaScript Io",
   'mid$' => "JavaScript",
   'string range' => "Tcl",
+  'strpart(s, n, m)' => "Yorick",
   'copy/part at s n len' => "Rebol",
   'copy/part at s n at s m' => "Rebol",
   's copyFrom: n to: m' => "Smalltalk",
@@ -2457,7 +2460,7 @@ module P : PType  = struct ... end)) => "OCaml",
   'strstr strchr' => "C",
   'find' => "Rebol YCP Logo Python",
   'findSeq' => "Io",
-  'strfind' => "Matlab",
+  'strfind' => "Matlab Yorick",
   '$FIND' => "MUMPS",
   'index_non_blank / find_token' => "Ada",
   'substring_index' => "Eiffel",
@@ -2528,7 +2531,7 @@ module P : PType  = struct ... end)) => "OCaml",
    'array containing at least one false value' => "Matlab",
    'exit status different from 0' => "BourneShell",
 
-   '0 (beware of 0.0 which is true in Pike!)' => "B VisualBasic C99 C++ Tcl Python JavaScript ClassicREXX MUMPS Awk Perl Perl6 Matlab XPath C PHP Pike",
+   '0 (beware of 0.0 which is true in Pike!)' => "B VisualBasic C99 C++ Tcl Python JavaScript ClassicREXX MUMPS Awk Perl Perl6 Matlab XPath C PHP Pike Yorick",
    '0.0' => "Matlab PHP",
    'NaN' => "JavaScript XPath",
 
@@ -2558,7 +2561,7 @@ module P : PType  = struct ... end)) => "OCaml",
   'on' => "Tcl YAML",
 
   'exit status 0' => "BourneShell",
-  'anything not false' => "Awk Perl Perl6 B C Pike Matlab MUMPS XPath EmacsLisp CommonLisp Python Scheme Dylan Rebol",
+  'anything not false' => "Awk Perl Perl6 B C Pike Matlab MUMPS XPath EmacsLisp CommonLisp Python Scheme Dylan Rebol Yorick",
 
   '1' => "ClassicREXX MUMPS",
   'non zero number' => "Tcl",
@@ -2567,7 +2570,7 @@ module P : PType  = struct ... end)) => "OCaml",
 
  'logical not' =>
  [
-  '!' => "Awk B C C++ C# E Java Pike Perl Perl6 Ruby YCP Tcl PHP JavaScript",
+  '!' => "Awk B C C++ C# E Java Pike Perl Perl6 Ruby YCP Tcl PHP JavaScript Yorick~",
   'not' => "OCaml Logo SML Rebol Io Maple Pascal PostScript Ruby Scheme Haskell Perl Perl6 XPath Python Smalltalk merd Eiffel Lua EmacsLisp CommonLisp Ada Beta Pliant Forth Prolog",
   'Not' => "Oz VisualBasic",
   'NOT' => "Modula-3",
@@ -2581,7 +2584,7 @@ module P : PType  = struct ... end)) => "OCaml",
  [
   'short circuit' =>
   [
-   '|| / &&' => "Awk C C++ C# Java Matlab Pike Perl Perl6 YCP Ruby OCaml Haskell merd Tcl E PHP JavaScript",
+   '|| / &&' => "Awk C C++ C# Java Matlab Pike Perl Perl6 YCP Ruby OCaml Haskell merd Tcl E PHP JavaScript Yorick",
    '| / &' => "B BCPL Dylan",
    'or / and' => "Perl Perl6 Logo Io Ruby Python Modula-2 PHP Smalltalk EmacsLisp CommonLisp Scheme Lua Pliant",
    'OR / AND' => "Modula-3",
@@ -3567,7 +3570,7 @@ Next' => "VisualBasic",
  [ { ALL => 1 },
    'integers' =>
    [
-    '1000' => 'Awk Ada Io C++ B Maple Prolog Logo Rebol C C# Haskell E Java JavaScript Pascal Pliant Pike Python BourneShell Tcl Scheme Smalltalk Perl Perl6 Ruby Eiffel OCaml merd Oz SQL92',
+    '1000' => 'Awk Ada Io C++ B Maple Prolog Logo Rebol C C# Haskell E Java JavaScript Pascal Pliant Pike Python BourneShell Tcl Scheme Smalltalk Perl Perl6 Ruby Eiffel OCaml merd Oz SQL92 Yorick',
     '1000, 1000.' => 'CommonLisp EmacsLisp',
     '1000, 1000., 1000.0' => 'Awk Matlab',
     "1000, '1000'D" => "ClassicREXX",
@@ -3578,7 +3581,7 @@ Next' => "VisualBasic",
     '0b1, 07, 0xf' => 'Ruby Pike Perl Oz',
     '0b1, 0o7, 0xf' => 'OCaml Perl6',
     '07, 0xf' => "C C++ Python Tcl Awk JavaScript",
-    '0xf' => "C# E Io",
+    '0xf' => "C# E Io Yorick",
     '07' => "B",
     '0o7, 0xf' => "Haskell",
     '1b' => "Eiffel",
@@ -3612,7 +3615,7 @@ Next' => "VisualBasic",
 
  'addition / subtraction / multiplication / division' =>
  [
-  '+ / - / * / /' => "Io C C++ Java Eiffel Maple C# Logo Perl Perl6 Matlab MUMPS Python Pliant Ruby BourneShell merd Tcl Haskell Scheme CommonLisp EmacsLisp Smalltalk ClassicREXX SQL92 Prolog",
+  '+ / - / * / /' => "Io C C++ Java Eiffel Maple C# Logo Perl Perl6 Matlab MUMPS Python Pliant Ruby BourneShell merd Tcl Haskell Scheme CommonLisp EmacsLisp Smalltalk ClassicREXX SQL92 Prolog Yorick",
   '+ +. / - -. / * *. / / /. (with mathematical priorities)' => "OCaml",
   'sum / difference / product / quotient' => "Logo",
   'add / sub / mul / idiv div' => "PostScript",
@@ -3621,7 +3624,7 @@ Next' => "VisualBasic",
  'exponentiation (power)' =>
  [ { MLANG => 'Pascal' },
   '**' => 'PL/I Perl Perl6 Io Tcl8.5 Rebol Ruby Python OCaml E Ada merd Fortran Prolog ClassicREXX',
-  '^' => 'Eiffel Awk Dylan Lua Matlab Pliant',
+  '^' => 'Eiffel Awk Dylan Lua Matlab Pliant Yorick',
   '* (APL uses a real multiplication sign for multiplication from a special character set)' => 'APL',
   '**, ^' => 'Maple',
   '**, ^ and ^^ (for each various types)' => 'Haskell',
@@ -3635,7 +3638,7 @@ Next' => "VisualBasic",
 
  'negation' =>
  [
-  '-' => "B Io BCPL Awk Maple Logo C++ C C# E Java Matlab Rebol Pike MUMPS Pliant Haskell Python BourneShell Tcl Scheme Smalltalk Perl Perl6 Ruby Eiffel merd EmacsLisp CommonLisp JavaScript Ada Prolog ClassicREXX",
+  '-' => "B Io BCPL Awk Maple Logo C++ C C# E Java Matlab Rebol Pike MUMPS Pliant Haskell Python BourneShell Tcl Scheme Smalltalk Perl Perl6 Ruby Eiffel merd EmacsLisp CommonLisp JavaScript Ada Prolog ClassicREXX Yorick",
   '- -.' => "OCaml",
   '~' => "SML Oz",
   'neg' => "PostScript",
@@ -3648,7 +3651,7 @@ Next' => "VisualBasic",
    'random number' =>
    [
     'rand' => 'C Perl Perl6 Maple Ruby Matlab Tcl',
-    'random' => "Prolog Logo Python CommonLisp",
+    'random' => "Prolog Logo Python CommonLisp Yorick",
     '$RANDOM' => "MUMPS",
     'randomR' => "Haskell",
     'Random.int' => "OCaml",
@@ -3682,7 +3685,7 @@ ran.Next(...);') => "C#",
  [ { MLANG => 'Scheme CommonLisp EmacsLisp' },
   'addition vs multiplication' =>
   [
-   'mathematical' => "C C++ Maple Io Java C# Eiffel Perl Perl6 Python Ruby BourneShell merd Matlab Tcl Haskell ClassicREXX",
+   'mathematical' => "C C++ Maple Io Java C# Eiffel Perl Perl6 Python Ruby BourneShell merd Matlab Tcl Haskell ClassicREXX Yorick",
    'same priorities' => "Smalltalk MUMPS",
   ],
 
@@ -3695,7 +3698,7 @@ ran.Next(...);') => "C#",
 
  'square root / e-exponential / absolute value' =>
  [
-  'sqrt / exp / abs' => 'C C++ Eiffel Maple Io Prolog Python Ruby Smalltalk SML Perl Perl6 Pascal Tcl Java E PHP JavaScript Lua Ada Haskell OCaml EmacsLisp CommonLisp Scheme',
+  'sqrt / exp / abs' => 'C C++ Eiffel Maple Io Prolog Python Ruby Smalltalk SML Perl Perl6 Pascal Tcl Java E PHP JavaScript Lua Ada Haskell OCaml EmacsLisp CommonLisp Scheme Yorick',
   'sqrt realsqrt / exp / abs' => "Matlab",
   'sqrt / exp /' => "Awk Logo",
   'Sqrt / Exp / Abs' => 'C# Oz',
@@ -3712,7 +3715,7 @@ ran.Next(...);') => "C#",
  [ { ALL => 1 },
    'basic' => 
    [ # perl's tan is in Math::Trig
-    'sin / cos / tan' => "C C++ Pike Maple Io Prolog Ruby Matlab Python Smalltalk SML Pascal Perl Perl6 Tcl Java E PHP JavaScript EmacsLisp CommonLisp Scheme Lua Ada Haskell OCaml Pliant",
+    'sin / cos / tan' => "C C++ Pike Maple Io Prolog Ruby Matlab Python Smalltalk SML Pascal Perl Perl6 Tcl Java E PHP JavaScript EmacsLisp CommonLisp Scheme Lua Ada Haskell OCaml Pliant Yorick",
     'Sin / Cos / Tan' => "C# Oz ClassicREXX",
     'sin / cos /' => "Awk PostScript",
     'sine / cosine / tangent' => "Eiffel Rebol",
@@ -3721,7 +3724,7 @@ ran.Next(...);') => "C#",
 
    'inverse' =>
    [ # perl's are in Math::Trig, JavaScript are in Math
-    'asin / acos / atan (Ruby >= 1.7)' => "C C++ Io Haskell Pike Tcl Prolog Pliant CommonLisp Scheme Python OCaml Perl Perl6 Ruby JavaScript Ada Matlab",
+    'asin / acos / atan (Ruby >= 1.7)' => "C C++ Io Haskell Pike Tcl Prolog Pliant CommonLisp Scheme Python OCaml Perl Perl6 Ruby JavaScript Ada Matlab Yorick",
     'Asin / Acos / Atan' => "C# Oz",
     'ASin / ACos / ATan' => "ClassicREXX",
     'arcsin / arccos / arctan' => "Maple",
@@ -3738,14 +3741,14 @@ ran.Next(...);') => "C#",
    'base e' =>
    [
     'ln' => "Pascal Maple Delphi-Kylix Logo PostScript SML Smalltalk",
-    'log' => "C C++ Eiffel Perl Maple Prolog Io Perl6 Ruby Python Tcl PHP Lua OCaml Pliant Matlab Awk Pike Java E JavaScript EmacsLisp Scheme CommonLisp",
+    'log' => "C C++ Eiffel Perl Maple Prolog Io Perl6 Ruby Python Tcl PHP Lua OCaml Pliant Matlab Awk Pike Java E JavaScript EmacsLisp Scheme CommonLisp Yorick",
     'Log' => "C# ClassicREXX Oz Ada",
     'log 10' => "Haskell",
     'log-e' => "Rebol",
    ],
    'base 10' =>
    [
-    'log10' => "C C++ Eiffel Perl Prolog Perl6 Io Ruby Python Tcl PHP Lua OCaml Pliant Matlab Delphi-Kylix Logo",
+    'log10' => "C C++ Eiffel Perl Prolog Perl6 Io Ruby Python Tcl PHP Lua OCaml Pliant Matlab Delphi-Kylix Logo Yorick",
     'Log10' => "C# ClassicREXX",
     'log' => "PostScript SML",
     'log: 10' => "Smalltalk",
@@ -3790,7 +3793,7 @@ ran.Next(...);') => "C#",
 
   'modulo of -3 / 2 is -1' =>
   [
-   '%' => "Awk B C C++ C# Java Io E PHP JavaScript Pliant",
+   '%' => "Awk B C C++ C# Java Io E PHP JavaScript Pliant Yorick",
    '#' => "MUMPS",
    'mod' => "Pascal PostScript Prolog Lua OCaml XPath Oz",
    'remainder' => "Ruby Scheme Logo",
@@ -3816,7 +3819,7 @@ ran.Next(...);') => "C#",
   '/ rounded / floor / ceiling' => "Smalltalk Eiffel",
   'int / / floor / ceil' => "Perl",
   'int_of_float / / floor / ceil' => "OCaml",
-  ' / / floor / ceil' => "Lua",
+  ' / / floor / ceil' => "Lua Yorick",
   ' / Rounding / Floor / Ceiling' => "Ada",
   'to-integer / / /' => "Rebol",
  ],
@@ -3826,6 +3829,7 @@ ran.Next(...);') => "C#",
   'and / or / xor' =>
   [
    '& / | / ^' => "C C++ C# Tcl E Eiffel Pike Ruby Python Perl Java JavaScript",
+   '& / | / ~' => "Yorick",
    '& / |' => "YCP",
    '+& / +| / +^' => "Perl6",
    '.&. / .|. / xor (in module Data.Bits)' => "Haskell",
@@ -4333,6 +4337,7 @@ sub credits {
 <li>Steve Davison (C)
 <li>Konstantin Yegupov (PHP, Python...)
 <li>Noé Rubinstein (Io)
+<li>Florentin Millour (Yorick)
 </ul>
 EOF
 }
