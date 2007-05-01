@@ -2570,7 +2570,7 @@ module P : PType  = struct ... end)) => "OCaml",
 
  'logical not' =>
  [
-  '!' => "Awk B C C++ C# E Java Pike Perl Perl6 Ruby YCP Tcl PHP JavaScript Yorick~",
+  '!' => "Awk B C C++ C# E Java Pike Perl Perl6 Ruby YCP Tcl PHP JavaScript Yorick",
   'not' => "OCaml Logo SML Rebol Io Maple Pascal PostScript Ruby Scheme Haskell Perl Perl6 XPath Python Smalltalk merd Eiffel Lua EmacsLisp CommonLisp Ada Beta Pliant Forth Prolog",
   'Not' => "Oz VisualBasic",
   'NOT' => "Modula-3",
@@ -3482,7 +3482,7 @@ Next' => "VisualBasic",
    'getKeys' => "E",
    'array_keys' => "PHP",
    'fieldnames' => "Matlab",
-   'findall(Key, item(Key, _), Keys)' => 
+   'findall(Key, item(Key, _), Keys)' => 'Prolog',
    '${!h[@]}' => 'KornShell',
   ],
 
