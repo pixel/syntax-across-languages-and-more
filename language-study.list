@@ -112,9 +112,20 @@ Ada
 Ada 95
   1995
 
+JOSS
+  1963
+  Algol 58
+Mumps
+  1967
+Standard Mumps
+  1977
+Mumps 1984
+  1984
+
+
 Basic
   1964
-  Fortran IV,Algol 60
+  Fortran IV,JOSS
   Dynamic implicit typing
   GC
   SY:2
@@ -649,3 +660,9 @@ Scala
 IO
   2003
   Smalltalk 80,Lua,NewtonScript
+
+Groovy
+  2004
+  Java 2 (v1.2),Ruby
+Groovy 1
+  2007
