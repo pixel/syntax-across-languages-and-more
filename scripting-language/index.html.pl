@@ -1233,11 +1233,11 @@ END
 ################################################################################
   Haskell => { 
         www => 'haskell.org',
-        implementation => "hugs 98", implementation_www => 'www.haskell.org/hugs',
-        run_file => 'runhugs %s', file_extension => '.hs', comment => '-- %s',
-        interactive_interpreter => 'hugs',
+        implementation => "ghc 6.6", implementation_www => 'www.haskell.org/ghc',
+        run_file => 'runghc %s', file_extension => '.hs', comment => '-- %s',
+        interactive_interpreter => 'ghci', run_cmdline => 'ghc -e %s', 
         shebang_aware => 1,
-        smallest => 'main = putStr ""', 
+        smallest => 'main = putStr ""',
 #       smallest => 'main = return () :: IO()', 
         hello_world => 'main = putStrLn "Hello World"',
         argv => <<'END',
@@ -1253,10 +1253,12 @@ END
 import Directory
 import System
 main = catch (getPermissions "/etc/mtab") (\_ -> exitFailure)
+         >> return ()
 END
         test_file_readable => <<'END',
 import System
 main = catch (readFile "/etc/mtab") (\_ -> exitFailure)
+         >> return ()
 END
         formatting => <<'END',
 main = putStrLn $ show a ++ " + " ++ show b ++ " = " ++ show(a + b) 
@@ -1271,6 +1273,7 @@ main =
     do ret <- system "false"
        when (ret /= ExitSuccess) (hPutStrLn stderr "false failed")
        system "echo done"
+       return ()
 END
         sed_in_place => <<'END',
 import System
@@ -1278,7 +1281,7 @@ import System.IO
 import Monad
 import Control.Exception
 
-c = unlines . map (takeWhile(/= '#')) . lines
+c = unlines . map (takeWhile (/= '#')) . lines
 fop f n = do l <- fmap f (readFile n)
              evaluate (length l)
              writeFile n l
@@ -1298,10 +1301,10 @@ op f = do catch (do ct <- gmt f; ot <- gmt o;
                 (\_ -> comp)
  where o = take (length f - 2) f ++ ".o"
        comp = do putStrLn ("Compiling "++f++" to "++o)
-                 system ("ghc -c -o "++o++" "++f)
+                 system ("gcc -c -o "++o++" "++f)
                  return ()
 
-main = do files <- getDirectoryContents <<= getCurrentDirectory
+main = do files <- getCurrentDirectory >>= getDirectoryContents
           mapM_ op $ filter (".c"`isSuffixOf`) files
 END
 
