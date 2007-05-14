@@ -17,9 +17,9 @@ my @functional_static =
 @static = (@OO_static, @functional_static,
   qw(C Cobol Pascal Fortran merd Modula-2 Modula-3 OCaml));
 @dynamic = (@functional_dynamic, @OO_dynamic,
-  qw(Awk Basic Dylan Forth Maple Lua Icon XPath XSLT Pike PostScript Prolog BourneShell Oz EmacsLisp CommonLisp ClassicREXX Yorick));
+  qw(Awk Basic Dylan Forth Maple Lua Icon XPath XSLT Pike PostScript Prolog BourneShell FishShell Oz EmacsLisp CommonLisp ClassicREXX Yorick));
 @OO = (@OO_dynamic, @OO_static, 
-  qw(OCaml CommonLisp  Dylan merd));
+  qw(OCaml CommonLisp Dylan merd));
 @functional = (@functional_dynamic, @functional_static, 
   qw(OCaml EmacsLisp CommonLisp Dylan merd Smalltalk));
 
@@ -97,7 +97,7 @@ my $all = [
   [
    'until end of line' =>
    [
-    '#' => "Perl Io Perl6 Maple Ruby Python Tcl Icon Awk BourneShell PHP merd E Pliant YAML",
+    '#' => "Perl Io Perl6 Maple Ruby Python Tcl Icon Awk FishShell BourneShell PHP merd E Pliant YAML",
     '//' => "BCPL Io C99 C++ C# Java Dylan Pike PHP JavaScript YCP Yorick",
     '--' => "Cecil Eiffel Sather Simula Haskell Ada Lua SQL92",
     ';' => "EmacsLisp Logo CommonLisp Scheme Rebol Assembler MUMPS",
@@ -205,7 +205,7 @@ def x():
   [ { ALL => 1 },
     'case-sensitivity (keywords, variable identifiers...)' =>
     [ # see http://www.swiss.ai.mit.edu/~jaffer/r5rs_4.html#SEC14 for Scheme, Guile is an exception
-     'case-sensitive' => 'B C C++ C# Io Java Maple Prolog JavaScript Lua Matlab Pike Perl Perl6 Python Ruby XML YAML Tcl Smalltalk BourneShell OCaml Haskell merd Awk Modula-3 Pliant Yorick',
+     'case-sensitive' => 'B C C++ C# Io Java Maple Prolog JavaScript Lua Matlab Pike Perl Perl6 Python Ruby XML YAML Tcl Smalltalk BourneShell FishShell OCaml Haskell merd Awk Modula-3 Pliant Yorick',
      'case-insensitive' => "PL/I CSS Pascal Logo Rebol VisualBasic Eiffel Ada SGML HTML Scheme CommonLisp Forth Assembler ClassicREXX SQL92",
      'case-sensitive: variables<br>case-insensitive: keywords, functions, constants...' => "PHP",
      'case-sensitive: identifiers<br>case-insensitive: keywords' => "E",
@@ -218,7 +218,7 @@ def x():
      # perl -ne '$l{$_} = 1 foreach /(\w*[a-z][_]\w*)/g; $m{$_} = 1 foreach /(\w*[a-z][A-Z]\w*)/g; END { print join(" ", keys %l), "\n", join(" ", keys %m), "\n" }'
      'camelCase' => "JavaScript",
      'CamelCase or camelCase' => "Haskell Io Java JavaScript Tcl Smalltalk C# E Pascal VisualBasic",
-     'underscores' => 'merd',
+     'underscores' => 'merd FishShell',
      'dots' => "Logo",
      'hyphens' => "Rebol EmacsLisp CommonLisp",
      'underscores for functions, unclear for modules / types / constructors' => "OCaml",
@@ -238,7 +238,7 @@ def x():
 
     'variable identifier regexp' =>
     [
-     '[a-zA-Z][a-zA-Z0-9]*' => "PL/I Smalltalk",
+     '[a-zA-Z][a-zA-Z0-9]*' => "PL/I Smalltalk FishShell",
      "[a-zA-Z][_a-zA-Z0-9]*" => "Eiffel Matlab",
      "[a-zA-Z](_?[a-zA-Z0-9])*" => 'Ada',
      "[_a-zA-Z][_a-zA-Z0-9]*" => 'B C C++ C# E Maple Python Perl Perl6 PHP Tcl Awk BourneShell',
@@ -261,6 +261,7 @@ def x():
      "[_a-zA-Z][_a-zA-Z0-9]*[!?]?" => 'Ruby',
      "[_a-z][_a-zA-Z0-9]*" => 'Prolog Mercury',
      '[^ \t\n\r\f]+' => "Tcl",
+     '[^ \t\n\r\f/]+' => "FishShell",
     ],
 
     'keyword regexp (if different from variable identifier regexp)' =>
@@ -286,7 +287,7 @@ def x():
   'breaking lines (useful when end-of-line and/or indentation has a special meaning)' =>
   [ { MLANG => "Pliant MUMPS Prolog" },
    'nothing needed' => 'Ada B C C++ C# Maple Eiffel PostScript Rebol Java YCP JavaScript Pascal Perl Perl6 OCaml CommonLisp EmacsLisp Scheme SML Smalltalk XSLT Forth Oz',
-   '\\' => "Awk Io C Python Ruby Tcl E BourneShell",
+   '\\' => "Awk Io C Python Ruby Tcl E FishShell BourneShell",
    '_' => "VisualBasic",
    ',' => "ClassicREXX",
    '~' => "Logo",
@@ -348,6 +349,7 @@ def x():
    [
     '=' => "Python Ruby merd",
     ':=' => "merd",
+    'set' => "FishShell",
     'set, variable' => "Tcl",
    ],
   ],
@@ -399,7 +401,7 @@ def x():
     '= /=' => "Fortran90 Eiffel",
     '= <>' => "Pliant Rebol Logo Maple Modula-2",
     '= # (in Modula-2, <> and # are synonyms)' => "Modula-2 Modula-3",
-    "= !=" => "BourneShell",
+    "= !=" => "BourneShell FishShell",
     "== === != !== (=== and !== differ from == and != when the objects' type differ)" => "JavaScript PHP",
     "=== !==" => "PHP5",
     '== ~=' => "Lua",
@@ -449,7 +451,7 @@ def x():
     '<< >> <<= >>= (deep comparison)' => "ClassicREXX",
     '@< / @=< / @> / @>=' => "Prolog",
     'lt gt le ge' => "Perl Perl6 PostScript",
-    '-lt -gt -le -ge' => "BourneShell MSH",
+    '-lt -gt -le -ge' => "BourneShell FishShell MSH",
     '.LT. .GT. .LE. .GE.' => "Fortran",
    ],
 
@@ -482,7 +484,7 @@ def x():
 
   'runtime evaluation' =>
   [ { KIND => 'dynamic', MLANG => "XSLT" },
-   'eval' => "Perl Perl6 Ruby Python BourneShell Scheme EmacsLisp Tcl Matlab PHP JavaScript CommonLisp YCP",
+   'eval' => "Perl Perl6 Ruby Python BourneShell FishShell Scheme EmacsLisp Tcl Matlab PHP JavaScript CommonLisp YCP",
    'exec' => "Python",
    'dostring' => "Lua",
    'doString' => "Io",
@@ -499,7 +501,7 @@ def x():
   ],
 
   'force garbage collection' =>
-  [ { MLANG => 'Ada B C C++ Tcl CommonLisp Pascal XSLT ClassicREXX MUMPS Matlab', },
+  [ { MLANG => 'Ada B C C++ Tcl CommonLisp Pascal XSLT ClassicREXX MUMPS Matlab FishShell', },
     'doGC' => "Beta",
     'GC.start' => "Ruby",
     'gc' => "Logo Pike Maple",
@@ -531,7 +533,7 @@ def x():
     '' => 
     [
      'f(a,b,...)' => "Awk B C C++ C# Io CSS Maple Java YCP Matlab Erlang Pike Perl Perl6 Mercury merd Eiffel Python Ruby Pascal E PHP JavaScript Dylan Lua Ada Awk Modula-3 XPath Prolog Yorick",
-     'f a b ...' => "SML Haskell Logo OCaml Rebol Matlab Tcl Pliant BourneShell MSH",
+     'f a b ...' => "SML Haskell Logo OCaml Rebol Matlab Tcl Pliant BourneShell FishShell MSH",
      'f(a,b,...f) or f[a,b,...] depending on the version' => "BCPL",
      '(f a b ...) (apply f l) ' => "Scheme EmacsLisp CommonLisp",
      '(funcall f a b ...)' => "EmacsLisp CommonLisp",
@@ -626,6 +628,7 @@ def x():
     'typ0 f(typ1 para1, typ2 para2, ...) { ... }' => "C C++ C# Pike YCP",
     'function f(para1, para2) { ... }' => "Awk JavaScript",
     'function f(para1, para2) ... code ... end' => "Lua",
+    'function f; ...; end' => "FishShell",
     'function f { ... }' => "KornShell",
     'function f { param(para1, [typ2]para2, ...) ... }' => "MSH",
     '(define (f para1 para2) ...)' => "Scheme",
@@ -721,6 +724,8 @@ return') => "ClassicREXX",
     [
       'one can use overloading on different number of arguments' => "C++ Java",
       'sub f { ... @_ }' => 'Perl',
+      'sub f; ... $argv; end' => 'FishShell',
+      'f() { ... $@ }' => "BourneShell",
       pre('function f(varargin)
 for i=1:nargin
  ...(varargin{i})
@@ -773,7 +778,7 @@ end') => 'Matlab',
   [ { MLANG => 'Prolog PostScript' },
    'breaks the control flow' => ($::return_a_value =
    [
-    q(return (in Lua, "return xxx" can only appear before a block end. in Matlab, only in inline('...'))) => "Awk Io B BCPL CommonLisp C Maple C++ C# ClassicREXX Java E Pike YCP Perl Perl6 Ruby Rebol Python Tcl Ada PHP Pliant JavaScript BourneShell Yorick Lua Matlab",
+    q(return (in Lua, "return xxx" can only appear before a block end. in Matlab, only in inline('...'))) => "Awk Io B BCPL CommonLisp C Maple C++ C# ClassicREXX FishShell Java E Pike YCP Perl Perl6 Ruby Rebol Python Tcl Ada PHP Pliant JavaScript BourneShell Yorick Lua Matlab",
     'Return' => "VisualBasic",
     'RETURN' => "Modula-3",
     'resultis ("return" is used when there is no value to return)' => "BCPL",
@@ -852,11 +857,11 @@ end') => 'Matlab',
   [ { MLANG => "Forth PostScript Oz" },
    ',' => "C C++ Perl Matlab Pike JavaScript Prolog",
    '.' => "Smalltalk",
-   ';' => "Awk Maple Beta Io PL/I B C C++ C# Java Matlab YCP Pike Pascal Python Ruby Perl Perl6 OCaml SML merd Tcl E PHP JavaScript Ada BourneShell Haskell Modula-3 Pliant",
+   ';' => "Awk Maple Beta Io PL/I B C C++ C# Java Matlab YCP Pike Pascal Python Ruby Perl Perl6 OCaml SML merd Tcl E PHP JavaScript Ada BourneShell FishShell Haskell Modula-3 Pliant",
    ':' => "Maple",
    'nothing, optionally ;' => "Lua ClassicREXX",
    'space' => "Eiffel Rebol",
-   'end-of-line' => "Awk Ruby Io Python Lua merd Basic Tcl E Matlab Fortran Assembler JavaScript BourneShell Haskell Pliant",
+   'end-of-line' => "Awk Ruby Io Python Lua merd Basic Tcl E Matlab Fortran Assembler JavaScript BourneShell FishShell Haskell Pliant",
    '(begin ...)' => "Scheme",
    '(progn ...) (prog1 ...) (prog2 ...) ' => "EmacsLisp CommonLisp",
    '>>' => "Haskell",
@@ -898,6 +903,7 @@ end') => 'Matlab',
 End If') => "VisualBasic",
 
    'if c; ... end' => "Ruby",
+   'if c; ...; end' => "FishShell",
    'if c, ..., end' => "Matlab",
 
    pre('if c
@@ -930,6 +936,7 @@ end') => "ClassicREXX",
    'if c b1 eif c2 b2 else b3' => "Pliant",
    'if c then b1 elif c2 then b2 else b3 end if' => "Maple",
    'if c; then b1; elif c2; then b2; else b3; fi' => "BourneShell",
+   'if c; b1; else b2; end' => "FishShell",
    'if c1, b1, elseif c2, b2, else, b3, end' => "Matlab",
    'if (c) b1 elseif (c2) b2 else b3' => "PHP",
    'if (c): b1 elseif (c2): b2 else: b3 endif' => "PHP",
@@ -1057,6 +1064,15 @@ ELSE ...') => "MUMPS",
    case v1: ...
    case v2: ...
    default: ...') => "BCPL",
+
+    pre("switch val
+  case v1
+    ...
+  case v2 v3
+    ...
+  case '*'
+    ...
+end") => "FishShell",
 
     pre('switch val
   case v1
@@ -1216,7 +1232,7 @@ END') => "SQL92",
   'loop' => 
   [ { ALL => 1 },
     'forever loop' =>
-    [ { MLANG => 'Awk B Maple C C++ C# Tcl Java Prolog E Lua Matlab Pascal JavaScript Haskell Perl Perl6 Python OCaml Smalltalk SML Tcl Eiffel Pliant' }, # Haskell would be: loop f = f >> loop f
+    [ { MLANG => 'Awk B Maple C C++ C# Tcl Java Prolog E Lua Matlab Pascal JavaScript Haskell Perl Perl6 Python OCaml FishShell Smalltalk SML Tcl Eiffel Pliant' }, # Haskell would be: loop f = f >> loop f
      'loop' => "Ruby merd PostScript",
      'loop(...)' => "Io",
      'loop ... end loop' => "Ada",
@@ -1245,6 +1261,7 @@ end') => "ClassicREXX",
     'WHILE c DO ... end' => "Lua",
     'while c: ...' => "Python",
     'while c; do ...; done' => "BourneShell",
+    'while c; ...; end' => "FishShell",
     'while c, ..., end' => "Matlab",
     'while [c][...]' => "Rebol",
     'while c [...]' => "Logo",
@@ -1302,6 +1319,7 @@ Loop Until c') => "VisualBasic",
     'For i = 1 To 10 ... Next' => "VisualBasic",
     'for i in 1 .. 10 loop ... end loop' => "Ada",
     'for i in xrange(1, 11)' => "Python",
+    'for i in (seq 10); ...; end' => "FishShell",
 #    'for i in `seq 1 10`; do ...; done' => "BourneShell", seq is non standard
     'FOR I=1:1:10 ...' => "MUMPS",
     'for i from 1 to 10 do ... end do' => "Maple",
@@ -1334,6 +1352,7 @@ end') => "ClassicREXX",
     'For i = 10 To 1 Step -1 ... Next' => "VisualBasic",
     'for i in xrange(10, 0, -1)' => "Python",
     'for i in `seq 10 -1 1`; do ...; done' => "BourneShell",
+    'for i in (seq 10 -1 1); ...; end' => "FishShell",
     'for i from 10 to 1 by -1 do ... end do' => "Maple",
     'for [i 1 10 -1] [...]' => "Logo",
     'FOR I=10:-1:1 ...' => "MUMPS",
@@ -1360,6 +1379,7 @@ end') => "ClassicREXX",
     'For i = 1 To 10 Step 2 ... Next' => "VisualBasic",
     'for i in xrange(1, 11, 2)' => "Python",
 #    'for ((x = 1; x <= 10; x += 2)); do ...; done' => "BourneShell",  it must be bash
+    'for i in (seq 1 2 10); ...; end' => "FishShell",
     'for i from 1 to 10 by 2 do ... end do' => "Maple",
     'for [i 1 10 2] [...]' => "Logo",
     'FOR I=1:2:10 ...' => "MUMPS",
@@ -1375,7 +1395,7 @@ end') => "ClassicREXX",
    ],
 
    'for "a la C" (while + initialisation)' =>
-   [ { MLANG => 'Ada B Pascal Maple Python Prolog Rebol Matlab OCaml Smalltalk SML CommonLisp Ruby Pliant ClassicREXX' },
+   [ { MLANG => 'Ada B Pascal Maple Python Prolog Rebol Matlab OCaml Smalltalk SML CommonLisp Ruby Pliant ClassicREXX FishShell' },
     'for' => "Awk C C++ C# Java Perl Pike Tcl PHP MSH JavaScript Yorick",
     'loop' => "Perl6",
     'for ((x = 0; x < 10; x++)); do ...; done' => "BourneShell",
@@ -1390,7 +1410,7 @@ end') => "ClassicREXX",
    'returning a value' => $::return_a_value,
 
    'goto (unconditional jump)' =>
-   [ { MLANG => 'Awk Tcl Prolog Ruby Maple merd Beta E Matlab Python Lua PostScript Smalltalk Java Pliant JavaScript' },
+   [ { MLANG => 'Awk Tcl Prolog Ruby Maple merd Beta E Matlab Python Lua PostScript Smalltalk Java Pliant JavaScript FishShell' },
     'goto' => "BCPL B C C++ C# Perl Basic Logo MUMPS Pascal Fortran Cobol Ada Yorick",
     'go throw' => "CommonLisp",
     'signal' => "ClassicREXX",
@@ -1398,7 +1418,7 @@ end') => "ClassicREXX",
 
    'continue / break' =>
    [ { MLANG => 'B Prolog Smalltalk' },
-    'continue / break' => "Awk C Tcl Io C++ C# Java E Matlab Pike JavaScript Python PHP YCP Yorick",
+    'continue / break' => "Awk C Tcl Io C++ C# Java E Matlab Pike JavaScript Python PHP YCP Yorick FishShell",
     'next / last' => "Perl Perl6",
     'next / break (in Ruby, see also catch/throw)' => "Maple Ruby",
     '/ break' => "BCPL Lua",
@@ -1420,7 +1440,7 @@ end') => "ClassicREXX",
   ],
 
   'exception' =>
-  [ { ALL => 1, MLANG => 'Awk B C XSLT Pascal' },
+  [ { ALL => 1, MLANG => 'Awk B C XSLT Pascal FishShell' },
    'throwing' =>
    [ { MLANG => 'Scheme' },
     'raise' => "Python SML OCaml Scheme-SRFI34 merd Ruby Eiffel Ada",
@@ -2001,7 +2021,7 @@ module P : PType  = struct ... end)) => "OCaml",
   [ { ALL => 1 },
    'with no interpolation of variables' =>
    [
-    "'...'" => "Perl Perl6 CSS XPath YAML Python Matlab Ruby PHP Lua JavaScript Pascal Smalltalk BourneShell Beta Prolog ClassicREXX SQL92",
+    "'...'" => "Perl Perl6 CSS XPath YAML Python Matlab Ruby PHP Lua JavaScript Pascal Smalltalk BourneShell FishShell Beta Prolog ClassicREXX SQL92",
     '"..."' => "C C++ C# CSS Io Maple XPath Java YCP YAML E Prolog Rebol Pike Python MUMPS EmacsLisp Scheme CommonLisp OCaml Ada Haskell SML Eiffel JavaScript Dylan Lua Awk Modula-3 Pliant FL Oz ClassicREXX",
     '"...' => "Logo",
     q('''...''') => "Python",
@@ -2020,7 +2040,7 @@ module P : PType  = struct ... end)) => "OCaml",
    'with interpolation of variables' =>
    [ { MLANG => "SML Haskell CommonLisp Beta Maple Logo Prolog C C# ClassicREXX Eiffel" },
     '... (no spaces)' => "Tcl",
-    '"... $v ..."' => "Perl Perl6 Tcl PHP BourneShell",
+    '"... $v ..."' => "Perl Perl6 Tcl PHP BourneShell FishShell",
     '"... {v} ..."' => "merd",
     '"... #{v} ..." "... #$v ..." "... #@v ..." "... #@@v ..."' => "Ruby",
     '<<MARK ... $v ... MARK' => "BourneShell Perl",
@@ -2037,7 +2057,7 @@ module P : PType  = struct ... end)) => "OCaml",
    'end-of-line (without writing the real CR or LF character)' =>
    [ { MLANG => "ClassicREXX Matlab Logo" },
     '\n' => "Tcl",
-    '"\n"' => "C C++ C# Perl Io Perl6 Maple Lua Haskell OCaml Python Ruby YCP Pike Java JavaScript Yorick",
+    '"\n"' => "C C++ C# Perl Io Perl6 Maple Lua Haskell OCaml Python Ruby YCP Pike Java JavaScript Yorick FishShell",
     '"*n"' => "B BCPL",
     '"%N"' => "Eiffel",
     '"^/"' => "Rebol",
@@ -2049,7 +2069,7 @@ module P : PType  = struct ... end)) => "OCaml",
 
   'multi-line' =>
   [ { MLANG => "C Eiffel Prolog" },
-   'all strings allow multi-line strings' => "E Maple Smalltalk Perl Io Perl6 OCaml Ruby Scheme Pascal CommonLisp EmacsLisp YCP",
+   'all strings allow multi-line strings' => "E Maple Smalltalk Perl Io Perl6 OCaml Ruby Scheme Pascal CommonLisp EmacsLisp YCP FishShell",
    '"...", {...}' => "Tcl",
    '@"..."' => "C#",
     q('''...''', """...""") => "Python",
@@ -2154,7 +2174,7 @@ module P : PType  = struct ... end)) => "OCaml",
     'print_endline (adding an end-of-line)' => "OCaml",
     'println (adding an end-of-line)' => "Java merd",
     'put_chars' => "Erlang",
-    'echo (in BourneShell, adding an end-of-line)' => "PHP BourneShell",
+    'echo (in BourneShell, adding an end-of-line)' => "PHP BourneShell FishShell",
     'emit' => "Forth",
     "putText" => "Beta",
     'say' => "ClassicREXX",
@@ -2212,7 +2232,7 @@ module P : PType  = struct ... end)) => "OCaml",
    '== <>' => "Python",
    '== /=' => "Haskell",
    '== \=' => "Oz",
-   '= !=' => "XPath BourneShell Maple",
+   '= !=' => "XPath BourneShell FishShell Maple",
    '= /=' => "Ada",
    '= \=' => "ClassicREXX",
    '= <>' => "OCaml VisualBasic SML Beta Pliant",
@@ -2243,6 +2263,7 @@ module P : PType  = struct ... end)) => "OCaml",
    'bytes chars' => "Perl6",
    'CHARACTER_LENGTH' => "SQL92",
    'atom_length' => "Prolog",
+   'wc -c' => "FishShell",
   ],
 
   'string concatenation' =>
@@ -2258,7 +2279,7 @@ module P : PType  = struct ... end)) => "OCaml",
   '_' => "MUMPS",
   '||' => "PL/I Cecil Icon Maple ClassicREXX SQL92",
   '++' => "Haskell",
-  '$a$b' => "Tcl BourneShell",
+  '$a$b' => "Tcl BourneShell FishShell",
   'concatenate' => "Dylan CommonLisp",
   'string-append' => "Scheme",
   'cat' => "Maple",
@@ -2655,6 +2676,7 @@ module P : PType  = struct ... end)) => "OCaml",
    'eval concat' => "Tcl",
    'ListTools[FlattenOnce]' => "Maple",
    '{*}$l' => "Tcl8.5",
+   '"$l"' => "FishShell",
   ],
 
   'recursive' =>
@@ -2684,6 +2706,7 @@ module P : PType  = struct ... end)) => "OCaml",
   'new List<t> { a, b, c}' => "C#3",
   'Array(a, b, c) (beware, if you give only one integer argument, it is the size!)' => "JavaScript",
   '[NSArray arrayWithObjects:a, b, c, nil]' => "Objective-C",
+  'set l a b c' => "FishShell",
   pre('  - a
   - b
   - c') => "YAML",
@@ -2691,7 +2714,7 @@ module P : PType  = struct ... end)) => "OCaml",
 
  'list/array indexing' =>
  [ { MLANG => "Beta" }, # eiffeil favors a.put(v, i) for write access
-  'a[i]' => "B C C++ C# Java Pike BourneShell KornShell Maple Ruby Python merd Pascal E PHP Perl Perl6 Dylan Lua JavaScript Modula-3 MSH",
+  'a[i]' => "B C C++ C# Java Pike BourneShell KornShell FishShell Maple Ruby Python merd Pascal E PHP Perl Perl6 Dylan Lua JavaScript Modula-3 MSH",
   'a*[i] or a!i or a*(i) depending on the version' => "BCPL",
   'a[i]:default' => "YCP",
   'a(i)' => "Ada Matlab",
@@ -2717,7 +2740,7 @@ module P : PType  = struct ... end)) => "OCaml",
  ],
 
  'adding an element at the beginning (list cons)' =>
- [ { MLANG => 'Python Objective-C Tcl' },
+ [ { MLANG => 'Python Objective-C Tcl FishShell' },
   'return the new list (no side-effect)' =>
   [
    ':' => "Haskell merd",
@@ -2760,7 +2783,7 @@ module P : PType  = struct ... end)) => "OCaml",
  ],
 
  'adding an element at the end' =>
- [ { MLANG => 'CommonLisp Tcl Haskell Beta Prolog Maple OCaml SML' },
+ [ { MLANG => 'CommonLisp Tcl Haskell Beta Prolog Maple OCaml SML FishShell' },
   'return the new list (no side-effect)' =>
   [
    'push' => "merd",
@@ -2784,7 +2807,7 @@ module P : PType  = struct ... end)) => "OCaml",
  ],
 
  'first element' =>
- [ { MLANG => "Beta Tcl Perl Python Ruby JavaScript Maple Matlab" },
+ [ { MLANG => "Beta Tcl Perl Python Ruby JavaScript Maple Matlab FishShell" },
   '' =>
   [
    'head' => "Haskell",
@@ -2856,6 +2879,7 @@ module P : PType  = struct ... end)) => "OCaml",
   'for v in l ...' => "Ruby E Maple",
   'for v in l: ...' => "Python",
   'for v in l; do ...; done' => "BourneShell",
+  'for v in l; ...; end' => "FishShell",
   'for (v in l) ...' => "Awk Dylan",
   'for (var v in l) { ... }' => "JavaScript",
   'For Each v in l
@@ -3069,7 +3093,7 @@ Next' => "VisualBasic",
   '$LENGTH' => "MUMPS",
   'elems' => "Perl6",
   'getn' => "Lua",
-  'count' => "PHP Eiffel XPath Objective-C SQL92",
+  'count' => "PHP Eiffel XPath Objective-C SQL92 FishShell",
   'numel' => "Matlab",
   'scalar @l' => "Perl",
   'nops' => "Maple",
@@ -3197,7 +3221,7 @@ Next' => "VisualBasic",
  ],
 
  'tuple constructor' =>
- [ { MLANG => 'C C++ C# Eiffel Tcl Java JavaScript ClassicREXX' },
+ [ { MLANG => 'C C++ C# Eiffel Tcl Java JavaScript ClassicREXX FishShell' },
    'a, b, c' => "OCaml Ruby Python Lua merd",
    '( a, b, c )' => "SML Haskell Prolog Ada Perl",
    '{ a. b. c }' => 'Smalltalk',
@@ -3208,7 +3232,7 @@ Next' => "VisualBasic",
  ],
 
  'computable tuple (these are a kind of immutable lists playing a special role in parameter passing)' =>
- [ { ALL => 1, KIND => 'dynamic', MLANG => "ClassicREXX Logo Io Tcl" },
+ [ { ALL => 1, KIND => 'dynamic', MLANG => "ClassicREXX Logo Io Tcl FishShell" },
    # tagged "dynamic" because in statically typed languages, this needs staged evaluation (like macros)
   'empty tuple' =>
   [
@@ -3508,7 +3532,7 @@ Next' => "VisualBasic",
    'a:b' => "Matlab",
    '[ a .. b ]' => "Haskell",
    'to' => "Smalltalk Io",
-   'seq a b / jot - a b (jot on BSD)' => "BourneShell",
+   'seq a b / jot - a b (jot on BSD)' => "BourneShell FishShell",
    '{a..b}' => 'KornShell',
    'range' => "PHP",
    'range(from: a, to: b, by: step)' => "Dylan",
@@ -4338,6 +4362,7 @@ sub credits {
 <li>Konstantin Yegupov (PHP, Python...)
 <li>Noé Rubinstein (Io)
 <li>Florentin Millour (Yorick)
+<li>Axel Liljencrantz (FishShell)
 </ul>
 EOF
 }
