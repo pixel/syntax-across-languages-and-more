@@ -15,6 +15,8 @@ Fortran IV
   1990
   Heap allocation
   SY:3
+Fortran 2003
+  2003
 
 APL
   1960
@@ -29,6 +31,10 @@ APL 96
   1996
 J
   1997
+
+A+
+  1988
+  APL 2
 
 Forth
   1969
@@ -48,12 +54,20 @@ Flow-matic
   1957
   Static allocation
   
-*Cobol
+*COBOL
   1960
   Flow-matic
   Static allocation
   DS:records
   SY:2
+COBOL-68
+  1968
+COBOL-74
+  1974
+COBOL-85
+  1985
+COBOL 2002
+  2002
 
 Algol 58
   1958
@@ -70,7 +84,7 @@ Algol 68
 
 *PL/I
   1964
-  Algol 60,Fortran IV,Cobol
+  Algol 60,Fortran IV,COBOL
   Static explicit typing
   Stack allocation
   SY:3
@@ -103,9 +117,16 @@ Oberon
   1988
   Modula-2
 
+CSP
+  1978
+occam
+  1983
+Ease
+  1990
+
 Ada
   1979
-  Pascal
+  Pascal,CSP
   SY:4
 *Ada 83
   1983
@@ -223,6 +244,10 @@ C
   SY:4
 *C (K&R)
   1978
+ANSI C
+  1989
+C99
+  1999
 
 *C++
   1985
@@ -243,13 +268,13 @@ C 95
 C 99
   1999
 
-*Java
+Oak
   1991
   C++ (ARM)
   Static explicit typing (RTTI)
   GC
   SY:3
-Java 1
+*Java
   1995
 Java 2 (v1.2)
   1998
@@ -258,13 +283,13 @@ Java 2 (v1.2)
 
 J++
   1997
-  Java 1
+  Java
 J++ 6.0
   1999
 
 Limbo
   1996
-  C 95,Java 1
+  C 95,Java,CSP
   GC
 
 Objective-C
@@ -280,8 +305,10 @@ Objective-C
   C++ (ISO),Java 2 (v1.2),.NET
   GC
   SY:4
-*C# 2.0 (beta)
-  2004
+*C# 2.0
+  2005
+C# 3.0 beta 1
+  2007
 
 VB.NET
   2001
@@ -304,6 +331,8 @@ Icon
   1983
   Snobol4,CLU,C (K&R)
   http://ringer.cs.utsa.edu/research/icon/  
+Unicon
+  2005
 
 sh
   1971
@@ -315,10 +344,29 @@ csh
   1978
   sh,C
   Heap allocation
+tcsh
+  1981
 
 ksh
   1983
   sh
+ksh88
+  1988
+ksh93
+  1993
+ksh98
+  1998
+
+zsh
+  1990
+  ksh88,tcsh
+zsh 3.0
+  1997
+zsh 4.0
+  2001
+
+sed
+  1979
 
 awk
   1978
@@ -342,10 +390,14 @@ NetREXX
 bash
   1989
   sh,csh,ksh
+bash 2.0
+  1996
+bash 3.0
+  2004
 
 *Perl
   1987
-  nawk
+  nawk,sed,sh
   GC
   DS:strings,lists
   SY:5
@@ -357,16 +409,26 @@ Perl 5.005
   1998
 Perl 5.6.0
   2000
+Perl 5.8.0
+  2002
 
-JavaScript
+*JavaScript
   1995
-  Java
+  Oak,Self
   GC
   http://www.oreillynet.com/pub/a/javascript/2001/04/06/js_history.html
+ECMAScript
+  1997
+ECMAScript rel3
+  1999
+JavaScript 1.5
+  2000
+JavaScript 1.7
+  2006
 
 Lua
   1994
-  Perl,Pascal AFNOR
+  Perl 4,Pascal AFNOR
   GC
 #Lua 3.0
 #  1997
@@ -431,6 +493,8 @@ Logo
   1967
   Lisp
 
+ABC
+  1980
 *Python
   1991
   Modula-3,C (ANSI)
@@ -449,6 +513,8 @@ Python 2.2
 #  2003
 Python 2.4
   2004
+Python 2.5
+  2006
 
 Pike
   1996
@@ -457,7 +523,7 @@ Pike
 
 *Ruby
   1995
-  Python,Perl,Smalltalk 80,Eiffel 2
+  Python,Perl 4,Smalltalk 80,Eiffel 2
   GC
   DS:strings,lists
   SY:4
@@ -473,6 +539,10 @@ Dylan
   1992
   CLOS,Smalltalk 80,C++ (ARM)
   GC
+
+Squeak
+  1996
+  Smalltalk 80,Self,Logo
 
 ISWIM
   1966
@@ -515,7 +585,7 @@ OCaml 3.0
 
 Pizza
   1996
-  Java 1,SML
+  Java,SML
 
 F#
   2002
@@ -609,15 +679,14 @@ Oz 1
 Oz 3
   1999
 
-Rebol
+REBOL
   1998
   CLOS
   http://www.rebol.com/
 
-# A+   
-#   APL
-# K
-#   List,APL
+K
+  1993
+  A+,Scheme R4RS
 
 F-Script
   1998
@@ -666,3 +735,11 @@ Groovy
   Java 2 (v1.2),Ruby
 Groovy 1
   2007
+
+Fortress 1.0beta
+  2007
+  Scala,Fortran 2003
+
+D 1.0
+  2007
+  C++,C99,Java,C#
