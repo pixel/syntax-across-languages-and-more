@@ -414,7 +414,7 @@ Perl 5.8.0
 
 *JavaScript
   1995
-  Oak,Self
+  Java,Self
   GC
   http://www.oreillynet.com/pub/a/javascript/2001/04/06/js_history.html
 ECMAScript
@@ -515,6 +515,10 @@ Python 2.4
   2004
 Python 2.5
   2006
+
+Boo
+  2003
+  Python,.NET
 
 Pike
   1996
