@@ -513,6 +513,7 @@ Languages critiques
     Listbox.insert(self, "end", tuple(l))  doesn't work because you must <<flatten>>
   - syntactically clean/poor (no i++, but have operator overloading)
   - vs perl http://lwn.net/1999/0826/a/tc-observations.html
+  - 1 == "1" is false
 
   ?? Functional Programming in Python http://gnosis.cx/publish/programming/charming_python_13.txt
   Functional programming is syntaxically hard in Python: http://www.p-nand-q.com/lambda.htm
@@ -569,6 +570,8 @@ Languages critiques
   - error messages not explicit
   - collect_with_index missing
   - List.[] second arg is the number of values (defaults to 1)
+  - 1 == "1" is false
+
   good points:
   ++ functional stuff (restricted (no partial application))
   + ensure for exceptions
