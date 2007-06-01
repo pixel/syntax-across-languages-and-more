@@ -1,5 +1,6 @@
 my %l = (
 'Abstract data types' => 'Simula 67 FOLDOC',
+'Algebraic data types' => 'Hope (giving ML) FOLDOC',
 'Assignment operator overloading' => 'C++',
 'BNF (Backus-Naur Form)' => "used to describe Algol 60's syntax FOLDOC=Backus-Naur+Form",
 'Block nesting with scope' => 'Algol 60',
@@ -43,7 +44,7 @@ my %l = (
 'Type inference' => 'ML FOLDOC',
 'User-defined data types' => 'Algol 68',
 'Using C as portable assembler' => "C++ (Cfront)",
-'Vertical layout (Indentation to show block structure)' => 'ISWIM (giving Haskell)',
+'Vertical layout (Indentation to show block structure)' => 'CPL, ISWIM (giving Haskell)',
 );
 
 # Lisp macros 1963 "MACRO Definitions for LISP" Timothy Hart
