@@ -4276,6 +4276,7 @@ sub similar_pages {
 <li><a href="http://www.uni-muenster.de/ZIV/Mitarbeiter/EberhardSturm/PL1andC.html">PL/I, C</a>
 <li><a href="http://www.cs.wcupa.edu/~rkline/perl2php/">Perl, PHP</a>
 <li><a href="http://obsidianrook.com/devnotes/elisp-for-perl-programmers.html">EmacsLisp, Perl</a>
+<li><a href="http://www.exept.de:8080/doc/online/english/programming/stForLispers.html">Smalltalk, Lisp</a>
 </ul>
 <h2>References</h2>
 <ul>
