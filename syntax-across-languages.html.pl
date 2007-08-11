@@ -202,7 +202,7 @@ def x():
    'system/script/header/file (need "file: %script-header.r" in file header)' => "Rebol",
    'SOURCELINE() / parse source OS . SOURCENAME' => "ClassicREXX",
    'info frame 0' => "Tcl8.5",
-   'thisContext accessors' => "Smalltalk",
+   'thisContext lineNumber / thisContext method source' => "Smalltalk",
   ],
 
   'tokens' =>
