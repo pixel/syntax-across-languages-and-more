@@ -156,6 +156,8 @@ my $all = [
     'indexing
               identifier: "...";' => "Eiffel",
 
+    "someClass comment: '...'" => "Smalltalk",
+
     'rebol [ Note: "..." ]' => "Rebol",
     'func ["..." arg] ...' => "Rebol",
 
@@ -200,6 +202,7 @@ def x():
    'system/script/header/file (need "file: %script-header.r" in file header)' => "Rebol",
    'SOURCELINE() / parse source OS . SOURCENAME' => "ClassicREXX",
    'info frame 0' => "Tcl8.5",
+   'thisContext accessors' => "Smalltalk",
   ],
 
   'tokens' =>
@@ -2156,6 +2159,7 @@ module P : PType  = struct ... end)) => "OCaml",
    'Format' => "C#",
    "putFormat" => "Beta",
    'stringWithFormat' => "Objective-C",
+   'expandMacrosWith (but not using the C-like %-syntax)' => "Smalltalk",
   ],
 
   'simple print' =>
@@ -2785,6 +2789,7 @@ module P : PType  = struct ... end)) => "OCaml",
    '[a insertObject:e atIndex:i]' => "Objective-C",
    'a.insert(i, e)' => "Ruby Python",
    'a insertAt(e, i)' => "Io",
+   'a add: e beforeIndex: i / a add: e afterIndex: i' => "Smalltalk",
   ],
  ],
 
@@ -3073,6 +3078,7 @@ Next' => "VisualBasic",
   'String.Join(s, l)' => "C#",
   's.join(l)' => "Python",
   'l.join(s)' => "Ruby JavaScript Perl6",
+  'l asStringWith: s' => "Smalltalk",
   'join l s' => "Tcl",
   'implode(s, l)' => "PHP",
   'ListTools[Join]' => "Maple",
@@ -4240,13 +4246,14 @@ foreach (group_by2(@$all)) {
     $print_both->("</ul><hr>");
 
     print CAT comments();
-    print CAT end();
+    print CAT end('../');
 }
 
 print comments();
 $print_both->(similar_pages());
 $print_both->(credits());
-$print_both->(end());
+print end('');
+print SHORT end('../');
 
 sub comments {
     $comments or return '';
@@ -4412,9 +4419,12 @@ You may also have a look at this information <a href="${ref}syntax-across-langua
 EOF
 }
 sub end {
-    <<'EOF' . "\n</body></html>";
+    my ($rel) = @_;
+
+    sprintf(<< 'EOF', $rel) . "\n</body></html>";
 <hr><address><a href="mailto:pixel@rigaux.org">Pixel</a></address>
 This document is licensed under <a href="http://www.gnu.org/copyleft/fdl.html">GFDL</a> (GNU Free Documentation License).
+<br>Generated from <a href="%ssyntax-across-languages.html.pl">syntax-across-languages.html.pl</a>
 <br> $Id$
 EOF
 }
@@ -4444,7 +4454,7 @@ while (my ($k, $v) = each %kind_dependencies) {
     print qq(<li>"$kind_descriptions{$v}" automatically implies "$kind_descriptions{$k}");
 }
 print "</ul>";
-print end();
+print end('../');
 
 
 my @langs_ = sort { lc $a cmp lc $b } keys %langs;
@@ -4463,7 +4473,7 @@ foreach (@langs_) {
     printf qq(<tr><td><a href="%s.html">%s</a></td><td>%s</td></tr>\n), url_quote($_), html_quote($_), $nb_text;
 }
 print "</table>";
-print end();
+print end('../');
 
 
 open STDOUT, ">syntax-across-languages/proximity.html" or die '';
@@ -4483,7 +4493,7 @@ foreach my $lang (@langs_) {
     printf qq(<tr><td><a href="../syntax-across-languages-per-language/%s.html">%s</a> (%d)</td><td>%s</td></tr>\n), url_quote($lang), html_quote($lang), $count{$lang}, $nb_text;
 }
 print "</table>";
-print end();
+print end('../');
 
 
 open STDOUT, ">syntax-across-languages-per-language/index.html" or die '';
@@ -4495,7 +4505,7 @@ print "</ul>";
 
 print comments();
 print credits();
-print end();
+print end('../');
 
 foreach my $lang (@langs_) {
     open STDOUT, ">syntax-across-languages-per-language/" . file_quote($lang) . ".html" or die "bad lang $lang\n";
@@ -4551,7 +4561,7 @@ The entry will be marked as such and won't appear as missing anymore.
     }
     print "</ul>";
     print comments();
-    print end();
+    print end('../');
 }
 
 sub pre {
