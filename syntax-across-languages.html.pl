@@ -106,6 +106,7 @@ my $all = [
     "'" => "VisualBasic",
     '\\' => "Forth",
     '!' => "Fortran90 Assembler",
+    'NB.' => 'J',
     'C or * in column 1' => "Fortran",
    ],
 
