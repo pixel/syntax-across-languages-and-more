@@ -30,7 +30,7 @@ my @functional_static =
 @has_lambda = (@functional,
   qw(Ruby Python Perl Perl6 MSH), 'C#2', 'C#3', 'Tcl');
 
-@various = qw(APL BCPL B PL/I MUMPS HTML CSS TeX SGML XML YAML Assembler SQL92);
+@various = qw(APL BCPL B J PL/I MUMPS HTML CSS TeX SGML XML YAML Assembler SQL92);
 
 my %kind_dependencies = (
   reflexive => 'dynamic',
