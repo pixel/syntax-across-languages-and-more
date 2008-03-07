@@ -2623,7 +2623,7 @@ module P : PType  = struct ... end)) => "OCaml",
  [
   'TRUE' => "Modula-3 SQL92",
   'True' => "Haskell merd Eiffel VisualBasic Python Mathematica",
-  'true' => "BCPL C# OCaml Io Maple SML Pascal Logo Smalltalk PostScript Java E Ada PHP Beta Pliant FL Oz YCP Tcl BourneShell YAML Prolog Rebol",
+  'true' => "BCPL C# OCaml Io Maple SML Pascal Logo Ruby Smalltalk PostScript Java E Ada PHP Beta Pliant FL Oz YCP Tcl BourneShell YAML Prolog Rebol",
   'true()' => "XPath",
   't' => "EmacsLisp CommonLisp",
   '#t' => "Scheme Dylan",
@@ -2634,7 +2634,7 @@ module P : PType  = struct ... end)) => "OCaml",
   'on' => "Tcl YAML",
 
   'exit status 0' => "BourneShell",
-  'anything not false' => "Awk Perl Perl6 B C Pike Matlab MUMPS XPath EmacsLisp CommonLisp Python Scheme Dylan Rebol Yorick",
+  'anything not false' => "Awk Perl Perl6 B C Pike Matlab Ruby MUMPS XPath EmacsLisp CommonLisp Python Scheme Dylan Rebol Yorick",
 
   '1' => "ClassicREXX MUMPS",
   'non zero number' => "Tcl",
