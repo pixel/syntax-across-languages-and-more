@@ -349,8 +349,8 @@ def x():
     'var' => "JavaScript Pliant",
     'gvar' => "Pliant",
     'variable v (the variable behaves like a pointer)' => "Forth",
-    'Module[{x, y},  ... ]' => 'Mathematica',
-    'Block[{x, y, z}, ... ]' => 'Mathematica',
+    'Module[{x, y = v},  ... ]' => 'Mathematica',
+    'Block[{x, y = v}, ... ]' => 'Mathematica',
     'With[{c1 = v1, c2 = v2, ... }, ...]' => 'Mathematica',
     '<xsl:variable name="v" select="e"/>' => "XSLT",
    ], 
@@ -562,6 +562,9 @@ def x():
      'a f: b g: ... (the function is "f: g:")' => "Smalltalk",
      "(a,b,...)->&f or (a,b,...)->f" => "Beta",
      'f:a (in Pliant, special sugar for only one parameter)' => 'FL',
+     'f@a (only for one parameter)' => "Mathematica",
+     'a // f (only for one parameter)' => "Mathematica",
+     'a ~ f ~ b (only for two parameters)' => "Mathematica",
      '.. [ f, A, B, ...]' => "Prolog",
      pre('<xsl:call-template name="f">
     <xsl:with-param name="a" select=a/>
@@ -973,6 +976,7 @@ end') => "ClassicREXX",
    'either c b1 b2 / if/else c b1 b2' => "Rebol",
    '(cond (c b1) (c2 b2) (t b3))' => "EmacsLisp CommonLisp",
    '(cond (c b1) (c2 b2) (else b3))' => "Scheme",
+   'Which[c, b1, c2, b2]' => "Mathematica",
    'c -> b1 ; c2 -> b2 ; b3' => "Prolog",
    'case when c; b1 when c2; b2 else b3 end' => "Ruby",
    'test c then b1 or b2' => "BCPL",
@@ -1160,7 +1164,7 @@ esac') => "BourneShell",
    ((v1) ...)
    ((v2) ...)
    (else ...))') => "Scheme",
-
+    
    pre('case val is
    when v1 => ...
    when v2 | v3 => ...
@@ -1234,7 +1238,7 @@ switch/default [
 
    'val caseOf: {[v1]->[...]. [v2]->[...]} otherwise: ...' => "Squeak",
 
-  'Switch[val, v1, ..., v2, ...]' => "Mathematica",
+  'Switch[val, v1, ..., v2, ..., _, ...]' => "Mathematica",
 
    pre('select
   when v1 ...
@@ -1288,7 +1292,7 @@ end') => "ClassicREXX",
     'while [c][...]' => "Rebol",
     'while c [...]' => "Logo",
     'while(c, ...)' => "Io",
-    'while[c, ...]' => "Mathematica",
+    'While[c, ...]' => "Mathematica",
     'do.while [...] c' => "Logo",
     'c whileTrue: ...' => "Smalltalk",
     '(loop while c do ...)' => "CommonLisp",
@@ -1322,6 +1326,7 @@ end') => "ClassicREXX",
     'until [... c]' => "Rebol",
     'until c [...]' => "Logo",
     'do.while [...] c' => "Logo",
+    'While[...; c]' => "Mathematica",
     '[... . c] whileFalse' => "Smalltalk",
     pre('Do 
 ...
@@ -2989,6 +2994,7 @@ Next' => "VisualBasic",
   'collect' => "Ruby Smalltalk",
   'transform' => "C++",
   'array_map' => "PHP",
+  '/@' => 'Mathematica',
   '[ f x | x <- l ] (list comprehension)' => "Haskell",
   '[ f(x) for x in l ] (list comprehension)' => "Python",
   'magical: sin(x) computes sin on each element' => "Matlab",
@@ -3026,57 +3032,59 @@ Next' => "VisualBasic",
   'Position' => "Mathematica",
  ],
 
- 'keep elements matching' =>
+ 'keep elements' =>
  [ { KIND => 'has_lambda', MLANG => 'Scheme Tcl', },
-  'find_all' => "Ruby OCaml",
-  'filter' => "Pike OCaml SML Haskell Mercury Scheme-SRFI1 Python merd YCP",
-  'filter!' => "Scheme-SRFI1",
-  'Filter' => "Oz",
-  'grep' => "Perl Perl6",
-  'where' => "MSH",
-  'select' => "Ruby Maple Smalltalk Io",
-  'Select / Case' => "Mathematica",
-  'selectInPlace' => "Io",
-  'remove-if delete-if' => "CommonLisp",
-#  'remove-each' => "Rebol", # unpure
-  'reject' => "Ruby",
-  'choose' => "Dylan",
-  '[ x | x <- l, p x ] (list comprehension)' => "Haskell",
-  '[ x for x in l if p(x) ] (list comprehension)' => "Python",
-  'a(a == 3)' => "Matlab",
+  'matching' => [
+   'find_all' => "Ruby OCaml",
+   'filter' => "Pike OCaml SML Haskell Mercury Scheme-SRFI1 Python merd YCP",
+   'filter!' => "Scheme-SRFI1",
+   'Filter' => "Oz",
+   'grep' => "Perl Perl6",
+   'where' => "MSH",
+   'select' => "Ruby Maple Smalltalk Io",
+   'Select / Case' => "Mathematica",
+   'selectInPlace' => "Io",
+   'remove-if-not delete-if-not' => "CommonLisp",
+ #  'remove-each' => "Rebol", # unpure
+   'choose' => "Dylan",
+   '[ x | x <- l, p x ] (list comprehension)' => "Haskell",
+   '[ x for x in l if p(x) ] (list comprehension)' => "Python",
+   'a(a == 3)' => "Matlab",
+  ],
+  'non matching' => [
+   'remove-if delete-if' => "CommonLisp",
+   'reject' => "Ruby",
+  ],
  ],
 
- 'f(... f(f(init, e1), e2) ..., en)' =>
- [ { KIND => 'has_lambda', MLANG => "Perl Scheme Matlab" },
-  'foldl' => "Haskell Maple SML Mercury merd",
-  'FoldL' => "Oz",
-  'fold_left' => "OCaml",
-  'fold' => "Scheme-SRFI1",
-  'Fold' => "Mathematica",
-  'reduce (in Perl, in List::Util)' => "Pike Io Python CommonLisp Dylan Perl Perl6",
-  'inject' => "Ruby",
-  'inject into' => 'Smalltalk',
- ],
-
- 'f(e1, f(e2, ... f(en, init) ...))' =>
- [ { KIND => 'functional', MLANG => 'Smalltalk Scheme' },
-  'foldr' => "Haskell Maple SML Mercury merd",
-  'FoldR' => "Oz",
-  'fold-right' => "Scheme-SRFI1",
-  'fold_right' => "OCaml",
-  'rreduce' => "Pike",
-  "(reduce f '(e1 e2 ... en) :from-right t :initial-value init)" => "CommonLisp",
-  'reverseReduce' => "Io",
- ],
-
- 'split a list in 2 based on a predicate' =>
+ 'partition a list: elements matching, elements non matching' => 
  [ { KIND => 'functional', MLANG => 'Smalltalk Scheme Matlab' },
-  'partition' => "OCaml Ruby SML Haskell Scheme-SRFI1 merd",
-  'partition!' => "Scheme-SRFI1",
-  'Partition' => "Oz",
-  'split-sequence (not in standard)' => "CommonLisp",
-  'Split' => "Mathematica",
-  'ListTools[Split]' => "Maple",
+   'partition' => "OCaml Ruby SML Haskell Scheme-SRFI1 merd",
+   'partition!' => "Scheme-SRFI1",
+   'Partition' => "Oz",
+ ],
+
+ 'split a list' => 
+ [ { KIND => 'functional', MLANG => 'Smalltalk Scheme Matlab' },
+  'in 2 based on a predicate' => [
+   'break' => "Haskell",
+   'span' => "Haskell",
+  ],
+
+  'into sublists delimited by elements matching a predicate' => [
+   'split-sequence (not in standard)' => "CommonLisp",
+   'ListTools[Split]' => "Maple",
+  ],
+
+  'into a list of lists of same value' => [
+   'group' => "Haskell",
+   'Split' => "Mathematica",
+  ],
+
+  'into sublists based on a predicate' => [
+   'groupBy' => "Haskell",
+   'Split' => "Mathematica",
+  ],
  ],
 
  'is an element in the list' =>
@@ -3154,8 +3162,8 @@ Next' => "VisualBasic",
   'l * s' => "Pike Ruby",
   "(mapconcat 'identity l s)" => "EmacsLisp",
   'componentsJoinedByString' => "Objective-C",
-  'concat . intersperse s (see also unwords and unlines)' => "Haskell",
-  'StringJoin[Riffle[l, s]]' => "Mathematica",
+  'intercalate' => "Haskell",
+  'StringJoin @@ Riffle[l, s]' => "Mathematica",
  ],
 
  'list size' =>
@@ -3258,6 +3266,7 @@ Next' => "VisualBasic",
   'unzip' => "Haskell SML merd",
   'unzip2' => "Scheme-SRFI1",
   'transpose' => "Ruby",
+  'Transpose' => "Mathematica",
   'zip(*l)' => "Python",
   'a(1,:), a(2,:)' => "Matlab",
  ],
@@ -3273,6 +3282,7 @@ Next' => "VisualBasic",
   'a.(e)' => "Matlab",
   'a[e]' => "Maple",
   'gprop' => "Logo",
+  '/.' => "Mathematica",
  ],
 
  'list out of a bag' =>
@@ -3285,6 +3295,29 @@ Next' => "VisualBasic",
   'map-as(<list>, bag)' => "Dylan",
   '[a.(:)]' => "Matlab",
   'array get' => "Tcl",
+ ],
+
+ 'f(... f(f(init, e1), e2) ..., en)' =>
+ [ { KIND => 'has_lambda', MLANG => "Perl Scheme Matlab" },
+  'foldl' => "Haskell Maple SML Mercury merd",
+  'FoldL' => "Oz",
+  'fold_left' => "OCaml",
+  'fold' => "Scheme-SRFI1",
+  'Fold' => "Mathematica",
+  'reduce (in Perl, in List::Util)' => "Pike Io Python CommonLisp Dylan Perl Perl6",
+  'inject' => "Ruby",
+  'inject into' => 'Smalltalk',
+ ],
+
+ 'f(e1, f(e2, ... f(en, init) ...))' =>
+ [ { KIND => 'functional', MLANG => 'Smalltalk Scheme' },
+  'foldr' => "Haskell Maple SML Mercury merd",
+  'FoldR' => "Oz",
+  'fold-right' => "Scheme-SRFI1",
+  'fold_right' => "OCaml",
+  'rreduce' => "Pike",
+  "(reduce f '(e1 e2 ... en) :from-right t :initial-value init)" => "CommonLisp",
+  'reverseReduce' => "Io",
  ],
 
 ],
@@ -3340,6 +3373,7 @@ Next' => "VisualBasic",
    't' => "merd Perl",
    '*t' => "Ruby Python",
    't{:}' => "Matlab",
+   'f @@ t' => "Mathematica",
    'L =.. [ F | Args ], call(L)' => "Prolog",
   ],
  ],
