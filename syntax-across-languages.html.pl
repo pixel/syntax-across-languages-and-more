@@ -389,7 +389,7 @@ def x():
    'BEGIN ... END' => "Modula-3",
    'do ... end' => "ClassicREXX",
    'do ... end (introduce scope)' => "PL/I Lua",
-   'indentation' => "Python Pliant MUMPS",
+   'indentation' => "Python Pliant MUMPS F#",
    'indentation (introduce scope)' => "Haskell merd",
    'foo ... end  where foo in { if, do, ... }' => "Modula-2 Ruby",
    'foo ... end  where foo in { if, for, while, ... }' => "Matlab",
@@ -1692,8 +1692,7 @@ predefined_condition_name :
   [ { ALL => 1 },
     '' =>
     [
-     'object.method(para)' => "C++ C# Java E MSH Python Perl6 Beta Cecil Delphi-Kylix Eiffel Sather Modula-3 Ruby VisualBasic Icon merd JavaScript",
-     'object.method para' => "F#",
+     'object.method(para)' => "C++ C# F# Java E MSH Python Perl6 Beta Cecil Delphi-Kylix Eiffel Sather Modula-3 Ruby VisualBasic Icon merd JavaScript",
      'object#method para' => "OCaml",
      'object:method(para)' => "Lua",
      'object method(para)' => "Io",
@@ -2919,9 +2918,9 @@ module P : PType  = struct ... end)) => "OCaml",
  [ { MLANG => "Beta Tcl Perl Python Ruby JavaScript Maple Matlab FishShell" },
   '' =>
   [
-   'head' => "Haskell F#",
+   'head' => "Haskell",
    'Head' => "F#",
-   'hd' => "OCaml",
+   'hd' => "F# OCaml",
    'car' => "Scheme EmacsLisp CommonLisp",
    'first' => "Eiffel Pliant Rebol Smalltalk Io Logo",
    'First (see also Head)' => "Mathematica",
@@ -2936,9 +2935,9 @@ module P : PType  = struct ... end)) => "OCaml",
 
  'all but the first element' =>
  [ { MLANG => 'Perl C++ Ruby JavaScript Maple Io Eiffel' },
-  'tail' => "F# Haskell",
+  'tail' => "Haskell",
   'Tail' => "F#",
-  'tl' => "OCaml",
+  'tl' => "OCaml F#",
   'cdr' => "Scheme EmacsLisp CommonLisp",
   'Rest' => "Mathematica",
   'butfirst' => "Logo",
