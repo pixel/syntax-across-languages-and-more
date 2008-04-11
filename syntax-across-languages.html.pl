@@ -747,6 +747,8 @@ return') => "ClassicREXX",
       'sub f { ... @_ }' => 'Perl',
       'sub f; ... $argv; end' => 'FishShell',
       'f() { ... $@ }' => "BourneShell",
+      'f := ... ## &' => "Mathematica",
+      'f[params___] := ... params ...' => "Mathematica",
       pre('function f(varargin)
 for i=1:nargin
  ...(varargin{i})
@@ -982,7 +984,7 @@ end') => "ClassicREXX",
    'either c b1 b2 / if/else c b1 b2' => "Rebol",
    '(cond (c b1) (c2 b2) (t b3))' => "EmacsLisp CommonLisp",
    '(cond (c b1) (c2 b2) (else b3))' => "Scheme",
-   'Which[c, b1, c2, b2]' => "Mathematica",
+   'Which[c, b1, c2, b2, True, b3]' => "Mathematica",
    'c -> b1 ; c2 -> b2 ; b3' => "Prolog",
    'case when c; b1 when c2; b2 else b3 end' => "Ruby",
    'test c then b1 or b2' => "BCPL",
