@@ -89,7 +89,7 @@ my @langs = uniq(map { @$_ } values %kinds);
 ########################################################################################
 # main #################################################################################
 ########################################################################################
-my $all = [
+my $all_raw = [
 
 'Various' => [
 
@@ -4267,12 +4267,6 @@ end Object_Name;') => "Ada",
 
 ];
 
-########################################################################################
-# normalize, using annotations to know missing entries #################################
-########################################################################################
-my %missing;
-my %proximity;
-my %count;
 
 sub merge_options {
     my ($h1, $h2) = @_;
@@ -4282,135 +4276,246 @@ sub merge_options {
     $h1->{ALL} ||= $h2->{ALL};
 }
 
-foreach (group_by2(@$all)) {
-    my ($category, $l) = @$_;
+# normalize, using annotations to know missing entries
+sub normalize {
+    my ($all_raw) = @_;
 
-    my %options;
-    if (ref $l->[0]) {
-	merge_options(\%options, shift @$l);
-    }
+    my (@all, %missing);
 
-    foreach (group_by2(@$l)) {
-	my ($label, $l) = @$_;
+    foreach (group_by2(@$all_raw)) {
+	my ($category, $l) = @$_;
+	push @all, [ $category, my $l_cat = [] ];
 
-	my %options = %options;
-	if (ref $l->[0] eq 'HASH') {
+	my %options;
+	if (ref $l->[0]) {
 	    merge_options(\%options, shift @$l);
 	}
 
-	# if no subcat, fake one
-	if (ref $l->[1] ne 'ARRAY') {
-	    @$l = ('' => [ @$l ]);
-	}
+	foreach (group_by2(@$l)) {
+	    my ($label, $l) = @$_;
 
-	my @flattened;
-	my @g = map {
-	    my ($subcat, $l) = @$_;
+	    push @$l_cat, [ $label, my $l_label = [] ];
 
 	    my %options = %options;
 	    if (ref $l->[0] eq 'HASH') {
-		my $h = shift @$l;
-		$h->{KIND} && !$options{ALL} and die "KIND not accepted here\n";
-		merge_options(\%options, $h);
+		merge_options(\%options, shift @$l);
 	    }
-	    my @subcats = 
-	      ref $l->[1] eq 'ARRAY' ?
-		map { [ "$subcat: $_->[0]", $_->[1] ] } group_by2(@$l) :
+
+	    # if no subcat, fake one
+	    if (ref $l->[1] ne 'ARRAY') {
+		@$l = ('' => [ @$l ]);
+	    }
+
+	    my @g = map {
+		my ($subcat, $l) = @$_;
+
+		my %options = %options;
+		if (ref $l->[0] eq 'HASH') {
+		    my $h = shift @$l;
+		    $h->{KIND} && !$options{ALL} and die "KIND not accepted here\n";
+		    merge_options(\%options, $h);
+		}
+		my @subcats = 
+		  ref $l->[1] eq 'ARRAY' ?
+		    map { [ "$subcat: $_->[0]", $_->[1] ] } group_by2(@$l) :
 		      [ "$subcat" => $l ];
-	    push @flattened, map { @$_ } @subcats;
+		$_->[1] = [ group_by2(@{$_->[1]}) ] foreach @subcats;
 
-	    my @provided_langs = map { split(" ", $_->[1]) } group_by2(map { @{$_->[1]} } @subcats);
-	    push @provided_langs, split(' ', $options{MLANG}) if $options{MLANG};
+		push @$l_label, @subcats;
 
-	    my @wanted_langs = @langs;
-	    if ($options{KIND}) {
-		@wanted_langs = intersection(\@wanted_langs, $kinds{$_}) foreach split(' ', $options{KIND});
+		my @provided_langs = map { split(" ", $_->[1]) } map { @{$_->[1]} } @subcats;
+		push @provided_langs, split(' ', $options{MLANG}) if $options{MLANG};
+
+		my @wanted_langs = @langs;
+		if ($options{KIND}) {
+		    @wanted_langs = intersection(\@wanted_langs, $kinds{$_}) foreach split(' ', $options{KIND});
+		}
+		[ $subcat => \@provided_langs, \@wanted_langs ];
+	    } group_by2(@$l);
+
+	    if (!$options{ALL}) {
+		@g = [ '' => [ map { @{$_->[1]} } @g ], $g[0][2] ];
 	    }
-	    [ $subcat => \@provided_langs, \@wanted_langs ];
-	} group_by2(@$l);
-
-	@$l = @flattened;
-
-	if (!$options{ALL}) {
-	    @g = [ '' => [ map { @{$_->[1]} } @g ], $g[0][2] ];
-	}
 	
-	foreach (@g) {
-	    my ($subcat, $provided_langs, $wanted_langs) = @$_;
-	    my $provided_langs_ = [ map { $_, @{$rev_hierarchy{$_} || []} } @$provided_langs ];
-	    push @{$missing{$_}{$category}}, $label . ($subcat && " ($subcat)") foreach difference2($wanted_langs, $provided_langs_);
+	    foreach (@g) {
+		my ($subcat, $provided_langs, $wanted_langs) = @$_;
+		my $provided_langs_ = [ map { $_, @{$rev_hierarchy{$_} || []} } @$provided_langs ];
+		push @{$missing{$_}{$category}}, $label . ($subcat && " ($subcat)") foreach difference2($wanted_langs, $provided_langs_);
+	    }
 	}
     }
+
+    # @various don't have missing things
+    delete @missing{@various};
+
+    \@all, \%missing;
 }
 
-# @various don't have missing things
-delete @missing{@various};
-
-
-########################################################################################
-# building #############################################################################
-########################################################################################
-my ($comments, %comments, %langs);
-
-$\ = "\n";
-
-system("rm -rf syntax-across-languages");
-mkdir "syntax-across-languages";
-
-unlink "syntax-across-languages.html";
-open STDOUT, ">syntax-across-languages.html" or die '';
-open SHORT, ">syntax-across-languages/index.html" or die '';
-chmod 0444, "syntax-across-languages.html";
-
-my $print_both = sub { print @_; print SHORT @_ };
-
-print intro();
-print SHORT intro("../");
-
-print qq(<h2>Light Version</h2>);
-print qq(Same content split into <a href="syntax-across-languages/">multiple html files</a>);
-
-print SHORT qq(<h2>One Big Page</h2>);
-print SHORT qq(Same content in <a href="../syntax-across-languages.html">one big page</a>);
-
-$print_both->("<h2>Categories</h2>");
-$print_both->("<ul>");
-my $cache = mangle_category_init();
-foreach (group_by2(@$all)) {
-    my ($category, $l) = @$_;
-    my $mangled_category = mangle_category($category, '', $cache);
-    print qq(<li><a href="#$mangled_category">$category</a>);
-    print SHORT qq(<li><a href="$mangled_category.html">$category</a>);
-
-    $print_both->("<ul>");
-    foreach (group_by2(@$l)) {
-	my ($label, $l) = @$_;
-
-	$label = simplify_category($label);
-	my $s = mangle_category($label, $mangled_category, $cache);
-	print qq(<li><a href="#$s">$label</a>);
-	print SHORT qq(<li><a href="$mangled_category.html#$s">$label</a>);
+sub langs_entries {
+    my ($all) = @_;
+    my %langs;
+    foreach (@$all) {
+	my ($category, $l) = @$_;
+	foreach (@$l) {
+	    my ($label, $l) = @$_;
+	    foreach (@$l) {
+		my ($subcat, $l) = @$_;
+		foreach (@$l) {
+		    my ($name, $langs) = @$_;
+		    push @{$langs{$_}{$category}{$label . ($subcat && " ($subcat)")}}, $name foreach split(" ", $langs);
+		}
+	    }
+	}
     }
-    $print_both->("</ul>");
+    \%langs;
 }
-$print_both->("</ul><hr>");
+
+sub proximity {
+    my ($all) = @_;
+
+    my %proximity;
+    my %count;
+
+    foreach (@$all) {
+	my ($_category, $l) = @$_;
+	foreach (@$l) {
+	    my ($_label, $l) = @$_;
+	    foreach (@$l) {
+		my ($_subcat, $l) = @$_;
+		foreach (@$l) {
+		    my ($_name, $langs) = @$_;
+		    foreach my $a (split(' ', $langs)) {
+			$count{$a}++;
+			foreach my $b (split(' ', $langs)) {
+			    $proximity{$a}{$b}++ if $a ne $b;
+			}
+		    }
+		}
+	    }
+	}
+    }
+    \%proximity, \%count;
+}
+
+generate_all();
+
+sub generate_all {
+    $\ = "\n";
+    unlink "syntax-across-languages.html";
+    system("rm -rf syntax-across-languages");
+    system("rm -rf syntax-across-languages-per-language");
+    mkdir "syntax-across-languages";
+    mkdir "syntax-across-languages-per-language";
+
+    my ($all, $missing) = normalize($all_raw);
+    my ($comments) = generate_main_page($all);
+    my $langs_entries = langs_entries($all);
+
+    my @langs_ = sort { lc $a cmp lc $b } keys %$langs_entries;
+    print STDERR "unused lang $_" foreach difference2(\@langs, \@langs_);
+    print STDERR "non described lang $_" foreach difference2(\@langs_, \@langs);
+
+    generate_category_descriptions();
+    generate_what_is_missing(\@langs_, $missing);
+    generate_proximity($all, \@langs_);
+    generate_per_language_index(\@langs_, $comments);
+    generate_per_language_file($all, $_, $langs_entries, $missing, $comments) foreach @langs_;
+}
+
+sub generate_main_page {
+    my ($all) = @_;
+    my (%comments, $comments_global_count);
+
+    open(my $LONG, ">syntax-across-languages.html") or die '';
+    open(my $SHORT, ">syntax-across-languages/index.html") or die '';
+    chmod 0444, "syntax-across-languages.html";
+
+    my $print_both = sub { print $LONG @_; print $SHORT @_ };
+
+    print $LONG intro();
+    print $SHORT intro("../");
+
+    print $LONG qq(<h2>Light Version</h2>);
+    print $LONG qq(Same content split into <a href="syntax-across-languages/">multiple html files</a>);
+
+    print $SHORT qq(<h2>One Big Page</h2>);
+    print $SHORT qq(Same content in <a href="../syntax-across-languages.html">one big page</a>);
+
+    $print_both->("<h2>Categories</h2>");
+    $print_both->("<ul>");
+    my $cache = mangle_category_init();
+    foreach (@$all) {
+	my ($category, $l) = @$_;
+	my $mangled_category = mangle_category($category, '', $cache);
+	print $LONG qq(<li><a href="#$mangled_category">$category</a>);
+	print $SHORT qq(<li><a href="$mangled_category.html">$category</a>);
+
+	$print_both->("<ul>");
+	foreach (@$l) {
+	    my ($label, $l) = @$_;
+
+	    $label = simplify_category($label);
+	    my $s = mangle_category($label, $mangled_category, $cache);
+	    print $LONG qq(<li><a href="#$s">$label</a>);
+	    print $SHORT qq(<li><a href="$mangled_category.html#$s">$label</a>);
+	}
+	$print_both->("</ul>");
+    }
+    $print_both->("</ul><hr>");
+
+    foreach (@$all) {
+	my ($category, $l) = @$_;
+	my $mangled_category = mangle_category($category, '');
+
+	open(my $CAT, "> syntax-across-languages/$mangled_category.html") or die;
+	print $CAT "<html><head><title>syntax across languages per category</title></head><body>";
+
+	my $print_both = sub { print $LONG @_; print $CAT @_ };
+
+	$print_both->(qq(<h2><a name="$mangled_category">$category</a></h2>));
+	$print_both->("<ul>");
+	foreach (@$l) {
+	    my ($label, $l) = @$_;
+
+	    my $s = mangle_category($label, $mangled_category);
+	    $print_both->(qq(<li><a name="$s">$label</a><p>));
+
+	    foreach (@$l) {
+		my ($subcat, $l) = @$_;
+		table($l, $category, $label, $subcat, $_, \%comments, \$comments_global_count) foreach $LONG, $CAT;
+	    }
+	}
+	$print_both->("</ul><hr>");
+
+	print $CAT comments(\%comments);
+	print $CAT end('../');
+    }
+
+    print $LONG comments(\%comments);
+    $print_both->(similar_pages());
+    $print_both->(credits());
+    print $LONG end('');
+    print $SHORT end('../');
+
+    \%comments;
+}
 
 sub table {
-    my ($l, $category, $label, $subcat, $F) = @_;
+    my ($l, $category, $label, $subcat, $F, $comments, $comments_global_count) = @_;
 
     print $F $subcat;
     print $F "<table border=1 cellpadding=3>";
 
     my $i = 0;
-    foreach (group_by2(@$l)) {
+    foreach (@$l) {
         my ($name, $langs) = @$_;
 
 	my $more = '';
         if (my ($n, $comment) = $name =~ m/(.*) \s+ \( ( [^)]+ (?: \( [^)]* \) )* [^)]* ) \)$/sx) {
-	    my $nb = $comments{$comment} ||= ++$comments;
+	    my $nb = $comments->{$comment} ||= ++$$comments_global_count;
 	    $name = $n;
-	    $more = qq(<a href="#$nb">($nb)</a>); #)
-	    $l->[$i] = $name;
+	    $more = qq(<a href="#$nb">($nb)</a>);
+	    $l->[$i][0] = $name;
         } else {
 	    $name =~ s/\s+$//;
 	}
@@ -4418,65 +4523,157 @@ sub table {
         printf $F "<tr><td><tt>%s</tt></td>", html_quote("$name$more");
 	my @langs = sort { lc $a cmp lc $b } split(" ", $langs);
         print $F "<td>", html_quote(join(", ", @langs)), "</td></tr>";
-	$i += 2;
-
-	foreach my $a (@langs) {
-	    $count{$a}++;
-	    foreach my $b (@langs) {
-		$proximity{$a}{$b}++ if $a ne $b;
-	    }
-	}
+	$i++;
     }
     print $F "</table><p>";
 }
 
-foreach (group_by2(@$all)) {
-    my ($category, $l) = @$_;
-    my $mangled_category = mangle_category($category, '');
+sub generate_per_language_index {
+    my ($all_langs, $comments) = @_;
 
-    local *CAT;
-    open CAT, "> syntax-across-languages/$mangled_category.html" or die;
-    print CAT "<html><head><title>syntax across languages per category</title></head><body>";
+    open(my $F, ">syntax-across-languages-per-language/index.html") or die '';
 
-    my $print_both = sub { print @_; print CAT @_ };
+    print $F "<html><head><title>syntax across languages per language</title></head><body>";
+    print $F "<ul>";
+    printf $F qq(<li><a href="%s.html">%s</a>\n), url_quote($_), html_quote($_) foreach @$all_langs;
+    print $F "</ul>";
 
-    $print_both->(qq(<h2><a name="$mangled_category">$category</a></h2>));
-    $print_both->("<ul>");
-    foreach (group_by2(@$l)) {
-	my ($label, $l) = @$_;
-
-	my $s = mangle_category($label, $mangled_category);
-	$print_both->(qq(<li><a name="$s">$label</a><p>));
-
-	foreach (group_by2(@$l)) {
-	    my ($subcat, $l) = @$_;
-	    table($l, $category, $label, $subcat, $_) foreach *STDOUT, *CAT;
-
-	    foreach (group_by2(@$l)) {
-		my ($name, $langs) = @$_;
-		push @{$langs{$_}{$category}{$label . ($subcat && " ($subcat)")}}, $name foreach split(" ", $langs);
-	    }
-
-	}
-    }
-    $print_both->("</ul><hr>");
-
-    print CAT comments();
-    print CAT end('../');
+    print $F comments($comments);
+    print $F credits();
+    print $F end('../');
 }
 
-print comments();
-$print_both->(similar_pages());
-$print_both->(credits());
-print end('');
-print SHORT end('../');
+sub generate_per_language_file {
+    my ($all, $lang, $langs, $missing, $comments) = @_;
+
+    open(my $F, ">syntax-across-languages-per-language/" . file_quote($lang) . ".html") or die "bad lang $lang\n";
+    
+    print $F "<html><head><title>syntax in ", html_quote($lang)," </title></head><body>";
+    print $F q(
+<p>
+The "Missing:"s below indicate that an entry is incomplete.
+<ul>
+<li>either the entry exist in the language, and <a href="mailto:pixel@rigaux.org">please tell</a>.
+<li>either the entry doesn't exist in the language, and <a href="mailto:pixel@rigaux.org">please tell so</a>.
+The entry will be marked as such and won't appear as missing anymore.
+</ul>
+);
+
+    printf $F qq(<hr>);
+
+    foreach my $prev (@{$hierarchy{$lang} || []}) {
+	printf $F qq(<p>See the <a href="%s.html">various entries for %s</a><p>\n), url_quote($prev), html_quote($prev);
+    }
+
+    print $F "<ul>";
+
+    if (my @has_kinds = grep { member($lang, @{$kinds{$_}} ) } keys %kind_descriptions) {
+	my %l; @l{@has_kinds} = ();
+	foreach (keys %kind_dependencies) {
+	    exists $l{$kind_dependencies{$_}} and delete $l{$_};
+	}
+	print $F qq(<li><a href="categories.html">Category</a>: ), join(", ", map { $kind_descriptions{$_}} sort keys %l), "<p>";
+    }
+
+    foreach my $category (map { $_->[0] } @$all) {
+	my $l = $langs->{$lang}{$category};
+	my $misses = $missing->{$lang}{$category};
+
+	$l || $misses or next;
+
+	my $mangled_category = mangle_category($category, '');
+	print $F qq(<li><a href="../syntax-across-languages/$mangled_category.html">$category</a><p>);
+
+	if ($l) {
+	    print $F "<table border=1 cellpadding=6>";
+	    foreach my $label (sort keys %$l) {
+		($label, my @names) = map { html_quote($_) } $label, @{$l->{$label}};
+		print $F "<tr><td><tt>$_</tt></td><td>$label</td></tr>" foreach @names;
+	    }
+	    print $F "</table><p>";
+	}
+	if ($misses) {
+	    print $F "Missing: <blockquote>", join(" ", map { "<br>$_" } @$misses);
+	    print $F "</blockquote>";
+	}
+    }
+    print $F "</ul>";
+    print $F comments($comments);
+    print $F end('../');
+}
+
+sub generate_category_descriptions {
+    open(my $F, ">syntax-across-languages-per-language/categories.html") or die '';
+    print $F "<html><head><title>language categories</title></head><body>";
+
+    print $F qq(Programming languages are categorized. The goal is to tag the various
+entries as belonging to some categories, so that the number of "Missing:"s is
+reduced. For example, the "object creation" entry only means something in the
+category "Object Oriented".<p>);
+
+    print $F "<ul>";
+    print $F "<li>$_" foreach values %kind_descriptions;
+    print $F "</ul>";
+
+    print $F "<p>";
+    print $F "Note that:";
+    print $F "<ul>";
+    while (my ($k, $v) = each %kind_dependencies) {
+	print $F qq(<li>"$kind_descriptions{$v}" automatically implies "$kind_descriptions{$k}");
+    }
+    print $F "</ul>";
+    print $F end('../');
+}
+
+sub generate_what_is_missing {
+    my ($all_langs, $missing) = @_;
+
+    open(my $F, ">syntax-across-languages-per-language/what-is-missing.html") or die '';
+    print $F "<html><head><title>Missing's in syntax across languages</title></head><body>";
+    print $F "<table border=1>";
+    foreach (@$all_langs) {
+	my $nb = map { @$_ } values %{$missing->{$_} || {}};
+	my $nb_text =
+	  sprintf("<font color=#%02x%02x00>", boundit(8 * $nb), boundit(0xff - 3 * ($nb - 16))) .
+	    ($nb == 0 ? 'all done' : "$nb Missings") . "</font>";
+	printf $F qq(<tr><td><a href="%s.html">%s</a></td><td>%s</td></tr>\n), url_quote($_), html_quote($_), $nb_text;
+    }
+    print $F "</table>";
+    print $F end('../');
+}
+
+sub generate_proximity {
+    my ($all, $all_langs) = @_;
+
+    my ($proximity, $count) = proximity($all);
+
+    open(my $F, ">syntax-across-languages/proximity.html") or die '';
+    print $F "<html><head><title>Proximity between languages</title></head><body>";
+    print $F "<table border=1>";
+    foreach my $lang (@$all_langs) {
+	my $h = $proximity->{$lang};
+	my @l = sort { $b->[1] <=> $a->[1] } map {
+	    [ $_, $h->{$_} / ($count->{$lang} + $count->{$_}) * 2 ];
+	} grep { $_ ne $lang && min($count->{$lang}, $count->{$_}) > 10 } keys %$h;
+	@l = grep { $_->[1] > 0.25 } @l or next;
+    
+	my $nb_text = join(' ', map {
+	    my $nb = boundit(0xff - ($_->[1] * 1.6 - 0.2) * 0xff);
+	    sprintf("<font color=#%02x%02x%02x>%s (%d/%d)</font>", $nb, $nb, $nb, $_->[0], $h->{$_->[0]}, $count->{$_->[0]});
+	} @l);
+	printf $F qq(<tr><td><a href="../syntax-across-languages-per-language/%s.html">%s</a> (%d)</td><td>%s</td></tr>\n), url_quote($lang), html_quote($lang), $count->{$lang}, $nb_text;
+    }
+    print $F "</table>";
+    print $F end('../');
+}
 
 sub comments {
-    $comments or return '';
-    my %c = reverse %comments;
+    my ($comments) = @_;
+
+    my %c = reverse %$comments or return '';
     join("\n",
 	 "<h2>Remarks</h2>", "<ul>",
-	 (map { qq(<li><a name="$_">($_)</a> $c{$_}) } (1 .. $comments)),
+	 (map { qq(<li><a name="$_">($_)</a> $c{$_}) } (1 .. keys %c)),
 	 "</ul>");
 }
 sub similar_pages {
@@ -4646,141 +4843,6 @@ This document is licensed under <a href="http://www.gnu.org/copyleft/fdl.html">G
 <br>Generated from <a href="%ssyntax-across-languages.html.pl">syntax-across-languages.html.pl</a>
 <br> $Id$
 EOF
-}
-
-########################################################################################
-# per-language #########################################################################
-########################################################################################
-system("rm -rf syntax-across-languages-per-language");
-mkdir "syntax-across-languages-per-language";
-
-open STDOUT, ">syntax-across-languages-per-language/categories.html" or die '';
-print "<html><head><title>language categories</title></head><body>";
-
-print qq(Programming languages are categorized. The goal is to tag the various
-entries as belonging to some categories, so that the number of "Missing:"s is
-reduced. For example, the "object creation" entry only means something in the
-category "Object Oriented".<p>);
-
-print "<ul>";
-print "<li>$_" foreach values %kind_descriptions;
-print "</ul>";
-
-print "<p>";
-print "Note that:";
-print "<ul>";
-while (my ($k, $v) = each %kind_dependencies) {
-    print qq(<li>"$kind_descriptions{$v}" automatically implies "$kind_descriptions{$k}");
-}
-print "</ul>";
-print end('../');
-
-
-my @langs_ = sort { lc $a cmp lc $b } keys %langs;
-print STDERR "unused lang $_" foreach difference2(\@langs, \@langs_);
-print STDERR "non described lang $_" foreach difference2(\@langs_, \@langs);
-
-
-open STDOUT, ">syntax-across-languages-per-language/what-is-missing.html" or die '';
-print "<html><head><title>Missing's in syntax across languages</title></head><body>";
-print "<table border=1>";
-foreach (@langs_) {
-    my $nb = map { @$_ } values %{$missing{$_} || {}};
-    my $nb_text =
-      sprintf("<font color=#%02x%02x00>", boundit(8 * $nb), boundit(0xff - 3 * ($nb - 16))) .
-	($nb == 0 ? 'all done' : "$nb Missings") . "</font>";
-    printf qq(<tr><td><a href="%s.html">%s</a></td><td>%s</td></tr>\n), url_quote($_), html_quote($_), $nb_text;
-}
-print "</table>";
-print end('../');
-
-
-open STDOUT, ">syntax-across-languages/proximity.html" or die '';
-print "<html><head><title>Proximity between languages</title></head><body>";
-print "<table border=1>";
-foreach my $lang (@langs_) {
-    my $h = $proximity{$lang};
-    my @l = sort { $b->[1] <=> $a->[1] } map {
-	[ $_, $h->{$_} / ($count{$lang} + $count{$_}) * 2 ];
-    } grep { $_ ne $lang && min($count{$lang}, $count{$_}) > 10 } keys %$h;
-    @l = grep { $_->[1] > 0.25 } @l or next;
-    
-    my $nb_text = join(' ', map {
-	my $nb = boundit(0xff - ($_->[1] * 1.6 - 0.2) * 0xff);
-	sprintf("<font color=#%02x%02x%02x>%s (%d/%d)</font>", $nb, $nb, $nb, $_->[0], $h->{$_->[0]}, $count{$_->[0]});
-    } @l);
-    printf qq(<tr><td><a href="../syntax-across-languages-per-language/%s.html">%s</a> (%d)</td><td>%s</td></tr>\n), url_quote($lang), html_quote($lang), $count{$lang}, $nb_text;
-}
-print "</table>";
-print end('../');
-
-
-open STDOUT, ">syntax-across-languages-per-language/index.html" or die '';
-
-print "<html><head><title>syntax across languages per language</title></head><body>";
-print "<ul>";
-printf qq(<li><a href="%s.html">%s</a>\n), url_quote($_), html_quote($_) foreach @langs_;
-print "</ul>";
-
-print comments();
-print credits();
-print end('../');
-
-foreach my $lang (@langs_) {
-    open STDOUT, ">syntax-across-languages-per-language/" . file_quote($lang) . ".html" or die "bad lang $lang\n";
-    
-    print "<html><head><title>syntax in ", html_quote($lang)," </title></head><body>";
-    print q(
-<p>
-The "Missing:"s below indicate that an entry is incomplete.
-<ul>
-<li>either the entry exist in the language, and <a href="mailto:pixel@rigaux.org">please tell</a>.
-<li>either the entry doesn't exist in the language, and <a href="mailto:pixel@rigaux.org">please tell so</a>.
-The entry will be marked as such and won't appear as missing anymore.
-</ul>
-);
-
-    printf qq(<hr>);
-
-    foreach my $prev (@{$hierarchy{$lang} || []}) {
-	printf qq(<p>See the <a href="%s.html">various entries for %s</a><p>\n), url_quote($prev), html_quote($prev);
-    }
-
-    print "<ul>";
-
-    if (my @has_kinds = grep { member($lang, @{$kinds{$_}} ) } keys %kind_descriptions) {
-	my %l; @l{@has_kinds} = ();
-	foreach (keys %kind_dependencies) {
-	    exists $l{$kind_dependencies{$_}} and delete $l{$_};
-	}
-	print qq(<li><a href="categories.html">Category</a>: ), join(", ", map { $kind_descriptions{$_}} sort keys %l), "<p>";
-    }
-
-    foreach my $category (map { $_->[0] } group_by2(@$all)) {
-	my $l = $langs{$lang}{$category};
-	my $misses = $missing{$lang}{$category};
-
-	$l || $misses or next;
-
-	my $mangled_category = mangle_category($category, '');
-	print qq(<li><a href="../syntax-across-languages/$mangled_category.html">$category</a><p>);
-
-	if ($l) {
-	    print "<table border=1 cellpadding=6>";
-	    foreach my $label (sort keys %$l) {
-		($label, my @names) = map { html_quote($_) } $label, @{$l->{$label}};
-		print "<tr><td><tt>$_</tt></td><td>$label</td></tr>" foreach @names;
-	    }
-	    print "</table><p>";
-	}
-	if ($misses) {
-	    print "Missing: <blockquote>", join(" ", map { "<br>$_" } @$misses);
-	    print "</blockquote>";
-	}
-    }
-    print "</ul>";
-    print comments();
-    print end('../');
 }
 
 sub pre {
