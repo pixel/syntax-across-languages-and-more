@@ -4317,10 +4317,8 @@ sub normalize {
 		}
 		my @subcats = 
 		  ref $l->[1] eq 'ARRAY' ?
-		    map { [ "$subcat: $_->[0]", $_->[1] ] } group_by2(@$l) :
-		      [ "$subcat" => $l ];
-		$_->[1] = [ group_by2(@{$_->[1]}) ] foreach @subcats;
-
+		    map { [ "$subcat: $_->[0]", normalize_entries($_->[1]) ] } group_by2(@$l) :
+		      [ "$subcat" => normalize_entries($l) ];
 		push @$l_label, @subcats;
 
 		my @provided_langs = map { split(" ", $_->[1]) } map { @{$_->[1]} } @subcats;
@@ -4351,9 +4349,25 @@ sub normalize {
     \@all, \%missing;
 }
 
-sub langs_entries {
+my $global_comment_count;
+sub normalize_entries {
+    my ($l) = @_;
+    [ map {
+	my ($name, $langs) = @$_;
+
+	if (my ($n, $comment) = $name =~ m/(.*) \s+ \( ( [^)]+ (?: \( [^)]* \) )* [^)]* ) \)$/sx) {
+	    $name = $n;
+	    [ $n, $langs, $comment, ++$global_comment_count ];
+        } else {
+	    $name =~ s/\s+$//;
+	    [ $name, $langs ];
+	}
+    } group_by2(@$l) ];
+}
+
+sub per_langs {
     my ($all) = @_;
-    my %langs;
+    my %per_langs;
     foreach (@$all) {
 	my ($category, $l) = @$_;
 	foreach (@$l) {
@@ -4361,13 +4375,28 @@ sub langs_entries {
 	    foreach (@$l) {
 		my ($subcat, $l) = @$_;
 		foreach (@$l) {
-		    my ($name, $langs) = @$_;
-		    push @{$langs{$_}{$category}{$label . ($subcat && " ($subcat)")}}, $name foreach split(" ", $langs);
+		    my ($name, $langs, $comment) = @$_;
+		    push @{$per_langs{$_}{$category}{$label . ($subcat && " ($subcat)")}}, [ $name, $comment ] foreach split(" ", $langs);
 		}
 	    }
 	}
     }
-    \%langs;
+    \%per_langs;
+}
+
+
+sub empty_comments {
+    [ {}, 0 ];
+}
+sub may_add_comment_and_quote {
+    my ($comments, $name, $comment) = @_;
+
+    my $more = '';
+    if ($comment) {
+	my $nb = $comments->[0]{$comment} ||= ++$comments->[1];
+	$more = qq(<a href="#$nb">($nb)</a>);
+    }
+    html_quote($name) . $more;
 }
 
 sub proximity {
@@ -4408,23 +4437,24 @@ sub generate_all {
     mkdir "syntax-across-languages-per-language";
 
     my ($all, $missing) = normalize($all_raw);
-    my ($comments) = generate_main_page($all);
-    my $langs_entries = langs_entries($all);
+    generate_main_page($all);
+    my $per_langs = per_langs($all);
 
-    my @langs_ = sort { lc $a cmp lc $b } keys %$langs_entries;
+    my @langs_ = sort { lc $a cmp lc $b } keys %$per_langs;
     print STDERR "unused lang $_" foreach difference2(\@langs, \@langs_);
     print STDERR "non described lang $_" foreach difference2(\@langs_, \@langs);
 
     generate_category_descriptions();
     generate_what_is_missing(\@langs_, $missing);
     generate_proximity($all, \@langs_);
-    generate_per_language_index(\@langs_, $comments);
-    generate_per_language_file($all, $_, $langs_entries, $missing, $comments) foreach @langs_;
+    generate_per_language_index(\@langs_);
+    generate_per_language_file($all, $_, $per_langs, $missing) foreach @langs_;
 }
 
 sub generate_main_page {
     my ($all) = @_;
-    my (%comments, $comments_global_count);
+
+    my $all_comments = empty_comments();
 
     open(my $LONG, ">syntax-across-languages.html") or die '';
     open(my $SHORT, ">syntax-across-languages/index.html") or die '';
@@ -4469,6 +4499,7 @@ sub generate_main_page {
 
 	open(my $CAT, "> syntax-across-languages/$mangled_category.html") or die;
 	print $CAT "<html><head><title>syntax across languages per category</title></head><body>";
+	my $cat_comments = empty_comments();
 
 	my $print_both = sub { print $LONG @_; print $CAT @_ };
 
@@ -4482,54 +4513,44 @@ sub generate_main_page {
 
 	    foreach (@$l) {
 		my ($subcat, $l) = @$_;
-		table($l, $category, $label, $subcat, $_, \%comments, \$comments_global_count) foreach $LONG, $CAT;
+		table($l, $category, $label, $subcat, $LONG, $all_comments);
+		table($l, $category, $label, $subcat, $CAT, $cat_comments);
 	    }
 	}
 	$print_both->("</ul><hr>");
 
-	print $CAT comments(\%comments);
+	print $CAT comments_text($cat_comments);
 	print $CAT end('../');
     }
 
-    print $LONG comments(\%comments);
+    print $LONG comments_text($all_comments);
     $print_both->(similar_pages());
     $print_both->(credits());
     print $LONG end('');
     print $SHORT end('../');
-
-    \%comments;
 }
 
 sub table {
-    my ($l, $category, $label, $subcat, $F, $comments, $comments_global_count) = @_;
+    my ($l, $category, $label, $subcat, $F, $comments) = @_;
 
     print $F $subcat;
     print $F "<table border=1 cellpadding=3>";
 
     my $i = 0;
     foreach (@$l) {
-        my ($name, $langs) = @$_;
+        my ($name, $langs, $comment) = @$_;
 
-	my $more = '';
-        if (my ($n, $comment) = $name =~ m/(.*) \s+ \( ( [^)]+ (?: \( [^)]* \) )* [^)]* ) \)$/sx) {
-	    my $nb = $comments->{$comment} ||= ++$$comments_global_count;
-	    $name = $n;
-	    $more = qq(<a href="#$nb">($nb)</a>);
-	    $l->[$i][0] = $name;
-        } else {
-	    $name =~ s/\s+$//;
-	}
+	my $name_ = may_add_comment_and_quote($comments, $name, $comment);
 
-        printf $F "<tr><td><tt>%s</tt></td>", html_quote("$name$more");
 	my @langs = sort { lc $a cmp lc $b } split(" ", $langs);
-        print $F "<td>", html_quote(join(", ", @langs)), "</td></tr>";
+        print $F "<tr><td><tt>$name_</tt></td><td>", html_quote(join(", ", @langs)), "</td></tr>";
 	$i++;
     }
     print $F "</table><p>";
 }
 
 sub generate_per_language_index {
-    my ($all_langs, $comments) = @_;
+    my ($all_langs) = @_;
 
     open(my $F, ">syntax-across-languages-per-language/index.html") or die '';
 
@@ -4538,13 +4559,14 @@ sub generate_per_language_index {
     printf $F qq(<li><a href="%s.html">%s</a>\n), url_quote($_), html_quote($_) foreach @$all_langs;
     print $F "</ul>";
 
-    print $F comments($comments);
     print $F credits();
     print $F end('../');
 }
 
 sub generate_per_language_file {
-    my ($all, $lang, $langs, $missing, $comments) = @_;
+    my ($all, $lang, $per_langs, $missing) = @_;
+
+    my $comments = empty_comments();
 
     open(my $F, ">syntax-across-languages-per-language/" . file_quote($lang) . ".html") or die "bad lang $lang\n";
     
@@ -4576,7 +4598,7 @@ The entry will be marked as such and won't appear as missing anymore.
     }
 
     foreach my $category (map { $_->[0] } @$all) {
-	my $l = $langs->{$lang}{$category};
+	my $l = $per_langs->{$lang}{$category};
 	my $misses = $missing->{$lang}{$category};
 
 	$l || $misses or next;
@@ -4587,8 +4609,9 @@ The entry will be marked as such and won't appear as missing anymore.
 	if ($l) {
 	    print $F "<table border=1 cellpadding=6>";
 	    foreach my $label (sort keys %$l) {
-		($label, my @names) = map { html_quote($_) } $label, @{$l->{$label}};
-		print $F "<tr><td><tt>$_</tt></td><td>$label</td></tr>" foreach @names;
+		my $label_ = html_quote($label);
+		my @names_ = map { may_add_comment_and_quote($comments, @$_) } @{$l->{$label}};
+		print $F "<tr><td><tt>$_</tt></td><td>$label_</td></tr>" foreach @names_;
 	    }
 	    print $F "</table><p>";
 	}
@@ -4598,7 +4621,7 @@ The entry will be marked as such and won't appear as missing anymore.
 	}
     }
     print $F "</ul>";
-    print $F comments($comments);
+    print $F comments_text($comments);
     print $F end('../');
 }
 
@@ -4667,13 +4690,13 @@ sub generate_proximity {
     print $F end('../');
 }
 
-sub comments {
+sub comments_text {
     my ($comments) = @_;
 
-    my %c = reverse %$comments or return '';
+    my %c = reverse %{$comments->[0]} or return '';
     join("\n",
 	 "<h2>Remarks</h2>", "<ul>",
-	 (map { qq(<li><a name="$_">($_)</a> $c{$_}) } (1 .. keys %c)),
+	 (map { qq(<li><a name="$_">($_)</a> ) . html_quote($c{$_}) } (1 .. keys %c)),
 	 "</ul>");
 }
 sub similar_pages {
