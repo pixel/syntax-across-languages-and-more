@@ -297,7 +297,7 @@ def x():
 
   'breaking lines (useful when end-of-line and/or indentation has a special meaning)' =>
   [ { MLANG => "Pliant MUMPS Prolog" },
-   'nothing needed' => 'Ada B C C++ C# F# Maple Mathematica Eiffel PostScript Rebol Java YCP JavaScript Pascal Perl Perl6 OCaml CommonLisp EmacsLisp Scheme SML Smalltalk XSLT Forth Oz',
+   'nothing needed' => 'Ada B C C++ C# F# Haskell Maple Mathematica Eiffel PostScript Rebol Java YCP JavaScript Pascal Perl Perl6 OCaml CommonLisp EmacsLisp Scheme SML Smalltalk XSLT Forth Oz',
    '\\' => "Awk Io C Python Ruby Tcl E FishShell BourneShell",
    '_' => "VisualBasic",
    ',' => "ClassicREXX",
@@ -382,8 +382,7 @@ def x():
    '{ ... }' => "Pike PHP JavaScript Awk BourneShell Tcl Yorick",
    '{ ... } (introduce scope)' => "B C C++ C# Java Perl Perl6 E Haskell Modula-3 YCP",
    '( ... ) (introduce scope)' => "BourneShell",
-   '[ ... ]' => "Logo",
-   '[ x. y. ... ]' => "Smalltalk",
+   '[ ... ] (Smalltalk: introduce scope)' => "Logo Smalltalk",
    '"..."' => "Tcl",
    'begin ... end (introduce scope)' => "Pascal Ada",
    'BEGIN ... END' => "Modula-3",
@@ -562,8 +561,8 @@ def x():
      'f, a, b, ... (procedure call)' => "Yorick",
      'v = f(a, b, ...) or call f a, b, ...' => "ClassicREXX",
      'a b ... f' => "PostScript Forth",
-     'a f' => 'Smalltalk',
-     'a f: b g: ... (the function is "f: g:")' => "Smalltalk",
+#     'a f' => 'Smalltalk',
+#     'a f: b g: ... (the function is "f: g:")' => "Smalltalk",
      "(a,b,...)->&f or (a,b,...)->f" => "Beta",
      'f:a (in Pliant, special sugar for only one parameter)' => 'FL',
      'f@a (only for one parameter)' => "Mathematica",
@@ -1337,7 +1336,7 @@ end') => "ClassicREXX",
     'until c [...]' => "Logo",
     'do.while [...] c' => "Logo",
     'While[...; c]' => "Mathematica",
-    '[... . c] whileFalse' => "Smalltalk",
+    '[...] whileFalse: [c]' => "Smalltalk",
     pre('Do 
 ...
 Loop Until c') => "VisualBasic",
@@ -1345,7 +1344,7 @@ Loop Until c') => "VisualBasic",
 
    'for each value in a numeric range, 1 increment (see also the entries about ranges)' =>
    [ { MLANG => 'SML Eiffel Prolog' },
-    'for (int i = 1; i <= 10; i++) ...' => "C C#",
+    'for (int i = 1; i <= 10; i++) ...' => "C C# C++",
     'for (i = 1; i <= 10; i++) ...' => "Awk JavaScript",
     'for ($i = 1; $i <= 10; $i++) ...' => "PHP",
     'foreach my $i (1 .. 10) { ... }' => "Perl",
@@ -1384,7 +1383,7 @@ end') => "ClassicREXX",
     'for i = 10 downto 1 do ... done' => "OCaml F#",
     'for i in reverse 1 .. 10 loop ... end loop' => "Ada",
     'for i in 10 .. -1 .. 1 do ... done' => "F#",
-    'for (int i = 10; i >= 1; i--) ...' => "C C#",
+    'for (int i = 10; i >= 1; i--) ...' => "C C# C++",
     'for (my $i = 10; $i >= 1; $i--) { ... }' => "Perl",
     'loop (my $i = 10; $i >= 1; $i--) { ... }' => "Perl6",
     'for (i = 1; i <= 10; i--) ...' => "Awk JavaScript",
@@ -1413,7 +1412,7 @@ end') => "ClassicREXX",
 
    'for each value in a numeric range, free increment' =>
    [ { MLANG => 'SML OCaml Eiffel Prolog' },
-    'for (int i = 1; i <= 10; i += 2) ...' => "C C# Pike",
+    'for (int i = 1; i <= 10; i += 2) ...' => "C C# C++ Pike",
     'for (i = 1; i <= 10; i += 2) ...' => "Awk JavaScript",
     'for ($i = 1; $i <= 10; $i += 2) ...' => "PHP",
     'for (my $i = 1; $i <= 10; $i += 2) { ... }' => "Perl",
@@ -2122,7 +2121,7 @@ module P : PType  = struct ... end)) => "OCaml",
    ],
 
    'with interpolation of variables' =>
-   [ { MLANG => "SML Haskell CommonLisp Beta Maple Logo Prolog C C# ClassicREXX Eiffel" },
+   [ { MLANG => "SML Haskell Smalltalk CommonLisp Beta Maple Logo Prolog C C# C++ ClassicREXX Eiffel" },
     '... (no spaces)' => "Tcl",
     '"... $v ..."' => "Perl Perl6 Tcl PHP BourneShell FishShell",
     '"... {v} ..."' => "merd",
@@ -2148,11 +2147,12 @@ module P : PType  = struct ... end)) => "OCaml",
     '"~%" (when using format)' => "CommonLisp",
     '"[lf]"' => "Pliant",
     'vb_nl' => "VisualBasic",
+    '<N> (need expandMacros)' => "Smalltalk",
    ],  
   ],
 
   'multi-line' =>
-  [ { MLANG => "C Eiffel Prolog" },
+  [ { MLANG => "C C++ Eiffel Prolog" },
    'all strings allow multi-line strings' => "E Maple F# Mathematica Smalltalk Perl Io Perl6 OCaml Ruby Scheme Pascal CommonLisp EmacsLisp YCP FishShell",
    '"...", {...}' => "Tcl",
    '@"..."' => "C#",
@@ -2201,7 +2201,7 @@ module P : PType  = struct ... end)) => "OCaml",
   ],
 
   'serialize (marshalling)' =>
-  [ { MLANG => 'C Prolog Logo Tcl' },
+  [ { MLANG => 'C C++ Prolog Logo Tcl' },
    'export-clixml' => "MSH",
    'serialize' => "PHP Io",
    'Marshal.to_string' => "OCaml",
@@ -2215,7 +2215,7 @@ module P : PType  = struct ... end)) => "OCaml",
   ],
 
   'unserialize (un-marshalling)' =>
-  [ { MLANG => 'C Prolog Logo Tcl' },
+  [ { MLANG => 'C C++ Prolog Logo Tcl' },
    'import-clixml' => "MSH",
    'unserialize' => "PHP",
    'Marshal.from_string' => "OCaml",
@@ -2582,8 +2582,9 @@ module P : PType  = struct ... end)) => "OCaml",
   'StringTools[Search]' => "Maple",
   'StringPosition' => "Mathematica",
   'strstr strchr' => "C",
-  'find' => "Rebol YCP Logo Python Lua",
+  'find' => "C++ Rebol YCP Logo Python Lua",
   'findSeq' => "Io",
+  'findSubstring' => "Haskell",
   'strfind' => "Matlab Yorick",
   '$FIND' => "MUMPS",
   'index_non_blank / find_token' => "Ada",
@@ -2596,7 +2597,7 @@ module P : PType  = struct ... end)) => "OCaml",
  ],
 
  'locate a substring (starting at the end)' => 
- [ { MLANG => "Prolog Io" }, # rindex in C is BSD only
+ [ { MLANG => "Prolog Haskell Io" }, # rindex in C is BSD only
   'rindex' => "Ruby Perl Perl6 OCaml Python",
   'rfind' => "C++ Python",
   'find/last' => "Rebol",
@@ -2674,7 +2675,7 @@ module P : PType  = struct ... end)) => "OCaml",
  [
   'TRUE' => "Modula-3 SQL92",
   'True' => "Haskell merd Eiffel VisualBasic Python Mathematica",
-  'true' => "BCPL C# F# OCaml Io Maple SML Pascal Logo Ruby Smalltalk PostScript Java E Ada PHP Beta Pliant FL Oz YCP Tcl BourneShell YAML Prolog Rebol",
+  'true' => "BCPL C++ C# F# OCaml Io Maple SML Pascal Logo Ruby Smalltalk PostScript Java E Ada PHP Beta Pliant FL Oz YCP Tcl BourneShell YAML Prolog Rebol",
   'true()' => "XPath",
   't' => "EmacsLisp CommonLisp",
   '#t' => "Scheme Dylan",
@@ -2685,7 +2686,7 @@ module P : PType  = struct ... end)) => "OCaml",
   'on' => "Tcl YAML",
 
   'exit status 0' => "BourneShell",
-  'anything not false' => "Awk Perl Perl6 B C Pike Matlab Ruby MUMPS XPath EmacsLisp CommonLisp Python Scheme Dylan Rebol Yorick",
+  'anything not false' => "Awk Perl Perl6 B C C++ Pike Matlab Ruby MUMPS XPath EmacsLisp CommonLisp Python Scheme Dylan Rebol Yorick",
 
   '1' => "ClassicREXX MUMPS",
   'non zero number' => "Tcl",
@@ -2695,7 +2696,7 @@ module P : PType  = struct ... end)) => "OCaml",
  'logical not' =>
  [
   '!' => "Awk B C C++ C# E Java Pike Perl Perl6 Ruby YCP Tcl PHP Mathematica JavaScript Yorick",
-  'not' => "OCaml F# Logo SML Rebol Io Maple Pascal PostScript Ruby Scheme Haskell Perl Perl6 XPath Python Smalltalk merd Eiffel Lua EmacsLisp CommonLisp Ada Beta Pliant Forth Prolog",
+  'not (Smalltalk: postfix operator)' => "OCaml F# Logo SML Rebol Io Maple Pascal PostScript Ruby Scheme Haskell Perl Perl6 XPath Python Smalltalk merd Eiffel Lua EmacsLisp CommonLisp Ada Beta Pliant Forth Prolog",
   'Not' => "Oz VisualBasic",
   'NOT' => "Modula-3",
   '~' => "PL/I BCPL Dylan Matlab",
@@ -2748,6 +2749,7 @@ module P : PType  = struct ... end)) => "OCaml",
    'ARRAY or LINKED_LIST' => "Eiffel",
    'Array or OrderedCollection' => "Smalltalk",
    'cell' => "Matlab",
+   'vector' => "C++",
  ],
 
  'list concatenation' =>
@@ -2877,7 +2879,7 @@ module P : PType  = struct ... end)) => "OCaml",
  ],
 
  'adding an element at index' =>
- [ { MLANG => 'Eiffel OCaml Logo Prolog Matlab Maple' },
+ [ { MLANG => 'C++ Eiffel OCaml Haskell Logo Prolog Matlab Maple' },
   'return the new list (no side-effect)' =>
   [
    'linsert l i e' => "Tcl",
@@ -3380,12 +3382,12 @@ Next' => "VisualBasic",
 
  'tuple type' =>
  [ { KIND => 'typed', MLANG => 'C C++ C# Maple Eiffel Pascal Java Smalltalk JavaScript Ada' },
-   't1 * ... * tn' => "SML F# OCaml",
-   '(t1, ..., tn)' => "Haskell",
-   't1, ..., tn' => "merd",
+   'typ1 * ... * typn' => "SML F# OCaml",
+   '(typ1, ..., typn)' => "Haskell",
+   'typ1, ..., typn' => "merd",
    'tuple' => "Python",
    'tuple!' => "Rebol",
-   'Tuple[T1, T2, T3]' => "E",
+   'Tuple[Typ1, Typ2, Typ3]' => "E",
  ],
 
  'tuple constructor' =>
@@ -3511,21 +3513,53 @@ Next' => "VisualBasic",
 
  ],
 
- 'record selector' =>
- [ { MLANG => "Perl Prolog Logo ClassicREXX" },
-  '.' => "C C++ C# F# Ruby OCaml Matlab Ada Beta Pascal Python E Eiffel Java Modula-2 Modula-3 JavaScript Lua Oz",
-  '::' => "XPath",
-  '%' => "Fortran90",
-  "' (attribute selector)" => "Ada",
-  '^' => "Mercury",
-  'r { field }' => "merd",
-  'r:field' => "Pliant",
-  'field r' => "Haskell",
-  '->' => "C C++",
-  'r[field]' => "Maple",
-  'r["field"]' => "JavaScript",
-  '#field r' => "SML",
-  'normal function call' => "Haskell CommonLisp Dylan Smalltalk Io",
+ 'record' =>
+ [ { ALL => 1, MLANG => "Perl Prolog Logo ClassicREXX" },
+   'type declaration' => 
+   [ { KIND => 'typed' },
+    'struct { typ1 n1; typ2 n2; ... }' => 'C C++',
+    'type typ = { n1 : typ1; n2 : typ2 }' => "OCaml SML",
+    'data Typ = N0 { n1, n2 :: typ1, n3 :: typ3, ... }' => "Haskell",
+   ],
+
+   'selector' =>
+   [
+    '.' => "C C++ C# F# Ruby OCaml Matlab Ada Beta Pascal Python E Eiffel Java Modula-2 Modula-3 JavaScript Lua Oz",
+    '::' => "XPath",
+    '%' => "Fortran90",
+    "' (attribute selector)" => "Ada",
+    '^' => "Mercury",
+    'r { field }' => "merd",
+    'r:field' => "Pliant",
+    'field r' => "Haskell",
+    '->' => "C C++",
+    'r[field]' => "Maple",
+    'r["field"]' => "JavaScript",
+    '#field r' => "SML",
+    'normal function call' => "Haskell CommonLisp Dylan Smalltalk Io",
+   ],
+  ],
+
+ 'union type declaration' =>
+ [ { KIND => 'typed' },
+   'union { typ1 n1; typ2 n2; ... }' => 'C C++',
+   'data Typ = N1 typ1 | N2 typ2 | ...' => "Haskell",
+   'type typ = N1 of typ1 | N2 of typ2 | ...' => "OCaml",
+   'datatype typ = N1 of typ1 | N2 of typ2 | ...' => "SML",
+ ],
+
+ 'enumerated type declaration' =>
+ [ { KIND => 'typed' },
+   'enum typ { n1; n2; ... } (Java: introduced in 1.5)' => 'C C++ C# Java',
+   pre('Enum typ
+   n1
+   n2
+End Enum') => "VisualBasic",
+   '(n1, n2, ...)' => "Pascal",
+   'type typ is (n1, n2, ...)' => "Ada",
+   'data Typ = N1 | N2 | ...' => "Haskell",
+   'type typ = N1 | N2 | ...' => "OCaml",
+   'datatype typ = N1 | N2 | ...' => "SML",
  ],
 
  'dictionary' =>
@@ -4563,6 +4597,7 @@ sub credits {
 <li>Sanghyeon Seo (Lua)
 <li>Szabolcs Horv&aacute;t (Mathematica)
 <li>Laurent Le Brun (F#)
+<li>Julien Hall (Smalltalk)
 </ul>
 EOF
 }
