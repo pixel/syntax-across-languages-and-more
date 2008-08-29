@@ -137,7 +137,7 @@ my $all_raw = [
   ],
 
   'documentation comment' =>
-  [ { MLANG => "C Tcl ClassicREXX Mathematica Logo MUMPS Prolog Maple" },
+  [ { MLANG => "C Tcl Forth ClassicREXX Mathematica Logo MUMPS Prolog Maple" },
    'until end of line' =>
    [
     '///' => "C# F# Java",
@@ -196,7 +196,7 @@ def x():
   ],
 
   'information about the current line and file' =>
-  [ { MLANG => "OCaml Io Haskell Ada MUMPS CommonLisp Matlab Prolog Tcl" },
+  [ { MLANG => "OCaml Io Haskell Forth Ada MUMPS CommonLisp Matlab Prolog Tcl" },
    '__LINE__ __FILE__' => "C C++ Perl Pike PHP Ruby",
    '__LINE__ __SOURCE_FILE__' => "F#",
    '$?LINE $?FILE' => "Perl6",
@@ -381,7 +381,7 @@ def x():
   ],
 
   'block (grouping statements, especially when statements are not expressions)' =>
-  [ { MLANG => 'OCaml Prolog Rebol SML XSLT Mathematica CommonLisp Maple Oz PostScript' },
+  [ { MLANG => 'OCaml Prolog Forth Rebol SML XSLT Mathematica CommonLisp Maple Oz PostScript' },
    '{ ... }' => "Pike PHP JavaScript Awk BourneShell Tcl Yorick",
    '{ ... } (introduce scope)' => "B C C++ C# Java Perl Perl6 E Haskell Modula-3 YCP",
    '( ... ) (introduce scope)' => "BourneShell",
@@ -539,7 +539,7 @@ def x():
   ],
 
   'force garbage collection' =>
-  [ { MLANG => 'Ada B C C++ Tcl CommonLisp Mathematica Pascal XSLT ClassicREXX MUMPS Matlab FishShell', },
+  [ { MLANG => 'Ada B C C++ Forth Tcl CommonLisp Mathematica Pascal XSLT ClassicREXX MUMPS Matlab FishShell', },
     'doGC' => "Beta",
     'GC.start' => "Ruby",
     'gc' => "Logo Pike Maple",
@@ -855,7 +855,7 @@ end') => 'Matlab',
   ],
 
   'function called when a function is not defined (in dynamic languages)' =>
-  [ { KIND => 'dynamic', MLANG => 'Logo Oz Rebol ClassicREXX Matlab', }, # in Oz: the function call is postponed until the function gets defined.  So the current thread will block, waiting for another thread to define the function. (mechanism of dataflow variables)
+  [ { KIND => 'dynamic', MLANG => 'Logo Oz Forth Rebol ClassicREXX Matlab', }, # in Oz: the function call is postponed until the function gets defined.  So the current thread will block, waiting for another thread to define the function. (mechanism of dataflow variables)
    'AUTOLOAD' => "Perl",
    'AUTOSCALAR, AUTOMETH, AUTOLOAD...' => "Perl6",
    '__getattr__' => "Python",
@@ -870,7 +870,7 @@ end') => 'Matlab',
   ],
 
   'runtime inspecting the caller information' =>
-  [ { KIND => 'dynamic', MLANG => 'E CommonLisp Logo' },
+  [ { KIND => 'dynamic', MLANG => 'E Forth CommonLisp Logo' },
    'caller' => "Perl Perl6 Ruby",
    'call' => "Io",
    'inspect.stack()[1]' => "Python",
@@ -1491,7 +1491,7 @@ end') => "ClassicREXX",
   ],
 
   'breaking control flow' =>
-  [ { ALL => 1, MLANG => "OCaml F# SML Beta Prolog PostScript Eiffel Oz", },
+  [ { ALL => 1, MLANG => "OCaml Forth F# SML Beta Prolog PostScript Eiffel Oz", },
    'returning a value' => $::return_a_value,
 
    'goto (unconditional jump)' =>
@@ -2102,7 +2102,7 @@ module P : PType  = struct ... end)) => "OCaml",
   ],
 ],
 
-'Strings' => [
+'Strings' => [ { MLANG => "Forth" },
 
   'type name' =>
   [ { KIND => 'typed' },
@@ -2355,7 +2355,7 @@ module P : PType  = struct ... end)) => "OCaml",
   ],
 
   'string equality & inequality' =>
-  [ { MLANG => "Forth" },
+  [
    'eq ne' => "Perl Perl6 Tcl",
    'strcmp' => "C Matlab",
    '== !=' => "Pike JavaScript",
@@ -2754,7 +2754,7 @@ module P : PType  = struct ... end)) => "OCaml",
  ],
 
  'logical or / and' =>
- [
+ [ { MLANG => "Forth" },
   'short circuit' =>
   [
    '|| / &&' => "Awk C C++ C# F# Java Matlab Mathematica Pike Perl Perl6 YCP Ruby OCaml Haskell merd Tcl E PHP JavaScript Yorick",
@@ -2801,7 +2801,7 @@ module P : PType  = struct ... end)) => "OCaml",
  ],
 
  'list concatenation' =>
- [ { MLANG => 'C++' }, # C++ has the typical OO disease, it does everything in-place
+ [ { MLANG => 'C++ Forth' }, # C++ has the typical OO disease, it does everything in-place
   '+' => "Ruby Eiffel Pike Python merd E",
   ',' => "Smalltalk Maple Matlab Perl",
   '@' => "SML OCaml F#",
@@ -2821,7 +2821,7 @@ module P : PType  = struct ... end)) => "OCaml",
  ],
 
  'list flattening' =>
- [ { MLANG => 'Perl Matlab Logo Python C++ Smalltalk JavaScript' },
+ [ { MLANG => 'Perl Matlab Logo Python C++ Forth Smalltalk JavaScript' },
   'one level depth' =>
   [
    'concat' => "F# Haskell Mercury SML",
@@ -2898,7 +2898,7 @@ module P : PType  = struct ... end)) => "OCaml",
  ],
 
  'adding an element at the beginning (list cons)' =>
- [ { MLANG => 'Python Objective-C Tcl FishShell' },
+ [ { MLANG => 'Python Forth Objective-C Tcl FishShell' },
   'return the new list (no side-effect)' =>
   [
    ':' => "Haskell merd",
@@ -2914,7 +2914,7 @@ module P : PType  = struct ... end)) => "OCaml",
   ],
 
   'side-effect' =>
-  [ { MLANG => "Beta Maple" }, # Beta: (obj, list.head) -> list.insertBefore
+  [ { MLANG => "Beta Maple Forth" }, # Beta: (obj, list.head) -> list.insertBefore
    'unshift' => "Perl Perl6 Ruby JavaScript",
    'prepend' => "YCP",
    'push_front' => "C++",
@@ -2928,7 +2928,7 @@ module P : PType  = struct ... end)) => "OCaml",
  ],
 
  'adding an element at index' =>
- [ { MLANG => 'C++ Eiffel OCaml Haskell Logo Prolog Matlab Maple' },
+ [ { MLANG => 'C++ Eiffel Forth OCaml Haskell Logo Prolog Matlab Maple' },
   'return the new list (no side-effect)' =>
   [
    'linsert l i e' => "Tcl",
@@ -2946,7 +2946,7 @@ module P : PType  = struct ... end)) => "OCaml",
  ],
 
  'adding an element at the end' =>
- [ { MLANG => 'CommonLisp Tcl Haskell Beta Prolog Maple OCaml SML FishShell' },
+ [ { MLANG => 'CommonLisp Forth Tcl Haskell Beta Prolog Maple OCaml SML FishShell' },
   'return the new list (no side-effect)' =>
   [
    'push' => "merd",
@@ -2972,7 +2972,7 @@ module P : PType  = struct ... end)) => "OCaml",
  ],
 
  'first element' =>
- [ { MLANG => "Beta Tcl Perl Python Ruby JavaScript Maple Matlab FishShell" },
+ [ { MLANG => "Beta Tcl Forth Perl Python Ruby JavaScript Maple Matlab FishShell" },
   '' =>
   [
    'head' => "Haskell",
@@ -2991,7 +2991,7 @@ module P : PType  = struct ... end)) => "OCaml",
  ],
 
  'all but the first element' =>
- [ { MLANG => 'Perl C++ Ruby JavaScript Maple Io Eiffel' },
+ [ { MLANG => 'Perl C++ Ruby Forth JavaScript Maple Io Eiffel' },
   'tail' => "Haskell",
   'Tail' => "F#",
   'tl' => "OCaml F#",
@@ -3006,7 +3006,7 @@ module P : PType  = struct ... end)) => "OCaml",
  ],
 
  'last element' =>
- [ { MLANG => 'C++ OCaml JavaScript Maple' },
+ [ { MLANG => 'C++ OCaml JavaScript Forth Maple' },
   '' =>
   [
    'last' => "Eiffel Rebol Io Logo Haskell Prolog Pliant Smalltalk E Scheme",
@@ -3030,7 +3030,7 @@ module P : PType  = struct ... end)) => "OCaml",
  ],
 
  'get the first element and remove it' =>
- [ { MLANG => 'Haskell Matlab Tcl Python C++ OCaml Maple Eiffel' },
+ [ { MLANG => 'Haskell Forth Matlab Tcl Python C++ OCaml Maple Eiffel' },
   'shift' => "Perl Perl6 Ruby JavaScript",
   'shift!' => "merd",
   'pop' => "CommonLisp Logo",
@@ -3039,7 +3039,7 @@ module P : PType  = struct ... end)) => "OCaml",
  ],
 
  'get the last element and remove it' =>
- [ { MLANG => 'Haskell C++ OCaml Tcl Maple Eiffel Matlab' },
+ [ { MLANG => 'Haskell Forth  C++ OCaml Tcl Maple Eiffel Matlab' },
   'pop' => "E Perl Perl6 Ruby Python Io JavaScript",
   'pop!' => "merd",
   'array_pop' => "PHP",
@@ -3191,7 +3191,7 @@ Next' => "VisualBasic",
  ],
 
  'is an element in the list' =>
- [ { MLANG => "C++ Perl Maple" },
+ [ { MLANG => "C++ Forth Perl Maple" },
   'member?' => "Ruby merd Dylan",
   'include?' => "Ruby",
   'mem' => "F# OCaml",
@@ -3238,7 +3238,7 @@ Next' => "VisualBasic",
 
  'smallest / biggest element' =>
  # accepting n-ary functions if a "*" tupling function exists		     
- [ { MLANG => 'OCaml Tcl Logo JavaScript' },
+ [ { MLANG => 'OCaml Tcl Forth Logo JavaScript' },
   'min / max' => "Eiffel Maple Perl6 Pike Io Matlab Ruby Scheme Prolog Python CommonLisp Smalltalk Java",
   'Min / Max' => "Mathematica",
   'minimum / maximum' => "Haskell Mercury merd",
@@ -3248,7 +3248,7 @@ Next' => "VisualBasic",
  ],
 
  'join a list of strings in a string using a glue string' =>
- [ { MLANG => "Eiffel Logo" },
+ [ { MLANG => "Eiffel Forth Logo" },
   'join(s, l)' => "PHP Perl Perl6",
   'String.Join(s, l)' => "C#",
   's.join(l)' => "Python",
@@ -3289,7 +3289,7 @@ Next' => "VisualBasic",
  ],
 
  'iterate with index' =>
- [ { MLANG => 'Haskell Tcl Maple Logo Matlab Prolog Perl C++ OCaml Smalltalk JavaScript' }, # Haskell is "zipWith (\i v -> expr) [1..] l"
+ [ { MLANG => 'Haskell Tcl Maple Forth Logo Matlab Prolog Perl C++ OCaml Smalltalk JavaScript' }, # Haskell is "zipWith (\i v -> expr) [1..] l"
   'each_with_index' => "Ruby merd",
   'enumerate(l)' => "Python",
   'foreach($l as $i => $v)' => "PHP",
@@ -3307,7 +3307,7 @@ Next' => "VisualBasic",
  ],
 
  'remove duplicates' =>
- [ { MLANG => "Perl Python OCaml Smalltalk JavaScript Scheme" },
+ [ { MLANG => "Perl Python Forth OCaml Smalltalk JavaScript Scheme" },
   'uniq' => "Ruby Perl6 Pike merd",
   'uniq!' => "Ruby",
   'uniq2' => "Pike",
@@ -3326,7 +3326,7 @@ Next' => "VisualBasic",
  ],
 
  'sort' =>
- [ { MLANG => 'Logo' },
+ [ { MLANG => 'Logo Forth' },
   'sort (in Scheme, not standard, but nearly standard)' => "Eiffel Io Pike F# Prolog Matlab Maple Rebol Ruby C++ C# OCaml XSLT Haskell Java JavaScript CommonLisp Python Perl Perl6 merd E PHP Lua YCP Scheme",
   'sort!' => "Ruby",
   'sorted' => "Python",
@@ -3342,7 +3342,7 @@ Next' => "VisualBasic",
  ],
 
  'reverse' =>
- [ { MLANG => 'Tcl' },
+ [ { MLANG => 'Tcl Forth' },
   'reverse' => "Pike Rebol Io Logo Ruby Haskell Prolog Perl Perl6 Java JavaScript Mercury Scheme Python merd Dylan EmacsLisp CommonLisp C++",
   'Reverse' => "C# Oz Mathematica",
   'reversed' => "Smalltalk Python",
@@ -3441,7 +3441,7 @@ Next' => "VisualBasic",
  ],
 
  'tuple constructor' =>
- [ { MLANG => 'C C++ C# Eiffel Tcl Java JavaScript ClassicREXX FishShell' },
+ [ { MLANG => 'C C++ C# Eiffel Tcl Java JavaScript ClassicREXX FishShell Forth' },
    'a, b, c' => "OCaml F# Ruby Python Lua merd",
    '( a, b, c )' => "SML Haskell Prolog Ada Perl C++-0x",
    '{ a. b. c }' => 'Smalltalk',
@@ -3452,7 +3452,7 @@ Next' => "VisualBasic",
  ],
 
  'computable tuple (these are a kind of immutable lists playing a special role in parameter passing)' =>
- [ { ALL => 1, KIND => 'dynamic', MLANG => "ClassicREXX Logo Io Tcl FishShell" },
+ [ { ALL => 1, KIND => 'dynamic', MLANG => "ClassicREXX Logo Io Tcl FishShell Forth" },
    # tagged "dynamic" because in statically typed languages, this needs staged evaluation (like macros)
   'empty tuple' =>
   [
@@ -3784,7 +3784,7 @@ End Enum') => "VisualBasic",
  ],
 
  'range' => 
- [ { MLANG => 'C C++ Maple OCaml Java ClassicREXX Eiffel' },
+ [ { MLANG => 'C C++ Maple Forth OCaml Java ClassicREXX Eiffel' },
   'inclusive .. inclusive' =>
   [
    'a .. b' => "Ruby Perl Pascal merd E Ada MSH",
@@ -3886,7 +3886,7 @@ End Enum') => "VisualBasic",
    ],
 
    'integer thousand-seperator' => 
-   [ { MLANG => "Awk C Tcl C++ C# Logo Smalltalk Maple Python Prolog Haskell Oz JavaScript CommonLisp ClassicREXX SQL92 Matlab" },
+   [ { KIND => "rare" },
     '1_000, 10_00, 100_0' => 'E Perl Perl6 Ruby Eiffel OCaml',
     "1'000, 10'00, 100'0" => 'Rebol',
     '1_000' => 'merd Ada',
