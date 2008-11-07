@@ -528,6 +528,7 @@ END
         implementation => "CPython 2.4",
         run_file => 'python %s', file_extension => '.py',
         run_stdin => 'python', run_cmdline => 'python -c %s', 
+        verbose_execution => 'python -m trace -t',
         interactive_interpreter => 'python',
         debugger => 'python -m pdb %s', interpreter_in_debugger => 1,
         shebang_aware => 1,
@@ -1253,12 +1254,10 @@ END
 import Directory
 import System
 main = catch (getPermissions "/etc/mtab") (\_ -> exitFailure)
-         >> return ()
 END
         test_file_readable => <<'END',
 import System
 main = catch (readFile "/etc/mtab") (\_ -> exitFailure)
-         >> return ()
 END
         formatting => <<'END',
 main = putStrLn $ show a ++ " + " ++ show b ++ " = " ++ show(a + b) 
@@ -1273,7 +1272,6 @@ main =
     do ret <- system "false"
        when (ret /= ExitSuccess) (hPutStrLn stderr "false failed")
        system "echo done"
-       return ()
 END
         sed_in_place => <<'END',
 import System
@@ -1302,7 +1300,6 @@ op f = do catch (do ct <- gmt f; ot <- gmt o;
  where o = take (length f - 2) f ++ ".o"
        comp = do putStrLn ("Compiling "++f++" to "++o)
                  system ("gcc -c -o "++o++" "++f)
-                 return ()
 
 main = do files <- getCurrentDirectory >>= getDirectoryContents
           mapM_ op $ filter (".c"`isSuffixOf`) files
