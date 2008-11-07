@@ -7,5 +7,6 @@ java3
 ocaml3bis
 ocaml
 ocaml2
+ocaml3
 *.cmi
 *.cmo
