@@ -15,3 +15,5 @@ syntax-across-languages.html.pl.txt
 syntax-across-languages-per-language
 syntax-across-languages
 concepts-history.html
+*.cmi
+*.cmo
