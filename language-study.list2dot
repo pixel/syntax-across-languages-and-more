@@ -3,6 +3,7 @@
 sub min { (sort { $a <=> $b } @_)[0] }
 sub max { (sort { $b <=> $a } @_)[0] }
 sub uniq { my %l; @l{@_} = (); keys %l }
+sub difference2 { my %l; @l{@{$_[1]}} = (); grep { !exists $l{$_} } @{$_[0]} }
 sub round_down { my ($i, $r) = @_; $i = int $i; $i -= $i % $r; }
 sub round_up { my ($i, $r) = @_; $i = int $i; $i += $r - ($i + $r - 1) % $r - 1; }
 sub allocation2color {
@@ -73,6 +74,7 @@ while (<>) {
 	$allocation{$lang} = $1;
     } elsif (/^  (.*)/) {
 	my @l = split ',', $1;
+	difference2($links{$lang}, \@l) and warn "overriding @{$links{$lang}} with @l for $lang\n";
 	$links{$_} or die "$ARGV $.: unknown lang $_\n" foreach @l;
 	$links{$lang} = \@l;
 	inheritate($lang, $l[0]);
