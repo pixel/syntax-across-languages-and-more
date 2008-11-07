@@ -418,7 +418,7 @@ def x():
     '= # (in Modula-2, <> and # are synonyms)' => "Modula-2 Modula-3",
     "= !=" => "BourneShell FishShell",
     "== === != !== (=== and !== differ from == and != when the objects' type differ)" => "JavaScript PHP",
-    "=== !==" => "PHP5",
+    "=== !==" => "PHP5 Perl6",
     '== ~=' => "Lua",
     '== ~~' => "Smalltalk",
     '== ~==' => "Dylan",
@@ -453,6 +453,7 @@ def x():
     'equals' => "Java",
     'equal' => "EmacsLisp CommonLisp Pike",
     'equalp' => "CommonLisp",
+    'eqv' => "Perl6",
     'deep_is_equal' => "Eiffel",
     'isEqual' => "Objective-C",
    ],
@@ -4931,7 +4932,7 @@ sub end {
 <hr><address><a href="mailto:pixel@rigaux.org">Pixel</a></address>
 This document is licensed under <a href="http://www.gnu.org/copyleft/fdl.html">GFDL</a> (GNU Free Documentation License).
 <br>Generated from <a href="%ssyntax-across-languages.html.pl">syntax-across-languages.html.pl</a>
-<br> $Id$
+<br> $Id: syntax-across-languages.html.pl 408 2008-08-29 08:32:23Z pixel $
 EOF
 }
 
