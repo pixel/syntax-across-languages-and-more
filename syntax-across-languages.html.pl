@@ -6,7 +6,7 @@ use vars qw(@static @dynamic @OO @functional @reflexive @typed @rare @has_lambda
 # kinds ################################################################################
 ########################################################################################
 my @OO_dynamic = 
-  qw(E JavaScript Perl Perl6 MSH PHP Python Rebol Ruby Smalltalk Io VisualBasic YCP Tcl MzScheme Oz Matlab);
+  qw(E JavaScript Perl Perl6 MSH PHP Python Rebol Ruby Smalltalk Io VisualBasic YCP Tcl MzScheme Oz Scilab Matlab);
 my @OO_static = 
   ('C#', qw(Ada Beta C++ Cecil Pike Objective-C Java Eiffel Sather Delphi-Kylix Pliant Simula));
 my @functional_dynamic = 
@@ -99,7 +99,7 @@ my $all_raw = [
    'until end of line' =>
    [
     '#' => "Perl Io Perl6 Maple Ruby Python Tcl Icon Awk FishShell BourneShell PHP merd E Pliant YAML",
-    '//' => "BCPL Io C99 C++ C# F# Java Dylan Pike PHP JavaScript YCP Yorick",
+    '//' => "BCPL Io C99 C++ C# F# Java Dylan Pike PHP JavaScript YCP Yorick Scilab",
     '--' => "Cecil Eiffel Sather Simula Haskell Ada Lua SQL92",
     ';' => "EmacsLisp Logo CommonLisp Scheme Rebol Assembler MUMPS",
     '%' => "Prolog Mercury TeX Erlang PostScript Oz Matlab",
@@ -345,7 +345,7 @@ def x():
     'flet labels defun defmethod defvar defparameter defsetf ..' => "CommonLisp",
     'local V1 = e V2 = e2 in ... end' => "Oz",
     'global v1, v2' => "Python",
-    'global v1 v2' => "Matlab",
+    'global v1 v2' => "Matlab Scilab",
     ':@' => "Beta",
     'NEW v' => "MUMPS",
     'v: t' => "Ada Pascal Eiffel",
@@ -372,7 +372,7 @@ def x():
 
   'grouping expressions' =>
   [ { MLANG => 'EmacsLisp CommonLisp Scheme XSLT PostScript Forth' },
-   '( ... )' => "Beta BCPL Io Logo Mathematica Prolog B ClassicREXX Maple C C++ C# Matlab YCP Java Eiffel Rebol MUMPS MSH Pike Perl Perl6 Python Ruby Pascal Haskell OCaml F# Smalltalk SML merd E Tcl PHP JavaScript Lua Ada Awk Modula-3 Pliant XPath Oz SQL92 Yorick",
+   '( ... )' => "Beta BCPL Io Logo Mathematica Prolog B ClassicREXX Maple C C++ C# Matlab Scilab YCP Java Eiffel Rebol MUMPS MSH Pike Perl Perl6 Python Ruby Pascal Haskell OCaml F# Smalltalk SML merd E Tcl PHP JavaScript Lua Ada Awk Modula-3 Pliant XPath Oz SQL92 Yorick",
    '[ ... ]' => "Rebol",
    'indentation' => "merd",
    '$ ...' => "Haskell",
@@ -394,7 +394,7 @@ def x():
    'indentation' => "Python Pliant MUMPS F#",
    'indentation (introduce scope)' => "Haskell merd",
    'foo ... end  where foo in { if, do, ... }' => "Modula-2 Ruby",
-   'foo ... end  where foo in { if, for, while, ... }' => "Matlab",
+   'foo ... end  where foo in { if, for, while, ... }' => "Matlab Scilab",
    'foo ... end  where foo in { if, loop, ... }' => "Eiffel",
    'foo ... end foo  where foo in { if, do, ... }' => "Fortran90 Ada",
    '(* ... *) (ascii representation, original uses a special charset)' => "BCPL",
@@ -446,6 +446,7 @@ def x():
     '= <>' => "VisualBasic OCaml F# Rebol SML Beta Pascal SQL92",
     '= ~=' => "Dylan Smalltalk",
     '== ~= eq ne isequal isequalwithequalnans' => "Matlab",
+    '== ~= eq ne isequal' => "Scilab",
     '=@= \=@= / = \= / =:= =\= (normal / structural / unification / arithmetic)' => "Prolog",
     '=== =!= / == != (structural / mathematical)' => "Mathematica",
     '.eq' => "Logo",
@@ -463,7 +464,7 @@ def x():
   [ { ALL => 1 },
    '' =>
    [
-    '< > <= >=' => "Ada Awk Io Beta Forth Maple Mathematica Logo B C C++ C# YCP E Matlab Java Pascal Rebol Smalltalk VisualBasic Scheme Pike Perl Perl6 merd Tcl Haskell Ruby SML OCaml F# PHP Eiffel JavaScript EmacsLisp CommonLisp Dylan Lua Awk Modula-3 Python Pliant XPath ClassicREXX SQL92 Yorick",
+    '< > <= >=' => "Ada Awk Io Beta Forth Maple Mathematica Logo B C C++ C# YCP E Matlab Scilab Java Pascal Rebol Smalltalk VisualBasic Scheme Pike Perl Perl6 merd Tcl Haskell Ruby SML OCaml F# PHP Eiffel JavaScript EmacsLisp CommonLisp Dylan Lua Awk Modula-3 Python Pliant XPath ClassicREXX SQL92 Yorick",
     '< > =< >=' => "Mercury Oz",
     "< > '> '<" => "MUMPS",
     '<< >> <<= >>= (deep comparison)' => "ClassicREXX",
@@ -494,7 +495,7 @@ def x():
 
    'min / max (binary or more)' =>
    [ { MLANG => 'Ruby B C C# Awk XSLT Tcl' },
-    'min / max' => "Ada Io C++ Java Forth Tcl8.5 Rebol Maple Lua Beta Prolog Pike Matlab Python Smalltalk E Eiffel merd CommonLisp Scheme OCaml F# Haskell Dylan Pliant SQL92 Yorick",
+    'min / max' => "Ada Io C++ Java Forth Tcl8.5 Rebol Maple Lua Beta Prolog Pike Matlab Scilab Python Smalltalk E Eiffel merd CommonLisp Scheme OCaml F# Haskell Dylan Pliant SQL92 Yorick",
     'min minstr / max maxstr (in List::Util)' => "Perl",
     'Min / Max' => "Oz Mathematica",
     'MIN / MAX' => "Modula-3 ClassicREXX",
@@ -507,6 +508,7 @@ def x():
   [ { KIND => 'dynamic', MLANG => "XSLT" },
    'eval' => "Perl Perl6 Ruby Python BourneShell FishShell Scheme EmacsLisp Tcl Matlab PHP JavaScript CommonLisp YCP",
    'exec' => "Python",
+   'evstr / execstr' => "Scilab",
    'dostring' => "Lua",
    'doString' => "Io",
    'evaluate' => "Forth",
@@ -682,7 +684,7 @@ def x():
     'fun f para1 para2 = ...' => 'SML',
     'proc f {para1 para2} { ... }' => "Tcl",
     pre('function retval = f(para1, para2)
-retval = ...') => "Matlab",
+retval = ...') => "Matlab Scilab",
     pre(':- func f(typ1, typ2, ...) = typ0.
 f(Para1, Para2, ...) = ...') => "Mercury",
     pre('function f(para1 : type1; para2 : typ2; ...) return retval is
@@ -758,7 +760,7 @@ MODE ::= | OUT | IN OUT') => "Ada",
 End Sub' => "VisualBasic",
 
     pre('function f(para1, para2)
-...') => "Matlab",
+...') => "Matlab Scilab",
 
     pre('f : procedure
   ...
@@ -777,6 +779,10 @@ return') => "ClassicREXX",
 for i=1:nargin
  ...(varargin{i})
 end') => 'Matlab',
+      pre('function f(varargin)
+for e=varargin
+ ...(e)
+end') => 'Scilab',
     ],
 
    'predicates' => 
@@ -911,7 +917,7 @@ end') => 'Matlab',
 
   'sequence' =>
   [ { MLANG => "Forth PostScript Oz" },
-   ',' => "C C++ Perl Matlab Pike JavaScript Prolog",
+   ',' => "C C++ Perl Matlab Scilab Pike JavaScript Prolog",
    '.' => "Smalltalk",
    ';' => "Awk Maple Mathematica Beta Io PL/I B C C++ C# Java Matlab YCP Pike Pascal Python Ruby Perl Perl6 OCaml F# SML merd Tcl E PHP JavaScript Ada BourneShell FishShell Haskell Modula-3 Pliant",
    ':' => "Maple",
@@ -3272,7 +3278,7 @@ Next' => "VisualBasic",
 
  'list size' =>
  [
-  'size' => "Ruby merd E Io Matlab Dylan Java C++ YCP Pliant Smalltalk",
+  'size' => "Ruby merd E Io Matlab Scilab Dylan Java C++ YCP Pliant Smalltalk",
   'sizeof' => "Pike",
   'length' => "C# F# Ruby Matlab SML Haskell Mercury OCaml Scheme PostScript Java JavaScript EmacsLisp CommonLisp Prolog",
   'Length' => "Oz F# Mathematica",
