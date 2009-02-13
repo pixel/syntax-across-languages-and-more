@@ -3663,6 +3663,7 @@ End Enum') => "VisualBasic",
    'table([a=b, c=d])' => "Maple",
    'define table foo a => b; c => d end' => "Dylan",
    'dict create a b c d' => "Tcl8.5",
+   'new Dictionary<t1, t2> { {a, b}, {c, d} }' = "C#",
    'fromList' => "Haskell",
    '[NSDictionary dictionaryWithObjectsAndKeys:b, a, d, c, nil]' => "Objective-C",
    pre('  a: b
