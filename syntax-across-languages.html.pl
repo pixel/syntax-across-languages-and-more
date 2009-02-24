@@ -30,7 +30,7 @@ my @functional_static =
 @has_lambda = (@functional,
   qw(Ruby Python Perl Perl6 MSH Mathematica), 'C#2', 'C#3', 'Tcl');
 
-@various = qw(APL BCPL B J PL/I MUMPS HTML CSS TeX SGML XML YAML Assembler SQL92 GNU-sed);
+@various = qw(APL BCPL B J PL/I MUMPS HTML CSS TeX SGML XML YAML Assembler SQL92 GNU-sed GNU-bc);
 
 my %kind_dependencies = (
   reflexive => 'dynamic',
@@ -98,7 +98,7 @@ my $all_raw = [
   [
    'until end of line' =>
    [
-    '#' => "Perl Io Perl6 Maple Ruby Python Tcl Icon Awk FishShell BourneShell PHP merd E Pliant YAML GNU-sed",
+    '#' => "Perl Io Perl6 Maple Ruby Python Tcl Icon Awk FishShell BourneShell PHP merd E Pliant YAML GNU-sed GNU-bc",
     '//' => "BCPL Io C99 C++ C# F# Java Dylan Pike PHP JavaScript YCP Yorick Scilab",
     '--' => "Cecil Eiffel Sather Simula Haskell Ada Lua SQL92",
     ';' => "EmacsLisp Logo CommonLisp Scheme Rebol Assembler MUMPS",
@@ -130,7 +130,7 @@ my $all_raw = [
    'non nestable' =>
    [
     '" ... "' => "Smalltalk",
-    '/* ... */' => "C C++ C# Java B PL/I Pike CSS PHP JavaScript Mercury YCP Yorick",
+    '/* ... */' => "C C++ C# Java B PL/I Pike CSS PHP JavaScript Mercury YCP Yorick GNU-bc",
     '<!-- ... -->' => "HTML XML",
     '( ... )' => "Forth",
    ],
@@ -218,6 +218,7 @@ def x():
      'case-sensitive: variables<br>case-insensitive: keywords, functions, constants...' => "PHP",
      'case-sensitive: identifiers<br>case-insensitive: keywords' => "E",
      'case-sensitive: identifiers<br>case-insensitive: commands' => "MUMPS",
+     'case-sensitive: upper case disallowed' => 'GNU-bc',
     ],
 
     'what is the standard way for <a href="http://c2.com/cgi/wiki?CapitalizationRules">scrunching together multiple words</a>' =>
@@ -226,10 +227,10 @@ def x():
      # perl -ne '$l{$_} = 1 foreach /(\w*[a-z][_]\w*)/g; $m{$_} = 1 foreach /(\w*[a-z][A-Z]\w*)/g; END { print join(" ", keys %l), "\n", join(" ", keys %m), "\n" }'
      'camelCase' => "JavaScript",
      'CamelCase or camelCase' => "Haskell Io Java JavaScript Tcl Smalltalk C# E Pascal Mathematica VisualBasic",
-     'underscores' => 'merd FishShell',
+     'underscores' => 'merd FishShell GNU-bc',
      'dots' => "Logo",
      'hyphens' => "Rebol EmacsLisp CommonLisp",
-     'underscores for functions, unclear for modules / types / constructors' => "OCaml",
+     'underscores for functions / types, unclear for modules / constructors' => "OCaml",
      'UPPER_CASE' => "BourneShell",
      'lowercasenoseparator' => 'Matlab',
      'underscores, UPPER_CASE for class names' => "Eiffel",
@@ -265,6 +266,7 @@ def x():
      "[a-zA-Z!?@#$_][a-zA-Z0-9!?@#$_]*" => "ClassicREXX",
      q([_a-zA-Z?!.'+*&|=~-][_a-zA-Z0-9?!.'+*&|=~-]* or 
 <br>[^0-9[](){}":;/][^ \n\t[](){}":;/]*) => "Rebol",
+     '[a-z][a-z0-9_]*' => "GNU-bc",
      'anything without a space and is not a number' => "CommonLisp Forth",
     ],
 
@@ -299,7 +301,7 @@ def x():
   'breaking lines (useful when end-of-line and/or indentation has a special meaning)' =>
   [ { MLANG => "Pliant MUMPS Prolog GNU-sed" },
    'nothing needed' => 'Ada B C C++ C# F# Haskell Maple Mathematica Eiffel PostScript Rebol Java YCP JavaScript Pascal Perl Perl6 OCaml CommonLisp EmacsLisp Scheme SML Smalltalk XSLT Forth Oz',
-   '\\' => "Awk Io C Python Ruby Tcl E FishShell BourneShell",
+   '\\' => "Awk Io C Python Ruby Tcl E FishShell BourneShell GNU-bc",
    '_' => "VisualBasic",
    ',' => "ClassicREXX",
    '~' => "Logo",
@@ -352,6 +354,7 @@ def x():
     't v' => "C C++ C# Java",
     '| v1 v2 |' => 'Smalltalk',
     'auto v1, v2; extrn v3, v4;' => "B",
+    'auto' => "GNU-bc",
     'var' => "JavaScript Pliant",
     'gvar' => "Pliant",
     'variable v (the variable behaves like a pointer)' => "Forth",
@@ -364,7 +367,7 @@ def x():
 
    'both' =>
    [
-    '=' => "Python Ruby merd",
+    '=' => "Python Ruby merd GNU-bc",
     ':=' => "merd",
     'set, variable' => "Tcl",
    ],
@@ -372,7 +375,7 @@ def x():
 
   'grouping expressions' =>
   [ { MLANG => 'EmacsLisp CommonLisp Scheme XSLT PostScript Forth' },
-   '( ... )' => "Beta BCPL Io Logo Mathematica Prolog B ClassicREXX Maple C C++ C# Matlab Scilab YCP Java Eiffel Rebol MUMPS MSH Pike Perl Perl6 Python Ruby Pascal Haskell OCaml F# Smalltalk SML merd E Tcl PHP JavaScript Lua Ada Awk Modula-3 Pliant XPath Oz SQL92 Yorick",
+   '( ... )' => "Beta BCPL Io Logo Mathematica Prolog B ClassicREXX Maple C C++ C# Matlab Scilab YCP Java Eiffel Rebol MUMPS MSH Pike Perl Perl6 Python Ruby Pascal Haskell OCaml F# Smalltalk SML merd E Tcl PHP JavaScript Lua Ada Awk Modula-3 Pliant XPath Oz SQL92 Yorick GNU-bc",
    '[ ... ]' => "Rebol",
    'indentation' => "merd",
    '$ ...' => "Haskell",
@@ -382,7 +385,7 @@ def x():
 
   'block (grouping statements, especially when statements are not expressions)' =>
   [ { MLANG => 'OCaml Prolog Forth Rebol SML XSLT Mathematica CommonLisp Maple Oz PostScript' },
-   '{ ... }' => "Pike PHP JavaScript Awk BourneShell Tcl Yorick GNU-sed",
+   '{ ... }' => "Pike PHP JavaScript Awk BourneShell Tcl Yorick GNU-sed GNU-bc",
    '{ ... } (introduce scope)' => "B C C++ C# Java Perl Perl6 E Haskell Modula-3 YCP",
    '( ... ) (introduce scope)' => "BourneShell",
    '[ ... ] (Smalltalk: introduce scope)' => "Logo Smalltalk",
