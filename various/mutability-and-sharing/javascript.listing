@@ -1,0 +1,28 @@
+# -*- java -*-
+
+i = 1
+i2 = i
+i2 += 1
+print("i2:" + i2)
+print("i :" + i)
+
+s = "hello"
+s2 = s
+s2 += "!"
+print("s2:" + s2)
+print("s :" + s)
+
+l = [ "hello" ]
+l2 = l
+l2.push("world")
+print("l2:" + l2)
+print("l :" + l)
+
+p = { x: 0, y: 1, 
+      translate: function(x,y) { this.x += x; this.y += y },
+      to_string: function() { return "Point(" + this.x + ", " + this.y + ")" }
+    }
+p2 = p
+p2.translate(1, 1)
+print("p2:" + p2.to_string())
+print("p :" + p.to_string())
