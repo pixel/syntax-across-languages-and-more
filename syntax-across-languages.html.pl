@@ -30,7 +30,7 @@ my @functional_static =
 @has_lambda = (@functional,
   qw(Ruby Python Perl Perl6 MSH Mathematica), 'C#2', 'C#3', 'Tcl');
 
-@various = qw(APL BCPL B J PL/I MUMPS HTML CSS TeX SGML XML YAML Assembler SQL92);
+@various = qw(APL BCPL B J PL/I MUMPS HTML CSS TeX SGML XML YAML Assembler SQL92 GNU-sed);
 
 my %kind_dependencies = (
   reflexive => 'dynamic',
@@ -98,7 +98,7 @@ my $all_raw = [
   [
    'until end of line' =>
    [
-    '#' => "Perl Io Perl6 Maple Ruby Python Tcl Icon Awk FishShell BourneShell PHP merd E Pliant YAML",
+    '#' => "Perl Io Perl6 Maple Ruby Python Tcl Icon Awk FishShell BourneShell PHP merd E Pliant YAML GNU-sed",
     '//' => "BCPL Io C99 C++ C# F# Java Dylan Pike PHP JavaScript YCP Yorick Scilab",
     '--' => "Cecil Eiffel Sather Simula Haskell Ada Lua SQL92",
     ';' => "EmacsLisp Logo CommonLisp Scheme Rebol Assembler MUMPS",
@@ -297,7 +297,7 @@ def x():
   ],
 
   'breaking lines (useful when end-of-line and/or indentation has a special meaning)' =>
-  [ { MLANG => "Pliant MUMPS Prolog" },
+  [ { MLANG => "Pliant MUMPS Prolog GNU-sed" },
    'nothing needed' => 'Ada B C C++ C# F# Haskell Maple Mathematica Eiffel PostScript Rebol Java YCP JavaScript Pascal Perl Perl6 OCaml CommonLisp EmacsLisp Scheme SML Smalltalk XSLT Forth Oz',
    '\\' => "Awk Io C Python Ruby Tcl E FishShell BourneShell",
    '_' => "VisualBasic",
@@ -382,7 +382,7 @@ def x():
 
   'block (grouping statements, especially when statements are not expressions)' =>
   [ { MLANG => 'OCaml Prolog Forth Rebol SML XSLT Mathematica CommonLisp Maple Oz PostScript' },
-   '{ ... }' => "Pike PHP JavaScript Awk BourneShell Tcl Yorick",
+   '{ ... }' => "Pike PHP JavaScript Awk BourneShell Tcl Yorick GNU-sed",
    '{ ... } (introduce scope)' => "B C C++ C# Java Perl Perl6 E Haskell Modula-3 YCP",
    '( ... ) (introduce scope)' => "BourneShell",
    '[ ... ] (Smalltalk: introduce scope)' => "Logo Smalltalk",
@@ -920,11 +920,11 @@ end') => 'Scilab',
   [ { MLANG => "Forth PostScript Oz" },
    ',' => "C C++ Perl Matlab Scilab Pike JavaScript Prolog",
    '.' => "Smalltalk",
-   ';' => "Awk Maple Mathematica Beta Io PL/I B C C++ C# Java Matlab YCP Pike Pascal Python Ruby Perl Perl6 OCaml F# SML merd Tcl E PHP JavaScript Ada BourneShell FishShell Haskell Modula-3 Pliant",
+   ';' => "Awk Maple Mathematica Beta Io PL/I B C C++ C# Java Matlab YCP Pike Pascal Python Ruby Perl Perl6 OCaml F# SML merd Tcl E PHP JavaScript Ada BourneShell FishShell Haskell Modula-3 Pliant GNU-sed",
    ':' => "Maple",
    'nothing, optionally ;' => "Lua ClassicREXX",
    'space' => "Eiffel Rebol",
-   'end-of-line' => "Awk Ruby F# Io Python Lua merd Basic Tcl E Matlab Fortran Assembler JavaScript BourneShell FishShell Haskell Pliant",
+   'end-of-line' => "Awk Ruby F# Io Python Lua merd Basic Tcl E Matlab Fortran Assembler JavaScript BourneShell FishShell Haskell Pliant GNU-sed",
    '(begin ...)' => "Scheme",
    '(progn ...) (prog1 ...) (prog2 ...) ' => "EmacsLisp CommonLisp",
    '>>' => "Haskell",
@@ -982,6 +982,7 @@ if c then
 if c then do
   ...
 end') => "ClassicREXX",
+    't label' => 'GNU-sed',
   ],
 
   'if_then_else' =>
@@ -1508,6 +1509,7 @@ end') => "ClassicREXX",
     'Goto' => "Mathematica",
     'go throw' => "CommonLisp",
     'signal' => "ClassicREXX",
+    'b' => 'GNU-sed',
    ],
 
    'continue / break' =>
@@ -2319,6 +2321,7 @@ module P : PType  = struct ... end)) => "OCaml",
     'type' => "Forth",
     "putText" => "Beta",
     'say' => "ClassicREXX",
+    'p or i' => 'GNU-sed',
    ],
 
    'on simple objects' =>
@@ -2478,6 +2481,7 @@ module P : PType  = struct ... end)) => "OCaml",
   'uppercase form / lowercase form' => "Rebol",
   'char-upcase / char-downcase' => "CommonLisp Scheme",
   'char_type(C_, to_upper(C)), char_type(C_, to_lower(C))' => "Prolog",
+  '\U / \L / \C' => "GNU-sed",
  ],
 
  'uppercase / lowercase / capitalized string' =>
@@ -2588,6 +2592,7 @@ module P : PType  = struct ... end)) => "OCaml",
   '$EXTRACT(s, n)' => "MUMPS",
   'item' => "Logo",
   'over n chars + c@' => "Forth",
+  's/.{n}(.).*/\1/' => 'GNU-sed',
  ],
 
  'extract a substring' =>
@@ -2623,6 +2628,7 @@ module P : PType  = struct ... end)) => "OCaml",
   'sub_string / sub_atom' => "Prolog",
   '(take len . drop n) s' => "Haskell",
   'over n chars + len' => "Forth",
+  's/.{n}(.{len}).*/\1/' => 'GNU-sed',
  ],
 
  'locate a substring' => 
@@ -3217,6 +3223,7 @@ Next' => "VisualBasic",
   'has' => "Eiffel",
   'has_value' => "Pike",
   'ismember' => "Matlab",
+  '/elt/' => 'GNU-sed',
  ],
 
  'is the predicate true for an element' =>
@@ -3663,7 +3670,7 @@ End Enum') => "VisualBasic",
    'table([a=b, c=d])' => "Maple",
    'define table foo a => b; c => d end' => "Dylan",
    'dict create a b c d' => "Tcl8.5",
-   'new t { {a, b}, {c, d} }' = "C#",
+   'new t { {a, b}, {c, d} }' => "C#",
    'fromList' => "Haskell",
    '[NSDictionary dictionaryWithObjectsAndKeys:b, a, d, c, nil]' => "Objective-C",
    pre('  a: b
@@ -4891,7 +4898,7 @@ sub credits {
 <li>Axel Liljencrantz (FishShell)
 <li>Sanghyeon Seo (Lua)
 <li>Szabolcs Horv&aacute;t (Mathematica)
-<li>Laurent Le Brun (F#)
+<li>Laurent Le Brun (F#, GNU-sed)
 <li>Julien Hall (Smalltalk)
 <li>Ian Osgood (Forth)
 </ul>
