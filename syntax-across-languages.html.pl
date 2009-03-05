@@ -3800,6 +3800,17 @@ End Enum') => "VisualBasic",
    'elems' => "Haskell",
    '${h[@]}' => 'KornShell',
   ],
+
+  'merge' =>
+  [ { MLANG => 'OCaml' },
+    'merge (right-bias)' => "Ruby",
+    'array_merge (right-bias)' => "PHP",
+    'union (left-bias)' => "Haskell",
+    'update (right-bias)' => "Ruby Python",
+    'putAll (right-bias)' => "Java",
+    'insert (left-bias)' => "C++",
+    '(%h1, %h2) (right-bias)' => "Perl",
+  ],
  ],
 
  'range' => 
