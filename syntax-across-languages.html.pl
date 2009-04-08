@@ -2703,7 +2703,7 @@ module P : PType  = struct ... end)) => "OCaml",
    '#f' => "Dylan Scheme",
 
    'n' => "YAML",
-   'nil' => "EmacsLisp CommonLisp Io Lua Ruby Lua",
+   'nil' => "EmacsLisp CommonLisp Io Lua Ruby",
    'no' => "Tcl YAML",
    'No' => "Prolog",
    'none' => "Rebol",
