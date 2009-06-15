@@ -1421,6 +1421,7 @@ Loop Until c') => "VisualBasic",
     '1 to(10) foreach(...)' => "Io",
     '1 to: 10 do: [...]' => "Smalltalk",
     '(loop for i from 1 to 10 do ...)' => "CommonLisp",
+    'do label i = 1, 10' => "Fortran",
     'Do[..., {i, 1, 10}] (1 is optional in this example, since min is 1 by default)' => 'Mathematica',
     pre('do i = 1 for 10
   ...
@@ -1456,6 +1457,7 @@ end') => "ClassicREXX",
     '10 to(1) foreach(...)' => "Io",
     '10.downto(1) {|i| ... }' => "Ruby",
     '(loop for i from 1 to 10 by -1 do ...)' => "CommonLisp",
+    'do label i = 10, 1, -1' => "Fortran",
     'Do[..., {i, 10, 1, -1}]' => 'Mathematica',
     pre('do i = 10 to 1 by -1
   ...
@@ -1487,6 +1489,7 @@ end') => "ClassicREXX",
     '(1..10).step(2) {|i| ... }' => "Ruby",
     '1 to (9,2) foreach(...)' => "Io",
     '(loop for i from 1 to 10 by 2 do ...)' => "CommonLisp",
+    'do label i = 1, 10, 2' => "Fortran",
     'Do[..., {i, 1, 10, 2}]' => 'Mathematica',
     pre('do i = 1 to 10 by 2
   ...
