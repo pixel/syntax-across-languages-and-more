@@ -203,6 +203,8 @@ def x():
    'inspect.stack()[0][2] inspect.stack()[0][1]' => "Python",
    pre('(new System.Diagnostics.StackFrame(true)).GetFileLineNumber()
 (new System.Diagnostics.StackFrame(true)).GetFileName()') => 'C#',
+   pre('Thread.currentThread().getStackTrace()[1].getLineNumber();
+Thread.currentThread().getStackTrace()[1].getFileName();') => "Java",
    'system/script/header/file (need "file: %script-header.r" in file header)' => "Rebol",
    'SOURCELINE() / parse source OS . SOURCENAME' => "ClassicREXX",
    'info frame 0' => "Tcl8.5",
