@@ -431,7 +431,6 @@ Thread.currentThread().getStackTrace()[1].getFileName();') => "Java",
     '= ~= neqv (ascii representation, original uses a special charset)' => "BCPL",
     'f= f<>' => "Forth",
     'is_equal (for objects)' => "Eiffel",
-    'equal?' => "Scheme",
     'eq ne' => "EmacsLisp PostScript",
     'eq, eql' => "CommonLisp",
     'eq? eqv?' => "Scheme",
@@ -1312,7 +1311,7 @@ END') => "SQL92",
   'loop' => 
   [ { ALL => 1 },
     'forever loop' =>
-    [ { MLANG => 'Awk B Maple C C++ C# Tcl Java Prolog E Lua Matlab Pascal JavaScript Haskell Perl Python OCaml F# FishShell Smalltalk SML Tcl Eiffel Pliant' }, # Haskell would be: loop f = f >> loop f
+    [ { MLANG => 'Awk B Maple C C++ C# Tcl Scheme Java Prolog E Lua Matlab Pascal JavaScript Haskell Perl Python OCaml F# FishShell Smalltalk SML Tcl Eiffel Pliant' }, # Haskell would be: loop f = f >> loop f
      'loop' => "Ruby merd PostScript Perl6",
      'loop(...)' => "Io",
      'loop ... end loop' => "Ada",
@@ -1332,7 +1331,7 @@ end') => "ClassicREXX",
    ],
 
    'while condition do something' =>
-   [ { MLANG => 'Prolog' },
+   [ { MLANG => 'Prolog Scheme' },
     'while (c) ...' => "Awk B C C++ C# Java E Pike Perl Ruby PHP JavaScript YCP Yorick",
     'while c ...' => "Tcl Perl6",
     'while c loop ... end loop' => "Ada",
@@ -1368,7 +1367,7 @@ end') => "ClassicREXX",
    ],
 
    'do something until condition' =>
-   [ { MLANG => 'Python Maple Io OCaml F# SML Eiffel Matlab Pliant Smalltalk Tcl' },
+   [ { MLANG => 'Python Maple Scheme Io OCaml F# SML Eiffel Matlab Pliant Smalltalk Tcl' },
     'do ... until c' => "Perl6",
     'do {...} until c' => "Perl",
     'do ... while (!c) ' => "C C++ C# Java Awk Pike JavaScript Yorick",
