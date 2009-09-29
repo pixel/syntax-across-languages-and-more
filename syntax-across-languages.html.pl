@@ -4851,30 +4851,28 @@ sub similar_pages {
 <p>
 <h2>Similar Pages</h2>
 <ul>
+<li><a href="http://en.wikipedia.org/wiki/Comparison_of_programming_languages_(syntax)">Comparison of programming languages syntax</a>
 <li><a href="http://www.gavilan.edu/csis/languages/history.html">Comments and Literals in programming languages</a>
 <li><a href="http://web.cs.mun.ca/~ulf/pld/surface.html">The Surface of Programming Languages</a>
 <li><a href="http://www.cpcug.org/user/clemenzi/technical/Languages/">Delphi, VisualBasic, C++, Java</a>
 <li><a href="http://www.ps.uni-sb.de/~rossberg/SMLvsOcaml.html">SML, OCaml</a>
-<li><a href="http://www.chimu.com/publications/JavaSmalltalkSyntax.html">Java, Smalltalk</a>
 <li><a href="http://www.cc.gatech.edu/classes/AY2000/cs2803ab_fall/SqueakBasics.html">Java, C++, Smalltalk</a>
 <li><a href="http://www.soften.ktu.lt/~mockus/gmcsharp/csharp/c-sharp-vs-java.html">Java, C#</a>
 <li><a href="http://www.javaworld.com/javaworld/jw-11-2000/jw-1122-csharp1_p.html">Java, C#</a>
-<li><a href="http://www.dur.ac.uk/~dcl0bjc/Java/a.taste.of.csharp/onefile/index.htm">Java, C#</a>
 <li><a href="http://renaud.waldura.com/doc/ruby/idioms.shtml">Ruby, Java, Perl</a>
 <li><a href="http://mail.python.org/pipermail/python-list/1999-August/009692.html">Python, Perl</a>
 <li><a href="http://www.norvig.com/python-lisp.html">Python, Lisp</a>
-<li><a href="http://www.uni-muenster.de/ZIV/Mitarbeiter/EberhardSturm/PL1andC.html">PL/I, C</a>
+<li><a href="http://www.uni-muenster.de/ZIV.EberhardSturm/PL1andC.html">PL/I, C</a>
 <li><a href="http://www.cs.wcupa.edu/~rkline/perl2php/">Perl, PHP</a>
 <li><a href="http://obsidianrook.com/devnotes/elisp-for-perl-programmers.html">EmacsLisp, Perl</a>
 <li><a href="http://www.exept.de:8080/doc/online/english/programming/stForLispers.html">Smalltalk, Lisp</a>
+<li><a href="http://rosettacode.org/">Tasks in many languages</a>
 </ul>
 <h2>References</h2>
 <ul>
 <li><a href="http://cm.bell-labs.com/cm/cs/who/dmr/bcpl.html">BCPL</a>
-<li><a href="http://msdn.microsoft.com/library/en-us/vblr7/html/vaorivblangkeywordsall.asp">VisualBasic</a>
 <li><a href="http://www.gobosoft.com/eiffel/syntax/">Eiffel</a>
 <li><a href="http://sqlzoo.net/">SQL</a>
-<li><a href="http://www.research.compaq.com/SRC/m3defn/html/m3.html">Modula-3</a>
 </ul>
 EOF
 }
