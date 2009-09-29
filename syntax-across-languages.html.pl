@@ -499,12 +499,13 @@ Thread.currentThread().getStackTrace()[1].getFileName();') => "Java",
 
    'min / max (binary or more)' =>
    [ { MLANG => 'Ruby B C C# Awk XSLT Tcl' },
-    'min / max' => "Ada Io C++ Java Forth Tcl8.5 Rebol Maple Lua Beta Prolog Pike Matlab Scilab Python Smalltalk E Eiffel merd CommonLisp Scheme OCaml F# Haskell Dylan Pliant SQL92 Yorick",
+    'min / max' => "Io C++ Java Forth Tcl8.5 Rebol Maple Lua Beta Prolog Pike Matlab Scilab Python Smalltalk E Eiffel merd CommonLisp Scheme OCaml F# Haskell Dylan Pliant SQL92 Yorick",
     'min minstr / max maxstr (in List::Util)' => "Perl",
     'Min / Max' => "Oz Mathematica",
     'MIN / MAX' => "Modula-3 ClassicREXX",
     'measure-object -min / measure-object -max' => "MSH",
     'fmin / fmax' => "Forth",
+    "Integer'min / Integer'max" => "Ada",
    ],
   ],
 
@@ -536,6 +537,7 @@ Thread.currentThread().getStackTrace()[1].getFileName();') => "Java",
    [
     'malloc' => "C",
     'allocate throw' => "Forth",
+    'new' => "Ada",
    ],
 
    'deallocation' =>
@@ -860,7 +862,7 @@ end') => 'Scilab',
     'Result := val' => "Eiffel",
     '<function name> = val' => "VisualBasic",
     '<function name> := val' => "Pascal",
-    '<retvar name> = val;' => "Matlab",
+    '<retvar name> = val;' => "Matlab Ada",
    ],
    
   ],
@@ -1375,7 +1377,7 @@ end') => "ClassicREXX",
     'begin ... c until' => "Forth",
     'REPEAT ... UNTIL c' => "Modula-3", 
     'loop (# until ::< (# do c -> value #) do ... #) ' => "Beta",
-    'loop ... exit when c end loop' => "Ada",
+    'loop ... exit when c; end loop' => "Ada",
     '(loop do ... until c)' => "CommonLisp",
     '... repeatuntil c' => "BCPL",
     'repeat ... until c' => "Lua Pascal",
@@ -1722,10 +1724,11 @@ predefined_condition_name :
   [ { ALL => 1, MLANG => "Smalltalk Eiffel" },
    'type of a mutable value' =>
    [
-    'mutability is the default' => "Ada C C++ Java Matlab C#",
+    'mutability is the default' => "C C++ Java Matlab C#",
     'val x: T' => "Pascal",
     'T ref' => "SML OCaml F#",
     'STRef a T' => "Haskell",
+    'in out T (for parameters)' => "Ada",
    ],
 
    'type of a constant value' =>
@@ -1750,7 +1753,7 @@ predefined_condition_name :
   [ { ALL => 1 },
     '' =>
     [
-     'object.method(para)' => "C++ C# F# Java E MSH Python Perl6 Beta Cecil Delphi-Kylix Eiffel Sather Modula-3 Ruby VisualBasic Icon merd JavaScript",
+     'object.method(para)' => "C++ C# F# Java Ada E MSH Python Perl6 Beta Cecil Delphi-Kylix Eiffel Sather Modula-3 Ruby VisualBasic Icon merd JavaScript",
      'object#method para' => "OCaml",
      'object:method(para)' => "Lua",
      'object method(para)' => "Io",
@@ -1770,7 +1773,7 @@ predefined_condition_name :
 
     'with no parameter' =>
     [
-     'object.method' => "merd Ruby Eiffel F# Perl6",
+     'object.method' => "merd Ruby Ada Eiffel F# Perl6",
      'object.property (properties are something alike attributes, but really are methods)' => "C#",
      'object.method()' => "C# C++ Java E Python JavaScript",
      'object#method' => "OCaml",
@@ -1790,13 +1793,14 @@ predefined_condition_name :
 
   'object creation' =>
   [ { MLANG => 'Io' },
-   'new' => "Ada Simula PHP Pliant",
+   'new' => "Simula PHP Pliant",
    'new class_name(...)' => "C++ C# F# Java Perl JavaScript VisualBasic PHP",
    'new class_name ...' => "OCaml",
    'class_name.new(...)' => "Ruby Perl6",
    'class_name new' => "Smalltalk",
    'class_name(...)' => "Pike Python F# Matlab",
    'class_name v(...)' => "C++",
+   'v : class_name' => "Ada",
    'class_name.Create' => "Delphi-Kylix",
    '!class_name!constructor_name(...)' => "Eiffel",
    '&'  => "Beta",
@@ -1826,10 +1830,11 @@ predefined_condition_name :
    '$o2 = $o' => "PHP",
    'o2.all := o.all' => "Ada",
    'make o []' => "Rebol",
+   "o_ : T'Class := o (or simply o_ := o for non-polymorphic objects)" => "Ada",
   ],
 
   "manually call an object's destructor" =>
-  [ { MLANG => 'OCaml Tcl Io Eiffel E CommonLisp Smalltalk Matlab Ruby Java' },
+  [ { MLANG => 'OCaml Tcl Io Eiffel E Ada CommonLisp Smalltalk Matlab Ruby Java' },
    'delete' => "C++ JavaScript",
    'destroy' => "Pike",
    'DESTROY' => "Perl",
@@ -1846,7 +1851,7 @@ predefined_condition_name :
    'defclass defstruct' => "CommonLisp",
    'subclass' => 'Smalltalk',
    'type' => "Pliant",
-   'type c is tagged record ... end record' => 'Ada',
+   "type c is tagged record ... end record (c'Class is the class rooted in c)" => 'Ada',
    '@interface c { ... } ... @end' => "Objective-C",
    ':' => "Beta",
    'type c() = class ... end' => "F#",
@@ -1974,6 +1979,7 @@ predefined_condition_name :
    '$o.SUPER::method(...)' => "Perl6",
    '$o->SUPER::method(...)' => "Perl",
    'method(parent(dispatching-parameter))' => "Ada",
+   'parent(dispatching-parameter).method' => "Ada",
    'call-next-method' => "CommonLisp",
     pre('type foo2 =
   inherit foo as parent
@@ -2247,7 +2253,7 @@ module P : PType  = struct ... end)) => "OCaml",
    'str, `e`, repr' => "Python",
    'out' => "Eiffel",
    'cvs' => "PostScript",
-   "'Image" => "Ada",
+   "T'Image(e) (where T is the type of the value)" => "Ada",
    'asString' => "Smalltalk Io",
    'printString' => "Smalltalk",
    'as(<string>, e)' => "Dylan",
@@ -2272,6 +2278,7 @@ module P : PType  = struct ... end)) => "OCaml",
    'Storable::store' => "Perl",
    'pickle.dump (see also cPickle)' => "Python",
    '(with-standard-io-syntax (write obj stream))' => "CommonLisp",
+   "T'Output (where T is the type of the value)" => "Ada",
   ],
 
   'unserialize (un-marshalling)' =>
@@ -2287,6 +2294,7 @@ module P : PType  = struct ... end)) => "OCaml",
    '(with-standard-io-syntax (read obj stream))' => "CommonLisp",
    'Storable::store' => "Perl",
    'doString' => "Io",
+   "T'Input (where T is the type of the value)" => "Ada",
   ],
 
   'sprintf-like' =>
@@ -2819,6 +2827,7 @@ module P : PType  = struct ... end)) => "OCaml",
    'Array or OrderedCollection' => "Smalltalk",
    'cell' => "Matlab",
    'vector' => "C++",
+   'Containers.Vectors.Vector or Ada.Containers.Doubly_Linked_Lists.List' => "Ada",
  ],
 
  'list concatenation' =>
@@ -2826,6 +2835,7 @@ module P : PType  = struct ... end)) => "OCaml",
   '+' => "Ruby Eiffel Pike Python merd E",
   ',' => "Smalltalk Maple Matlab Perl",
   '@' => "SML OCaml F#",
+  '&' => "Ada",
   '++' => "Haskell",
   '|||' => "Icon",
   'array_merge' => "PHP",
@@ -2931,7 +2941,7 @@ module P : PType  = struct ... end)) => "OCaml",
    'cons' => "EmacsLisp CommonLisp Scheme",
    'pair' => "Dylan",
    'fput' => "Logo",
-   'Prepend' => "Mathematica",
+   'Prepend' => "Mathematica Ada",
   ],
 
   'side-effect' =>
@@ -2953,7 +2963,7 @@ module P : PType  = struct ... end)) => "OCaml",
   'return the new list (no side-effect)' =>
   [
    'linsert l i e' => "Tcl",
-   'Insert' => "Mathematica",
+   'Insert' => "Mathematica Ada",
   ],
 
   'side-effect' =>
@@ -2974,7 +2984,7 @@ module P : PType  = struct ... end)) => "OCaml",
    'arrayByAddingObject' => "Objective-C",
    'lput' => "Logo",
    'linsert l end e' => "Tcl",
-   'Append' => "Mathematica",
+   'Append' => "Mathematica Ada",
   ],
 
   'side-effect' =>
@@ -3002,12 +3012,14 @@ module P : PType  = struct ... end)) => "OCaml",
    'car' => "Scheme EmacsLisp CommonLisp",
    'first' => "Eiffel Pliant Rebol Smalltalk Io Logo",
    'First (see also Head)' => "Mathematica",
+   'First_Element' => "Ada",
   ],
 
   'iterator' =>
   [ 
    'head' => "Beta",
    'begin' => "C++",
+   'First' => "Ada",
   ],
  ],
 
@@ -3038,10 +3050,12 @@ module P : PType  = struct ... end)) => "OCaml",
    'node[last()]' => "XPath",
    '(car (last l))' => "CommonLisp EmacsLisp",
    'lindex l end' => "Tcl",
+   'Last_Element' => "Ada",
   ],
 
   'iterator' =>
   [
+   'Last' => "Ada",
   ],
  ],
 
@@ -3103,6 +3117,7 @@ Next' => "VisualBasic",
   '(dolist (v l) ...)  (loop for v in l do ...)  mapc' => "CommonLisp",
   "list.iterate (# do current ... #) " => "Beta",
   'l.Iterate(...)' => "F#",
+  'Iterate' => "Ada",
  ],
 
  'transform a list (or bag) in another one' =>
@@ -3142,6 +3157,7 @@ Next' => "VisualBasic",
  'find an element' =>
  [ { KIND => 'has_lambda', MLANG => "Perl Scheme" },
   'find' => "C++ F# CommonLisp Ruby Rebol SML OCaml Haskell Scheme-SRFI1 merd YCP",
+  'Find' => "Ada",
   'find_if' => "C++",
   'find-if' => "CommonLisp",
   'first (in List::Util)' => "Perl",
@@ -3296,7 +3312,7 @@ Next' => "VisualBasic",
   'size' => "Ruby merd E Io Matlab Scilab Dylan Java C++ YCP Pliant Smalltalk",
   'sizeof' => "Pike",
   'length' => "C# F# Ruby Matlab SML Haskell Mercury OCaml Scheme PostScript Java JavaScript EmacsLisp CommonLisp Prolog",
-  'Length' => "Oz F# Mathematica",
+  'Length' => "Oz F# Mathematica Ada",
   'length?' => "Rebol",
   'len' => "Python",
   'llength' => "Tcl",
@@ -3370,6 +3386,7 @@ Next' => "VisualBasic",
   'reversed' => "Smalltalk Python",
   'reverse_copy' => "C++",
   'rev' => "OCaml F# SML",
+  'Reverse_Elements' => "Ada",
   'lreverse' => 'Tcl8.5',
   'array_reverse' => "PHP",
   'ListTools[Reverse]' => "Maple",
@@ -3595,6 +3612,12 @@ Next' => "VisualBasic",
     'struct { typ1 n1; typ2 n2; ... }' => 'C C++',
     'type typ = { n1 : typ1; n2 : typ2 }' => "OCaml SML",
     'data Typ = N0 { n1, n2 :: typ1, n3 :: typ3, ... }' => "Haskell",
+     pre("type Typ is record
+  N1 : Typ1;
+  N2 : Typ2 := default_val;
+  ...
+end record;") => 'Ada',
+
    ],
 
    'selector' =>
@@ -3621,6 +3644,18 @@ Next' => "VisualBasic",
    'data Typ = N1 typ1 | N2 typ2 | ...' => "Haskell",
    'type typ = N1 of typ1 | N2 of typ2 | ...' => "OCaml",
    'datatype typ = N1 of typ1 | N2 of typ2 | ...' => "SML",
+   pre("type Typ (Choice : Discrete_Type) is record
+  case Choice is
+     when Choice_1 =>
+         N1 : Typ1;
+         ...
+     when Choice_2 | Choice_3 =>
+         ...
+     when others =>
+        ...
+  end case;
+end record;") => "Ada",
+
  ],
 
  'enumerated type declaration' =>
@@ -3654,6 +3689,7 @@ End Enum') => "VisualBasic",
     'struct' => "Matlab",
     'table' => "Maple",
     'Data.Map, Data.HashTable' => "Haskell",
+    'Containers.Ordered_Maps.Map' => "Ada",
   ],
 
   'constructor' =>
@@ -3714,6 +3750,7 @@ End Enum') => "VisualBasic",
     'h.get(k, returned_value_when_k_unfound)' => "Python",
     'objectForKey' => "Objective-C",
     'lookup' => "Haskell",
+    'Element' => "Ada",
    ],
 
    'write' =>
@@ -3728,6 +3765,7 @@ End Enum') => "VisualBasic",
     'h at: k put: o' => "Smalltalk",
     '[h setObject:o forKey:k]' => "Objective-C",
     'insert' => "Haskell",
+    'Replace_Element' => "Ada",
    ],
   ],
 
@@ -3741,7 +3779,7 @@ End Enum') => "VisualBasic",
    'hasKey' => "Io",
    'has_key' => "Python",
    'has_key?, include?, key?, member?' => "Ruby",
-   'Contains' => "F# C#",
+   'Contains' => "F# C# Ada",
    'containsKey' => "Java",
    'includesKey' => "Smalltalk",
    'k in h' => "Python JavaScript",
@@ -3770,6 +3808,7 @@ End Enum') => "VisualBasic",
    'removeKey' => "E Smalltalk",
    'remhash' => "CommonLisp",
    'delete' => "Ruby Haskell JavaScript Perl6",
+   'Delete' => "Ada",
    'erase' => "C++",
    'm_delete' => "Pike",
    'removeObjectForKey' => "Objective-C",
@@ -3867,6 +3906,7 @@ End Enum') => "VisualBasic",
    'Integer, FixNum, BigNum' => 'Ruby',
    'Integer, SmallInteger, LargeInteger' => "Smalltalk",
    'Integer' => "Mathematica",
+   "type T is range Low...High;" => "Ada",
   ],
 
   'decimal' =>
@@ -3885,6 +3925,8 @@ End Enum') => "VisualBasic",
    'float, decimal.Decimal' => "Python",
    'Real, Rational' => "Mathematica",
    'Number' => "Io",
+   'type T is digits N range Low..High;' => "Ada",
+   'type T is delta S digits N range Low..High; (fixed point)' => "Ada",
   ],
  ],
 
@@ -3985,6 +4027,7 @@ End Enum') => "VisualBasic",
     'random' => "Prolog Logo Python CommonLisp Yorick",
     '$RANDOM' => "MUMPS",
     'randomR' => "Haskell",
+    'Random (from instances of Ada.Numerics.Float_Random or Ada.Numerics.Discrete_Random)' => "Ada",
     'Random.int' => "OCaml",
     'Random, RandomReal, RandomInteger' => "Mathematica",
     'Random value' => "Io",
@@ -4013,6 +4056,7 @@ r.Next()') => "F#",
     'SeedRandom' => "Mathematica",
     'mkStdGen' => "Haskell",
     'make-random-state' => "CommonLisp",
+    'Reset' => "Ada",
    ],
  ],
 
@@ -4156,6 +4200,7 @@ r.Next()') => "F#",
   'int / round / /' => "Logo",
   'to_i, Integer() / round / floor / ceil' => "Ruby",
   'TRUNC / FORMAT / Floor / Ceil' => "ClassicREXX",
+  "Float'Truncation / Float'Rounding / Float'Floor / Float'Ceiling (replace Float with whatever type you are using)" => "Ada",
   '/ round / floor / ceil' => "SML Tcl Java E PHP Lua Io",
   '/ Round / Floor / Ceiling' => "C#",
   '/ Round / Floor / Ceil' => "Oz",
@@ -4181,7 +4226,7 @@ r.Next()') => "F#",
    '+& / +| / +^' => "Perl6",
    '.&. / .|. / xor (in module Data.Bits)' => "Haskell",
    '&&& / ||| / ^^^' => "F#",
-   'and / or / xor' => "Rebol PostScript Forth",
+   'and / or / xor' => "Rebol PostScript Forth Ada",
    'land / lor / lxor' => "F# OCaml",
    'logand / logior / logxor (see also bit-and / bit-or / bit-xor)' => "CommonLisp",
    'bitand / bitor / bitxor' => "Matlab Logo",
@@ -4196,7 +4241,7 @@ r.Next()') => "F#",
   [
    '~' => "C C++ C# Pike Ruby Tcl Python Perl Java JavaScript YCP SML",
    '~~~' => "F#",
-   'not' => 'Eiffel PostScript',
+   'not' => 'Eiffel PostScript Ada',
    'lnot' => "F# OCaml",
    'lognot (see also bit-not)' => "CommonLisp",
    'bitnot' => "Eiffel Logo",
@@ -4222,6 +4267,7 @@ r.Next()') => "F#",
    'lshift / rshift' => "Forth",
    'shiftL / / shiftR' => "Haskell",
    'shiftLeft / shiftRight' => "Io",
+   'Shift_Left / Shift_Right / Shift_Right_Arithmetic / Rotate_Left / Rotate_Right' => "Ada",
    '(ash x positive-integer) / (ash x negative-integer) / ' => "CommonLisp",
   ],
  ],
@@ -4920,6 +4966,7 @@ sub credits {
 <li>Laurent Le Brun (F#, GNU-sed)
 <li>Julien Hall (Smalltalk)
 <li>Ian Osgood (Forth)
+<li>Dmitry A. Kazakov (Ada)
 </ul>
 EOF
 }
