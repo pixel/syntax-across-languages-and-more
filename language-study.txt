@@ -650,6 +650,7 @@ Languages critiques
   ****************************************
   OCaml:
   ++ back stepping in debugger
+  -- obscure types like `StringMap.key' instead of `string' when using Map.Make and functors in general
   - no overloading => verbose
   - syntax errors in imperative style not helpful
   - limited libraries
