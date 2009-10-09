@@ -651,6 +651,9 @@ Languages critiques
   OCaml:
   ++ back stepping in debugger
   -- obscure types like `StringMap.key' instead of `string' when using Map.Make and functors in general
+  -- with ocamlopt (for native-code), no option to disable inlining and so no separate compilation for dependent modules
+  - no way to specify a function type except for signatures/.mli, but then the type is not used for inference
+    let (f : 'a -> 'a) = fun x -> x+x      is valid! (contrary to haskell)
   - no overloading => verbose
   - syntax errors in imperative style not helpful
   - limited libraries
