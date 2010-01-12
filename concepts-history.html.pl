@@ -55,7 +55,7 @@ print <<'EOF';
 include(`../mirrors.m4')
 <html>
   <head>
-    <title>diagram & history of programming languages</title>
+    <title>History of programming languages concepts</title>
   </head>
 
 <body>
