@@ -4610,8 +4610,8 @@ sub generate_main_page {
 
     my $print_both = sub { print $LONG @_; print $SHORT @_ };
 
-    print $LONG intro();
-    print $SHORT intro("../");
+    print $LONG intro(' (One Big Page)', '');
+    print $SHORT intro('', "../");
 
     print $LONG qq(<h2>Light Version</h2>);
     print $LONG qq(Same content split into <a href="syntax-across-languages/">multiple html files</a>);
@@ -4970,11 +4970,11 @@ sub credits {
 EOF
 }
 sub intro {
-    my ($ref) = @_;
+    my ($title_suffix, $ref) = @_;
     <<EOF;
 <html>
   <head>
-    <title>syntax across languages</title>
+    <title>syntax across languages$title_suffix</title>
   </head>
 
 <body>
