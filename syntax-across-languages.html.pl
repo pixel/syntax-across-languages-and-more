@@ -2220,7 +2220,7 @@ module P : PType  = struct ... end)) => "OCaml",
 
   'multi-line' =>
   [ { MLANG => "C C++ Eiffel Prolog" },
-   'all strings allow multi-line strings' => "E Maple F# Mathematica Smalltalk Perl Io Perl6 OCaml Ruby Scheme Pascal CommonLisp EmacsLisp YCP FishShell",
+   'all strings allow multi-line strings' => "E Maple F# Mathematica Smalltalk Perl PHP Io Perl6 OCaml Ruby Scheme Pascal CommonLisp EmacsLisp YCP FishShell",
    '"...", {...}' => "Tcl",
    '@"..."' => "C#",
     q('''...''', """...""") => "Python",
