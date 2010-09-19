@@ -2075,7 +2075,7 @@ sub programs {
 
     print '<h2><a name="programs">Programs</a></h2>';
     foreach my $snippet (@snippets) {
-        print qq(<h3><a name="$snippet"), various::to_english($snippet), "</a></h3>";
+        print qq(<h3><a name="$snippet">), various::to_english($snippet), "</a></h3>";
         print $snippets_comments{$snippet} || '';
         print '<table border="1" cellpadding="4">';
         foreach my $e (@$all) {
