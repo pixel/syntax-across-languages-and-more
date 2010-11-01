@@ -1,7 +1,6 @@
-FROMM4FILES = index.html diagram.html
 FROMPERLFILES = syntax-across-languages.html concepts-history.html
 DIAGRAMFILES = $(foreach i, diagram diagram-light, $(i).png $(i)-thumbnail.png $(i).ps.gz $(i).pdf)
-FILES = $(DIAGRAMFILES) $(FROMM4FILES) $(FROMPERLFILES)
+FILES = $(DIAGRAMFILES) $(FROMPERLFILES)
 DIRS = various usenet-traffic-ranking scripting-language
 
 all: $(FILES) dirs
@@ -38,11 +37,6 @@ syntax-across-languages.html : %: %.pl
 concepts-history.html: %: %.pl
 	rm -f $@
 	perl $< > $@
-	chmod a-w $@
-
-$(FROMM4FILES) : %: %.m4 ../mirrors.m4
-	rm -f $@
-	m4 $< > $@
 	chmod a-w $@
 
 #diagram.png: diagram.vcg

@@ -49,17 +49,14 @@ my %l = (
 
 # Lisp macros 1963 "MACRO Definitions for LISP" Timothy Hart
 
-open STDOUT, "|m4";
-
 print <<'EOF';
-include(`../mirrors.m4')
 <html>
   <head>
     <title>History of programming languages concepts</title>
   </head>
 
 <body>
-    MACRO_MIRRORS_LINK(index.html, ` to Pixel''`s programming languages study page', language-study/concepts-history.html)
+    <small> <a href="index.html">&lt;- back to Pixel's programming languages study page</a> </small> <p>
 
 Also have a look at the <a href="diagram.html">diagram of programming languages history</a>.
 
