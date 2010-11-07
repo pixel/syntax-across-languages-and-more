@@ -2034,7 +2034,7 @@ sub general {
      [ 20, 'compilation and execution in one command' => sub { $_[0]{run_file} !~ /&&/ } ],
      [ 15, '<a href="http://wombat.doc.ic.ac.uk/foldoc/foldoc.cgi?shebang">shebang</a> aware (#!)' => sub { $_[0]{shebang_aware} } ],
      [  5, 'program can be passed<br>on command line' => sub { $_[0]{run_cmdline} } ],
-     [  5, 'interactive interpreter (<a href="http://www.telent.net/cliki/REPL">REPL</a>)' => sub { $_[0]{interactive_interpreter} } ],
+     [  5, 'interactive interpreter (<a href="http://en.wikipedia.org/wiki/Read-eval-print_loop">REPL</a>)' => sub { $_[0]{interactive_interpreter} } ],
      [  5, 'debugger' => sub { $_[0]{debugger} } ],
      [  5, 'full interpreter in debugger' => sub { $_[0]{interpreter_in_debugger} } ],
      [  2, 'execution tracer (a la "sh -x")' => sub { $_[0]{verbose_execution} } ],
@@ -2091,11 +2091,11 @@ sub general {
     my ($all) = @_;
 
     print '<h1>Scriptometer Overall Scores</h1>';
-    print '<table border="1">';
-    table_title_line($all, '', www => 1);
-    print "<tr align='center'><td align='left'>Score</td>", (map {
-        '<td>' . $_->{score} . '</td>';
-    } @$all), '</tr>';
+    print '<table border="1"><tr><th></th><th>Score</th></tr>';
+    foreach (@$all) {
+	printf "<tr><td>%s</td><td align='right'>%s</td></tr>\n", 
+	  format_title($_, www => 1), $_->{score};
+    }
     print '</table>';
 
     print '<p><small>conflict of interest warning: the author of this page is also the author of
@@ -2104,28 +2104,29 @@ sub general {
 
     print '<h1><a name="tools">Tools</a></h1>';
     print '<table border="1">';
-    table_title_line($all, '');
+    print '<tr><th></th><th>Implementation</th>', join('', map { 
+        my ($points, $descr, $predicate) = @$_;
+	"<th>$descr<br>($points points)</th>";
+    } score::general()), '<th>Score</th></tr>';
+    foreach my $e (@$all) {
+	print "<tr>";
 
-    print "<tr align='center'><td align='left'>Implementation</td>", (map {
-        my $name = $_->{implementation};
+        print "<td>", format_title($e), "</td>";
+
+        my $name = $e->{implementation};
         ($name, my $version) = ($1, $2) if $name =~ /(.*)\s(.*)/;
-        if (my $www = $_->{implementation_www} || $_->{www}) {
+        if (my $www = $e->{implementation_www} || $e->{www}) {
             $name = qq(<a href="http://$www">$name</a>);
         }
-        "<td>$name<br>$version</td>";
-    } @$all), '</tr>';
+        print "<td>$name<br>$version</td>";
 
-
-    foreach (score::general()) {
-        my ($points, $descr, $predicate) = @$_;
-        print "<tr align='center'><td align='left'>$descr<br>($points points)</td>", (map { 
-            '<td>' . ($predicate->($_) ? 'X' : '&nbsp;') . '</td>';
-        } @$all), '</tr>';
+	foreach (score::general()) {
+	    my ($points, $descr, $predicate) = @$_;
+	    print "<td align='center'>" . ($predicate->($e) ? 'X' : '&nbsp;') . '</td>';
+	}
+        print '<td>' . $e->{various_score} . '</td>';
+	print '</tr>';
     }
-    print '<tr><td colspan=5></td></tr>';
-    print "<tr align='center'><td align='left'>Score</td>", (map {
-        '<td>' . $_->{various_score} . '</td>';
-    } @$all), '</tr>';
     print '</table>';
 }
 
@@ -2181,21 +2182,23 @@ sub snippet_lengths_table {
     print '<br><small>(contiguous spaces count as one character)</small>';
     print '<br><small>(the length of the "smallest" program is partially removed in the length of other programs)</small>';
     print '<table border="1">';
-    table_title_line($all, '', listing => 1);
-    foreach my $snippet (@snippets) {
-        my ($min, $max) = ($bounds->{$snippet}{min}, $bounds->{$snippet}{max});
+    print '<tr><th></th>', join('', map {
+	qq(<th><a href="#$_">) . various::to_english($_) . qq(</a></th>);
+    } @snippets), '<th>Score</th></tr>';
+    foreach my $e (@$all) {
+	print '<tr><td>', format_title($e, listing => 1), '</td>';
+    
+	foreach my $snippet (@snippets) {
+	    my ($min, $max) = ($bounds->{$snippet}{min}, $bounds->{$snippet}{max});
 
-	print STDERR "$min $max\n";
+	    #print STDERR "$min $max\n";
 
-        print qq(<tr align='right'><td align='left'><a href="#$snippet">), various::to_english($snippet), qq(</a></th>), (map { 
-            my $s = snippet_length($_, $snippet, $min, $max);
-            "<td>$s</td>";
-        } @$all), '</tr>';
+            my $s = snippet_length($e, $snippet, $min, $max);
+            print "<td>$s</td>";
+        } 
+        print '<td>' . $e->{various_score} . '</td>';
+	print '</tr>';
     }
-    print '<tr><td colspan=5></td></tr>';
-    print "<tr align='right'><td align='left'>Score</th>", (map { 
-        "<td>$_->{lengths_score}</td>";
-    } @$all), '</tr>';
     print '</table>';
     print 'TD = "TODO"';
 }
@@ -2209,24 +2212,17 @@ sub snippet_length {
     }
     #warn "$e->{lang}: $s $min $max -> $nb\n" if $snippet eq 'system';
     my ($a, $b) = map { $_ > 0xff ? 0xff : $_ < 0 ? 0 : $_ } (2 * $nb, 0xff - $nb);
-    sprintf("<font color=#%02x%02x00>$s</font>", $a, $b);
+    sprintf("<font color='#%02x%02x00'>$s</font>", $a, $b);
 }
 
-sub table_title_line {
-    my ($all, $text, %options) = @_;
+sub format_title {
+    my ($e, %options) = @_;
 
-    my @l = map { $_->{lang} } @$all;
-
-    my $max = max(map { length $_ } @l);
-
-    print "<tr><th>$text</th>", (map {
-        my $s = $_->{lang};
-#        ($s) = $_->{implementation} =~ /(\S+)/ if $s eq 'C';
-        $s = qq(<a href="http://$_->{www}">$s</a>) if $_->{www} && $options{www};
-        $s = qq(<a href=") . url_quote($_->{lang}) . qq(.listing">$s</a>) if $options{listing};
-        my ($s1, $s2) = nbsps(($max - length($s) - 4) / 2);
-        "<th>$s1$s$s2</th>";
-    } @$all), '</tr>';
+    my $s = $e->{lang};
+    # ($s) = $e->{implementation} =~ /(\S+)/ if $s eq 'C';
+    $s = qq(<a href="http://$e->{www}">$s</a>) if $e->{www} && $options{www};
+    $s = qq(<a href=") . url_quote($e->{lang}) . qq(.listing">$s</a>) if $options{listing};
+    $s;
 }
 
 sub nbsps {
@@ -2248,6 +2244,9 @@ sub header {
 <html>
   <head>
     <meta content="text/html; charset=utf-8"> 
+    <style type="text/css">
+      th { font-weight: normal; }
+    </style>
     <title>Scriptometer: measuring the ease of SOP (Script-Oriented Programming) of programming languages</title>
   </head>
 
@@ -2281,14 +2280,8 @@ print <<'EOF';
 <p>
 <h2>Related Pages</h2>
 
-<h3>Translations</h3>
-<ul>
-<li><a href="http://rsoftware.altervista.org/index.php?articolo=lng">italian</a> (Roberto Rossi)</li>
-</ul>
-
 <h3>Small snippets</h3>
 <ul>
-<li><a href="http://www.latech.edu/~acm/HelloWorld.shtml">"Hello World" Page</a>
 <li><a href="http://www.99-bottles-of-beer.net/">99 Bottles of Beer</a>
 <li><a href="http://ucsub.colorado.edu/~kominek/rot13/">rot13 in different languages</a> (string manipulation)
 <li><a href="http://www.nyx.net/~gthompso/quine.htm">Quine</a> (self-reproducing code)
@@ -2325,7 +2318,7 @@ print <<'EOF';
 <li>Scott Anderson (Java enhancements)
 <li>Matt Shaw (Perl enhancements)
 <li>Michael Scherer (Python enhancements)
-<li>DH <crazyinsomniac> (Perl enhancements)
+<li>DH "crazyinsomniac" (Perl enhancements)
 <li>Bob Hicks (Tcl enhancements)
 <li>Damián Viano (sh enhancements)
 <li>Kevin Scaldeferri (Perl enhancements)
@@ -2364,6 +2357,7 @@ This document is licensed under <a href="http://www.gnu.org/copyleft/fdl.html">G
 sub quote {
     local $_ = $_[0];
     if (!/<a/ && !/<pre>/) {
+	s/&/&amp;/g;
         s/</&lt;/g;
         s/>/&gt;/g;
         s/&lt;br&gt;/<br>/g; # put back <br>
