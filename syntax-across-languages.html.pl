@@ -3936,10 +3936,11 @@ End Enum') => "VisualBasic",
  [ { ALL => 1 },
    'integers' =>
    [
-    '1000' => 'Awk Ada Io C++ Forth F# B Maple Mathematica Prolog Logo Rebol C C# Haskell E Java JavaScript Pascal Pliant Pike Python BourneShell Tcl Scheme Smalltalk Perl Perl6 Ruby Eiffel OCaml merd Oz SQL92 Yorick',
+    '1000' => 'Awk Io C++ Forth F# B Maple Mathematica Prolog Logo Rebol C C# Haskell E Java JavaScript Pascal Pliant Pike Python BourneShell Tcl Scheme Smalltalk Perl Perl6 Ruby Eiffel OCaml merd Oz SQL92 Yorick',
     '1000, 1000.' => 'CommonLisp EmacsLisp',
     '1000, 1000., 1000.0' => 'Awk Matlab',
     "1000, '1000'D" => "ClassicREXX",
+    '1000, 1E3' => 'Ada',
    ],
 
    'integers in base 2, octal and hexadecimal' =>
@@ -3963,20 +3964,20 @@ End Enum') => "VisualBasic",
     '$f' => "Forth",
    ],
 
-   'integer thousand-seperator' => 
+   'integer thousand-separator' => 
    [ { KIND => "rare" },
-    '1_000, 10_00, 100_0' => 'E Perl Perl6 Ruby Eiffel OCaml',
+    '1_000, 10_00, 100_0' => 'E Perl Perl6 Ruby Eiffel OCaml Ada',
     "1'000, 10'00, 100'0" => 'Rebol',
-    '1_000' => 'merd Ada',
+    '1_000' => 'merd',
    ],
 
    'decimals' =>
    [ { MLANG => 'BourneShell' },
-    '1000., 1E3' => 'C C++ E Logo F# Maple OCaml Java Python Scheme Tcl JavaScript Ada ClassicREXX SQL92',
+    '1000., 1E3' => 'C C++ E Logo F# Maple OCaml Java Python Scheme Tcl JavaScript ClassicREXX SQL92',
     '1000., 1E3, 1,0' => 'Rebol',
     '1000., 1.E3' => 'Oz Eiffel',
     '1000.0, 1E3' => 'C# Pike Ruby Prolog CommonLisp EmacsLisp Smalltalk',
-    '1000.0, 1.0E3' => 'Haskell',
+    '1000.0, 1.0E3' => 'Haskell Ada',
     '1000, 1000.0, 1E3 (integers are decimals)' => 'Awk Perl Perl6 merd',
     '1000., 1*^3, 1000`' => "Mathematica",
     '1000e, 1e3' => "Forth",
@@ -4966,6 +4967,7 @@ sub credits {
 <li>Julien Hall (Smalltalk)
 <li>Ian Osgood (Forth)
 <li>Dmitry A. Kazakov (Ada)
+<li>Peter Hermann (Ada)
 </ul>
 EOF
 }
