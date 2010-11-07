@@ -591,8 +591,11 @@ else:
     re = re.compile(r)
   
 for s in fileinput.input(files):
+    prefix = ""
+    if len(files) > 1:
+        prefix = fileinput.filename() + ":"
     if re.search(s):
-        print s,
+        print prefix + s,
 END
   },
 
@@ -621,7 +624,7 @@ echo $a + $b = $(a+b)
 END
         system => <<'END',
 if (system("false")) fprintf(stderr, "false failed\n");
-echo done;
+system("echo done");
 END
         sed_in_place => <<'END',
 char *tmp=tmpnam(NULL);
@@ -1545,7 +1548,7 @@ f.setText(text)
 END
 	system => <<'END',
 def runFalse := makeCommand("/bin/false")
-def runEcho := makeCommand("/bin/true")
+def runEcho := makeCommand("/bin/echo")
 def ok := try {
      runFalse()
      true
@@ -1834,6 +1837,83 @@ main (int argc, char **argv)
 }
 END
    },
+################################################################################
+
+  D => { 
+        www => 'http://www.d-programming-language.org',
+        implementation => "DMD 2.050",
+        run_file => 'dmd -run', file_extension => '.d',
+        run_cmdline => "rdmd --eval='%s'",
+        shebang_aware => "#!/usr/bin/rdmd\n",
+        debugger => 'see http://www.prowiki.org/wiki4d/wiki.cgi?DebugEnvironments',
+        smallest => 'void main() {}', 
+        hello_world => 'import std.stdio;
+void main() { write("Hello World"); }',
+        argv => 'import std.stdio;
+void main(string[] a) { if(a.length>1) writeln(a[1]); }',
+        env => 'import std.stdio,std.process;
+void main() { writeln(getenv("HOME")); }',
+        test_file_exists => 'import std.file;
+int main() { return !exists("/etc/mtab"); }',
+        test_file_readable => 'import std.stdio;
+void main() { File("/etc/mtab"); }',
+        formatting => <<'END',
+import std.stdio;
+void main() {
+   int a=1,b=2;
+   writeln(a," + ",b," = ",a+b);
+}
+END
+        system => <<'END',
+import std.stdio,std.process;
+void main() {
+   if (system("false"))
+       stderr.writeln("false failed");
+   system("echo done");
+}
+END
+        sed_in_place => <<'END',
+import std.file,std.regex;
+void main(string[] a) {
+   a[1].write(a[1].readText().replace(regex("#.*","g"),""));
+}
+END
+        compile_what_must_be => <<'END',
+import std.stdio,std.file,std.process;
+void main() {
+   foreach (c; listdir("","*.c")) {
+       auto o = c[0..$-1]~'o';
+       if (lastModified(o,0) < lastModified(c)) {
+           writeln("compiling "~c~" to "~o);
+           system("gcc -c -o '"~c~"' '"~o~"'");
+       }
+   }
+}
+END
+        grep => <<'END',
+import std.stdio,std.array,std.regex;
+int main(string[] a) {
+   auto o = ["-h":0,"-F":0,"-i":0];
+   while (!(a=a[1..$]).empty) {
+       if(auto b=a[0] in o) *b=1;
+       else break;
+   }
+   if (!a.length || o["-h"]) {
+       writeln("usage: grep [-F] [-i] regexp [files...]");
+       return 1;
+   }
+   auto e = o["-F"] ? a[0].replace(regex(r"\W","g"),r"\$&") : a[0];
+   foreach (f; a[1..$])
+       foreach (l; File(f).byLine())
+           if (!l.match(regex(e, o["-i"] ? "i" : "")).empty)
+               if (a.length > 2)
+	           writeln(f,':',l);
+               else
+	           writeln(l);
+   return 0;
+}
+END
+  },
 ################################################################################
 
 );
@@ -2167,6 +2247,7 @@ sub header {
     print q<
 <html>
   <head>
+    <meta content="text/html; charset=utf-8"> 
     <title>Scriptometer: measuring the ease of SOP (Script-Oriented Programming) of programming languages</title>
   </head>
 
@@ -2246,7 +2327,7 @@ print <<'EOF';
 <li>Michael Scherer (Python enhancements)
 <li>DH <crazyinsomniac> (Perl enhancements)
 <li>Bob Hicks (Tcl enhancements)
-<li>Damián Viano (sh enhancements)
+<li>DamiÃ¡n Viano (sh enhancements)
 <li>Kevin Scaldeferri (Perl enhancements)
 <li>Chris Hostetter (Perl enhancements)
 <li>Matthew Good (Python enhancements)
@@ -2259,10 +2340,11 @@ print <<'EOF';
 <li>Jerrad Pierce (Perl enhancements)
 <li>Olof Johansson (VBScript)
 <li>Heilig (Cece) Szabolcs (PHP)
-<li>Túri Gábor (PHP enhancements)
+<li>TÃºri GÃ¡bor (PHP enhancements)
 <li>Daniel Lowe (Common Lisp)
 <li>Anthony Borla (REXX, Prolog)
 <li>Michael Sloan (Haskell enhancements)
+<li>Tomek SowiÅ„ski (D)
 </ul>
 EOF
 }
