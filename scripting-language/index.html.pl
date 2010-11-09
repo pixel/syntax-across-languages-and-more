@@ -840,7 +840,7 @@ EOF
         env => 'say VALUE("HOME", , SYSTEM)',
         test_file_exists => q(exit STREAM(ARG(1), 'C', 'QUERY EXISTS') == ""),
         test_file_readable => q(exit \STREAM(ARG(1), 'C', 'READABLE')),
-        formatting => 'a = 1 ; b = 2 ; say "a + b =" a + b',
+        formatting => 'a = 1 ; b = 2 ; say a "+" b "=" a + b',
         system => <<'END',
 address SYSTEM "false"
 if RC == 0 then ; call LINEOUT 'STDERR', "false failed"
@@ -1149,7 +1149,7 @@ END
 ################################################################################
   Erlang => {
         www => 'www.erlang.org',
-        implementation => "sae-r9b-1", implementation_www => 'http://www.sics.se/~joe/sae.html',
+        implementation => "sae-r9b-1", implementation_www => 'www.sics.se/~joe/sae.html',
         run_file => 'escript %s', file_extension => '.erl',
         run_stdin => 'escript',
         interactive_interpreter => 'erl',
@@ -1840,7 +1840,7 @@ END
 ################################################################################
 
   D => { 
-        www => 'http://www.d-programming-language.org',
+        www => 'www.d-programming-language.org',
         implementation => "DMD 2.050",
         run_file => 'dmd -run', file_extension => '.d',
         run_cmdline => "rdmd --eval='%s'",
@@ -1906,10 +1906,7 @@ int main(string[] a) {
    foreach (f; a[1..$])
        foreach (l; File(f).byLine())
            if (!l.match(regex(e, o["-i"] ? "i" : "")).empty)
-               if (a.length > 2)
-	           writeln(f,':',l);
-               else
-	           writeln(l);
+               writeln(a.length>2 ? f~':'~l : l);
    return 0;
 }
 END
