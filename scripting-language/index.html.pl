@@ -1512,6 +1512,64 @@ END
    },
 
 ################################################################################
+  Scala => { 
+        www => 'www.scala-lang.org',
+        implementation => "Scala 2.8.0 and Sun JVM 6",
+        run_file => 'scala %s', file_extension => '.scala', comment => '/* %s */',
+        run_cmdline => 'scala -e %s', 
+        shebang_aware => "#!/path/to/scala\n!#\n",
+        interactive_interpreter => 'scala',
+        debugger => 'any jvm debugger',
+        smallest => '',
+        hello_world => 'println("Hello World")',
+        argv => 'println(args(0))',
+        env => 'println(System.getenv("HOME"))',
+        test_file_exists => 'System.exit(if(new java.io.File("/etc/mtab").exists) 0 else 1)',
+        test_file_readable => 'System.exit(if(new java.io.File("/etc/mtab").canRead) 0 else 1)',
+        formatting => <<'END',
+val (a, b) = (1, 2)
+println(a + " + " + b + " = " + (a + b))
+END
+        system => <<'END',
+def exec = Runtime.getRuntime.exec (_:String)
+
+if (exec("false").waitFor != 0)
+  error("false failed")
+
+for (i <- new io.BufferedSource(exec("echo done").getInputStream))
+  print(i)
+END
+	compile_what_must_be => <<'END',
+import java.io._
+
+for (src <- new File(args(0)).listFiles if (""+src) endsWith ".c") {
+  val obj = new File((""+src).replaceAll(".c",".o"))
+  if (!obj.exists || obj.lastModified < src.lastModified) {
+    println("compiling "+src+" to "+obj)
+    Runtime.getRuntime.exec("gcc -c " + src + " -o " + obj)
+  }
+}
+END
+	sed_in_place => <<'END',
+import java.io._
+
+val source = new File(args(0))
+val target = new File(source+".tmp")
+
+val fw = new FileWriter(target)
+
+for (l <- new io.BufferedSource(new FileInputStream(source)).getLines 
+          if !(l startsWith "#"))
+  fw write (l+"\n")
+
+fw.close
+
+target renameTo source
+
+END
+   },
+
+################################################################################
   E => { 
         www => 'www.erights.org',
 #        implementation => "NJS 0.2.5", implementation_www => 'www.bbassett.net/njs',
@@ -2335,6 +2393,7 @@ print <<'EOF';
 <li>Anthony Borla (REXX, Prolog)
 <li>Michael Sloan (Haskell enhancements)
 <li>Tomek Sowiński (D)
+<li>Jari-Matti Mäkelä (Scala)
 </ul>
 EOF
 }
