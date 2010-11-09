@@ -2193,7 +2193,7 @@ sub snippet_lengths_table {
             my $s = snippet_length($e, $snippet, $min, $max);
             print "<td>$s</td>";
         } 
-        print '<td>' . $e->{various_score} . '</td>';
+        print '<td>' . $e->{lengths_score} . '</td>';
 	print '</tr>';
     }
     print '</table>';
