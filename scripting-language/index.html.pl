@@ -1897,54 +1897,51 @@ void main() { File("/etc/mtab"); }',
         formatting => <<'END',
 import std.stdio;
 void main() {
-   int a=1,b=2;
-   writeln(a," + ",b," = ",a+b);
+    int a=1,b=2;
+    writeln(a," + ",b," = ",a+b);
 }
 END
         system => <<'END',
 import std.stdio,std.process;
 void main() {
-   if (system("false"))
-       stderr.writeln("false failed");
-   system("echo done");
+    if (system("false"))
+        stderr.writeln("false failed");
+    system("echo done");
 }
 END
         sed_in_place => <<'END',
 import std.file,std.regex;
 void main(string[] a) {
-   a[1].write(a[1].readText().replace(regex("#.*","g"),""));
+    a[1].write(a[1].readText().replace(regex("#.*","g"),""));
 }
 END
         compile_what_must_be => <<'END',
 import std.stdio,std.file,std.process;
 void main() {
-   foreach (c; listdir("","*.c")) {
-       auto o = c[0..$-1]~'o';
-       if (lastModified(o,0) < lastModified(c)) {
-           writeln("compiling "~c~" to "~o);
-           system("gcc -c -o '"~c~"' '"~o~"'");
-       }
-   }
+    foreach (c; listdir("","*.c")) {
+        auto o = c[0..$-1]~'o';
+        if (lastModified(o,0) < lastModified(c)) {
+            writeln("compiling "~c~" to "~o);
+            system("gcc -c -o '"~c~"' '"~o~"'");
+        }
+    }
 }
 END
         grep => <<'END',
-import std.stdio,std.array,std.regex;
+import std.stdio,std.regex,std.getopt;
 int main(string[] a) {
-   auto o = ["-h":0,"-F":0,"-i":0];
-   while (!(a=a[1..$]).empty) {
-       if(auto b=a[0] in o) *b=1;
-       else break;
-   }
-   if (!a.length || o["-h"]) {
-       writeln("usage: grep [-F] [-i] regexp [files...]");
-       return 1;
-   }
-   auto e = o["-F"] ? a[0].replace(regex(r"\W","g"),r"\$&") : a[0];
-   foreach (f; a[1..$])
-       foreach (l; File(f).byLine())
-           if (!l.match(regex(e, o["-i"] ? "i" : "")).empty)
-               writeln(a.length>2 ? f~':'~l : l);
-   return 0;
+    bool h,F,i;
+    getopt(a,"h",&h,"F",&F,"i",&i);
+    if (a.length<2 || h) {
+        writeln("usage: grep [-F] [-i] regexp [files...]");
+        return 1;
+    }
+    auto e = F ? a[1].replace(regex(r"\W","g"),r"\$&") : a[1];
+    foreach (f; a[2..$])
+        foreach (l; File(f).byLine())
+            if (!l.match(regex(e, i ? "i" : "")).empty)
+                writeln(a.length>3 ? f~':'~l : l);
+    return 0;
 }
 END
   },
@@ -2434,7 +2431,7 @@ sub compute_snippet_lengths {
 	my $smallest;
 	foreach my $snippet (@snippets) {
             exists $lang->{$snippet} or next;
-            (my $s = rationalize_snippet($lang->{$snippet})) =~ s/\s+/ /gs;
+            my $s = rationalize_snippet($lang->{$snippet});
             my $n = length $s;
 	    if ($snippet eq 'smallest') {
 		$smallest = $n;
@@ -2450,6 +2447,7 @@ sub rationalize_snippet {
     my ($s) = @_;
     $s =~ s/^% (\w+)\s+//;
     $s =~ s/e? '(.*)'$/ $1/;
+    $s =~ s/\s+/ /gs;
     $s;
 }
 
