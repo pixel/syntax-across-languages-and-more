@@ -1417,16 +1417,16 @@ END
         www => 'csharp.org',
         implementation => "mono 0.15", implementation_www => 'www.go-mono.com',
         run_file => 'mcs %s && mint %s.exe', file_extension => '.cs', tmpfile => '%s.exe', comment => '// %s', emacs_mode => 'java',
-        smallest => 'class z { static void Main() { } }',
+        smallest => 'class smallest { static void Main() { } }',
         hello_world => <<'END',
-class z {
+class hello_world {
    static void Main() {
       System.Console.WriteLine("Hello World");
    }
 }
 END
         argv => <<'END',
-class z {
+class argv {
    static void Main(string[] args) {
       if (args.Length > 0) System.Console.WriteLine(args[0]);
    }
@@ -1435,14 +1435,14 @@ END
         env => <<'END',
 using System;
 
-class z {
+class env {
     static void Main() {
 	Console.WriteLine(Environment.GetEnvironmentVariable("HOME"));
     }
 }
 END
         test_file_readable => <<'END',
-public class z {
+public class readable {
     static int Main() {
 	try {
 	    (new System.IO.FileInfo("/etc/mtab")).OpenRead();
@@ -1454,7 +1454,7 @@ public class z {
 }
 END
         test_file_exists => <<'END',
-public class z {
+public class exists {
     static int Main() {
 	return (new System.IO.FileInfo("/etc/mtab")).Exists ? 0 : 1;
     }
@@ -1464,7 +1464,7 @@ END
 using System;
 using System.Diagnostics;
 
-public class z {
+public class system {
     static void Main() {
 	Process proc = new Process();
 	proc.EnableRaisingEvents = false;
@@ -1482,7 +1482,7 @@ public class z {
 }
 END
         formatting => <<'END',
-class z {
+class formatting {
    static void Main() {
       int a=1, b=2;
       System.Console.WriteLine("{0} + {1} = {2}", a, b, a + b);
@@ -1523,49 +1523,36 @@ END
         smallest => '',
         hello_world => 'println("Hello World")',
         argv => 'println(args(0))',
-        env => 'println(System.getenv("HOME"))',
-        test_file_exists => 'System.exit(if(new java.io.File("/etc/mtab").exists) 0 else 1)',
-        test_file_readable => 'System.exit(if(new java.io.File("/etc/mtab").canRead) 0 else 1)',
+        env => 'println(System getenv "HOME")',
+        test_file_exists => 'if(!new java.io.File("/etc/mtab").exists) exit(1)',
+        test_file_readable => 'if(!new java.io.File("/etc/mtab").canRead) exit(1)',
         formatting => <<'END',
 val (a, b) = (1, 2)
 println(a + " + " + b + " = " + (a + b))
 END
         system => <<'END',
-def exec = Runtime.getRuntime.exec (_:String)
+def exec = Runtime.getRuntime.exec(_:String)
 
-if (exec("false").waitFor != 0)
+if (exec("false").waitFor > 0)
   error("false failed")
 
-for (i <- new io.BufferedSource(exec("echo done").getInputStream))
-  print(i)
+new io.BufferedSource(exec("echo done").getInputStream) foreach print
 END
 	compile_what_must_be => <<'END',
-import java.io._
-
-for (src <- new File(args(0)).listFiles if (""+src) endsWith ".c") {
-  val obj = new File((""+src).replaceAll(".c",".o"))
-  if (!obj.exists || obj.lastModified < src.lastModified) {
-    println("compiling "+src+" to "+obj)
-    Runtime.getRuntime.exec("gcc -c " + src + " -o " + obj)
+for (s <- new java.io.File(args(0)).listFiles if ""+s endsWith ".c") {
+  val o = new java.io.File((""+s dropRight 1)+"o")
+  if (!o.exists || o.lastModified < s.lastModified) {
+    println("compiling "+s+" to "+o)
+    Runtime.getRuntime.exec("gcc -c " + s + " -o " + o)
   }
 }
 END
 	sed_in_place => <<'END',
-import java.io._
-
-val source = new File(args(0))
-val target = new File(source+".tmp")
-
-val fw = new FileWriter(target)
-
-for (l <- new io.BufferedSource(new FileInputStream(source)).getLines 
-          if !(l startsWith "#"))
-  fw write (l+"\n")
-
-fw.close
-
-target renameTo source
-
+val i = new io.BufferedSource(new java.io.FileInputStream(
+  args(0))).mkString
+val w = new java.io.FileWriter(args(0))
+w write i.replaceAll("^#.*\n","")
+w.close
 END
    },
 
@@ -1655,36 +1642,28 @@ END
         argv => <<'END',
 public class argv {
   public static void main(String[] args) {
-    System.out.println(args[0]);
+    if (args.length > 0) System.out.println(args[0]);
   }
 }
 END
         env => <<'END',
-import java.io.*;
-
 public class env {
     public static void main(String[] args) {
 	System.out.println(System.getenv("HOME"));
     }
-    // NB: System.getenv was re-introduced in JDK 1.5, 
-    //     and is not yet in gcj
 }
 END
 	test_file_exists => <<'END',
-import java.io.*;
-
 public class exists {
   public static void main(String[] args) {
-      System.exit((new File("/etc/mtab")).exists() ? 0 : 1);
+      if(!(new java.io.File("/etc/mtab")).exists()) System.exit(1);
   }
 }
 END
 	test_file_readable => <<'END',
-import java.io.*;
-
 public class readable {
   public static void main(String[] args) {
-      System.exit((new File("/etc/mtab")).canRead() ? 0 : 1);
+      if(!(new java.io.File("/etc/mtab")).canRead()) System.exit(1);
   }
 }
 END
