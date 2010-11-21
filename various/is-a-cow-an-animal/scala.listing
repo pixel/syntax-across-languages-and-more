@@ -1,0 +1,117 @@
+(* -*- scala -*- *)
+
+abstract class EnergyEntity(var energy: Int)
+
+abstract class Food(energy: Int) extends EnergyEntity(energy)
+
+abstract class Meat(energy: Int) extends Food(energy) with HumanFood
+
+abstract class Vegetable[+VegType <: Food](energy: Int) extends Food(energy) with Edible[VegType]
+
+class EatenMeat(energy: Int) extends Meat(energy)
+
+abstract class EdibleMeat(energy: Int) extends Meat(energy) with Edible[Meat] {
+  def result = new EatenMeat(energy)
+}
+
+trait HumanFood
+
+trait Edible[+Result <: Food] {
+  protected def energy: Int
+  protected def result: Result
+
+  def eaten: (Int, Result) = (energy, result)
+}
+
+trait Alive[When_slaughtered, Accepted_food <: Food] {
+  def when_slaughtered: Int => When_slaughtered
+  def energy: Int
+  def energy_=(i: Int)
+
+  def eat[R <: Food](food: Edible[R] with Accepted_food) = {
+    val (food_energy, food_result) = food.eaten
+    energy += food_energy
+    (this, food_result)
+  }
+
+  def slaughter =
+    (new DeadAnimal(energy), when_slaughtered(energy))
+}
+
+abstract class Animal(i_energy: Int) extends EnergyEntity(i_energy)
+
+class DeadAnimal(i_energy: Int) extends Animal(i_energy)
+
+abstract class AliveAnimal[When_slaughtered, Accepted_food <: Food](
+  val when_slaughtered: Int => When_slaughtered,
+  i_energy: Int) extends Animal(i_energy)
+  with Alive[When_slaughtered, Accepted_food]
+
+class Carrot(energy: Int) extends Vegetable[Carrot](energy) with HumanFood {
+  def result = this
+}
+
+class Grass(energy: Int) extends Vegetable[Grass](energy) {
+  def result = this
+}
+
+class Beef(energy: Int) extends EdibleMeat(energy)
+class Dead_rabit(energy: Int) extends EdibleMeat(energy)
+class Dead_human(energy: Int) extends EdibleMeat(energy)
+
+class Cow(energy: Int) extends
+  AliveAnimal[Beef, Grass](new Beef(_), energy)
+
+class Rabbit(energy: Int) extends
+  AliveAnimal[Dead_rabit, Carrot](new Dead_rabit(_), energy)
+
+class Human(energy: Int) extends
+  AliveAnimal[Dead_human, Food with HumanFood](new Dead_human(_), energy)
+
+object test {
+
+  def main(a: Array[String]) {
+    val grass         = new Grass(5)
+    val carrot        = new Carrot(10)
+
+    val a_rabbit      = new Rabbit(100)
+    val a_cow         = new Cow(1000)
+    val a_human       = new Human(300)
+    val another_human = new Human(350)
+
+    val animals = List(a_rabbit, a_cow, a_human, another_human)
+
+    for (a <- animals) println(a + " " + a.energy)
+
+    val (a_rabbit2, carrot2) = a_rabbit eat carrot
+    val (a_cow2, grass2) = a_cow eat grass
+
+    val (a_rabbit3, a_dead_rabbit) = a_rabbit2.slaughter
+    val (a_cow3, a_beef) = a_cow2.slaughter
+
+    val (a_human2, carrot3) = a_human eat carrot2
+    val (a_human3, carrot4) = a_human2 eat carrot3
+    val (a_human4, a_beef2) = a_human3 eat a_beef
+    val (a_human5, a_dead_rabbit2) = a_human4 eat a_dead_rabbit
+
+    val (another_human2, human_slaughter) = another_human.slaughter
+    val (a_human6, human_slaughter2) = a_human5 eat human_slaughter
+
+    if (a_human6.energy != 1785) throw new Error("Failed")
+
+    println("ok")
+
+//    (new Cow(10)).slaughter.eat(grass)    
+//    (new Cow(10)).slaughter.slaughter
+//    carrot4 eat grass
+//    carrot4.slaughter
+//    (new Cow(10)) eat carrot
+//    (new Cow(10)).eat((new Cow(10)).slaughter)
+//    a_human6 eat (new Cow(10))
+//    a_human6 eat grass
+//    a_human6 eat a_beef2
+//    a_cow3 eat grass
+//    a_cow3.slaughter
+
+  }
+}
