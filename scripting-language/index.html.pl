@@ -1012,11 +1012,11 @@ END
   CommonLisp => { 
         www => 'common-lisp.net',
 #        implementation => "clisp", implementation_www => 'clisp.cons.org',
-        implementation => "sbcl 0.9.2", implementation_www => 'www.sbcl.org',
+        implementation => "sbcl 1.0.45", implementation_www => 'www.sbcl.org',
         run_file => 'sbcl --noinform -load %s', file_extension => '.lisp',
         run_stdin => 'sbcl --noinform', 
 	run_cmdline => 'sbcl --noinform -eval %s', 
-#	shebang_aware => 1,
+	shebang_aware => 1,
         interactive_interpreter => 'sbcl',
         verbose_execution => "sbcl --noinform -eval '(trace)'",
         debugger => '<builtin>', interpreter_in_debugger => 1,
