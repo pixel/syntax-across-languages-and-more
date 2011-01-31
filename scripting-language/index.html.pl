@@ -1520,7 +1520,7 @@ END
         run_cmdline => 'scala -e %s', 
         shebang_aware => "#!/path/to/scala\n!#\n",
         interactive_interpreter => 'scala',
-        debugger => 'any jvm debugger',
+        debugger => 'any jvm debugger',# interpreter_in_debugger => 1,
         smallest => '',
         hello_world => 'println("Hello World")',
         argv => 'println(args(0))',
@@ -1554,6 +1554,31 @@ val i = new io.BufferedSource(new java.io.FileInputStream(
 val w = new java.io.FileWriter(args(0))
 w write i.replaceAll("^#.*\n","")
 w.close
+END
+    grep => <<'END',
+val options = "-([hiF]+)".r
+val (optList, pattern :: files) = args.toList span (options.pattern matcher _ matches)
+val opts = optList.map{ case options(x) => x }.mkString.toSet
+
+if (args.isEmpty || opts('h')) {
+    println("usage: grep [-F] [-i] regexp [files...]")
+    exit(1)
+}
+
+val mods = Map('i' -> ("(?i)" + (_: String)),
+               'F' -> (java.util.regex.Pattern.quote(_))).filterKeys(opts)
+               .withDefaultValue((x: String) => x)
+
+val regex = mods('i')(mods('F')(pattern)).r
+
+files foreach { file =>
+    io.Source fromFile file getLines () foreach { line =>
+        regex findFirstIn line foreach { _ =>
+            if (files.size > 1) print(file+":")
+            println(line)
+        }
+    }
+}
 END
    },
 
@@ -2371,6 +2396,7 @@ print <<'EOF';
 <li>Michael Sloan (Haskell enhancements)
 <li>Tomek Sowiński (D)
 <li>Jari-Matti Mäkelä (Scala)
+<li>Daniel Sobral (Scala)
 </ul>
 EOF
 }
