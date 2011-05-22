@@ -4853,6 +4853,7 @@ sub similar_pages {
 <p>
 <h2>Similar Pages</h2>
 <ul>
+<li><a href="http://webhostingrating.com/libs/syntax-across-languages-be">Belorussian translation of this page</a>
 <li><a href="http://en.wikipedia.org/wiki/Comparison_of_programming_languages_(syntax)">Comparison of programming languages syntax</a>
 <li><a href="http://www.gavilan.edu/csis/languages/history.html">Comments and Literals in programming languages</a>
 <li><a href="http://web.cs.mun.ca/~ulf/pld/surface.html">The Surface of Programming Languages</a>
