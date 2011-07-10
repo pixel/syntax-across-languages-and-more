@@ -989,6 +989,7 @@ if c then
 if c then do
   ...
 end') => "ClassicREXX",
+    'c and ...' => 'Perl',
     't label' => 'GNU-sed',
   ],
 
@@ -1003,7 +1004,7 @@ end') => "ClassicREXX",
    'If c Then b1 ElseIf c2 Then b2 Else b3 End If' => "Modula-2",
    'if (c) b1 else b2' => "Awk B C C# C++ Pike Java JavaScript YCP",
    'if c b1 elsif c2 b2 b3' => "Tcl",
-   'if c then b1 elsif c2 then b2 else b3' => "Tcl",
+   'if c then b1 elseif c2 then b2 else b3' => "Tcl",
    'if c then begin b1 end else begin b2 end' => "Pascal",
    'if c b1 eif c2 b2 else b3' => "Pliant",
    'if c then b1 elif c2 then b2 else b3 end if' => "Maple",
@@ -1034,7 +1035,7 @@ end') => "ClassicREXX",
    'e | c = b1 | c2 = b2 | otherwise = b3 (the result goes to "e")' => "Haskell",
    'c b1 b2 ifelse' => "PostScript",
    'c if b1 else b2 then' => "Forth",
-   'c ? b1 : b2' => "Awk B C C++ C# Java Perl Ruby PHP JavaScript YCP Yorick",
+   'c ? b1 : b2' => "Awk B C C++ C# Java Perl Ruby PHP Tcl JavaScript YCP Yorick",
    'c ?? b1 !! b2' => "Perl6",
    'b1 if c else b2 (Python >= 2.5)' => "Python",
    '$SELECT(c:b1,c2:b2,1:b3)' => "MUMPS",
@@ -1504,6 +1505,7 @@ end') => "ClassicREXX",
     'loop' => "Perl6",
     'for ((x = 0; x < 10; x++)); do ...; done' => "BourneShell",
     'from init_code until c loop ... incr_statement end' => "Eiffel",
+    '(loop with VAR = INITIAL-VALUE ... while CONDITION finally INCREMENT ...)' => 'CommonLisp',
      # 'for var in range loop exp end loop' => "Ada",
    ],
 
@@ -1520,6 +1522,7 @@ end') => "ClassicREXX",
     'go throw' => "CommonLisp",
     'signal' => "ClassicREXX",
     'b' => 'GNU-sed',
+    'b, bra, jmp' => 'Assembler',
    ],
 
    'continue / break' =>
@@ -1672,7 +1675,6 @@ predefined_condition_name :
    't v' => "C C++ C# Java Pike Pliant Perl6 YCP",
    '(declare (t v))' => "CommonLisp",
    'v :@ t' => "Beta",
-   'typeset' => "BourneShell",
    '_t (matches an expression of type t)' => "Mathematica",
   ],
 
@@ -1851,6 +1853,7 @@ predefined_condition_name :
    'class c inherit p1 p2 ... feature decl decl ... end' => "Eiffel",
    'defclass defstruct' => "CommonLisp",
    'subclass' => 'Smalltalk',
+   'struct' => 'C++',
    'type' => "Pliant",
    "type c is tagged record ... end record (c'Class is the class rooted in c)" => 'Ada',
    '@interface c { ... } ... @end' => "Objective-C",
@@ -2020,6 +2023,7 @@ predefined_condition_name :
     'package p;' => "Perl Java",
     'namespace p { ... }' => "C++ C#",
     'namespace p ...' => "F#",
+    'namespace eval p ...' => "Tcl",
     'module p where ...' => "Haskell",
     'module P ... end' => "Ruby",
     'module P = struct ... end' => "OCaml",
@@ -2028,7 +2032,6 @@ predefined_condition_name :
     'p = module() ... end module' => "Maple",
     "(defpackage p ...)" => "CommonLisp",
     'automatically done based on the file name' => "Python OCaml Tcl8.5",
-    'package provide p 1.0' => "Tcl",
     'package declare (directory name is package name)' => "Matlab",
     'Begin["p`"] ... End[]' => "Mathematica",
     'BeginPackage["p`"] ... EndPackage[]' => "Mathematica",
@@ -2196,7 +2199,6 @@ module P : PType  = struct ... end)) => "OCaml",
     '<<MARK ... $v ... MARK' => "BourneShell Perl",
     '<<MARK ... #{v} ... MARK' => "Ruby",
     '<<<MARK ... $v ... MARK' => "PHP",
-    '[ subst {...{... $v ...}...} ]' => "Tcl",
     'qq(...(... $v ...)...), qq[...], qq{...}, qq<...>, qq/.../' => "Perl Perl6",
     '%Q(...(... #{v} ...)...), %Q[...], %Q{...}, %Q<...>, %Q/.../' => "Ruby",
     'qq(...(... {v} ...)...) ' => "merd",
@@ -2237,7 +2239,7 @@ module P : PType  = struct ... end)) => "OCaml",
   ],
 
   'convert something to a string (see also string interpolation)' =>
-  [ { MLANG => 'Awk B C C++ Beta Tcl Prolog OCaml Logo SML BourneShell ClassicREXX' }, #- everything is a string in BourneShell
+  [ { MLANG => 'Awk B C C++ Beta Prolog OCaml Logo SML BourneShell ClassicREXX' }, #- everything is a string in BourneShell
    'show' => "Haskell",
    'to_s, to_str, inspect, String()' => "Ruby",
    'to_string' => "merd Pliant",
@@ -2265,6 +2267,7 @@ module P : PType  = struct ... end)) => "OCaml",
    'to string! / to-string / to ""' => "Rebol",
    'description' => "Objective-C",
    'pr1' => "Yorick",
+   'unneeded, all values are strings' => 'Tcl',
   ],
 
   'serialize (marshalling)' =>
@@ -2316,7 +2319,7 @@ module P : PType  = struct ... end)) => "OCaml",
   [
    'on strings' =>
    [
-    'puts' => "C Dylan",
+    'puts' => "C Tcl Dylan",
     'print' => "Awk Java Maple merd Basic SML PHP",
     'write' => "Pascal Pike JavaScript Yorick",
     'putStr' => "Haskell",
@@ -2430,6 +2433,7 @@ module P : PType  = struct ... end)) => "OCaml",
    'atom_length' => "Prolog",
    'wc -c' => "FishShell",
    '#' => "Lua",
+   '${#v}' => "BourneShell",
    'dup (the string is represented on the stack as (addr len))' => "Forth",
   ],
 
@@ -2733,12 +2737,12 @@ module P : PType  = struct ... end)) => "OCaml",
    'exit status different from 0' => "BourneShell",
 
    '0 (beware of 0.0 which is true in Pike!)' => "B VisualBasic C99 C++ Tcl Python JavaScript ClassicREXX MUMPS Awk Perl Perl6 Matlab XPath C PHP Pike Forth Yorick",
-   '0.0' => "Matlab PHP",
+   '0.0' => "Matlab PHP Perl",
    'NaN' => "JavaScript XPath",
 
    '""' => "Python JavaScript Awk Perl Perl6 XPath PHP",
    '"0"' => "Awk Perl PHP Perl6",
-   "''" => "Matlab",
+   "''" => "Matlab Perl",
    q('\0') => "C99 C++ C",
 
    '()' => "Python Perl Perl6",
@@ -2826,6 +2830,7 @@ module P : PType  = struct ... end)) => "OCaml",
    'Array or List' => "Perl6",
    'ARRAY or LINKED_LIST' => "Eiffel",
    'Array or OrderedCollection' => "Smalltalk",
+   'ARRAY' => 'Perl',
    'cell' => "Matlab",
    'vector' => "C++",
    'Containers.Vectors.Vector or Ada.Containers.Doubly_Linked_Lists.List' => "Ada",
@@ -3559,6 +3564,7 @@ Next' => "VisualBasic",
    '.[all]' => "Ada",
    '@' => "Forth",
    'eval' => "Maple",
+   '(reg)' => 'Assembler',
   ],
 
   "assigning (when dereferencing doesn't give a lvalue)" =>
@@ -3685,6 +3691,7 @@ End Enum') => "VisualBasic",
     'dict' => "Python",
     'Dictionary' => "Pliant Smalltalk",
     'Hash' => "Perl6 Ruby",
+    'HASH' => 'Perl',
     'HASH_TABLE' => "Eiffel",
     'HashTable' => "Java",
     'Hashtbl' => "F#",
@@ -3731,7 +3738,7 @@ End Enum') => "VisualBasic",
     'h[k]' => "Awk Maple Ruby Python E PHP MSH Dylan Lua JavaScript C++ C#",
     '$h{k}' => "Perl",
     '%h{k} or %h<s>' => "Perl6",
-    '$h(k)' => "Tcl",
+    'h(k)' => "Tcl",
     'h.[k]' => "F#",
     'h.k' => "Lua JavaScript Matlab",
     'h:k' => "Pliant",
@@ -3904,6 +3911,7 @@ End Enum') => "VisualBasic",
    'INTEGER, INT, SMALLINT' => "SQL92",
    'INTEGER, INTEGER_8, NATURAL_8...' => "Eiffel",
    'int8, uint8, int16, uint16, ...64' => "Matlab",
+   'int8_t, uint8_t, int16_t, uint16_t, ...64' => "C99",
    'int, int8, uint8, int16, uint16, int32, uint32, int64, uint64, bigint, bignum' => "F#",
    'Int, Integer, Int8, Int16, Int32, Int64' => "Haskell",
    'Integer, FixNum, BigNum' => 'Ruby',
@@ -3912,9 +3920,10 @@ End Enum') => "VisualBasic",
    "type T is range Low...High;" => "Ada",
   ],
 
-  'decimal' =>
+  'floating point' =>
   [
-   'float, double' => "C C#",
+   'float, double, long double' => "C",
+   'float, double' => "C#",
    'float' => "YAML SML OCaml Maple",
    'Float' => "Ruby",
    'float, float32' => "F#",
@@ -3963,7 +3972,7 @@ End Enum') => "VisualBasic",
     '1b, Fh' => "Pliant",
     "'1'B, 'F'X" => "ClassicREXX",
     "B'1', X'F'" => "SQL92",
-    '$f' => "Forth",
+    '$f' => "Forth Assign",
    ],
 
    'integer thousand-separator' => 
@@ -3973,7 +3982,7 @@ End Enum') => "VisualBasic",
     '1_000' => 'merd',
    ],
 
-   'decimals' =>
+   'floating point' =>
    [ { MLANG => 'BourneShell' },
     '1000., 1E3' => 'C C++ E Logo F# Maple OCaml Java Python Scheme Tcl JavaScript ClassicREXX SQL92',
     '1000., 1E3, 1,0' => 'Rebol',
@@ -4241,7 +4250,7 @@ r.Next()') => "F#",
    '/\ / \/ / xor' => "Prolog",
   ],
 
-  'negation' => 
+  'bitwise inversion' => 
   [
    '~' => "C C++ C# Pike Ruby Tcl Python Perl Java JavaScript YCP SML",
    '~~~' => "F#",
@@ -4971,6 +4980,7 @@ sub credits {
 <li>Ian Osgood (Forth)
 <li>Dmitry A. Kazakov (Ada)
 <li>Peter Hermann (Ada)
+<li>Ian Jackson (Tcl, Perl, C, Assembler...)
 </ul>
 EOF
 }
