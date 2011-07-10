@@ -2981,6 +2981,7 @@ module P : PType  = struct ... end)) => "OCaml",
  [ { MLANG => 'CommonLisp Forth Tcl Haskell Beta Prolog Maple OCaml SML FishShell' },
   'return the new list (no side-effect)' =>
   [
+   '[l e]' => "Matlab",
    'push' => "merd",
    'arrayByAddingObject' => "Objective-C",
    'lput' => "Logo",
@@ -4723,7 +4724,7 @@ sub generate_per_language_file {
     print $F "<html><head><title>syntax in ", html_quote($lang)," </title></head><body>";
     print $F q(
 <p>
-The "Missing:"s below indicate that an entry is incomplete.
+The "Unknown:"s below indicate that an entry is incomplete.
 <ul>
 <li>either the entry exist in the language, and <a href="mailto:pixel@rigaux.org">please tell</a>.
 <li>either the entry doesn't exist in the language, and <a href="mailto:pixel@rigaux.org">please tell so</a>.
@@ -4766,7 +4767,7 @@ The entry will be marked as such and won't appear as missing anymore.
 	    print $F "</table><p>";
 	}
 	if ($misses) {
-	    print $F "Missing: <blockquote>", join(" ", map { "<br>$_" } @$misses);
+	    print $F "Unknown: <blockquote>", join(" ", map { "<br>$_" } @$misses);
 	    print $F "</blockquote>";
 	}
     }
@@ -4780,7 +4781,7 @@ sub generate_category_descriptions {
     print $F "<html><head><title>language categories</title></head><body>";
 
     print $F qq(Programming languages are categorized. The goal is to tag the various
-entries as belonging to some categories, so that the number of "Missing:"s is
+entries as belonging to some categories, so that the number of "Unknown:"s is
 reduced. For example, the "object creation" entry only means something in the
 category "Object Oriented".<p>);
 
