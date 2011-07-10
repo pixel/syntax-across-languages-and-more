@@ -4767,7 +4767,7 @@ The entry will be marked as such and won't appear as missing anymore.
 	    print $F "</table><p>";
 	}
 	if ($misses) {
-	    print $F "Unknown: <blockquote>", join(" ", map { "<br>$_" } @$misses);
+	    print $F "Unknown: <blockquote>", join("<br>", @$misses);
 	    print $F "</blockquote>";
 	}
     }
