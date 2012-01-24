@@ -3996,7 +3996,7 @@ End Enum') => "VisualBasic",
     '1b, Fh' => "Pliant",
     "'1'B, 'F'X" => "ClassicREXX",
     "B'1', X'F'" => "SQL92",
-    '$f' => "Forth Assign",
+    '$f' => "Forth",
    ],
 
    'integer thousand-separator' => 
