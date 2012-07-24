@@ -202,7 +202,7 @@ def x():
    '__LINE__ __FILE__' => "C C++ Perl Pike PHP Ruby",
    '__LINE__ __SOURCE_FILE__' => "F#",
    '$?LINE $?FILE' => "Perl6",
-   'inspect.stack()[0][2] inspect.stack()[0][1]' => "Python",
+   '__file__' => "Python",
    pre('(new System.Diagnostics.StackFrame(true)).GetFileLineNumber()
 (new System.Diagnostics.StackFrame(true)).GetFileName()') => 'C#',
    pre('Thread.currentThread().getStackTrace()[1].getLineNumber();
