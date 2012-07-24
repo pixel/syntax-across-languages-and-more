@@ -119,7 +119,7 @@ my $all_raw = [
     '/* ... */' => "Oz Io Dylan ClassicREXX SQL99",
     '{ ... }' => "Pascal Rebol",
     '{- ... -}' => "Haskell",
-    '#| ... |#' => "CommonLisp",
+    '#| ... |# (introduced in Scheme in R6RS)' => "CommonLisp Scheme",
     '#[ ... ]' => "Perl6",
     '#if 0 ... #endif' => "C",
     'comment { ... }' => "Rebol",
@@ -218,7 +218,7 @@ Thread.currentThread().getStackTrace()[1].getFileName();') => "Java",
     'case-sensitivity (keywords, variable identifiers...)' =>
     [ # see http://www.swiss.ai.mit.edu/~jaffer/r5rs_4.html#SEC14 for Scheme, Guile is an exception
      'case-sensitive' => 'B C C++ C# F# Io Java Maple Mathematica Prolog JavaScript Lua Matlab Pike Perl Perl6 Python Ruby XML YAML Tcl Smalltalk BourneShell FishShell OCaml Haskell merd Awk Modula-3 Pliant Yorick CoffeeScript',
-     'case-insensitive' => "PL/I CSS Pascal Logo Rebol VisualBasic Eiffel Ada SGML HTML Scheme CommonLisp Forth Assembler ClassicREXX SQL92",
+     'case-insensitive' => "PL/I CSS Pascal Logo Rebol VisualBasic Eiffel Ada SGML HTML CommonLisp Forth Assembler ClassicREXX SQL92",
      'case-sensitive: variables<br>case-insensitive: keywords, functions, constants...' => "PHP",
      'case-sensitive: identifiers<br>case-insensitive: keywords' => "E",
      'case-sensitive: identifiers<br>case-insensitive: commands' => "MUMPS",
@@ -233,7 +233,7 @@ Thread.currentThread().getStackTrace()[1].getFileName();') => "Java",
      'CamelCase or camelCase' => "Haskell Io Java JavaScript Tcl Smalltalk C# E Pascal Mathematica VisualBasic",
      'underscores' => 'merd FishShell GNU-bc',
      'dots' => "Logo",
-     'hyphens' => "Rebol EmacsLisp CommonLisp",
+     'hyphens' => "Rebol EmacsLisp CommonLisp Scheme",
      'underscores for functions / types, unclear for modules / constructors' => "OCaml",
      'UPPER_CASE' => "BourneShell",
      'lowercasenoseparator' => 'Matlab',
@@ -331,7 +331,7 @@ Thread.currentThread().getStackTrace()[1].getFileName();') => "Java",
     'set!' => "Scheme",
     'is' => "Prolog",
     'make "v e' => "Logo",
-    'e to v' => "Forth",
+    'e v !' => "Forth",
    ],
 
    'declaration' =>
@@ -348,7 +348,7 @@ Thread.currentThread().getStackTrace()[1].getFileName();') => "Java",
     'my / our / temp' => "Perl6",
     'define' => "Dylan Scheme",
     'let let*' => "Scheme CommonLisp",
-    'letrec fluid-let' => "Scheme",
+    'letrec' => "Scheme",
     'flet labels defun defmethod defvar defparameter defsetf ..' => "CommonLisp",
     'local V1 = e V2 = e2 in ... end' => "Oz",
     'global v1, v2' => "Python",
@@ -390,12 +390,13 @@ Thread.currentThread().getStackTrace()[1].getFileName();') => "Java",
 
   'block (grouping statements, especially when statements are not expressions)' =>
   [ { MLANG => 'OCaml Prolog Forth Rebol SML XSLT Mathematica CommonLisp Maple Oz PostScript' },
-   '{ ... }' => "Pike PHP JavaScript Awk BourneShell Tcl Yorick GNU-sed GNU-bc",
+   '{ ... }' => "Pike PHP JavaScript Awk BourneShell Tcl BCPL Yorick GNU-sed GNU-bc",
    '{ ... } (introduce scope)' => "B C C++ C# Java Perl Perl6 E Haskell Modula-3 YCP",
    '( ... ) (introduce scope)' => "BourneShell",
    '[ ... ] (Smalltalk: introduce scope)' => "Logo Smalltalk",
    '"..."' => "Tcl",
    'begin ... end (introduce scope)' => "Pascal Ada",
+   '(begin ...)' => 'Scheme',
    'BEGIN ... END' => "Modula-3",
    'do ... end' => "ClassicREXX",
    'do ... end (introduce scope)' => "PL/I Lua",
@@ -794,6 +795,7 @@ for e=varargin
  ...(e)
 end') => 'Scilab',
     '(args...) -> ...' => 'CoffeeScript',
+      '(lambda x ...) or (lambda (x . y) ...)' => 'Scheme',
     ],
 
    'predicates' => 
@@ -5017,6 +5019,7 @@ sub credits {
 <li>Peter Hermann (Ada)
 <li>Ian Jackson (Tcl, Perl, C, Assembler...)
 <li>Steve Breese
+<li>Nils M Holm (Scheme, ...)
 </ul>
 EOF
 }
