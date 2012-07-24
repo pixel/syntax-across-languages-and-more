@@ -947,7 +947,8 @@ end') => 'Scilab',
    'if c then ...' => "OCaml F# Tcl merd Pascal CoffeeScript",
    'if c then ... end' => "Ruby Eiffel Lua Oz",
    'if c then ... end if' => "Ada Maple",
-   'if c then ... fi' => "Maple BourneShell",
+   'if c then ... fi' => "Maple",
+   'if c; then ... fi' => "BourneShell",
    'if (c) then ... end' => "Dylan",
    'if c do ...' => "BCPL",
    'IF c THEN ... END' => "Modula-2 Modula-3",
@@ -2244,7 +2245,7 @@ module P : PType  = struct ... end)) => "OCaml",
 
   'multi-line' =>
   [ { MLANG => "C C++ Eiffel Prolog" },
-   'all strings allow multi-line strings' => "E Maple F# Mathematica Smalltalk Perl PHP Io Perl6 OCaml Ruby Scheme Pascal CommonLisp EmacsLisp YCP FishShell",
+   'all strings allow multi-line strings' => "E Maple F# Mathematica Smalltalk Perl PHP Io Perl6 OCaml Ruby Scheme Pascal CommonLisp EmacsLisp YCP FishShell BourneShell",
    '"...", {...}' => "Tcl",
    '@"..."' => "C#",
     q('''...''', """...""") => "Python",
@@ -3635,6 +3636,16 @@ Next' => "VisualBasic",
     'Maybe' => "Haskell",
   ],
 
+  'null coalescing' =>
+  [
+    'COALESCE' => 'SQL92',
+    '?:' => 'PHP',
+    '||' => 'Perl Ruby JavaScript',
+    '// (introduced in Perl 5.10)' => 'Perl',
+    '??' => 'C#',
+    'if(a, b)' => "VisualBasic",
+    'or' => 'Python Scheme',
+  ],
  ],
 
  'record' =>
@@ -5005,6 +5016,7 @@ sub credits {
 <li>Dmitry A. Kazakov (Ada)
 <li>Peter Hermann (Ada)
 <li>Ian Jackson (Tcl, Perl, C, Assembler...)
+<li>Steve Breese
 </ul>
 EOF
 }
