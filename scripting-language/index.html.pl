@@ -1549,15 +1549,15 @@ for (s <- new java.io.File(args(0)).listFiles if ""+s endsWith ".c") {
 }
 END
 	sed_in_place => <<'END',
-val i = new io.BufferedSource(new java.io.FileInputStream(
-  args(0))).mkString
+val i = io.Source.fromFile(args(0)).mkString
 val w = new java.io.FileWriter(args(0))
-w write i.replaceAll("^#.*\n","")
+w write i.replaceAll("#.*\n","")
 w.close
 END
     grep => <<'END',
 val options = "-([hiF]+)".r
-val (optList, pattern :: files) = args.toList span (options.pattern matcher _ matches)
+val (optList, pattern :: files) = args.toList span
+   (options.pattern matcher _ matches)
 val opts = optList.map{ case options(x) => x }.mkString.toSet
 
 if (args.isEmpty || opts('h')) {
@@ -1565,8 +1565,9 @@ if (args.isEmpty || opts('h')) {
     exit(1)
 }
 
-val mods = Map('i' -> ("(?i)" + (_: String)),
-               'F' -> (java.util.regex.Pattern.quote(_))).filterKeys(opts)
+val mods = Map('i' -> ("(?i)" + _),
+               'F' -> (java.util.regex.Pattern.quote(_)))
+               .filterKeys(opts)
                .withDefaultValue((x: String) => x)
 
 val regex = mods('i')(mods('F')(pattern)).r
