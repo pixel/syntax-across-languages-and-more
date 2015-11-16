@@ -1,0 +1,134 @@
+class T {
+    
+class Food {
+    int energy;
+    
+    Food(int energy) { this.energy = energy; }
+
+    int eaten() {
+        return energy;
+    }
+    String name() {
+        return getClass().getSimpleName();
+    }
+}
+
+class HumanFood extends Food {
+    HumanFood(int energy) { super(energy); }
+}
+    
+class Meat extends HumanFood {
+    boolean valid = true;
+
+    Meat(int energy) { super(energy); }
+    
+    int eaten() {
+        if (!valid) throw new RuntimeException("meat is already eaten");
+        valid = false;
+        return super.eaten();
+    }
+}
+
+    
+static <RealMeat> RealMeat createMeat(Class<RealMeat> realMeat, int energy) {
+    try {
+        return realMeat.getDeclaredConstructor(T.class, int.class).newInstance(new T(), energy);
+    } catch (Exception e) {
+        throw new RuntimeException(e);
+    }
+}
+
+
+class Animal<When_slaughtered extends Meat, FoodAccepted extends Food> {
+    boolean valid = true;
+    int energy;
+    Class<When_slaughtered> when_slaughtered;
+
+    Animal(int energy, Class<When_slaughtered> when_slaughtered) {
+        this.energy = energy;
+        this.when_slaughtered = when_slaughtered;
+    }
+
+    void eat(FoodAccepted food) {
+        if (!valid) throw new RuntimeException("animal is dead, it can't eat");
+        energy += food.eaten();
+    }
+
+    When_slaughtered slaughter() {
+        if (!valid) throw new RuntimeException("animal is dead, it can't be slaughtered again");
+        valid = false;
+        return createMeat(when_slaughtered, energy);
+    }
+
+    String name() {
+        return getClass().getSimpleName();
+    }
+}
+
+class Beef extends Meat { Beef(int energy) { super(energy); } }
+class DeadRabbit extends Meat { DeadRabbit(int energy) { super(energy); } }
+class DeadHuman extends Meat { DeadHuman(int energy) { super(energy); } }
+class Grass extends Food { Grass(int energy) { super(energy); } }
+class Carrot extends HumanFood { Carrot(int energy) { super(energy); } }
+
+class Cow extends Animal<Beef, Grass> {
+    Cow(int energy) { super(energy, Beef.class); }
+}
+class Rabbit extends Animal<DeadRabbit, Carrot> {
+    Rabbit(int energy) { super(energy, DeadRabbit.class); }
+}
+class Human extends Animal<DeadHuman, HumanFood> {
+    Human(int energy) { super(energy, DeadHuman.class); }
+}
+
+    public static void main(String[] args) {
+        new T().run();
+    }
+
+    public void run() {
+        Grass grass    = new Grass(5);
+        Carrot carrot   = new Carrot(10);
+
+      Rabbit a_rabbit      = new Rabbit(100);
+      Cow a_cow         = new Cow(1000);
+      Human a_human       = new Human(300);
+      Human another_human = new Human(350);
+
+      Animal[] animals = new Animal[] { a_rabbit, a_cow, a_human };
+      for (Animal o : animals) {
+          System.out.println(o.name() + " -> " + o.energy);
+      }
+
+      a_rabbit.eat(carrot);
+      a_cow.eat(grass);
+
+
+      DeadRabbit a_dead_rabbit = a_rabbit.slaughter();
+      Beef a_beef = a_cow.slaughter();
+
+      a_human.eat(carrot);
+      a_human.eat(carrot);
+      a_human.eat(a_beef);
+      a_human.eat(a_dead_rabbit);
+
+      a_human.eat(another_human.slaughter());
+
+      if (a_human.energy != 1785) throw new RuntimeException("failed");
+
+      // detected at compile-time:
+      //new Cow(10).slaughter().eat(grass); // meat (food) can't eat
+      //new Cow(10).slaughter().slaughter(); // meat (food) can't be slaughtered
+      //carrot.eat(grass);      // vegetable (food) can't eat
+      //carrot.slaughter();     // vegetable (food) can't be slaughtered
+      //a_human.eat(new  Cow(10)); // can't eat live animals
+      //new Cow(10).eat(carrot); // cow do not eat carrot
+      //new Cow(10).eat(new Cow(10).slaughter()); // cow do not eat beef
+      //a_human.eat(grass);     // human do not eat grass
+
+      // detected at run-time:
+      //a_human.eat(a_beef);    // a_beef is already eaten
+      //a_cow.eat(grass);       // a_cow is dead, it can't eat
+      //a_cow.slaughter();      // a_cow is dead, it can't be slaughtered again
+    }
+
+}

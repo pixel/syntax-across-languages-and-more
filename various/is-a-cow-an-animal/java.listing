@@ -1,0 +1,119 @@
+import java.util.Arrays;
+import java.util.List;
+
+class T {
+    
+class Food {
+    String name;
+    int energy;
+    
+    Food(String name, int energy) { this.name = name; this.energy = energy; }
+
+    int eaten() {
+        return energy;
+    }
+}
+
+class Meat extends Food {
+    String name;
+    boolean valid = true;
+
+    Meat(String name, int energy) { super(name, energy); }
+    
+    int eaten() {
+        if (!valid) throw new RuntimeException("meat is already eaten");
+        valid = false;
+        return super.eaten();
+      }
+}
+
+class Animal {
+    boolean valid = true;
+    int energy;
+    String when_slaughtered;
+    List<String> foodAccepted;
+
+    Animal(int energy, String when_slaughtered, String[] foodAccepted) {
+        this.energy = energy;
+        this.when_slaughtered = when_slaughtered;
+        this.foodAccepted = Arrays.asList(foodAccepted);
+    }
+
+    void eat(Food food) {
+        if (!valid) throw new RuntimeException("animal is dead, it can't eat");
+        if (!foodAccepted.contains(food.name)) throw new RuntimeException(name() + " doesn't accept food " + food.name);
+        energy += food.eaten();
+    }
+
+    Meat slaughter() {
+        if (!valid) throw new RuntimeException("animal is dead, it can't be slaughtered again");
+        valid = false;
+        return new Meat(when_slaughtered, energy);
+    }
+
+    String name() {
+        return getClass().getSimpleName();
+    }
+}
+
+class Cow extends Animal {
+    Cow(int energy) { super(energy, "Beef", new String[] { "Grass" }); }
+}
+class Rabbit extends Animal {
+    Rabbit(int energy) { super(energy, "DeadRabbit", new String[] { "Carrot" }); }
+}
+class Human extends Animal {
+    Human(int energy) { super(energy, "DeadHuman", new String[] { "Carrot", "Beef", "DeadRabbit", "DeadHuman" }); }
+}
+
+    public static void main(String[] args) {
+        new T().run();
+    }
+
+    public void run() {
+      Food grass    = new Food("Grass", 5);
+      Food carrot   = new Food("Carrot", 10);
+
+      Rabbit a_rabbit      = new Rabbit(100);
+      Cow a_cow         = new Cow(1000);
+      Human a_human       = new Human(300);
+      Human another_human = new Human(350);
+
+      Animal[] animals = new Animal[] { a_rabbit, a_cow, a_human };
+      for (Animal o : animals) {
+          System.out.println(o.name() + " -> " + o.energy);
+      }
+
+      a_rabbit.eat(carrot);
+      a_cow.eat(grass);
+
+
+      Meat a_dead_rabbit = a_rabbit.slaughter();
+      Meat a_beef = a_cow.slaughter();
+
+      a_human.eat(carrot);
+      a_human.eat(carrot);
+      a_human.eat(a_beef);
+      a_human.eat(a_dead_rabbit);
+
+      a_human.eat(another_human.slaughter());
+
+      if (a_human.energy != 1785) throw new RuntimeException("failed");
+
+      // detected at compile-time:
+      //new Cow(10).slaughter().eat(grass); // meat (food) can't eat
+      //new Cow(10).slaughter().slaughter(); // meat (food) can't be slaughtered
+      //carrot.eat(grass);      // vegetable (food) can't eat
+      //carrot.slaughter();     // vegetable (food) can't be slaughtered
+      //a_human.eat(new  Cow(10)); // can't eat live animals
+
+      // detected at run-time:
+      //new Cow(10).eat(carrot); // cow do not eat carrot
+      //new Cow(10).eat(new Cow(10).slaughter()); // cow do not eat beef
+      //a_human.eat(grass);     // human do not eat grass
+      //a_human.eat(a_beef);    // a_beef is already eaten
+      //a_cow.eat(grass);       // a_cow is dead, it can't eat
+      //a_cow.slaughter();      // a_cow is dead, it can't be slaughtered again
+    }
+
+}
