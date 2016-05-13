@@ -149,7 +149,7 @@ my $all_raw = [
 
    'non nestable' =>
    [
-    "/** ... */ (for C, it is not a standard convention, but it is the more widespread)" => "C C# Java E PHP",
+    "/** ... */ (for C, it is not a standard convention, but it is the more widespread)" => "C C# Java JavaScript E PHP",
     "(** ... *)" => "F#",
    ],
 
