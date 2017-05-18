@@ -39,23 +39,6 @@ concepts-history.html: %: %.pl
 	perl $< > $@
 	chmod a-w $@
 
-#diagram.png: diagram.vcg
-#	 rm -f /tmp/t.ppm
-#	 xvcg -silent -ppmoutput /tmp/t.ppm -xdpi 600 -ydpi 50 $<
-#	 convert /tmp/t.ppm $@
-#	 rm -f /tmp/t.ppm
-
-#diagram.ps: diagram.vcg
-#	rm -f $@
-#	xvcg -silent -landscape -split 9 -psoutput $@ $<
-
-diagram.letter.ps: diagram.vcg
-	rm -f $@
-	xvcg -silent -paper letter -landscape -split 9 -psoutput $@ $<
-
-diagram.vcg: language-study.list
-	perl language-study.list2vcg $< > $@
-
 diagram.dot: language-study.list
 	BLOATED=1 perl language-study.list2dot $< > $@
 

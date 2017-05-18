@@ -277,10 +277,16 @@ Oak
   SY:3
 *Java
   1995
-Java 2 (v1.2)
+Java 2
   1998
-*Java 2 (v1.5 beta)
+*Java 5
   2004
+Java 6
+  2006
+Java 7
+  2011
+*Java 8
+  2014
 
 J++
   1997
@@ -303,7 +309,7 @@ Objective-C
 
 *C#
   2000
-  C++ (ISO),Java 2 (v1.2),.NET
+  C++ (ISO),Java 2,.NET
   GC
   SY:4
 *C# 2.0
@@ -516,6 +522,10 @@ Python 2.4
   2004
 Python 2.5
   2006
+Python 3.0
+  2008
+Python 3.6
+  2016
 
 Boo
   2003
@@ -641,6 +651,8 @@ GHC 5.00
   2001
 GHC 6.0
   2003
+*Haskell 2010
+  2010
   
 Mondrian
   2000
@@ -648,7 +660,7 @@ Mondrian
 
 CAL (Open Quark)
   2006
-  Haskell 98,Java 2 (v1.2)
+  Haskell 98,Java 2
 
 *Prolog
   1970
@@ -731,12 +743,12 @@ XQuery
 
 Nice
   2003
-  Java 2 (v1.2),OCaml,CLOS
+  Java 2,OCaml,CLOS
   http://nice.sf.net/
 
 Scala
   2004
-  Java 2 (v1.2),.NET,OCaml
+  Java 2,.NET,OCaml
   http://scala.epfl.ch/
 
 Io
@@ -745,7 +757,7 @@ Io
 
 Groovy
   2004
-  Java 2 (v1.2),Ruby
+  Java 2,Ruby
 Groovy 1
   2007
 
@@ -766,3 +778,21 @@ D 1.0
 Zonnon
   2005
   Oberon-2,.NET
+
+S
+  1976
+R
+  1993
+  S,Common Lisp,Scheme
+
+*Go
+  2009
+  APL 96,C,CSP,Limbo,Modula-3,Oberon-2,occam,Pascal,Python 2.0,Smalltalk 80
+
+*Rust
+  2010
+  C# 2.0,C++,Cyclone,Erlang,Haskell 98,Limbo,OCaml,Ruby,Scheme R5RS
+
+*Swift
+  2014
+  C# 2.0,CLU,D 1.0,Haskell 98,Objective-C,Python 2.0,Ruby,Rust
