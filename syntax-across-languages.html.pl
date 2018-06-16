@@ -6,9 +6,9 @@ use vars qw(@static @dynamic @OO @functional @reflexive @typed @rare @has_lambda
 # kinds ################################################################################
 ########################################################################################
 my @OO_dynamic = 
-  qw(E JavaScript Perl Perl6 MSH PHP Python Rebol Ruby Smalltalk Io VisualBasic YCP Tcl MzScheme Oz Scilab Matlab CoffeeScript);
+  qw(E JavaScript Perl Perl6 MSH PHP Python Rebol Ruby Smalltalk Io VisualBasic YCP Tcl MzScheme Oz Scilab Matlab Julia CoffeeScript);
 my @OO_static = 
-  ('C#', qw(Ada Beta C++ Cecil Pike Objective-C Java Eiffel Sather Delphi-Kylix Pliant Simula));
+  ('C#', qw(Ada Beta C++ Cecil D Pike Objective-C Java Eiffel Sather Delphi-Kylix Pliant Simula));
 my @functional_dynamic = 
   qw(Scheme Erlang FL Logo);
 my @functional_static = 
@@ -17,7 +17,7 @@ my @functional_static =
 @static = (@OO_static, @functional_static,
   qw(C Cobol Pascal Fortran merd Modula-2 Modula-3 OCaml Go), 'F#');
 @dynamic = (@functional_dynamic, @OO_dynamic,
-  qw(Awk Basic Dylan Forth Maple Lua Icon XPath XSLT Pike PostScript Prolog BourneShell FishShell Oz EmacsLisp CommonLisp ClassicREXX Yorick));
+  qw(Awk Basic Dylan Forth Maple Lua Icon XPath XSLT Pike PostScript Prolog BourneShell FishShell Oz EmacsLisp CommonLisp ClassicREXX Yorick Vimscript));
 @OO = (@OO_dynamic, @OO_static, 
   qw(OCaml CommonLisp Dylan merd));
 @functional = (@functional_dynamic, @functional_static, 
