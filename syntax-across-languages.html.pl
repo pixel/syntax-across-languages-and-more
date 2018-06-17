@@ -1413,6 +1413,7 @@ end') => "ClassicREXX",
     ...
 Loop') => "VisualBasic",
 'while c ... endwhile' => 'Vimscript',
+'while c ... end' => Julia,
     pre('do while c
   ...
 end') => "ClassicREXX",
@@ -1453,6 +1454,7 @@ Loop Until c') => "VisualBasic",
     'foreach ($i in 1..10) { ... }' => "MSH",
     'for (1 .. 10) -> $i { ... }' => "Perl6",
     'for i = 1:10, ..., end' => "Matlab",
+    'for i = 1:10 ... end' => 'Julia',
     'for i = 1, 10 do ... end' => "Lua",
     'for i := 1 to 10 do ...' => "Pascal",
     'for i = 1 to 10 do ... done' => "OCaml F#",
@@ -2815,7 +2817,7 @@ module P : PType  = struct ... end)) => "OCaml",
 
  'false value' =>
  [
-   'false' => "C99 C++ BCPL C# F# OCaml Io Logo SML Pascal YCP Smalltalk PostScript Java E Ada Beta Pliant FL Oz Tcl Maple JavaScript CoffeeScript Rebol Matlab BourneShell PHP Ruby Lua Forth YAML Go",
+   'false' => "C99 C++ BCPL Julia C# F# OCaml Io Logo SML Pascal YCP Smalltalk PostScript Java E Ada Beta Pliant FL Oz Tcl Maple JavaScript CoffeeScript Rebol Matlab BourneShell PHP Ruby Lua Forth YAML Go",
    'False' => "VisualBasic Python Haskell merd Eiffel Mathematica",
    'FALSE' => "Modula-3 SQL92",
    'false()' => "XPath",
@@ -2857,7 +2859,7 @@ module P : PType  = struct ... end)) => "OCaml",
  [
   'TRUE' => "Modula-3 SQL92",
   'True' => "Haskell merd Eiffel VisualBasic Python Mathematica",
-  'true' => "BCPL C++ C# F# OCaml Io Maple SML Pascal Logo Ruby Smalltalk PostScript Java E Ada PHP Beta Pliant FL Oz YCP Tcl BourneShell YAML Prolog Forth Rebol JavaScript CoffeeScript Go",
+  'true' => "BCPL C++ C# F# OCaml Io Julia Maple SML Pascal Logo Ruby Smalltalk PostScript Java E Ada PHP Beta Pliant FL Oz YCP Tcl BourneShell YAML Prolog Forth Rebol JavaScript CoffeeScript Go",
   'true()' => "XPath",
   't' => "EmacsLisp CommonLisp",
   '#t' => "Scheme Dylan",
@@ -2878,7 +2880,7 @@ module P : PType  = struct ... end)) => "OCaml",
 
  'logical not' =>
  [
-  '!' => "Awk B C C++ C# E Java Pike Perl Perl6 Ruby YCP Tcl PHP Mathematica JavaScript CoffeeScript Yorick Go Vimscript",
+  '!' => "Awk B C C++ C# E Java Pike Perl Perl6 Ruby YCP Tcl PHP Mathematica JavaScript CoffeeScript Yorick Go Vimscript Julia",
   'not (Smalltalk: postfix operator)' => "OCaml F# Logo SML Rebol Io Maple Pascal PostScript Ruby Scheme Haskell Perl Perl6 XPath Python Smalltalk merd Eiffel Lua EmacsLisp CommonLisp Ada Beta Pliant Prolog CoffeeScript",
   'Not' => "Oz VisualBasic",
   'NOT' => "Modula-3",
@@ -2893,7 +2895,7 @@ module P : PType  = struct ... end)) => "OCaml",
  [ { MLANG => "Forth" },
   'short circuit' =>
   [
-   '|| / &&' => "Awk C C++ C# F# Java Matlab Mathematica Pike Perl Perl6 YCP Ruby OCaml Haskell merd Tcl E PHP JavaScript CoffeeScript Yorick Vimscript Go",
+   '|| / &&' => "Awk C C++ C# F# Java Julia Matlab Mathematica Pike Perl Perl6 YCP Ruby OCaml Haskell merd Tcl E PHP JavaScript CoffeeScript Yorick Vimscript Go",
    '| / &' => "B BCPL Dylan",
    'or / and' => "Perl Perl6 Logo Io Ruby Python Modula-2 PHP Smalltalk EmacsLisp CommonLisp Scheme Lua Pliant CoffeeScript",
    'OR / AND' => "Modula-3",
@@ -4129,7 +4131,7 @@ End Enum') => "VisualBasic",
 
  'addition / subtraction / multiplication / division' =>
  [
-  '+ / - / * / /' => "Io C C++ D Vimscript Java Eiffel PHP Maple C# F# Forth Logo Perl Perl6 Matlab MUMPS Python Pliant Ruby BourneShell merd Tcl Haskell Scheme CommonLisp EmacsLisp Smalltalk ClassicREXX SQL92 Prolog Yorick JavaScript CoffeeScript Go",
+  '+ / - / * / / (Julia also uses \ for dividing the right side by the left)' => "Io C C++ D Vimscript Julia Java Eiffel PHP Maple C# F# Forth Logo Perl Perl6 Matlab MUMPS Python Pliant Ruby BourneShell merd Tcl Haskell Scheme CommonLisp EmacsLisp Smalltalk ClassicREXX SQL92 Prolog Yorick JavaScript CoffeeScript Go",
   '+ / - / * or nothing / /' => "Mathematica",
   '+ +. / - -. / * *. / / /. (with mathematical priorities)' => "OCaml",
   'sum / difference / product / quotient' => "Logo",
@@ -4139,8 +4141,8 @@ End Enum') => "VisualBasic",
 
  'exponentiation (power)' =>
  [ { MLANG => 'Pascal Forth' },
-  '**' => 'PL/I Perl Perl6 F# Io Tcl8.5 Rebol Ruby Python OCaml E Ada merd Fortran Prolog ClassicREXX',
-  '^' => 'Eiffel Awk Dylan Lua Matlab Mathematica Pliant Yorick',
+  '**' => 'PL/I Perl Perl6 F# Io Tcl8.5 Rebol Ruby Python JavaScript OCaml E Ada merd Fortran Prolog ClassicREXX',
+  '^' => 'Eiffel Awk Dylan Lua Matlab Mathematica Pliant Yorick Julia',
   '* (APL uses a real multiplication sign for multiplication from a special character set)' => 'APL',
   '**, ^' => 'Maple',
   '^^' => 'D', 
@@ -4157,7 +4159,7 @@ End Enum') => "VisualBasic",
 
  'negation' =>
  [
-  '-' => "B D Vimscript Io BCPL PHP Awk Maple Logo C++ C C# F# E Java Matlab Mathematica Rebol Pike MUMPS Pliant Haskell Python BourneShell Tcl Scheme Smalltalk Perl Perl6 Ruby Eiffel merd EmacsLisp CommonLisp JavaScript CoffeeScript Ada Prolog ClassicREXX Yorick Go",
+  '-' => "B C++ C C# D Vimscript Julia Io BCPL PHP Awk Maple Logo  F# E Java Matlab Mathematica Rebol Pike MUMPS Pliant Haskell Python BourneShell Tcl Scheme Smalltalk Perl Perl6 Ruby Eiffel merd EmacsLisp CommonLisp JavaScript CoffeeScript Ada Prolog ClassicREXX Yorick Go",
   '- -.' => "OCaml",
   '~' => "SML Oz",
   'neg' => "PostScript",
@@ -4222,7 +4224,7 @@ r.Next()') => "F#",
   'exponentiation vs negation (is -3^2 equal to 9 or -9)' =>
   [ { MLANG => 'C C++ MUMPS Go' },
    'mathematical' => "Perl Perl6 Maple Mathematica Io Eiffel Ruby Python Haskell Matlab ClassicREXX",
-   'negation first' => "OCaml F#",
+   'negation first' => "OCaml F# JavaScript",
   ],
  ],
 
@@ -4380,7 +4382,8 @@ r.Next()') => "F#",
   'and / or / xor' =>
   [
    '& / | / ^' => "C C++ C# PHP Tcl E Eiffel Pike Ruby Python Perl Java JavaScript CoffeeScript Go",
-   '& / | / ~' => "Yorick",
+   '& / | / ~' => "Yorick Lua",
+   '& / | / ⊻' => "Julia",
    '& / |' => "YCP",
    '+& / +| / +^' => "Perl6",
    '.&. / .|. / xor (in module Data.Bits)' => "Haskell",
@@ -4398,7 +4401,7 @@ r.Next()') => "F#",
 
   'bitwise inversion' => 
   [
-   '~' => "C C++ C# Pike PHP Ruby Tcl Python Perl Java JavaScript CoffeeScript YCP SML",
+   '~' => "C C++ C# Pike PHP Ruby Tcl Python Perl Java JavaScript CoffeeScript YCP SML Julia Lua",
    '~~~' => "F#",
    'not' => 'Eiffel PostScript Ada',
    'lnot' => "F# OCaml",
@@ -4415,8 +4418,8 @@ r.Next()') => "F#",
 
   'left shift / right shift / unsigned right shift' => 
   [ { MLANG => "Mathematica" },
-   '<< / >> / >>>' => "Java JavaScript CoffeeScript",
-   '<< / >>' => "C C++ C# Pike PHP Tcl Prolog Ruby Python Perl YCP Go",
+   '<< / >> / >>>' => "Java JavaScript CoffeeScript Julia",
+   '<< / >>' => "C C++ C# Pike PHP Tcl Prolog Ruby Python Perl YCP Go Lua",
    '<<< / >>>' => "F#",
    '|<< / |>>' => "Eiffel",
    'lsl / lsr or asr' => "F# OCaml",
