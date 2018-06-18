@@ -1413,7 +1413,7 @@ end') => "ClassicREXX",
     ...
 Loop') => "VisualBasic",
 'while c ... endwhile' => 'Vimscript',
-'while c ... end' => Julia,
+'while c ... end' => 'Julia',
     pre('do while c
   ...
 end') => "ClassicREXX",
@@ -2538,6 +2538,7 @@ module P : PType  = struct ... end)) => "OCaml",
   '..' => "Io Lua",
   ',' => "Smalltalk",
   '~' => "Perl6 D",
+  '*' => 'Julia',
   '&' => "Ada Modula-3 VisualBasic",
   '^' => "SML OCaml F#",
   '_' => "MUMPS",
@@ -4224,7 +4225,7 @@ r.Next()') => "F#",
   'exponentiation vs negation (is -3^2 equal to 9 or -9)' =>
   [ { MLANG => 'C C++ MUMPS Go' },
    'mathematical' => "Perl Perl6 Maple Mathematica Io Eiffel Ruby Python Haskell Matlab ClassicREXX",
-   'negation first' => "OCaml F# JavaScript",
+   'negation first' => "OCaml F#",
   ],
  ],
 
