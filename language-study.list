@@ -316,6 +316,8 @@ Objective-C
   2005
 C# 3.0
   2007
+*C# 5.0
+  2012
 
 VB.NET
   2001
@@ -432,6 +434,13 @@ JavaScript 1.5
   2000
 JavaScript 1.7
   2006
+JavaScript ES2015
+  2015
+JavaScript ES2106
+  2016
+*JavaScript ES2107
+  2017
+  JavaScript ES2106,C# 5.0
 
 Lua
   1994
@@ -795,7 +804,7 @@ R
 
 *Swift
   2014
-  C# 2.0,CLU,D 1.0,Haskell 2010,Objective-C,Python 2.0,Ruby,Rust
+  C# 5.0,CLU,D 1.0,Haskell 2010,Objective-C,Python 2.0,Ruby,Rust
 
 *Kotlin
   2011
